@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UsersScreen extends GetView {
+  static const router = '/users';
   final ct = Get.put(UsersController());
   @override
   Widget build(BuildContext context) {

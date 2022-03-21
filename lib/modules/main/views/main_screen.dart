@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainScreen extends StatelessWidget {
+  static const router = '/home';
   final ct = Get.put(MenuController());
   @override
   Widget build(BuildContext context) {

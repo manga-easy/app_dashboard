@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserDetalhesPage extends GetView {
+  static const router = '/dealhes.users';
   final ct = Get.put(UsersDetalhesController());
   @override
   Widget build(BuildContext context) {
