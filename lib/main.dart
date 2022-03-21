@@ -1,9 +1,9 @@
-import 'package:dashboard_manga_easy/config/app_theme.dart';
-import 'package:dashboard_manga_easy/services/appwrite.dart';
-import 'package:dashboard_manga_easy/services/global.dart';
-import 'package:dashboard_manga_easy/views/main/main_screen.dart';
-import 'package:dashboard_manga_easy/views/users/user_detalhe_page.dart';
-import 'package:dashboard_manga_easy/views/users/users_page.dart';
+import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite.dart';
+import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
+import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
