@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Painel admin Mangá Easy',
+      title: 'Dashboard Mangá Easy',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: AppTheme.bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(
@@ -30,19 +31,23 @@ class MyApp extends StatelessWidget {
         ),
         canvasColor: AppTheme.secondaryColor,
       ),
-      initialRoute: "/home",
+      initialRoute: AuthPage.router,
       getPages: [
         GetPage(
-          name: '/home',
+          name: MainScreen.router,
           page: () => MainScreen(),
         ),
         GetPage(
-          name: '/users',
+          name: UsersScreen.router,
           page: () => UsersScreen(),
         ),
         GetPage(
-          name: '/dealhes.users',
+          name: UserDetalhesPage.router,
           page: () => UserDetalhesPage(),
+        ),
+        GetPage(
+          name: AuthPage.router,
+          page: () => AuthPage(),
         ),
       ],
     );
