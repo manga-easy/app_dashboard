@@ -53,17 +53,21 @@ class RecuperacaoController extends GetxController {
   }
 
   recuperaDados() async {
-    idUserNew = await user.Users.findUserNew(userNovo.text);
-    idUserOld = await user.Users.findUserOld(userAntigo.text);
-    if (idUserOld != null && idUserNew != null) {
-      await recuperaBiblioteca();
-      await recuperaEmblemaUser();
-      await recuperaHistorico();
-      await recuperaNivel();
-      userAntigo.clear();
-      userNovo.clear();
-    } else {
-      print('User não encontrado ');
+    try {
+      idUserNew = await user.Users.findUserNew(userNovo.text);
+      idUserOld = await user.Users.findUserOld(userAntigo.text);
+      if (idUserOld != null && idUserNew != null) {
+        await recuperaBiblioteca();
+        await recuperaEmblemaUser();
+        await recuperaHistorico();
+        await recuperaNivel();
+        userAntigo.clear();
+        userNovo.clear();
+      } else {
+        print('User não encontrado ');
+      }
+    } catch (e) {
+      Get.defaultDialog(middleText: e.toString(), title: 'erro');
     }
   }
 
