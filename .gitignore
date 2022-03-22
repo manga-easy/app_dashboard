@@ -46,3 +46,4 @@ app.*.map.json
 /android/app/release
 lib/config/app_config.dart
 lib/core/config/app_config.dart
+pubspec.lock
