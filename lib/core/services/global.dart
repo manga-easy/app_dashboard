@@ -1,10 +1,10 @@
-import 'package:dashboard_manga_easy/core/services/appwrite.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/modules/users/models/emblema.dart';
 
 import 'package:get/get.dart';
 
 class Global extends GetxService {
-  final app = Get.find<Appwrite>();
+  final app = Get.find<AppwriteAdmin>();
   List<Emblema> listEmblema = [];
   Future<Global> inicia() async {
     carregaEmblemas();

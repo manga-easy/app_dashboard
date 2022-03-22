@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/services/appwrite.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/models/banner_model.dart';
 import 'package:dashboard_manga_easy/modules/users/models/biblioteca.dart';
 import 'package:dashboard_manga_easy/modules/users/models/emblema.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class RecuperacaoController extends GetxController {
-  final app = Get.find<Appwrite>();
+  final app = Get.find<AppwriteAdmin>();
   TextEditingController userAntigo = TextEditingController();
   TextEditingController userNovo = TextEditingController();
   String? idUserOld;

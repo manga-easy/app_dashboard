@@ -2,13 +2,13 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/config/app_config.dart';
 import 'package:get/get.dart';
 
-class Appwrite extends GetxService {
+class AppwriteAdmin extends GetxService {
   late Client client;
   late Account account;
   late Database database;
   late Users users;
 
-  Future<Appwrite> inicia() async {
+  Future<AppwriteAdmin> inicia() async {
     client = Client();
     client
         .setEndpoint(AppConfig.ipserver) // Your Appwrite Endpoint

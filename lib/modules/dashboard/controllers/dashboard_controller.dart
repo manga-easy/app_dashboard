@@ -1,8 +1,8 @@
-import 'package:dashboard_manga_easy/core/services/appwrite.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
-  final app = Get.find<Appwrite>();
+  final app = Get.find<AppwriteAdmin>();
   @override
   void onClose() {
     super.onClose();

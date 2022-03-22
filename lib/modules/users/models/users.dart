@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/services/appwrite.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_old.dart';
 
 import 'package:get/get.dart';
@@ -65,7 +65,7 @@ class Users {
   }
 
   static Future<String?> findUserNew(String user) async {
-    final app = Get.find<Appwrite>();
+    final app = Get.find<AppwriteAdmin>();
     for (var i = 0; i < 30000; i++) {
       var favos = await app.users.list(
         limit: 100,
