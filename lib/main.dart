@@ -1,5 +1,6 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
@@ -11,7 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Get.putAsync(() => Appwrite().inicia());
+  await Get.putAsync(() => AppwriteAdmin().inicia());
+  await Get.putAsync(() => AppwriteClient().inicia());
   await Get.putAsync(() => Global().inicia());
   runApp(MyApp());
 }
