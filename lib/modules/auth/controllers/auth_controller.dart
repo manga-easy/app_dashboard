@@ -2,11 +2,15 @@ import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   final gb = Get.find<Global>();
   final app = Get.find<AppwriteClient>();
+
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   void onClose() {
     super.onClose();
@@ -17,12 +21,15 @@ class AuthController extends GetxController {
     super.onInit();
   }
 
-  logar() {
+  logar() async {
     try {
-    app.account.createSession(email: email, password: password)
-    Get.offAllNamed(MainScreen.router);
-     } catch (e) {
-       Get.defaultDialog(title: 'Erro', middleText: e.toString());
+      await app.account
+          .createSession(email: email.text, password: password.text);
+      Get.offAllNamed(MainScreen.router);
+    } catch (e) {
+      Get.defaultDialog(
+          title: 'Erro ao realizar o login',
+          middleText: 'Verifique seus dados!\n${e.toString()}');
     }
   }
 }

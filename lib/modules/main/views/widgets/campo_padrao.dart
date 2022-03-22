@@ -9,8 +9,10 @@ class CampoPadrao extends GetView {
   final Widget? icone;
   final void Function()? onEditComplet;
   final TextEditingController? controller;
+  final bool? obscureText;
   const CampoPadrao({
     Key? key,
+    this.obscureText,
     this.hintText,
     this.icone,
     this.onChange,
@@ -21,6 +23,7 @@ class CampoPadrao extends GetView {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: obscureText != null,
       style: Get.textTheme.subtitle1!.copyWith(color: AppTheme.bgColor),
       onChanged: onChange,
       controller: controller,
@@ -39,7 +42,8 @@ class CampoPadrao extends GetView {
                 onTap: () {},
                 child: Container(
                   padding: EdgeInsets.all(AppTheme.defaultPadding * 0.75),
-                  margin: EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding / 2),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: AppTheme.defaultPadding / 2),
                   decoration: BoxDecoration(
                     color: AppTheme.secondaryColor,
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
