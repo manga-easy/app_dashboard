@@ -55,9 +55,9 @@ class RecuperacaoController extends GetxController {
   recuperaDados() async {
     try {
       print('Procurando findUserNew');
-      idUserNew = await user.Users.findUserNew(userNovo.text);
+      idUserNew = userNovo.text;
       print('Procurando findUserOld');
-      idUserOld = await user.Users.findUserOld(userAntigo.text);
+      idUserOld = userAntigo.text;
       if (idUserOld != null && idUserNew != null) {
         await recuperaBiblioteca();
         await recuperaEmblemaUser();
@@ -151,36 +151,38 @@ class RecuperacaoController extends GetxController {
     var embs = await NivelUser.getOldApp(idUserOld!);
     var total = embs.length;
     var atual = 1;
-    var item = embs.first;
-    print('recuperaNivel - total $total atual $atual');
-    item.userId = idUserNew!;
-    var ret = await app.database.listDocuments(
-      collectionId: NivelUser.collectionId,
-      queries: [
-        Query.equal('userId', item.userId),
-      ],
-    );
-    if (ret.documents.length == 0) {
-      await app.database.createDocument(
+    if (total > 0) {
+      var item = embs.first;
+      print('recuperaNivel - total $total atual $atual');
+      item.userId = idUserNew!;
+      var ret = await app.database.listDocuments(
         collectionId: NivelUser.collectionId,
-        documentId: item.id!,
-        data: item.toJson(),
-        write: ['role:all'],
-        read: ['role:all'],
+        queries: [
+          Query.equal('userId', item.userId),
+        ],
       );
-    } else {
-      var atual = NivelUser.fromJson(ret.documents.first.data);
-      if (atual.lvl < item.lvl) {
-        print('recuperaNivel - Atualiza');
-        atual.lvl = item.lvl;
-        atual.minute = item.minute;
-        atual.quantity = item.quantity;
+      if (ret.documents.length == 0) {
+        await app.database.createDocument(
+          collectionId: NivelUser.collectionId,
+          documentId: item.id!,
+          data: item.toJson(),
+          write: ['role:all'],
+          read: ['role:all'],
+        );
+      } else {
+        var atual = NivelUser.fromJson(ret.documents.first.data);
+        if (atual.lvl < item.lvl) {
+          print('recuperaNivel - Atualiza');
+          atual.lvl = item.lvl;
+          atual.minute = item.minute;
+          atual.quantity = item.quantity;
+        }
+        await app.database.updateDocument(
+          collectionId: NivelUser.collectionId,
+          documentId: atual.id!,
+          data: atual.toJson(),
+        );
       }
-      await app.database.updateDocument(
-        collectionId: NivelUser.collectionId,
-        documentId: atual.id!,
-        data: atual.toJson(),
-      );
     }
   }
 

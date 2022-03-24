@@ -49,10 +49,11 @@ class Users {
 
   static Future<String?> findUserOld(String user) async {
     final app = await AppwriteOld().inicia();
-    for (var i = 0; i < 30000; i++) {
+    for (var i = 0; i < 3; i++) {
+      print('Procurando antigo user $i');
       var favos = await app.users.list(
-        limit: 25,
-        offset: 25 * i,
+        limit: 100,
+        offset: 100 * i,
         search: removeCoisas(user),
       );
       for (var item in favos.users) {
@@ -67,6 +68,7 @@ class Users {
   static Future<String?> findUserNew(String user) async {
     final app = Get.find<AppwriteAdmin>();
     for (var i = 0; i < 30000; i++) {
+      print('Procurando novo user $i');
       var favos = await app.users.list(
         limit: 100,
         offset: 100 * i,
