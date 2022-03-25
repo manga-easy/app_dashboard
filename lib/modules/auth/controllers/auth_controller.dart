@@ -1,3 +1,5 @@
+import 'package:appwrite/models.dart';
+import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
@@ -22,14 +24,34 @@ class AuthController extends GetxController {
 
   logar() async {
     try {
-      await app.account.createSession(
+      final response = await app.account.createSession(
         email: email.text,
         password: password.text,
       );
+      await validacaoAdmin(response);
       Get.offAllNamed(MainScreen.router);
     } catch (e) {
       Get.defaultDialog(
         title: 'Erro ao realizar o login',
+        middleText: 'Verifique seus dados!\n$e',
+      );
+    }
+  }
+
+  validacaoAdmin(Session response) async {
+    try {
+      await app.database.listDocuments(
+        collectionId: '623d1373e64ea01b85c0',
+        queries: [
+          Query.equal(
+            'userId',
+            response.userId,
+          )
+        ],
+      );
+    } catch (e) {
+      Get.defaultDialog(
+        title: 'Não é adm',
         middleText: 'Verifique seus dados!\n$e',
       );
     }
