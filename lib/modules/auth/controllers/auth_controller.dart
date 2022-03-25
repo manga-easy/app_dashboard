@@ -10,8 +10,15 @@ class AuthController extends GetxController {
   final gb = Get.find<Global>();
   final app = Get.find<AppwriteClient>();
 
+  final erros = {
+    'login': 'Erro ao realizar o login',
+    'auth': 'Dados incorretos, verifique seus dados',
+    'admin': 'Você não é um administrador',
+  };
+
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
   @override
   void onClose() {
     super.onClose();
@@ -24,36 +31,40 @@ class AuthController extends GetxController {
 
   logar() async {
     try {
-      final response = await app.account.createSession(
-        email: email.text,
-        password: password.text,
-      );
+      Session response = await checkUsuario();
       await validacaoAdmin(response);
       Get.offAllNamed(MainScreen.router);
     } catch (e) {
       Get.defaultDialog(
-        title: 'Erro ao realizar o login',
-        middleText: 'Verifique seus dados!\n$e',
+        title: '${erros['login']}',
+        middleText: '$e',
       );
     }
   }
 
-  validacaoAdmin(Session response) async {
+  checkUsuario() async {
     try {
-      await app.database.listDocuments(
-        collectionId: '623d1373e64ea01b85c0',
-        queries: [
-          Query.equal(
-            'userId',
-            response.userId,
-          )
-        ],
+      return await app.account.createSession(
+        email: email.text,
+        password: password.text,
       );
     } catch (e) {
-      Get.defaultDialog(
-        title: 'Não é adm',
-        middleText: 'Verifique seus dados!\n$e',
-      );
+      throw new Exception(erros['auth']);
+    }
+  }
+
+  validacaoAdmin(Session response) async {
+    DocumentList result = await app.database.listDocuments(
+      collectionId: '623d1373e64ea01b85c0',
+      queries: [
+        Query.equal(
+          'userId',
+          response.userId,
+        )
+      ],
+    );
+    if (result.total <= 0) {
+      throw new Exception(erros['admin']);
     }
   }
 }
