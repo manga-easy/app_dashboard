@@ -22,13 +22,16 @@ class AuthController extends GetxController {
 
   logar() async {
     try {
-      await app.account
-          .createSession(email: email.text, password: password.text);
+      await app.account.createSession(
+        email: email.text,
+        password: password.text,
+      );
       Get.offAllNamed(MainScreen.router);
     } catch (e) {
       Get.defaultDialog(
-          title: 'Erro ao realizar o login',
-          middleText: 'Verifique seus dados!\n${e.toString()}');
+        title: 'Erro ao realizar o login',
+        middleText: 'Verifique seus dados!\n$e',
+      );
     }
   }
 }
