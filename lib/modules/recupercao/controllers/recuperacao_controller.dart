@@ -5,8 +5,8 @@ import 'package:dashboard_manga_easy/modules/users/models/emblema.dart';
 import 'package:dashboard_manga_easy/modules/users/models/emblema_user.dart';
 import 'package:dashboard_manga_easy/modules/users/models/historico.dart';
 import 'package:dashboard_manga_easy/modules/users/models/nivel_user.dart';
-import 'package:dashboard_manga_easy/modules/users/models/users.dart' as user;
 import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:dashboard_manga_easy/modules/users/models/users.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -55,9 +55,9 @@ class RecuperacaoController extends GetxController {
   recuperaDados() async {
     try {
       print('Procurando findUserNew');
-      idUserNew = await user.Users.findUserNew(userNovo.text);
+      idUserNew = await UsersL.findUserNew(userNovo.text);
       print('Procurando findUserOld');
-      idUserOld = await user.Users.findUserOld(userAntigo.text);
+      idUserOld = await UsersL.findUserOld(userAntigo.text);
       if (idUserOld != null && idUserNew != null) {
         await recuperaBiblioteca();
         await recuperaEmblemaUser();

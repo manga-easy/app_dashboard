@@ -6,9 +6,9 @@ import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.da
 import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/models/notificacao.dart';
 import 'package:dashboard_manga_easy/modules/users/models/emblema_user.dart';
-import 'package:dashboard_manga_easy/modules/users/models/users.dart' as urs;
 
 import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:dashboard_manga_easy/modules/users/models/users.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +16,7 @@ class UsersDetalhesController extends GetxController {
   final app = Get.find<AppwriteAdmin>();
   final gb = Get.find<Global>();
   var nova = Notificacao(menssege: '', titulo: '');
-  urs.Users user = Get.arguments;
+  UsersL user = Get.arguments;
   List<EmblemaUser> emblemasUsers = [];
   final apiFcm = FCMApi();
   var indexP = 0.obs;
