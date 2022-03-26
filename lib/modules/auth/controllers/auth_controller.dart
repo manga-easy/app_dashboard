@@ -29,6 +29,7 @@ class AuthController extends GetxController {
     try {
       Session response = await checkUsuario();
       await validacaoAdmin(response);
+      gb.user = response.userId;
       Get.offAllNamed(MainScreen.router);
     } catch (e) {
       Get.defaultDialog(
