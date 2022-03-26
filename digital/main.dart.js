@@ -42749,7 +42749,7 @@ n.b=A.ab(["content-type","application/json","x-sdk-version","appwrite:dart:4.0.1
 n.c=A.x(o,o)
 p.cx=n
 n=A.a(n,"client")
-n.a="http://193.123.101.63/v1"
+n.a="https://193.123.101.63/v1"
 J.dQ(A.a(n.c,"config"),"project","62289ee30466407c1cb8")
 n.b.m(0,"X-Appwrite-Project","62289ee30466407c1cb8")
 J.dQ(A.a(n.c,"config"),"key",u.F)
@@ -42776,8 +42776,8 @@ n.c=A.x(o,o)
 n.wW()
 p.cx=n
 n=A.a(n,"client")
-n.a="http://193.123.101.63/v1"
-B.b.iA(B.b.iA("http://193.123.101.63/v1","https://","wss://"),"http://","ws://")
+n.a="https://193.123.101.63/v1"
+B.b.iA(B.b.iA("https://193.123.101.63/v1","https://","wss://"),"http://","ws://")
 J.dQ(A.a(n.c,"config"),"project","62289ee30466407c1cb8")
 n.b.m(0,"X-Appwrite-Project","62289ee30466407c1cb8")
 p.cy=new A.XZ(A.a(p.cx,"client"))
@@ -42799,7 +42799,7 @@ n.b=A.ab(["content-type","application/json","x-sdk-version","appwrite:dart:2.0.0
 n.c=A.x(o,o)
 p.a=n
 n=A.a(n,"client")
-n.a="http://193.123.102.234/v1"
+n.a="https://193.123.102.234/v1"
 J.dQ(A.a(n.c,"config"),"project","617844c305e60")
 n.b.m(0,"X-Appwrite-Project","617844c305e60")
 J.dQ(A.a(n.c,"config"),"key",u.X)
