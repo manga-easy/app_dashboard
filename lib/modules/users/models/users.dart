@@ -3,7 +3,8 @@ import 'package:dashboard_manga_easy/core/services/appwrite_old.dart';
 
 import 'package:get/get.dart';
 
-class Users {
+class UsersL {
+  static String get collectionIdAdmin => '623f19fd634f690560fc';
   String id;
   String name;
   int registration;
@@ -13,7 +14,7 @@ class Users {
   bool emailVerification;
   Prefs prefs;
 
-  Users({
+  UsersL({
     required this.id,
     required this.name,
     required this.registration,
@@ -24,7 +25,7 @@ class Users {
     required this.prefs,
   });
 
-  Users.fromJson(Map<String, dynamic> json)
+  UsersL.fromJson(Map<String, dynamic> json)
       : id = json['\$id'],
         name = json['name'],
         registration = json['registration'],

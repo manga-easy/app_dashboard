@@ -24,7 +24,7 @@ class UsersScreen extends GetView {
                 ? ListView.builder(
                     itemCount: ct.lista.length,
                     itemBuilder: (context, index) {
-                      Users use = ct.lista[index];
+                      UsersL use = ct.lista[index];
                       return ListTile(
                         onTap: () => Get.toNamed('/dealhes.users', arguments: use),
                         leading: CircleAvatar(

@@ -12,43 +12,44 @@ class AuthPage extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppTheme.defaultPadding * 2,
-        vertical: AppTheme.defaultPadding * 2,
-      ),
-      child: Container(
-        padding: EdgeInsets.all(AppTheme.defaultPadding),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppTheme.secondaryColor,
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppTheme.defaultPadding * 2,
+          vertical: AppTheme.defaultPadding * 2,
         ),
-        child: Column(
-          children: [
-            Text(
-              'Login',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: AppTheme.defaultPadding * 2),
-            CampoPadrao(
-              hintText: 'E-mail',
-              controller: ct.email,
-            ),
-            SizedBox(height: AppTheme.defaultPadding),
-            CampoPadrao(
-              hintText: 'Senha',
-              controller: ct.password,
-              obscureText: true,
-            ),
-            SizedBox(height: AppTheme.defaultPadding * 2),
-            ButtonPadrao(
-              title: 'logar',
-              icone: Icons.login,
-              onPress: () => ct.logar(),
-            ),
-          ],
+        child: Container(
+          padding: EdgeInsets.all(AppTheme.defaultPadding),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppTheme.secondaryColor,
+          ),
+          child: Column(
+            children: [
+              Text(
+                'Login',
+                style: TextStyle(fontSize: 24),
+              ),
+              SizedBox(height: AppTheme.defaultPadding * 2),
+              CampoPadrao(
+                hintText: 'E-mail',
+                controller: ct.email,
+              ),
+              SizedBox(height: AppTheme.defaultPadding),
+              CampoPadrao(
+                hintText: 'Senha',
+                controller: ct.password,
+                obscureText: true,
+              ),
+              SizedBox(height: AppTheme.defaultPadding * 2),
+              ButtonPadrao(
+                title: 'logar',
+                icone: Icons.login,
+                onPress: () => ct.logar(),
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

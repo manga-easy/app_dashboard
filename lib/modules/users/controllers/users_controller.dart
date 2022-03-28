@@ -22,7 +22,7 @@ class UsersController extends GetxController {
     var retorno = await app.users.list(limit: 100);
     var list = retorno.users;
     for (var item in list) {
-      lista.add(Users.fromJson(item.toMap()));
+      lista.add(UsersL.fromJson(item.toMap()));
     }
   }
 
@@ -31,7 +31,7 @@ class UsersController extends GetxController {
     var list = retorno.users;
     lista.clear();
     for (var item in list) {
-      lista.add(Users.fromJson(item.toMap()));
+      lista.add(UsersL.fromJson(item.toMap()));
     }
   }
 }

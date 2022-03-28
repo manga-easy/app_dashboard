@@ -1,0 +1,19 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+name: dashboard-manga-easy
+region: nyc
+static_sites:
+- environment_slug: html
+  github:
+    branch: auth
+    deploy_on_push: true
+    repo: lucascardo12/dashboard_manga_easy
+  name: dashboard-manga-easy
+  routes:
+  - path: /
+  - path: /auth
+  - path: /home
+  - path: /users
+  - path: /dealhes.users
+  source_dir: /digital
