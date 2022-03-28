@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/services/appwrite_old.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite_old.dart';
 
 class BannerModel {
   static const String collectionID = '61c64c7fd5d94';
