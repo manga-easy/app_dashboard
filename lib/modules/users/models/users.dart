@@ -4,7 +4,7 @@ import 'package:dashboard_manga_easy/core/services/appwrite_old.dart';
 import 'package:get/get.dart';
 
 class UsersL {
-  static String get collectionIdAdmin => '623f19fd634f690560fc';
+  static String get collectionIdAdmin => '623d1373e64ea01b85c0';
   String id;
   String name;
   int registration;

@@ -41,9 +41,9 @@ class SideMenu extends GetView {
             press: () => menu.trocarPage(3),
           ),
           DrawerListTile(
-            title: "Documents",
+            title: "Recomendação",
             svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
+            press: () => menu.trocarPage(4),
           ),
           DrawerListTile(
             title: "Store",
