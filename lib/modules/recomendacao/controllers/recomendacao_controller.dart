@@ -1,8 +1,12 @@
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
+import 'package:appwrite/models.dart';
+import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/models/recomendacao_model.dart';
 import 'package:get/get.dart';
 
 class RecomendacaoController extends GetxController {
-  final app = Get.find<AppwriteAdmin>();
+  final app = Get.find<AppwriteClient>();
+  List<Recomendacao> listaGeneros = [];
+
   @override
   void onClose() {
     super.onClose();
@@ -11,5 +15,17 @@ class RecomendacaoController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+  }
+
+  listaRecomendacao() async {
+    DocumentList response = await app.database.listDocuments(
+      collectionId: Recomendacao.collectionId,
+    );
+    for (var item in response.documents) {
+      listaGeneros.add(
+        Recomendacao.fromJson(item.data),
+      );
+    }
+    print(listaGeneros[0].generos);
   }
 }

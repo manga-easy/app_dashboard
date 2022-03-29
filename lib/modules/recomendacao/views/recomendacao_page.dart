@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class RecomendacaoPage extends GetView {
   final ct = Get.put(RecomendacaoController());
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,7 +23,9 @@ class RecomendacaoPage extends GetView {
               ButtonPadrao(
                 title: 'Nova recomendação',
                 icone: Icons.add,
-                onPress: () {},
+                onPress: () {
+                  ct.listaRecomendacao();
+                },
               ),
             ],
           ),
@@ -33,25 +36,22 @@ class RecomendacaoPage extends GetView {
               borderRadius: BorderRadius.circular(10),
               color: AppTheme.secondaryColor,
             ),
-            child: Flexible(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: AppTheme.primaryColor,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(index.toString()),
-                        ),
-                        Text('skdfbsdsdjnsdjvksvjvsdvsdvsdvsdvfbxbfbd'),
-                        Image.asset(''),
-                      ],
-                    ),
-                  );
-                },
-              ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return Card(
+                  color: AppTheme.primaryColor,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text(index.toString()),
+                      ),
+                      Text('teste'),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
         ],
