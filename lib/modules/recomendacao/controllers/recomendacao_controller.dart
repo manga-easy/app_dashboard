@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class RecomendacaoController extends GetxController {
   final app = Get.find<AppwriteClient>();
-  List<Recomendacao> listaGeneros = [];
+  List listaRecomendacaoItens = [].obs;
 
   @override
   void onClose() {
@@ -15,17 +15,22 @@ class RecomendacaoController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    listaRecomendacao();
   }
 
   listaRecomendacao() async {
-    DocumentList response = await app.database.listDocuments(
-      collectionId: Recomendacao.collectionId,
-    );
-    for (var item in response.documents) {
-      listaGeneros.add(
-        Recomendacao.fromJson(item.data),
+    listaRecomendacaoItens.clear();
+    try {
+      DocumentList response = await app.database.listDocuments(
+        collectionId: Recomendacao.collectionId,
       );
+      for (var item in response.documents) {
+        listaRecomendacaoItens.add(
+          Recomendacao.fromJson(item.data),
+        );
+      }
+    } catch (e) {
+      print(e);
     }
-    print(listaGeneros[0].generos);
   }
 }

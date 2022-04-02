@@ -4,6 +4,7 @@ import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/criar_recomendacao/views/criar_recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,10 @@ class MyApp extends StatelessWidget {
           name: AuthPage.router,
           page: () => AuthPage(),
         ),
+        GetPage(
+          name: CriarRecomendacaoPage.router,
+          page: () => CriarRecomendacaoPage(),
+        )
       ],
     );
   }
