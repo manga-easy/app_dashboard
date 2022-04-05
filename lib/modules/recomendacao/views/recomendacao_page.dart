@@ -44,8 +44,11 @@ class RecomendacaoPage extends GetView {
                           child: Column(
                             children: [
                               ListTile(
+                                textColor: Colors.white,
                                 title: Text(
                                     ct.listaRecomendacaoItens[index].nomeManga),
+                                subtitle: Text(ct.listaRecomendacaoItens[index]
+                                    .descricaoRecomendacao),
                               ),
                               Text(ct.listaRecomendacaoItens[index].link),
                             ],

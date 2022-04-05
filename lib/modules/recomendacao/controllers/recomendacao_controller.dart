@@ -15,7 +15,6 @@ class RecomendacaoController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    listaRecomendacao();
   }
 
   listaRecomendacao() async {

@@ -4,6 +4,7 @@ class Recomendacao {
   List<String> generos;
   String link;
   String nomeManga;
+  String descricaoRecomendacao;
   String uniqueid;
 
   Recomendacao({
@@ -11,6 +12,7 @@ class Recomendacao {
     required this.generos,
     required this.link,
     required this.nomeManga,
+    required this.descricaoRecomendacao,
     required this.uniqueid,
   });
 
@@ -19,6 +21,7 @@ class Recomendacao {
         generos = json['generos'].map<String>((e) => e.toString()).toList(),
         link = json['link'],
         nomeManga = json['nomeManga'],
+        descricaoRecomendacao = json['descricao_recomendacao'],
         uniqueid = json['uniqueid'];
 
   Map<String, dynamic> toJson() {
@@ -27,6 +30,7 @@ class Recomendacao {
     data['generos'] = generos;
     data['link'] = link;
     data['nomeManga'] = nomeManga;
+    data['descricao_recomendacao'] = descricaoRecomendacao;
     data['uniqueid'] = uniqueid;
     return data;
   }

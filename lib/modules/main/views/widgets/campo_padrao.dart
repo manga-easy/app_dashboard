@@ -10,9 +10,11 @@ class CampoPadrao extends GetView {
   final void Function()? onEditComplet;
   final TextEditingController? controller;
   final bool? obscureText;
+  final int? numberLines;
   const CampoPadrao({
     Key? key,
     this.obscureText,
+    this.numberLines = 1,
     this.hintText,
     this.icone,
     this.onChange,
@@ -24,6 +26,7 @@ class CampoPadrao extends GetView {
   Widget build(BuildContext context) {
     return TextField(
       obscureText: obscureText != null,
+      maxLines: numberLines,
       style: Get.textTheme.subtitle1!.copyWith(color: AppTheme.bgColor),
       onChanged: onChange,
       controller: controller,
