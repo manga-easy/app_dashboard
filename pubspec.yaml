@@ -21,6 +21,7 @@ dependencies:
   dart_appwrite: ^4.0.1
   appwrite: ^4.0.1
   awesome_notifications: ^0.6.21
+  logger: ^1.1.0
   dart_appwriteold:
     path: dart_appwrite-3.0.2
 
