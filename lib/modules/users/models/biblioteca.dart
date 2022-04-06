@@ -2,7 +2,7 @@ import 'dart:convert' as j;
 
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_old.dart';
-import 'package:dashboard_manga_easy/models/manga.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/models/manga.dart';
 
 enum StatusBiblioteca { lendo, dropado, lido, planejo }
 
