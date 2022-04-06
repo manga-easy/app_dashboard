@@ -1,5 +1,6 @@
 import 'package:appwrite/models.dart';
 import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/models/erros_auth.dart';
@@ -32,6 +33,7 @@ class AuthController extends GetxController {
       gb.user = response.userId;
       Get.offAllNamed(MainScreen.router);
     } catch (e) {
+      AppHelps.log(e);
       Get.defaultDialog(
         title: '${ErrosAuth.erroLogin}',
         middleText: '$e',
