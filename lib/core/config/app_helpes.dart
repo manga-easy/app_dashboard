@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 class AppHelps {
   static Future<bool> verificarConexao() async {
@@ -100,5 +102,14 @@ class AppHelps {
       return json.decode(value);
     }
     return value;
+  }
+
+  static void log(e) {
+    var logger = Logger();
+    try {
+      logger.e(e, null);
+    } catch (e) {
+      logger.w(e, null);
+    }
   }
 }

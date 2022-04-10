@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/models/imageChapters.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/models/imageChapters.dart';
 
 class Chapter {
   String? id;

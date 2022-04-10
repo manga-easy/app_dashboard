@@ -1,12 +1,11 @@
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/models/banner_model.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/models/banner_model.dart';
 import 'package:dashboard_manga_easy/modules/users/models/biblioteca.dart';
 import 'package:dashboard_manga_easy/modules/users/models/emblema.dart';
 import 'package:dashboard_manga_easy/modules/users/models/emblema_user.dart';
 import 'package:dashboard_manga_easy/modules/users/models/historico.dart';
 import 'package:dashboard_manga_easy/modules/users/models/nivel_user.dart';
 import 'package:dart_appwrite/dart_appwrite.dart';
-import 'package:dashboard_manga_easy/modules/users/models/users.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
