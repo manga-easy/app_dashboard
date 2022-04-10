@@ -1,4 +1,5 @@
 import 'package:appwrite/models.dart';
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/models/recomendacao_model.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class RecomendacaoController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    listaRecomendacao();
   }
 
   listaRecomendacao() async {
@@ -29,7 +31,7 @@ class RecomendacaoController extends GetxController {
         );
       }
     } catch (e) {
-      print(e);
+      AppHelps.log(e);
     }
   }
 }

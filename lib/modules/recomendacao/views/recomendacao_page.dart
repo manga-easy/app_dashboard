@@ -27,41 +27,63 @@ class RecomendacaoPage extends GetView {
             ],
           ),
           SizedBox(height: AppTheme.defaultPadding),
-          Container(
-            padding: EdgeInsets.all(AppTheme.defaultPadding),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppTheme.secondaryColor,
-            ),
-            child: Obx(
-              () => ct.listaRecomendacaoItens.length != 0
-                  ? ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: ct.listaRecomendacaoItens.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          color: AppTheme.primaryColor,
-                          child: Column(
-                            children: [
-                              ListTile(
-                                textColor: Colors.white,
-                                title: Text(
-                                    ct.listaRecomendacaoItens[index].nomeManga),
-                                subtitle: Text(ct.listaRecomendacaoItens[index]
-                                    .descricaoRecomendacao),
-                              ),
-                              Text(ct.listaRecomendacaoItens[index].link),
-                            ],
-                          ),
-                        );
-                      },
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                      ],
-                    ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(AppTheme.defaultPadding),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: AppTheme.secondaryColor,
+              ),
+              child: Obx(
+                () => ct.listaRecomendacaoItens.length != 0
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: ct.listaRecomendacaoItens.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            color: AppTheme.primaryColor,
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  textColor: Colors.white,
+                                  title: Text(ct
+                                      .listaRecomendacaoItens[index].nomeManga),
+                                  subtitle: Text(ct
+                                      .listaRecomendacaoItens[index]
+                                      .descricaoRecomendacao),
+                                ),
+                                Text(ct.listaRecomendacaoItens[index].link),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ButtonPadrao(
+                                        title: "Editar",
+                                        icone: Icons.edit,
+                                        onPress: () {}),
+                                    ElevatedButton.icon(
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.red),
+                                        ),
+                                        onPressed: () {},
+                                        icon: Icon(Icons.delete_forever),
+                                        label: Text('Deletar')),
+                                  ],
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+              ),
             ),
           ),
         ],

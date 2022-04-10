@@ -1,4 +1,4 @@
-import 'package:appwrite/models.dart';
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/models/recomendacao_model.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +10,7 @@ class CriarRecomendacaoController extends GetxController {
   TextEditingController nomeManga = TextEditingController();
   TextEditingController link = TextEditingController();
   TextEditingController descricaoRecomendacao = TextEditingController();
+  List<String> generos = [];
 
   @override
   void onClose() {
@@ -23,18 +24,21 @@ class CriarRecomendacaoController extends GetxController {
 
   criarRecomendacao() async {
     try {
-      Document response = await app.database.createDocument(
+      Recomendacao rec = new Recomendacao(
+        generos: generos,
+        link: link.text,
+        nomeManga: nomeManga.text,
+        descricaoRecomendacao: descricaoRecomendacao.text,
+        uniqueid: 'unique()',
+      );
+      await app.database.createDocument(
         collectionId: Recomendacao.collectionId,
         documentId: 'unique()',
-        data: {
-          'nomeManga': nomeManga.text,
-          'link': link.text,
-          'descricao_recomendacao': descricaoRecomendacao.text,
-        },
+        data: rec.toJson(),
       );
-      print(response.data);
+      Get.back();
     } catch (e) {
-      print(e);
+      AppHelps.log(e);
     }
   }
 }

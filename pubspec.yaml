@@ -1,7 +1,7 @@
 name: dashboard_manga_easy
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -24,6 +24,7 @@ dependencies:
   logger: ^1.1.0
   dart_appwriteold:
     path: dart_appwrite-3.0.2
+  dropdown_search: ^2.0.1
 
 dev_dependencies:
   flutter_test:
