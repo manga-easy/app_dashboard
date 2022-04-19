@@ -16,17 +16,16 @@ dependencies:
         url: https://github.com/lucascardo12/sdk_manga_easy.git
   google_fonts: ^2.3.1
   flutter_svg: ^1.0.3
-  fl_chart: ^0.46.0
+  fl_chart: ^0.50.1
   provider: ^6.0.2
   data_table_2: ^2.2.1
   get: ^4.6.1
-  dart_appwrite: ^4.0.1
-  appwrite: ^4.0.1
+  dart_appwrite: ^4.0.2
+  appwrite: ^4.0.2
   awesome_notifications: ^0.6.21
-  logger: ^1.1.0
   dart_appwriteold:
     path: dart_appwrite-3.0.2
-  dropdown_search: ^2.0.1
+  dropdown_search: ^3.0.1
 
 dev_dependencies:
   flutter_test:
