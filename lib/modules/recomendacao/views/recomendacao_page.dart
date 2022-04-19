@@ -3,6 +3,7 @@ import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.da
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/recomendacao_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class RecomendacaoPage extends GetView {
   final ct = Get.put(RecomendacaoController());
@@ -40,27 +41,28 @@ class RecomendacaoPage extends GetView {
                         shrinkWrap: true,
                         itemCount: ct.listaRecomendacaoItens.length,
                         itemBuilder: (context, index) {
+                          RecomendacoesModel reco = ct.listaRecomendacaoItens[index];
                           return Card(
                             color: AppTheme.primaryColor,
                             child: Column(
                               children: [
                                 ListTile(
                                   textColor: Colors.white,
-                                  title: Text(ct.listaRecomendacaoItens[index].nomeManga),
-                                  subtitle: Text(ct.listaRecomendacaoItens[index].descricaoRecomendacao),
+                                  title: Text(reco.title),
                                 ),
-                                Text(ct.listaRecomendacaoItens[index].link),
+                                Text(reco.link),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     ButtonPadrao(title: "Editar", icone: Icons.edit, onPress: () {}),
                                     ElevatedButton.icon(
-                                        style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                                        ),
-                                        onPressed: () {},
-                                        icon: Icon(Icons.delete_forever),
-                                        label: Text('Deletar')),
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                                      ),
+                                      onPressed: () {},
+                                      icon: Icon(Icons.delete_forever),
+                                      label: Text('Deletar'),
+                                    ),
                                   ],
                                 )
                               ],
