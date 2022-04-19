@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/modules/users/models/users.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class UsersController extends GetxController {
   List lista = [].obs;
@@ -22,7 +22,7 @@ class UsersController extends GetxController {
     var retorno = await app.users.list(limit: 100);
     var list = retorno.users;
     for (var item in list) {
-      lista.add(UsersL.fromJson(item.toMap()));
+      lista.add(User.fromJson(item.toMap()));
     }
   }
 
@@ -31,7 +31,7 @@ class UsersController extends GetxController {
     var list = retorno.users;
     lista.clear();
     for (var item in list) {
-      lista.add(UsersL.fromJson(item.toMap()));
+      lista.add(User.fromJson(item.toMap()));
     }
   }
 }

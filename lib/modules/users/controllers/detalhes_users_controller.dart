@@ -4,19 +4,16 @@ import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
 import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/models/notificacao.dart';
-import 'package:dashboard_manga_easy/modules/users/models/emblema_user.dart';
-
 import 'package:dart_appwrite/dart_appwrite.dart';
-import 'package:dashboard_manga_easy/modules/users/models/users.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class UsersDetalhesController extends GetxController {
   final app = Get.find<AppwriteAdmin>();
   final gb = Get.find<Global>();
   var nova = Notificacao(menssege: '', titulo: '');
-  UsersL user = Get.arguments;
+  User user = Get.arguments;
   List<EmblemaUser> emblemasUsers = [];
   final apiFcm = FCMApi();
   var indexP = 0.obs;
@@ -46,7 +43,7 @@ class UsersDetalhesController extends GetxController {
   }
 
   void enviaNotificacao() async {
-    List<String> tokens = [user.prefs.tokenFcm!];
+    List<String> tokens = [user.prefs.tokenFcm];
 
     var noti = await app.database.createDocument(
       collectionId: Notificacao.collectionId,
@@ -73,7 +70,7 @@ class UsersDetalhesController extends GetxController {
     if (emble.documents.isEmpty) {
       var embUser = EmblemaUser(
         timeCria: DateTime.now().millisecondsSinceEpoch,
-        userId: user.id,
+        userId: user.id!,
         idEmblema: idEmblema,
       );
       await app.database.createDocument(

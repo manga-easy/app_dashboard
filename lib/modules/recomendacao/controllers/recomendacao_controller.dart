@@ -1,8 +1,7 @@
 import 'package:appwrite/models.dart';
-import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/models/recomendacao_model.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class RecomendacaoController extends GetxController {
   final app = Get.find<AppwriteClient>();
@@ -23,15 +22,15 @@ class RecomendacaoController extends GetxController {
     listaRecomendacaoItens.clear();
     try {
       DocumentList response = await app.database.listDocuments(
-        collectionId: Recomendacao.collectionId,
+        collectionId: RecomendacoesModel.collectionID,
       );
       for (var item in response.documents) {
         listaRecomendacaoItens.add(
-          Recomendacao.fromJson(item.data),
+          RecomendacoesModel.fromJson(item.data),
         );
       }
     } catch (e) {
-      AppHelps.log(e);
+      Helps.log(e);
     }
   }
 }

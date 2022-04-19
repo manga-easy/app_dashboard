@@ -1,9 +1,9 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
 import 'package:dashboard_manga_easy/modules/users/controllers/users_controller.dart';
-import 'package:dashboard_manga_easy/modules/users/models/users.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class UsersScreen extends GetView {
   static const router = '/users';
@@ -24,7 +24,7 @@ class UsersScreen extends GetView {
                 ? ListView.builder(
                     itemCount: ct.lista.length,
                     itemBuilder: (context, index) {
-                      UsersL use = ct.lista[index];
+                      User use = ct.lista[index];
                       return ListTile(
                         onTap: () => Get.toNamed('/dealhes.users', arguments: use),
                         leading: CircleAvatar(

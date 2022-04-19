@@ -39,7 +39,7 @@ class UserDetalhesPage extends GetView {
                 child: [
                   InfoUsersW(
                     email: ct.user.email,
-                    id: ct.user.id,
+                    id: ct.user.id!,
                     onPress: () => ct.addNotificacao(),
                   ),
                   EmblemasUsersW(ct.emblemasUsers),

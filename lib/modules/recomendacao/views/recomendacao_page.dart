@@ -46,26 +46,17 @@ class RecomendacaoPage extends GetView {
                               children: [
                                 ListTile(
                                   textColor: Colors.white,
-                                  title: Text(ct
-                                      .listaRecomendacaoItens[index].nomeManga),
-                                  subtitle: Text(ct
-                                      .listaRecomendacaoItens[index]
-                                      .descricaoRecomendacao),
+                                  title: Text(ct.listaRecomendacaoItens[index].nomeManga),
+                                  subtitle: Text(ct.listaRecomendacaoItens[index].descricaoRecomendacao),
                                 ),
                                 Text(ct.listaRecomendacaoItens[index].link),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    ButtonPadrao(
-                                        title: "Editar",
-                                        icone: Icons.edit,
-                                        onPress: () {}),
+                                    ButtonPadrao(title: "Editar", icone: Icons.edit, onPress: () {}),
                                     ElevatedButton.icon(
                                         style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Colors.red),
+                                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                                         ),
                                         onPressed: () {},
                                         icon: Icon(Icons.delete_forever),

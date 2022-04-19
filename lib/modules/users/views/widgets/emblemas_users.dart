@@ -1,7 +1,7 @@
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/modules/users/models/emblema_user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class EmblemasUsersW extends GetView {
   final gb = Get.find<Global>();

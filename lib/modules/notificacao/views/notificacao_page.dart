@@ -1,9 +1,9 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/config/responsive.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/models/notificacao.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class NotificacaoScreen extends GetView {
   final ct = Get.put(NotificacaoController());

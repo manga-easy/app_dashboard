@@ -3,9 +3,9 @@ import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
 import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/models/notificacao.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class NotificacaoController extends GetxController {
   List lista = [].obs;

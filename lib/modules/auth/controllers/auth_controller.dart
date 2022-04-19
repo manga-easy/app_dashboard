@@ -1,13 +1,12 @@
 import 'package:appwrite/models.dart';
 import 'package:dart_appwrite/dart_appwrite.dart';
-import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/models/erros_auth.dart';
 import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
-import 'package:dashboard_manga_easy/modules/users/models/users.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart' as sdk;
 
 class AuthController extends GetxController {
   final gb = Get.find<Global>();
@@ -33,7 +32,7 @@ class AuthController extends GetxController {
       gb.user = response.userId;
       Get.offAllNamed(MainScreen.router);
     } catch (e) {
-      AppHelps.log(e);
+      sdk.Helps.log(e);
       Get.defaultDialog(
         title: '${ErrosAuth.erroLogin}',
         middleText: '$e',
@@ -54,7 +53,7 @@ class AuthController extends GetxController {
 
   Future<void> validacaoAdmin(Session response) async {
     DocumentList result = await app.database.listDocuments(
-      collectionId: UsersL.collectionIdAdmin,
+      collectionId: sdk.User.collectionIdAdmin,
       queries: [
         Query.equal(
           'userId',

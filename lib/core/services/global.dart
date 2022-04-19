@@ -1,8 +1,6 @@
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/modules/users/models/emblema.dart';
-import 'package:dashboard_manga_easy/modules/users/models/users.dart';
-
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class Global extends GetxService {
   final app = Get.find<AppwriteAdmin>();
