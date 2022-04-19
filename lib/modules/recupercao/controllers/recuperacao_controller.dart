@@ -1,20 +1,28 @@
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/models/banner_model.dart';
-import 'package:dashboard_manga_easy/modules/users/models/biblioteca.dart';
-import 'package:dashboard_manga_easy/modules/users/models/emblema.dart';
-import 'package:dashboard_manga_easy/modules/users/models/emblema_user.dart';
-import 'package:dashboard_manga_easy/modules/users/models/historico.dart';
-import 'package:dashboard_manga_easy/modules/users/models/nivel_user.dart';
+import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_banner_model_case.dart';
+import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_biblioteca_case.dart';
+import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_emblema_user.dart';
+import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_emblemas_case.dart';
 import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_historico_case.dart';
+import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_nivel_user_case.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class RecuperacaoController extends GetxController {
   final app = Get.find<AppwriteAdmin>();
-  TextEditingController userAntigo = TextEditingController();
-  TextEditingController userNovo = TextEditingController();
+  var userAntigo = TextEditingController();
+  var userNovo = TextEditingController();
+  var caseOldEmblema = GetOldEmblemasCase();
+  var caseOldBannerModel = GetOldBannerModelCase();
+  var caseOldBiblioteca = GetOldBibliotecaCase();
+  var caseOldNivelUser = GetOldNivelUserCase();
+  var caseOldEmblemaUser = GetOldEmlemaUser();
+  var caseOldHistorico = GetOldHistoricoCase();
   String? idUserOld;
   String? idUserNew;
+
   @override
   void onClose() {
     super.onClose();
@@ -26,7 +34,7 @@ class RecuperacaoController extends GetxController {
   }
 
   Future<void> recuperaEmblemas() async {
-    var embs = await Emblema.getOldApp();
+    var embs = await caseOldEmblema();
     for (var item in embs) {
       await app.database.createDocument(
         collectionId: Emblema.collectionId,
@@ -39,7 +47,7 @@ class RecuperacaoController extends GetxController {
   }
 
   Future<void> recuperaBanner() async {
-    var embs = await BannerModel.getOldApp();
+    var embs = await caseOldBannerModel();
     for (var item in embs) {
       await app.database.createDocument(
         collectionId: BannerModel.collectionID,
@@ -51,7 +59,7 @@ class RecuperacaoController extends GetxController {
     }
   }
 
-  recuperaDados() async {
+  Future<void> recuperaDados() async {
     try {
       print('Procurando findUserNew');
       idUserNew = userNovo.text;
@@ -72,8 +80,8 @@ class RecuperacaoController extends GetxController {
     }
   }
 
-  recuperaBiblioteca() async {
-    var embs = await Biblioteca.getOldApp(idUserOld!);
+  Future<void> recuperaBiblioteca() async {
+    var embs = await caseOldBiblioteca(idUserOld!);
     var total = embs.length;
     var atual = 1;
     for (var item in embs) {
@@ -107,9 +115,9 @@ class RecuperacaoController extends GetxController {
     }
   }
 
-  recuperaHistorico() async {
+  Future<void> recuperaHistorico() async {
     try {
-      var embs = await Historico.getOldApp(idUserOld!);
+      var embs = await caseOldHistorico(idUserOld!);
       var total = embs.length;
       var atual = 1;
       for (var item in embs) {
@@ -146,8 +154,8 @@ class RecuperacaoController extends GetxController {
     }
   }
 
-  recuperaNivel() async {
-    var embs = await NivelUser.getOldApp(idUserOld!);
+  Future<void> recuperaNivel() async {
+    var embs = await caseOldNivelUser(idUserOld!);
     var total = embs.length;
     var atual = 1;
     if (total > 0) {
@@ -185,8 +193,8 @@ class RecuperacaoController extends GetxController {
     }
   }
 
-  recuperaEmblemaUser() async {
-    var embs = await EmblemaUser.getOldApp(idUserOld!);
+  Future<void> recuperaEmblemaUser() async {
+    var embs = await caseOldEmblemaUser(idUserOld!);
     var total = embs.length;
     var atual = 1;
     for (var item in embs) {
