@@ -20,7 +20,7 @@ class ButtonPadrao extends GetView {
       style: TextButton.styleFrom(
         padding: EdgeInsets.symmetric(
           horizontal: AppTheme.defaultPadding * 1.5,
-          vertical: AppTheme.defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+          vertical: AppTheme.defaultPadding,
         ),
       ),
       onPressed: onPress,

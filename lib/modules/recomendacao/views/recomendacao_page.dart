@@ -23,7 +23,9 @@ class RecomendacaoPage extends GetView {
               ButtonPadrao(
                 title: 'Nova recomendação',
                 icone: Icons.add,
-                onPress: () => Get.toNamed('/criar.recomendacao'),
+                onPress: () => Get.toNamed('/criar.recomendacao')!.then(
+                  (value) => ct.listaRecomendacao(),
+                ),
               ),
             ],
           ),
@@ -48,9 +50,19 @@ class RecomendacaoPage extends GetView {
                               children: [
                                 ListTile(
                                   textColor: Colors.white,
-                                  title: Text(reco.title),
+                                  title: Text(
+                                    reco.title,
+                                    style: Theme.of(context).textTheme.titleLarge,
+                                  ),
                                 ),
-                                Text(reco.link),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  child: Image.network(
+                                    reco.link,
+                                    height: 300,
+                                  ),
+                                ),
+                                SizedBox(height: 16),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
@@ -64,7 +76,8 @@ class RecomendacaoPage extends GetView {
                                       label: Text('Deletar'),
                                     ),
                                   ],
-                                )
+                                ),
+                                SizedBox(height: 16)
                               ],
                             ),
                           );
