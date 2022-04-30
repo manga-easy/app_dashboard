@@ -1,36 +1,33 @@
 import 'package:dashboard_manga_easy/core/apis/fcm_api.dart';
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
+import 'package:dashboard_manga_easy/main.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class NotificacaoController extends GetxController {
-  List lista = [].obs;
-  Notificacao nova = Notificacao(menssege: '', titulo: '');
+class NotificacaoController extends IController {
+  final AppwriteAdmin app = di();
   final apiFcm = FCMApi();
-  final app = Get.find<AppwriteAdmin>();
+  var nova = Notificacao(menssege: '', titulo: '');
+  var lista = ValueNotifier(<Notificacao>[]);
   @override
-  void onClose() {
-    super.onClose();
-  }
+  void onClose() {}
 
   @override
-  void onInit() {
+  void onInit(BuildContext context) {
     carregaNotificacao();
-    super.onInit();
   }
 
   void carregaNotificacao() async {
-    lista.clear();
+    lista.value.clear();
     var retorno = await app.database.listDocuments(
       collectionId: Notificacao.collectionId,
     );
-    for (var item in retorno.documents) {
-      lista.add(Notificacao.fromJson(item.data));
-    }
+    lista.value = retorno.documents.map((e) => Notificacao.fromJson(e.data)).toList();
   }
 
   void enviaNotificacao() async {
@@ -50,30 +47,33 @@ class NotificacaoController extends GetxController {
     await Future.delayed(Duration(seconds: 3));
   }
 
-  void addNotificacao() {
-    Get.bottomSheet(
-      Container(
+  void addNotificacao(context) {
+    AppHelps.bottomSheet(
+      context: context,
+      isScrollControlled: true,
+      child: Container(
         color: AppTheme.bgColor,
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 20),
             Text(
               'Novo Aviso',
-              style: Get.textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6,
             ),
             SizedBox(height: 20),
-            CampoPadrao(
+            CampoPadraoAtom(
               hintText: 'Digite o titulo',
               onChange: (v) => nova.titulo = v,
             ),
             SizedBox(height: 10),
-            CampoPadrao(
+            CampoPadraoAtom(
               hintText: 'Digite a mensagem',
               onChange: (v) => nova.menssege = v,
             ),
             SizedBox(height: 20),
-            ButtonPadrao(
+            ButtonPadraoAtom(
               onPress: () => enviaNotificacao(),
               icone: Icons.send,
               title: "Enviar",
