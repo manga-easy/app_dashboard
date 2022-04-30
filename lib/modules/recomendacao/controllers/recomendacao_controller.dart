@@ -1,34 +1,32 @@
-import 'package:appwrite/models.dart';
+import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class RecomendacaoController extends GetxController {
-  final app = Get.find<AppwriteClient>();
-  List listaRecomendacaoItens = [].obs;
+class RecomendacaoController extends IController {
+  final AppwriteClient app;
+  var listaRecomendacaoItens = ValueNotifier(<RecomendacoesModel>[]);
+
+  RecomendacaoController({required this.app});
 
   @override
   void onClose() {
-    super.onClose();
+    listaRecomendacaoItens.dispose();
   }
 
   @override
-  void onInit() {
-    super.onInit();
+  void onInit(BuildContext context) {
     listaRecomendacao();
   }
 
-  listaRecomendacao() async {
-    listaRecomendacaoItens.clear();
+  void listaRecomendacao() async {
+    listaRecomendacaoItens.value.clear();
     try {
-      DocumentList response = await app.database.listDocuments(
+      var response = await app.database.listDocuments(
         collectionId: RecomendacoesModel.collectionID,
       );
-      for (var item in response.documents) {
-        listaRecomendacaoItens.add(
-          RecomendacoesModel.fromJson(item.data),
-        );
-      }
+      listaRecomendacaoItens.value =
+          response.documents.map((e) => RecomendacoesModel.fromJson(e.data)).toList();
     } catch (e) {
       Helps.log(e);
     }

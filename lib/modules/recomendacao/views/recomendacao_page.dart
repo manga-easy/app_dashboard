@@ -1,12 +1,32 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
+import 'package:dashboard_manga_easy/main.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/recomendacao_controller.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class RecomendacaoPage extends GetView {
-  final ct = Get.put(RecomendacaoController());
+class RecomendacaoPage extends StatefulWidget {
+  static const route = '/Recomendacao';
+  const RecomendacaoPage({Key? key}) : super(key: key);
+  @override
+  State<RecomendacaoPage> createState() => _RecomendacaoPageState();
+}
+
+class _RecomendacaoPageState extends State<RecomendacaoPage> {
+  final ct = di.get<RecomendacaoController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ct.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +40,12 @@ class RecomendacaoPage extends GetView {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ButtonPadrao(
+              ButtonPadraoAtom(
                 title: 'Nova recomendação',
                 icone: Icons.add,
-                onPress: () => Get.toNamed('/criar.recomendacao')!.then(
-                  (value) => ct.listaRecomendacao(),
-                ),
+                onPress: () => Navigator.of(context).pushNamed(CriarRecomendacaoPage.route).then(
+                      (value) => ct.listaRecomendacao(),
+                    ),
               ),
             ],
           ),
@@ -37,13 +57,14 @@ class RecomendacaoPage extends GetView {
                 borderRadius: BorderRadius.circular(10),
                 color: AppTheme.secondaryColor,
               ),
-              child: Obx(
-                () => ct.listaRecomendacaoItens.length != 0
+              child: ValueListenableBuilder(
+                valueListenable: ct.listaRecomendacaoItens,
+                builder: (context, value, child) => ct.listaRecomendacaoItens.value.length != 0
                     ? ListView.builder(
                         shrinkWrap: true,
-                        itemCount: ct.listaRecomendacaoItens.length,
+                        itemCount: ct.listaRecomendacaoItens.value.length,
                         itemBuilder: (context, index) {
-                          RecomendacoesModel reco = ct.listaRecomendacaoItens[index];
+                          RecomendacoesModel reco = ct.listaRecomendacaoItens.value[index];
                           return Card(
                             color: AppTheme.primaryColor,
                             child: Column(
@@ -66,7 +87,7 @@ class RecomendacaoPage extends GetView {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    ButtonPadrao(title: "Editar", icone: Icons.edit, onPress: () {}),
+                                    ButtonPadraoAtom(title: "Editar", icone: Icons.edit, onPress: () {}),
                                     ElevatedButton.icon(
                                       style: ButtonStyle(
                                         backgroundColor: MaterialStateProperty.all<Color>(Colors.red),

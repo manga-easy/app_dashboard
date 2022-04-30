@@ -1,14 +1,32 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
+import 'package:dashboard_manga_easy/main.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/criar_recomendacao_controller.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class CriarRecomendacaoPage extends GetView {
-  static const router = '/criar.recomendacao';
-  final ct = Get.put(CriarRecomendacaoController());
+class CriarRecomendacaoPage extends StatefulWidget {
+  static const route = '/CriarRecomendacao';
+  const CriarRecomendacaoPage({Key? key}) : super(key: key);
+  @override
+  State<CriarRecomendacaoPage> createState() => _CriarRecomendacaoPageState();
+}
+
+class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
+  final ct = di.get<CriarRecomendacaoController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ct.onClose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,40 +47,27 @@ class CriarRecomendacaoPage extends GetView {
                 ),
                 child: Column(
                   children: [
-                    CampoPadrao(
+                    CampoPadraoAtom(
                       hintText: 'Nome do manga',
                       controller: ct.nomeManga,
                     ),
                     SizedBox(height: AppTheme.defaultPadding * 2),
-                    CampoPadrao(
+                    CampoPadraoAtom(
                       hintText: 'Link',
                       controller: ct.link,
                     ),
                     SizedBox(height: AppTheme.defaultPadding * 2),
-                    CampoPadrao(
+                    CampoPadraoAtom(
                       numberLines: 5,
                       hintText: 'Descrição da recomendação',
                       controller: ct.descricaoRecomendacao,
                     ),
                     SizedBox(height: AppTheme.defaultPadding * 2),
-                    // DropdownSearch<String>.multiSelection(
-                    //     mode: Mode.MENU,
-                    //     showSearchBox: true,
-                    //     showSelectedItems: true,
-                    //     items: [
-                    //       "Brazil",
-                    //       "Italia",
-                    //       "Tunisia",
-                    //       'Canada',
-                    //     ],
-                    //     dropdownSearchDecoration:
-                    //         InputDecoration(labelText: 'Genêros', hintText: 'Selecione os genêros do manga'),
-                    //     onChanged: (event) => ct.generos = event),
                     SizedBox(height: AppTheme.defaultPadding * 2),
-                    ButtonPadrao(
+                    ButtonPadraoAtom(
                       title: 'Criar recomendação',
                       icone: Icons.create,
-                      onPress: () => ct.criarRecomendacao(),
+                      onPress: () => ct.criarRecomendacao(context),
                     ),
                   ],
                 ),
