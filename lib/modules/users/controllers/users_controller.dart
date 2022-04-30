@@ -1,37 +1,25 @@
+import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class UsersController extends GetxController {
-  List lista = [].obs;
-  final app = Get.find<AppwriteAdmin>();
-  var pesquisa = ''.obs;
+class UsersController extends IController {
+  var lista = ValueNotifier(<User>[]);
+  final AppwriteAdmin app;
+  var pesquisa = ValueNotifier('');
+
+  UsersController({required this.app});
   @override
-  void onClose() {
-    super.onClose();
-  }
+  void onClose() {}
 
   @override
-  void onInit() {
+  void onInit(BuildContext context) {
     carregaUsers();
-    super.onInit();
   }
 
-  carregaUsers() async {
-    lista.clear();
-    var retorno = await app.users.list(limit: 100);
-    var list = retorno.users;
-    for (var item in list) {
-      lista.add(User.fromJson(item.toMap()));
-    }
-  }
-
-  pesquisaUser() async {
-    var retorno = await app.users.list(search: pesquisa.value);
-    var list = retorno.users;
-    lista.clear();
-    for (var item in list) {
-      lista.add(User.fromJson(item.toMap()));
-    }
+  void carregaUsers() async {
+    lista.value.clear();
+    var retorno = await app.users.list(limit: 100, search: pesquisa.value);
+    lista.value = retorno.users.map((e) => User.fromJson(e.toMap())).toList();
   }
 }

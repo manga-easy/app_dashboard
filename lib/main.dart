@@ -11,6 +11,7 @@ import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart
 import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/recuperacao_module.dart';
+import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ Future<void> main() async {
   NotificacaoModule().register();
   RecomendacaoModule().register();
   RecuperacaooModule().register();
+  UsersModule().register();
   runApp(MyApp());
 }
 

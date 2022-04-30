@@ -1,31 +1,41 @@
 import 'package:dashboard_manga_easy/core/apis/fcm_api.dart';
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
 import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class UsersDetalhesController extends GetxController {
-  final app = Get.find<AppwriteAdmin>();
-  final gb = Get.find<Global>();
+class UsersDetalhesController extends IController {
+  final AppwriteAdmin app;
+  final Global gb;
+  final FCMApi apiFcm;
   var nova = Notificacao(menssege: '', titulo: '');
-  User user = Get.arguments;
+  late User user;
   List<EmblemaUser> emblemasUsers = [];
-  final apiFcm = FCMApi();
-  var indexP = 0.obs;
+  List<Emblema> listEmblema = [];
+  var indexP = ValueNotifier(0);
+
+  UsersDetalhesController({
+    required this.app,
+    required this.gb,
+    required this.apiFcm,
+  });
+
   @override
   void onClose() {
-    super.onClose();
+    indexP.dispose();
   }
 
   @override
-  void onInit() {
+  void onInit(BuildContext context) {
+    user = ModalRoute.of(context)!.settings.arguments as User;
     carrega();
-    super.onInit();
+    carregaEmblemas();
   }
 
   carrega() async {
@@ -58,8 +68,7 @@ class UsersDetalhesController extends GetxController {
     );
   }
 
-  Future<void> addEmblema(String idEmblema) async {
-    print(idEmblema);
+  Future<void> addEmblema(String idEmblema, BuildContext context) async {
     var emble = await app.database.listDocuments(
       collectionId: EmblemaUser.collectionId,
       queries: [
@@ -81,39 +90,39 @@ class UsersDetalhesController extends GetxController {
         read: ['role:all'],
       );
     } else {
-      Get.defaultDialog(
+      AppHelps.confirmaDialog(
         title: 'Já adquirido',
-        content: Text(
-          'Você já adquiriu o emblema',
-        ),
+        content: 'Você já adquiriu o emblema',
+        context: context,
       );
     }
   }
 
-  void addNotificacao() {
-    Get.bottomSheet(
-      Container(
+  void addNotificacao(BuildContext context) {
+    AppHelps.bottomSheet(
+      context: context,
+      child: Container(
         color: AppTheme.bgColor,
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Novo Aviso',
-              style: Get.textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6,
             ),
-            SizedBox(height: 20),
-            CampoPadrao(
+            const SizedBox(height: 20),
+            CampoPadraoAtom(
               hintText: 'Digite o titulo',
               onChange: (v) => nova.titulo = v,
             ),
-            SizedBox(height: 10),
-            CampoPadrao(
+            const SizedBox(height: 10),
+            CampoPadraoAtom(
               hintText: 'Digite a mensagem',
               onChange: (v) => nova.menssege = v,
             ),
-            SizedBox(height: 20),
-            ButtonPadrao(
+            const SizedBox(height: 20),
+            ButtonPadraoAtom(
               onPress: () => enviaNotificacao(),
               icone: Icons.send,
               title: "Enviar",
@@ -124,18 +133,19 @@ class UsersDetalhesController extends GetxController {
     );
   }
 
-  void showAddemblema() {
-    Get.bottomSheet(
-      Container(
+  void showAddemblema(BuildContext context) {
+    AppHelps.bottomSheet(
+      context: context,
+      child: Container(
         color: AppTheme.bgColor,
         child: Wrap(
           children: [
             Column(
-              children: gb.listEmblema
+              children: listEmblema
                   .map(
                     (e) => TextButton(
                       child: Text(e.name),
-                      onPressed: () => addEmblema(e.id),
+                      onPressed: () => addEmblema(e.id, context),
                     ),
                   )
                   .toList(),
@@ -144,5 +154,11 @@ class UsersDetalhesController extends GetxController {
         ),
       ),
     );
+  }
+
+  void carregaEmblemas() async {
+    listEmblema.clear();
+    var retorno = await app.database.listDocuments(limit: 100, collectionId: Emblema.collectionId);
+    listEmblema = retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
   }
 }

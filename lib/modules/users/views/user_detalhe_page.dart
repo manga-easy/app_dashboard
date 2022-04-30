@@ -1,12 +1,31 @@
+import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/users/controllers/detalhes_users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/views/widgets/emblemas_users.dart';
 import 'package:dashboard_manga_easy/modules/users/views/widgets/info_users.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class UserDetalhesPage extends GetView {
-  static const router = '/dealhes.users';
-  final ct = Get.put(UsersDetalhesController());
+class UserDetalhesPage extends StatefulWidget {
+  static const route = '/UserDetalhes';
+  const UserDetalhesPage({Key? key}) : super(key: key);
+  @override
+  State<UserDetalhesPage> createState() => _UserDetalhesPageState();
+}
+
+class _UserDetalhesPageState extends State<UserDetalhesPage> {
+  final ct = di.get<UsersDetalhesController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ct.onClose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +33,8 @@ class UserDetalhesPage extends GetView {
         title: Text(ct.user.name),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: ct.showAddemblema,
-        label: Text('Adicionar emblema'),
+        onPressed: () => ct.showAddemblema(context),
+        label: const Text('Adicionar emblema'),
       ),
       body: SafeArea(
         child: Column(
@@ -26,7 +45,7 @@ class UserDetalhesPage extends GetView {
                 length: 3,
                 child: TabBar(
                   onTap: (v) => ct.indexP.value = v,
-                  tabs: [
+                  tabs: const [
                     Tab(text: 'Geral'),
                     Tab(text: 'Emblemas'),
                     Tab(text: 'não sei ainda'),
@@ -34,16 +53,17 @@ class UserDetalhesPage extends GetView {
                 ),
               ),
             ),
-            Obx(
-              () => Expanded(
+            ValueListenableBuilder(
+              valueListenable: ct.indexP,
+              builder: (context, value, child) => Expanded(
                 child: [
                   InfoUsersW(
                     email: ct.user.email,
                     id: ct.user.id!,
-                    onPress: () => ct.addNotificacao(),
+                    onPress: () => ct.addNotificacao(context),
                   ),
-                  EmblemasUsersW(ct.emblemasUsers),
-                  EmblemasUsersW(ct.emblemasUsers),
+                  EmblemasUsersW(ct: ct, list: ct.emblemasUsers),
+                  EmblemasUsersW(ct: ct, list: ct.emblemasUsers),
                 ].elementAt(ct.indexP.value),
               ),
             )

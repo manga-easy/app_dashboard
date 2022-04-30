@@ -1,19 +1,23 @@
-import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class InfoUsersW extends GetView {
+class InfoUsersW extends StatelessWidget {
   final String email;
   final String id;
   final void Function()? onPress;
 
-  InfoUsersW({required this.email, required this.id, this.onPress});
+  const InfoUsersW({
+    Key? key,
+    required this.email,
+    required this.id,
+    this.onPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -26,12 +30,12 @@ class InfoUsersW extends GetView {
             SelectableText(id),
           ],
         ),
-        ButtonPadrao(
+        ButtonPadraoAtom(
           title: 'Enviar Notificação',
           icone: Icons.send,
           onPress: onPress,
         ),
-        ButtonPadrao(
+        ButtonPadraoAtom(
           title: 'Resetar senha',
           icone: Icons.password,
         ),
