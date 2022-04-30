@@ -26,4 +26,24 @@ class AppHelps {
         ) ??
         false;
   }
+
+  static bottomSheet({
+    required BuildContext context,
+    Widget? child,
+    bool isScrollControlled = false,
+    ShapeBorder? shape,
+  }) async {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) => child ?? Container(),
+      isScrollControlled: isScrollControlled,
+      shape: shape ??
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ),
+          ),
+    );
+  }
 }
