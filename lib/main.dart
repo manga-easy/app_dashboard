@@ -3,6 +3,7 @@ import 'package:dashboard_manga_easy/core/core_module.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
@@ -16,6 +17,7 @@ final di = GetIt.instance;
 Future<void> main() async {
   //register all modules
   CoreModule().register();
+  AuthModule().register();
   runApp(MyApp());
 }
 

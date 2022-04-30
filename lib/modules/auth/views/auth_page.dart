@@ -1,13 +1,31 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/auth/controllers/auth_controller.dart';
 import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
 import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class AuthPage extends GetView {
-  static const router = '/auth';
-  final ct = Get.put(AuthController());
+class AuthPage extends StatefulWidget {
+  static const route = '/auth';
+  const AuthPage({Key? key}) : super(key: key);
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  final ct = di.get<AuthController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ct.onClose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +62,7 @@ class AuthPage extends GetView {
               ButtonPadrao(
                 title: 'logar',
                 icone: Icons.login,
-                onPress: () => ct.logar(),
+                onPress: () => ct.logar(context),
               ),
             ],
           ),

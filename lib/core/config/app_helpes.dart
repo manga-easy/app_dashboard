@@ -4,7 +4,7 @@ class AppHelps {
   static Future<bool> confirmaDialog({
     required String title,
     required String content,
-    required void Function()? confime,
+    void Function()? confime,
     required BuildContext context,
   }) async {
     return await showDialog<bool>(
