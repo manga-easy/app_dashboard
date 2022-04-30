@@ -1,8 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/core_module.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
@@ -32,9 +29,11 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Dashboard Mangá Easy',
       theme: ThemeData.dark().copyWith(
@@ -46,29 +45,14 @@ class MyApp extends StatelessWidget {
         ),
         canvasColor: AppTheme.secondaryColor,
       ),
-      initialRoute: AuthPage.router,
-      getPages: [
-        GetPage(
-          name: MainScreen.router,
-          page: () => MainScreen(),
-        ),
-        GetPage(
-          name: UsersScreen.router,
-          page: () => UsersScreen(),
-        ),
-        GetPage(
-          name: UserDetalhesPage.router,
-          page: () => UserDetalhesPage(),
-        ),
-        GetPage(
-          name: AuthPage.router,
-          page: () => AuthPage(),
-        ),
-        GetPage(
-          name: CriarRecomendacaoPage.router,
-          page: () => CriarRecomendacaoPage(),
-        )
-      ],
+      initialRoute: AuthPage.route,
+      routes: {
+        MainPage.route: (context) => const MainPage(),
+        UsersPage.route: (context) => const UsersPage(),
+        UserDetalhesPage.route: (context) => const UserDetalhesPage(),
+        AuthPage.route: (context) => const AuthPage(),
+        CriarRecomendacaoPage.route: (context) => const CriarRecomendacaoPage(),
+      },
     );
   }
 }
