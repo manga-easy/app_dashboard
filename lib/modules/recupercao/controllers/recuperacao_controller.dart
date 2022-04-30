@@ -1,3 +1,5 @@
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_banner_model_case.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_biblioteca_case.dart';
@@ -7,11 +9,10 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_historico_case.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_nivel_user_case.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class RecuperacaoController extends GetxController {
-  final app = Get.find<AppwriteAdmin>();
+class RecuperacaoController extends IController {
+  final AppwriteAdmin app;
   var userAntigo = TextEditingController();
   var userNovo = TextEditingController();
   var caseOldEmblema = GetOldEmblemasCase();
@@ -23,15 +24,16 @@ class RecuperacaoController extends GetxController {
   String? idUserOld;
   String? idUserNew;
 
+  RecuperacaoController({required this.app});
+
   @override
   void onClose() {
-    super.onClose();
+    userAntigo.dispose();
+    userNovo.dispose();
   }
 
   @override
-  void onInit() {
-    super.onInit();
-  }
+  void onInit(BuildContext context) {}
 
   Future<void> recuperaEmblemas() async {
     var embs = await caseOldEmblema();
@@ -59,7 +61,7 @@ class RecuperacaoController extends GetxController {
     }
   }
 
-  Future<void> recuperaDados() async {
+  Future<void> recuperaDados(context) async {
     try {
       print('Procurando findUserNew');
       idUserNew = userNovo.text;
@@ -76,7 +78,11 @@ class RecuperacaoController extends GetxController {
         print('User não encontrado ');
       }
     } catch (e) {
-      Get.defaultDialog(middleText: e.toString(), title: 'erro');
+      AppHelps.confirmaDialog(
+        content: e.toString(),
+        title: 'erro',
+        context: context,
+      );
     }
   }
 
