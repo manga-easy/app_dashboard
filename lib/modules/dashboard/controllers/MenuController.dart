@@ -1,8 +1,8 @@
+import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class MenuController extends GetxController {
-  var page = 0.obs;
+class MenuController extends IController {
+  var page = ValueNotifier(0);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
@@ -13,8 +13,14 @@ class MenuController extends GetxController {
     }
   }
 
-  trocarPage(int v) {
+  void trocarPage(int v, BuildContext context) {
     page.value = v;
-    Get.back();
+    Navigator.of(context).pop();
   }
+
+  @override
+  void onClose() {}
+
+  @override
+  void onInit(BuildContext context) {}
 }

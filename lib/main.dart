@@ -5,6 +5,7 @@ import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
   //register all modules
   CoreModule().register();
   AuthModule().register();
+  DashboardModule().register();
   runApp(MyApp());
 }
 
