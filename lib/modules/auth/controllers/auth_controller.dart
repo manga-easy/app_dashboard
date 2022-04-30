@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/models/erros_auth.dart';
-import 'package:dashboard_manga_easy/modules/main/views/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart' as sdk;
 
@@ -34,7 +34,7 @@ class AuthController extends IController {
       gb.user = response.userId;
       Navigator.pushNamedAndRemoveUntil(
         context,
-        MainScreen.router,
+        MainPage.route,
         (route) => true,
       );
     } catch (e) {

@@ -1,14 +1,12 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
-import 'package:dashboard_manga_easy/core/config/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class ButtonPadrao extends GetView {
+class ButtonPadraoAtom extends StatelessWidget {
   final String title;
   final IconData icone;
   final void Function()? onPress;
 
-  ButtonPadrao({
+  ButtonPadraoAtom({
     this.onPress,
     required this.title,
     required this.icone,

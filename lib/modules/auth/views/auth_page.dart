@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/auth/controllers/auth_controller.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/button_padrao.dart';
-import 'package:dashboard_manga_easy/modules/main/views/widgets/campo_padrao.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatefulWidget {
@@ -48,18 +48,18 @@ class _AuthPageState extends State<AuthPage> {
                 style: TextStyle(fontSize: 24),
               ),
               SizedBox(height: AppTheme.defaultPadding * 2),
-              CampoPadrao(
+              CampoPadraoAtom(
                 hintText: 'E-mail',
                 controller: ct.email,
               ),
               SizedBox(height: AppTheme.defaultPadding),
-              CampoPadrao(
+              CampoPadraoAtom(
                 hintText: 'Senha',
                 controller: ct.password,
                 obscureText: true,
               ),
               SizedBox(height: AppTheme.defaultPadding * 2),
-              ButtonPadrao(
+              ButtonPadraoAtom(
                 title: 'logar',
                 icone: Icons.login,
                 onPress: () => ct.logar(context),

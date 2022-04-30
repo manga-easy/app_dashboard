@@ -1,9 +1,8 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
-class CampoPadrao extends GetView {
+class CampoPadraoAtom extends StatelessWidget {
   final Function(String)? onChange;
   final String? hintText;
   final Widget? icone;
@@ -11,7 +10,7 @@ class CampoPadrao extends GetView {
   final TextEditingController? controller;
   final bool? obscureText;
   final int? numberLines;
-  const CampoPadrao({
+  const CampoPadraoAtom({
     Key? key,
     this.obscureText,
     this.numberLines = 1,
@@ -27,7 +26,7 @@ class CampoPadrao extends GetView {
     return TextField(
       obscureText: obscureText != null,
       maxLines: numberLines,
-      style: Get.textTheme.subtitle1!.copyWith(color: AppTheme.bgColor),
+      style: Theme.of(context).textTheme.subtitle1!.copyWith(color: AppTheme.bgColor),
       onChanged: onChange,
       controller: controller,
       cursorColor: Colors.white,
@@ -45,8 +44,7 @@ class CampoPadrao extends GetView {
                 onTap: () {},
                 child: Container(
                   padding: EdgeInsets.all(AppTheme.defaultPadding * 0.75),
-                  margin: EdgeInsets.symmetric(
-                      horizontal: AppTheme.defaultPadding / 2),
+                  margin: EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding / 2),
                   decoration: BoxDecoration(
                     color: AppTheme.secondaryColor,
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
