@@ -1,35 +1,11 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:dashboard_manga_easy/core/services/service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class NotificFCM extends GetxService {
+class NotificFCM extends IService {
   String? token;
   late Stream<String> tokenStream;
   Future<NotificFCM> inicia() async {
-    /// await Firebase.initializeApp();
-    await AwesomeNotifications().initialize(
-        // set the icon to null if you want to use the default app icon
-        'resource://drawable/ic_launcher',
-        [
-          NotificationChannel(
-              channelKey: 'Geral',
-              channelName: 'Notificações em geral',
-              channelDescription: 'Notificações Basicas em geral',
-              defaultColor: Colors.white,
-              ledColor: Colors.white)
-        ]);
-    await AwesomeNotifications().isNotificationAllowed().then((isAllowed) async {
-      if (!isAllowed) {
-        // Insert here your friendly dialog box before call the request method
-        // This is very important to not harm the user experience
-        await AwesomeNotifications().requestPermissionToSendNotifications();
-      }
-    });
-    // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    // if (await Helps.verificarConexao()) {
-    //   await FirebaseMessaging.instance.subscribeToTopic('avisos');
-    // }
-    // firebaseMessaging();
     return this;
   }
 
@@ -74,12 +50,23 @@ class NotificFCM extends GetxService {
     );
   }
 
-  void notificacaoDeToque() {
-    AwesomeNotifications().actionStream.listen((receivedNotification) {
-      Get.toNamed('/NotificationPage', arguments: {
-        "receive": receivedNotification
-      } // your page params. I recommend to you to pass all *receivedNotification* object
-          );
+  @override
+  Future<void> initialise() async {
+    await AwesomeNotifications().initialize(
+      'resource://drawable/ic_launcher',
+      [
+        NotificationChannel(
+            channelKey: 'Geral',
+            channelName: 'Notificações em geral',
+            channelDescription: 'Notificações Basicas em geral',
+            defaultColor: Colors.white,
+            ledColor: Colors.white)
+      ],
+    );
+    await AwesomeNotifications().isNotificationAllowed().then((isAllowed) async {
+      if (!isAllowed) {
+        await AwesomeNotifications().requestPermissionToSendNotifications();
+      }
     });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/core_module.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
@@ -8,14 +9,13 @@ import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendac
 import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final di = GetIt.instance;
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Get.putAsync(() => AppwriteAdmin().inicia());
-  await Get.putAsync(() => AppwriteClient().inicia());
-  await Get.putAsync(() => Global().inicia());
+  //register all modules
+  CoreModule().register();
   runApp(MyApp());
 }
 
