@@ -1,5 +1,7 @@
 import 'package:dashboard_manga_easy/core/services/service.dart';
 
+enum StatusBuild { done, loading, erro }
+
 class Global extends IService {
   String? user;
   Future<Global> inicia() async {
