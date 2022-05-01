@@ -8,6 +8,8 @@ import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart
 import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/recuperacao_module.dart';
+import 'package:dashboard_manga_easy/modules/splash/splash_module.dart';
+import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
 import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
@@ -20,6 +22,7 @@ Future<void> main() async {
   //register all modules
   CoreModule().register();
   AuthModule().register();
+  SplashModule().register();
   DashboardModule().register();
   NotificacaoModule().register();
   RecomendacaoModule().register();
@@ -45,8 +48,9 @@ class MyApp extends StatelessWidget {
         ),
         canvasColor: AppTheme.secondaryColor,
       ),
-      initialRoute: AuthPage.route,
+      initialRoute: SplashPage.route,
       routes: {
+        SplashPage.route: (context) => const SplashPage(),
         MainPage.route: (context) => const MainPage(),
         UsersPage.route: (context) => const UsersPage(),
         UserDetalhesPage.route: (context) => const UserDetalhesPage(),
