@@ -44,7 +44,6 @@ class FCMApi {
   }
 
   Future<bool> postAviso({
-    required List<dynamic> listtokens,
     required String msg,
     required String title,
     required String idmsg,

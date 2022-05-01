@@ -31,20 +31,16 @@ class NotificacaoController extends IController {
   }
 
   void enviaNotificacao() async {
-    List<String?> tokens = [];
     var noti = await app.database.createDocument(
       documentId: 'unique()',
       collectionId: Notificacao.collectionId,
       data: nova.toJson(),
     );
     apiFcm.postAviso(
-      listtokens: tokens,
       msg: nova.menssege,
       title: nova.titulo,
       idmsg: noti.data['\$id'],
     );
-
-    await Future.delayed(const Duration(seconds: 3));
   }
 
   void addNotificacao(context) {
