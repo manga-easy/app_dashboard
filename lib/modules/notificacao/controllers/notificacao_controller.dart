@@ -44,7 +44,7 @@ class NotificacaoController extends IController {
       idmsg: noti.data['\$id'],
     );
 
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
   }
 
   void addNotificacao(context) {
@@ -53,26 +53,26 @@ class NotificacaoController extends IController {
       isScrollControlled: true,
       child: Container(
         color: AppTheme.bgColor,
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Novo Aviso',
               style: Theme.of(context).textTheme.headline6,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             CampoPadraoAtom(
               hintText: 'Digite o titulo',
               onChange: (v) => nova.titulo = v,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             CampoPadraoAtom(
               hintText: 'Digite a mensagem',
               onChange: (v) => nova.menssege = v,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ButtonPadraoAtom(
               onPress: () => enviaNotificacao(),
               icone: Icons.send,

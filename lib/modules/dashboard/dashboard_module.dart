@@ -4,6 +4,7 @@ import 'package:dashboard_manga_easy/modules/dashboard/controllers/MenuControlle
 import 'package:dashboard_manga_easy/modules/dashboard/controllers/dashboard_controller.dart';
 
 class DashboardModule extends IModuleFactory {
+  @override
   void register() {
     //register controllers
     di.registerFactory(() => DashboardController(app: di()));

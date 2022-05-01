@@ -32,12 +32,12 @@ class _UsersPageState extends State<UsersPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: AppTheme.defaultPadding),
+        const SizedBox(height: AppTheme.defaultPadding),
         CampoPadraoAtom(
           onChange: (p) => ct.pesquisa.value = p,
           onEditComplet: () => ct.carregaUsers(),
         ),
-        SizedBox(height: AppTheme.defaultPadding),
+        const SizedBox(height: AppTheme.defaultPadding),
         Expanded(
           child: ValueListenableBuilder(
             valueListenable: ct.lista,

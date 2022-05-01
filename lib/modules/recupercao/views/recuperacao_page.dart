@@ -30,20 +30,20 @@ class _RecuperacaoPageState extends State<RecuperacaoPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding * 2),
+      padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding * 2),
       child: Column(
         children: [
-          SizedBox(height: AppTheme.defaultPadding * 2),
+          const SizedBox(height: AppTheme.defaultPadding * 2),
           CampoPadraoAtom(
             hintText: 'Antigo User',
             controller: ct.userAntigo,
           ),
-          SizedBox(height: AppTheme.defaultPadding),
+          const SizedBox(height: AppTheme.defaultPadding),
           CampoPadraoAtom(
             hintText: 'Novo User',
             controller: ct.userNovo,
           ),
-          SizedBox(height: AppTheme.defaultPadding * 2),
+          const SizedBox(height: AppTheme.defaultPadding * 2),
           ButtonPadraoAtom(
             title: 'consultar',
             icone: Icons.task,

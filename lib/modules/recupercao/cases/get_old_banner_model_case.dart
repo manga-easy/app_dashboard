@@ -3,7 +3,7 @@ import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class GetOldBannerModelCase {
   var repository = AppwriteOld();
-  
+
   Future<List<BannerModel>> call() async {
     final List<BannerModel> emblemas = [];
     repository.inicia();
@@ -13,7 +13,6 @@ class GetOldBannerModelCase {
         limit: 100,
         offset: 100 * i,
       );
-      print(favos.documents.length);
       if (favos.documents.isEmpty) break;
       for (var favo in favos.documents) {
         emblemas.add(BannerModel.fromJson(favo.data));

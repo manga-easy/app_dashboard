@@ -31,34 +31,34 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: AppTheme.defaultPadding * 2,
           vertical: AppTheme.defaultPadding * 2,
         ),
         child: Container(
-          padding: EdgeInsets.all(AppTheme.defaultPadding),
+          padding: const EdgeInsets.all(AppTheme.defaultPadding),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: AppTheme.secondaryColor,
           ),
           child: Column(
             children: [
-              Text(
+              const Text(
                 'Login',
                 style: TextStyle(fontSize: 24),
               ),
-              SizedBox(height: AppTheme.defaultPadding * 2),
+              const SizedBox(height: AppTheme.defaultPadding * 2),
               CampoPadraoAtom(
                 hintText: 'E-mail',
                 controller: ct.email,
               ),
-              SizedBox(height: AppTheme.defaultPadding),
+              const SizedBox(height: AppTheme.defaultPadding),
               CampoPadraoAtom(
                 hintText: 'Senha',
                 controller: ct.password,
                 obscureText: true,
               ),
-              SizedBox(height: AppTheme.defaultPadding * 2),
+              const SizedBox(height: AppTheme.defaultPadding * 2),
               ButtonPadraoAtom(
                 title: 'logar',
                 icone: Icons.login,

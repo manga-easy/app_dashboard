@@ -6,17 +6,18 @@ class ButtonPadraoAtom extends StatelessWidget {
   final IconData icone;
   final void Function()? onPress;
 
-  ButtonPadraoAtom({
+  const ButtonPadraoAtom({
+    Key? key,
     this.onPress,
     required this.title,
     required this.icone,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: AppTheme.defaultPadding * 1.5,
           vertical: AppTheme.defaultPadding,
         ),

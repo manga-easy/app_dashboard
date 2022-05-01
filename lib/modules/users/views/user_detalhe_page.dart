@@ -40,17 +40,15 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: DefaultTabController(
-                length: 3,
-                child: TabBar(
-                  onTap: (v) => ct.indexP.value = v,
-                  tabs: const [
-                    Tab(text: 'Geral'),
-                    Tab(text: 'Emblemas'),
-                    Tab(text: 'não sei ainda'),
-                  ],
-                ),
+            DefaultTabController(
+              length: 3,
+              child: TabBar(
+                onTap: (v) => ct.indexP.value = v,
+                tabs: const [
+                  Tab(text: 'Geral'),
+                  Tab(text: 'Emblemas'),
+                  Tab(text: 'não sei ainda'),
+                ],
               ),
             ),
             ValueListenableBuilder(

@@ -3,7 +3,6 @@ import 'package:dashboard_manga_easy/core/config/responsive.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class NotificacaoPage extends StatefulWidget {
   static const route = '/Notificacao';
@@ -31,7 +30,7 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: AppTheme.defaultPadding),
+        const SizedBox(height: AppTheme.defaultPadding),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -43,8 +42,8 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
                 ),
               ),
               onPressed: () => ct.addNotificacao(context),
-              icon: Icon(Icons.send),
-              label: Text("Enviar notificação"),
+              icon: const Icon(Icons.send),
+              label: const Text("Enviar notificação"),
             ),
           ],
         ),

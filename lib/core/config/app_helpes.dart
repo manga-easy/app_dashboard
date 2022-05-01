@@ -38,7 +38,7 @@ class AppHelps {
       builder: (BuildContext context) => child ?? Container(),
       isScrollControlled: isScrollControlled,
       shape: shape ??
-          RoundedRectangleBorder(
+          const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(25),
               topRight: Radius.circular(25),

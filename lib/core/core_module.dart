@@ -7,6 +7,7 @@ import 'package:dashboard_manga_easy/core/services/notificaion.dart';
 import 'package:dashboard_manga_easy/main.dart';
 
 class CoreModule extends IModuleService {
+  @override
   void register() {
     //register factorys
     di.registerFactory(() => FCMApi());
@@ -18,6 +19,7 @@ class CoreModule extends IModuleService {
     di.registerLazySingleton(() => NotificFCM());
   }
 
+  @override
   Future<void> start() async {
     await di.get<AppwriteClient>().initialise();
     await di.get<AppwriteAdmin>().initialise();

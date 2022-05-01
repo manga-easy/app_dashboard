@@ -9,6 +9,7 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_historico_case.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_nivel_user_case.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class RecuperacaoController extends IController {
@@ -63,9 +64,13 @@ class RecuperacaoController extends IController {
 
   Future<void> recuperaDados(context) async {
     try {
-      print('Procurando findUserNew');
+      if (kDebugMode) {
+        print('Procurando findUserNew');
+      }
       idUserNew = userNovo.text;
-      print('Procurando findUserOld');
+      if (kDebugMode) {
+        print('Procurando findUserOld');
+      }
       idUserOld = userAntigo.text;
       if (idUserOld != null && idUserNew != null) {
         await recuperaBiblioteca();
@@ -75,7 +80,9 @@ class RecuperacaoController extends IController {
         userAntigo.clear();
         userNovo.clear();
       } else {
-        print('User não encontrado ');
+        if (kDebugMode) {
+          print('User não encontrado ');
+        }
       }
     } catch (e) {
       AppHelps.confirmaDialog(
@@ -91,8 +98,10 @@ class RecuperacaoController extends IController {
     var total = embs.length;
     var atual = 1;
     for (var item in embs) {
-      await Future.delayed(Duration());
-      print('recuperaBiblioteca - total $total atual $atual');
+      await Future.delayed(const Duration());
+      if (kDebugMode) {
+        print('recuperaBiblioteca - total $total atual $atual');
+      }
       atual++;
       item.idUser = idUserNew!;
       var ret = await app.database.listDocuments(
@@ -102,8 +111,10 @@ class RecuperacaoController extends IController {
           Query.equal('idUser', item.idUser),
         ],
       );
-      if (ret.documents.length == 0) {
-        print('recuperaBiblioteca - create $atual');
+      if (ret.documents.isEmpty) {
+        if (kDebugMode) {
+          print('recuperaBiblioteca - create $atual');
+        }
         try {
           await app.database.createDocument(
             collectionId: Biblioteca.collectionId,
@@ -113,10 +124,14 @@ class RecuperacaoController extends IController {
             read: ['role:all'],
           );
         } catch (e) {
-          print(e);
+          if (kDebugMode) {
+            print(e);
+          }
         }
       } else {
-        print('recuperaBiblioteca - not create $atual');
+        if (kDebugMode) {
+          print('recuperaBiblioteca - not create $atual');
+        }
       }
     }
   }
@@ -127,8 +142,10 @@ class RecuperacaoController extends IController {
       var total = embs.length;
       var atual = 1;
       for (var item in embs) {
-        await Future.delayed(Duration());
-        print('recuperaHistorico - total $total atual $atual');
+        await Future.delayed(const Duration());
+        if (kDebugMode) {
+          print('recuperaHistorico - total $total atual $atual');
+        }
         atual++;
         item.idUser = idUserNew!;
         var ret = await app.database.listDocuments(
@@ -138,9 +155,11 @@ class RecuperacaoController extends IController {
             Query.equal('idUser', item.idUser),
           ],
         );
-        if (ret.documents.length == 0) {
+        if (ret.documents.isEmpty) {
           try {
-            print('recuperaHistorico - create $atual');
+            if (kDebugMode) {
+              print('recuperaHistorico - create $atual');
+            }
             await app.database.createDocument(
               collectionId: Historico.collectionId,
               documentId: 'unique()',
@@ -149,14 +168,20 @@ class RecuperacaoController extends IController {
               read: ['role:all'],
             );
           } catch (e) {
-            print(e);
+            if (kDebugMode) {
+              print(e);
+            }
           }
         } else {
-          print('recuperaHistorico - not create $atual');
+          if (kDebugMode) {
+            print('recuperaHistorico - not create $atual');
+          }
         }
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -166,7 +191,9 @@ class RecuperacaoController extends IController {
     var atual = 1;
     if (total > 0) {
       var item = embs.first;
-      print('recuperaNivel - total $total atual $atual');
+      if (kDebugMode) {
+        print('recuperaNivel - total $total atual $atual');
+      }
       item.userId = idUserNew!;
       var ret = await app.database.listDocuments(
         collectionId: NivelUser.collectionId,
@@ -174,7 +201,7 @@ class RecuperacaoController extends IController {
           Query.equal('userId', item.userId),
         ],
       );
-      if (ret.documents.length == 0) {
+      if (ret.documents.isEmpty) {
         await app.database.createDocument(
           collectionId: NivelUser.collectionId,
           documentId: item.id!,
@@ -185,7 +212,9 @@ class RecuperacaoController extends IController {
       } else {
         var atual = NivelUser.fromJson(ret.documents.first.data);
         if (atual.lvl < item.lvl) {
-          print('recuperaNivel - Atualiza');
+          if (kDebugMode) {
+            print('recuperaNivel - Atualiza');
+          }
           atual.lvl = item.lvl;
           atual.minute = item.minute;
           atual.quantity = item.quantity;
@@ -204,8 +233,10 @@ class RecuperacaoController extends IController {
     var total = embs.length;
     var atual = 1;
     for (var item in embs) {
-      await Future.delayed(Duration());
-      print('recuperaEmblemaUser - total $total atual $atual');
+      await Future.delayed(const Duration());
+      if (kDebugMode) {
+        print('recuperaEmblemaUser - total $total atual $atual');
+      }
       item.userId = idUserNew!;
       atual++;
       var ret = await app.database.listDocuments(
@@ -215,7 +246,7 @@ class RecuperacaoController extends IController {
           Query.equal('userId', item.userId),
         ],
       );
-      if (ret.documents.length == 0) {
+      if (ret.documents.isEmpty) {
         await app.database.createDocument(
           collectionId: EmblemaUser.collectionId,
           documentId: item.id!,

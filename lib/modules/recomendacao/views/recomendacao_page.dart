@@ -31,7 +31,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: AppTheme.defaultPadding * 2,
         vertical: AppTheme.defaultPadding * 2,
       ),
@@ -49,17 +49,17 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
               ),
             ],
           ),
-          SizedBox(height: AppTheme.defaultPadding),
+          const SizedBox(height: AppTheme.defaultPadding),
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(AppTheme.defaultPadding),
+              padding: const EdgeInsets.all(AppTheme.defaultPadding),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: AppTheme.secondaryColor,
               ),
               child: ValueListenableBuilder(
                 valueListenable: ct.listaRecomendacaoItens,
-                builder: (context, value, child) => ct.listaRecomendacaoItens.value.length != 0
+                builder: (context, value, child) => ct.listaRecomendacaoItens.value.isNotEmpty
                     ? ListView.builder(
                         shrinkWrap: true,
                         itemCount: ct.listaRecomendacaoItens.value.length,
@@ -83,7 +83,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                                     height: 300,
                                   ),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
@@ -93,12 +93,12 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                                         backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                                       ),
                                       onPressed: () {},
-                                      icon: Icon(Icons.delete_forever),
-                                      label: Text('Deletar'),
+                                      icon: const Icon(Icons.delete_forever),
+                                      label: const Text('Deletar'),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 16)
+                                const SizedBox(height: 16)
                               ],
                             ),
                           );
@@ -106,7 +106,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           CircularProgressIndicator(),
                         ],
                       ),

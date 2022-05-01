@@ -35,19 +35,19 @@ class CampoPadraoAtom extends StatelessWidget {
         hintText: hintText,
         fillColor: AppTheme.primaryColor,
         filled: true,
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderSide: BorderSide.none,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         suffixIcon: icone != null
             ? InkWell(
                 onTap: () {},
                 child: Container(
-                  padding: EdgeInsets.all(AppTheme.defaultPadding * 0.75),
-                  margin: EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding / 2),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(AppTheme.defaultPadding * 0.75),
+                  margin: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding / 2),
+                  decoration: const BoxDecoration(
                     color: AppTheme.secondaryColor,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: SvgPicture.asset("assets/icons/Search.svg"),
                 ),

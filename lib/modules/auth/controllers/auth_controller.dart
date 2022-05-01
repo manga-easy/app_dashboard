@@ -54,7 +54,7 @@ class AuthController extends IController {
         password: password.text,
       );
     } catch (e) {
-      throw new Exception(ErrosAuth.erroLogin);
+      throw Exception(ErrosAuth.erroLogin);
     }
   }
 
@@ -69,7 +69,7 @@ class AuthController extends IController {
       ],
     );
     if (result.total <= 0) {
-      throw new Exception(ErrosAuth.isNotAdmin);
+      throw Exception(ErrosAuth.isNotAdmin);
     }
   }
 }

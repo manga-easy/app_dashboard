@@ -31,16 +31,16 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Criar Recomendação'),
+        title: const Text('Criar Recomendação'),
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(AppTheme.defaultPadding),
+          padding: const EdgeInsets.all(AppTheme.defaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.all(AppTheme.defaultPadding),
+                padding: const EdgeInsets.all(AppTheme.defaultPadding),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: AppTheme.secondaryColor,
@@ -51,19 +51,19 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
                       hintText: 'Nome do manga',
                       controller: ct.nomeManga,
                     ),
-                    SizedBox(height: AppTheme.defaultPadding * 2),
+                    const SizedBox(height: AppTheme.defaultPadding * 2),
                     CampoPadraoAtom(
                       hintText: 'Link',
                       controller: ct.link,
                     ),
-                    SizedBox(height: AppTheme.defaultPadding * 2),
+                    const SizedBox(height: AppTheme.defaultPadding * 2),
                     CampoPadraoAtom(
                       numberLines: 5,
                       hintText: 'Descrição da recomendação',
                       controller: ct.descricaoRecomendacao,
                     ),
-                    SizedBox(height: AppTheme.defaultPadding * 2),
-                    SizedBox(height: AppTheme.defaultPadding * 2),
+                    const SizedBox(height: AppTheme.defaultPadding * 2),
+                    const SizedBox(height: AppTheme.defaultPadding * 2),
                     ButtonPadraoAtom(
                       title: 'Criar recomendação',
                       icone: Icons.create,

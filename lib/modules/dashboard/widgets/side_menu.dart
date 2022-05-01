@@ -1,10 +1,10 @@
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/drawer_list_tile_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/controllers/MenuController.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/controllers/menu_controller.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatelessWidget {
   final MenuController menu;
-  SideMenu({
+  const SideMenu({
     Key? key,
     required this.menu,
   }) : super(key: key);

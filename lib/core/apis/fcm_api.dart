@@ -15,14 +15,14 @@ class FCMApi {
     if (listtokens.length == 1) {
       msgJson = jsonEncode({
         'to': listtokens.first,
-        'notification': {'title': '$title', 'body': '$msg'},
-        'data': {'msgId': '$idmsg'}
+        'notification': {'title': title, 'body': msg},
+        'data': {'msgId': idmsg}
       });
     } else {
       msgJson = jsonEncode({
         'registration_ids': listtokens,
-        'notification': {'title': '$title', 'body': '$msg'},
-        'data': {'msgId': '$idmsg'}
+        'notification': {'title': title, 'body': msg},
+        'data': {'msgId': idmsg}
       });
     }
 
@@ -51,8 +51,8 @@ class FCMApi {
   }) async {
     var msgJson = jsonEncode({
       'to': '/topics/avisos',
-      'notification': {'title': '$title', 'body': '$msg'},
-      'data': {'msgId': '$idmsg'}
+      'notification': {'title': title, 'body': msg},
+      'data': {'msgId': idmsg}
     });
     try {
       var result = await dio.post(

@@ -13,7 +13,6 @@ class GetOldEmblemasCase {
         limit: 100,
         offset: 100 * i,
       );
-      print(favos.documents.length);
       if (favos.documents.isEmpty) break;
       for (var favo in favos.documents) {
         emblemas.add(Emblema.fromJson(favo.data));

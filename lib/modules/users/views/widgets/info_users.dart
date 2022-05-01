@@ -35,7 +35,7 @@ class InfoUsersW extends StatelessWidget {
           icone: Icons.send,
           onPress: onPress,
         ),
-        ButtonPadraoAtom(
+        const ButtonPadraoAtom(
           title: 'Resetar senha',
           icone: Icons.password,
         ),
