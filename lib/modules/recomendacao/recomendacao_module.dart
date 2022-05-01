@@ -7,7 +7,7 @@ class RecomendacaoModule extends IModuleFactory {
   @override
   void register() {
     //register controllers
-    di.registerFactory(() => CriarRecomendacaoController(app: di()));
-    di.registerFactory(() => RecomendacaoController(app: di()));
+    di.registerFactory(() => CriarRecomendacaoController(app: di(), global: di()));
+    di.registerFactory(() => RecomendacaoController(app: di(), global: di()));
   }
 }

@@ -7,7 +7,7 @@ class UsersModule extends IModuleFactory {
   @override
   void register() {
     //register controllers
-    di.registerFactory(() => UsersController(app: di()));
+    di.registerFactory(() => UsersController(app: di(), global: di()));
     di.registerFactory(() => UsersDetalhesController(app: di(), apiFcm: di(), gb: di()));
   }
 }

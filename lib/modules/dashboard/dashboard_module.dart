@@ -7,7 +7,7 @@ class DashboardModule extends IModuleFactory {
   @override
   void register() {
     //register controllers
-    di.registerFactory(() => DashboardController(app: di()));
-    di.registerFactory(() => MenuController());
+    di.registerFactory(() => DashboardController(app: di(), global: di()));
+    di.registerFactory(() => MenuController(global: di()));
   }
 }

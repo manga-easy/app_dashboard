@@ -1,22 +1,32 @@
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
+import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class CriarRecomendacaoController extends IController {
   final AppwriteClient app;
-
+  final Global global;
   var nomeManga = TextEditingController();
   var link = TextEditingController();
   var descricaoRecomendacao = TextEditingController();
-  List<String> generos = [];
 
-  CriarRecomendacaoController({required this.app});
+  CriarRecomendacaoController({
+    required this.app,
+    required this.global,
+  });
 
   @override
-  void onClose() {}
+  void onClose() {
+    nomeManga.dispose();
+    link.dispose();
+    descricaoRecomendacao.dispose();
+  }
+
   @override
-  void onInit(BuildContext context) {}
+  void onInit(BuildContext context) {
+    global.validaLogin(context);
+  }
 
   void criarRecomendacao(context) async {
     try {

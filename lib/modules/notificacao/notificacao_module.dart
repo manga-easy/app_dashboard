@@ -6,6 +6,6 @@ class NotificacaoModule extends IModuleFactory {
   @override
   void register() {
     //register controllers
-    di.registerFactory(() => NotificacaoController());
+    di.registerFactory(() => NotificacaoController(apiFcm: di(), app: di(), global: di()));
   }
 }

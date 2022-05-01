@@ -1,19 +1,25 @@
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
+import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class UsersController extends IController {
   var lista = ValueNotifier(<User>[]);
+  final Global global;
   final AppwriteAdmin app;
   var pesquisa = ValueNotifier('');
 
-  UsersController({required this.app});
+  UsersController({required this.app, required this.global});
   @override
-  void onClose() {}
+  void onClose() {
+    lista.dispose();
+    pesquisa.dispose();
+  }
 
   @override
   void onInit(BuildContext context) {
+    global.validaLogin(context);
     carregaUsers();
   }
 
