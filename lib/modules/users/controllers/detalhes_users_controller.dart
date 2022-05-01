@@ -14,8 +14,9 @@ class UsersDetalhesController extends IController {
   final AppwriteAdmin app;
   final Global gb;
   final FCMApi apiFcm;
+  var status = ValueNotifier(StatusBuild.loading);
   var nova = Notificacao(menssege: '', titulo: '');
-  late User user;
+  User? user;
   List<EmblemaUser> emblemasUsers = [];
   List<Emblema> listEmblema = [];
   var indexP = ValueNotifier(0);
@@ -38,11 +39,11 @@ class UsersDetalhesController extends IController {
     carregaEmblemas();
   }
 
-  carrega() async {
+  void carrega() async {
     var retorno = await app.database.listDocuments(
       collectionId: EmblemaUser.collectionId,
       queries: [
-        Query.equal('userId', user.id),
+        Query.equal('userId', user!.id),
       ],
     );
     for (var item in retorno.documents) {
@@ -50,10 +51,11 @@ class UsersDetalhesController extends IController {
         EmblemaUser.fromJson(item.data),
       );
     }
+    status.value = StatusBuild.done;
   }
 
   void enviaNotificacao() async {
-    List<String> tokens = [user.prefs.tokenFcm];
+    List<String> tokens = [user!.prefs.tokenFcm];
 
     var noti = await app.database.createDocument(
       collectionId: Notificacao.collectionId,
@@ -73,13 +75,13 @@ class UsersDetalhesController extends IController {
       collectionId: EmblemaUser.collectionId,
       queries: [
         Query.equal('idEmblema', idEmblema),
-        Query.equal('userId', user.id),
+        Query.equal('userId', user!.id),
       ],
     );
     if (emble.documents.isEmpty) {
       var embUser = EmblemaUser(
         timeCria: DateTime.now().millisecondsSinceEpoch,
-        userId: user.id!,
+        userId: user!.id!,
         idEmblema: idEmblema,
       );
       await app.database.createDocument(
