@@ -4,23 +4,29 @@ import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class NotificacaoController extends IController {
-  final AppwriteAdmin app = di();
-  final apiFcm = FCMApi();
+  final AppwriteAdmin app;
+  final Global global;
+  final FCMApi apiFcm;
   var status = ValueNotifier(StatusBuild.loading);
   var nova = Notificacao(menssege: '', titulo: '');
   var lista = ValueNotifier(<Notificacao>[]);
+
+  NotificacaoController({required this.app, required this.global, required this.apiFcm});
   @override
-  void onClose() {}
+  void onClose() {
+    status.dispose();
+    lista.dispose();
+  }
 
   @override
   void onInit(BuildContext context) {
+    global.validaLogin(context);
     carregaNotificacao();
   }
 

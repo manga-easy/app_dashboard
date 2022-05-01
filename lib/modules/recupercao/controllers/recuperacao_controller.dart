@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
+import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_banner_model_case.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_biblioteca_case.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/cases/get_old_emblema_user.dart';
@@ -14,6 +15,7 @@ import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class RecuperacaoController extends IController {
   final AppwriteAdmin app;
+  final Global global;
   var userAntigo = TextEditingController();
   var userNovo = TextEditingController();
   var caseOldEmblema = GetOldEmblemasCase();
@@ -25,7 +27,7 @@ class RecuperacaoController extends IController {
   String? idUserOld;
   String? idUserNew;
 
-  RecuperacaoController({required this.app});
+  RecuperacaoController({required this.app, required this.global});
 
   @override
   void onClose() {
@@ -34,7 +36,9 @@ class RecuperacaoController extends IController {
   }
 
   @override
-  void onInit(BuildContext context) {}
+  void onInit(BuildContext context) {
+    global.validaLogin(context);
+  }
 
   Future<void> recuperaEmblemas() async {
     var embs = await caseOldEmblema();

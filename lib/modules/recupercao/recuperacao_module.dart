@@ -6,6 +6,6 @@ class RecuperacaooModule extends IModuleFactory {
   @override
   void register() {
     //register controllers
-    di.registerFactory(() => RecuperacaoController(app: di()));
+    di.registerFactory(() => RecuperacaoController(app: di(), global: di()));
   }
 }
