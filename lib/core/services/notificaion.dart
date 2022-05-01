@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dashboard_manga_easy/core/services/service.dart';
 import 'package:flutter/material.dart';
@@ -52,21 +54,23 @@ class NotificFCM extends IService {
 
   @override
   Future<void> initialise() async {
-    await AwesomeNotifications().initialize(
-      'resource://drawable/ic_launcher',
-      [
-        NotificationChannel(
-            channelKey: 'Geral',
-            channelName: 'Notificações em geral',
-            channelDescription: 'Notificações Basicas em geral',
-            defaultColor: Colors.white,
-            ledColor: Colors.white)
-      ],
-    );
-    await AwesomeNotifications().isNotificationAllowed().then((isAllowed) async {
-      if (!isAllowed) {
-        await AwesomeNotifications().requestPermissionToSendNotifications();
-      }
-    });
+    if (!Platform.isWindows) {
+      await AwesomeNotifications().initialize(
+        'resource://drawable/ic_launcher',
+        [
+          NotificationChannel(
+              channelKey: 'Geral',
+              channelName: 'Notificações em geral',
+              channelDescription: 'Notificações Basicas em geral',
+              defaultColor: Colors.white,
+              ledColor: Colors.white)
+        ],
+      );
+      await AwesomeNotifications().isNotificationAllowed().then((isAllowed) async {
+        if (!isAllowed) {
+          await AwesomeNotifications().requestPermissionToSendNotifications();
+        }
+      });
+    }
   }
 }
