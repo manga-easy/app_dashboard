@@ -48,14 +48,10 @@ class AuthController extends IController {
   }
 
   Future<Session> checkUsuario() async {
-    try {
-      return await app.account.createSession(
-        email: email.text,
-        password: password.text,
-      );
-    } catch (e) {
-      throw Exception(ErrosAuth.erroLogin);
-    }
+    return await app.account.createSession(
+      email: email.text,
+      password: password.text,
+    );
   }
 
   Future<void> validacaoAdmin(Session response) async {

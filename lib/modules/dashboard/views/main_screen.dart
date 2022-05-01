@@ -1,12 +1,11 @@
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/controllers/MenuController.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/controllers/menu_controller.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/dashboard_screen.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/views/recuperacao_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
-
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
