@@ -26,7 +26,6 @@ class NotificacaoController extends IController {
 
   @override
   void onInit(BuildContext context) {
-    global.validaLogin(context);
     carregaNotificacao();
   }
 

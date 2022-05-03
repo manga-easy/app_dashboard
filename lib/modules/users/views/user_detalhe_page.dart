@@ -1,4 +1,5 @@
 import 'package:dashboard_manga_easy/main.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
 import 'package:dashboard_manga_easy/modules/users/controllers/detalhes_users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/views/widgets/emblemas_users.dart';
 import 'package:dashboard_manga_easy/modules/users/views/widgets/info_users.dart';
@@ -28,58 +29,64 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
-        if (ct.user == null) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(ct.user!.name),
-          ),
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () => ct.showAddemblema(context),
-            label: const Text('Adicionar emblema'),
-          ),
-          body: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DefaultTabController(
-                  length: 3,
-                  child: TabBar(
-                    onTap: (v) => ct.indexP.value = v,
-                    tabs: const [
-                      Tab(text: 'Geral'),
-                      Tab(text: 'Emblemas'),
-                      Tab(text: 'não sei ainda'),
-                    ],
-                  ),
+    return Scaffold(
+      drawer: const SideMenu(atual: UserDetalhesPage.route),
+      appBar: AppBar(),
+      body: SafeArea(
+        child: ValueListenableBuilder(
+          valueListenable: ct.status,
+          builder: (context, value, child) {
+            if (ct.user == null) {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
                 ),
-                ValueListenableBuilder(
-                  valueListenable: ct.indexP,
-                  builder: (context, value, child) => Expanded(
-                    child: [
-                      InfoUsersW(
-                        email: ct.user!.email,
-                        id: ct.user!.id!,
-                        onPress: () => ct.addNotificacao(context),
+              );
+            }
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(ct.user!.name),
+              ),
+              floatingActionButton: FloatingActionButton.extended(
+                onPressed: () => ct.showAddemblema(context),
+                label: const Text('Adicionar emblema'),
+              ),
+              body: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DefaultTabController(
+                      length: 3,
+                      child: TabBar(
+                        onTap: (v) => ct.indexP.value = v,
+                        tabs: const [
+                          Tab(text: 'Geral'),
+                          Tab(text: 'Emblemas'),
+                          Tab(text: 'não sei ainda'),
+                        ],
                       ),
-                      EmblemasUsersW(ct: ct, list: ct.emblemasUsers),
-                      EmblemasUsersW(ct: ct, list: ct.emblemasUsers),
-                    ].elementAt(ct.indexP.value),
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
+                    ),
+                    ValueListenableBuilder(
+                      valueListenable: ct.indexP,
+                      builder: (context, value, child) => Expanded(
+                        child: [
+                          InfoUsersW(
+                            email: ct.user!.email,
+                            id: ct.user!.id!,
+                            onPress: () => ct.addNotificacao(context),
+                          ),
+                          EmblemasUsersW(ct: ct, list: ct.emblemasUsers),
+                          EmblemasUsersW(ct: ct, list: ct.emblemasUsers),
+                        ].elementAt(ct.indexP.value),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

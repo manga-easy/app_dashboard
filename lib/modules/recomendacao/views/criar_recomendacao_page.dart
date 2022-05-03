@@ -2,6 +2,7 @@ import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/criar_recomendacao_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,7 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const SideMenu(atual: CriarRecomendacaoPage.route),
       appBar: AppBar(
         title: const Text('Criar Recomendação'),
       ),

@@ -2,6 +2,7 @@ import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/controllers/recuperacao_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -29,27 +30,33 @@ class _RecuperacaoPageState extends State<RecuperacaoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding * 2),
-      child: Column(
-        children: [
-          const SizedBox(height: AppTheme.defaultPadding * 2),
-          CampoPadraoAtom(
-            hintText: 'Antigo User',
-            controller: ct.userAntigo,
+    return Scaffold(
+      drawer: const SideMenu(atual: RecuperacaoPage.route),
+      appBar: AppBar(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding * 2),
+          child: Column(
+            children: [
+              const SizedBox(height: AppTheme.defaultPadding * 2),
+              CampoPadraoAtom(
+                hintText: 'Antigo User',
+                controller: ct.userAntigo,
+              ),
+              const SizedBox(height: AppTheme.defaultPadding),
+              CampoPadraoAtom(
+                hintText: 'Novo User',
+                controller: ct.userNovo,
+              ),
+              const SizedBox(height: AppTheme.defaultPadding * 2),
+              ButtonPadraoAtom(
+                title: 'consultar',
+                icone: Icons.task,
+                onPress: () => ct.recuperaDados(context),
+              )
+            ],
           ),
-          const SizedBox(height: AppTheme.defaultPadding),
-          CampoPadraoAtom(
-            hintText: 'Novo User',
-            controller: ct.userNovo,
-          ),
-          const SizedBox(height: AppTheme.defaultPadding * 2),
-          ButtonPadraoAtom(
-            title: 'consultar',
-            icone: Icons.task,
-            onPress: () => ct.recuperaDados(context),
-          )
-        ],
+        ),
       ),
     );
   }

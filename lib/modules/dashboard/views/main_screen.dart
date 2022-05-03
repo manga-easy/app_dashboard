@@ -1,11 +1,7 @@
+import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/controllers/menu_controller.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/dashboard_screen.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
-import 'package:dashboard_manga_easy/modules/recupercao/views/recuperacao_page.dart';
-import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,7 +12,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final ct = di.get<MenuController>();
+  final ct = di.get<DashboardController>();
 
   @override
   void initState() {
@@ -33,30 +29,15 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: ct.scaffoldKey,
-      drawer: SideMenu(menu: ct),
+      drawer: const SideMenu(atual: MainPage.route),
       appBar: AppBar(),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: AnimatedBuilder(
-            animation: ct.page,
-            builder: (context, child) {
-              switch (ct.page.value) {
-                case 0:
-                  return const DashboardScreen();
-                case 1:
-                  return const UsersPage();
-                case 2:
-                  return const NotificacaoPage();
-                case 3:
-                  return const RecuperacaoPage();
-                case 4:
-                  return const RecomendacaoPage();
-                default:
-                  return const Text('kd ?');
-              }
-            },
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(AppTheme.defaultPadding),
+          child: Column(
+            children: const [
+              SizedBox(height: AppTheme.defaultPadding),
+            ],
           ),
         ),
       ),

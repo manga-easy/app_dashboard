@@ -19,7 +19,6 @@ class UsersController extends IController {
 
   @override
   void onInit(BuildContext context) {
-    global.validaLogin(context);
     carregaUsers();
   }
 

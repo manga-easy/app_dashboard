@@ -36,9 +36,7 @@ class RecuperacaoController extends IController {
   }
 
   @override
-  void onInit(BuildContext context) {
-    global.validaLogin(context);
-  }
+  void onInit(BuildContext context) {}
 
   Future<void> recuperaEmblemas() async {
     var embs = await caseOldEmblema();

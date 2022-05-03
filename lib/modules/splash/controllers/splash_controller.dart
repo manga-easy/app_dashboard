@@ -13,14 +13,17 @@ class SplashController extends IController {
 
   @override
   void onInit(BuildContext context) {
+    loadingServices(context);
+  }
+
+  loadingServices(context) async {
     try {
-      CoreModule().start().then(
-            (value) => Navigator.pushNamedAndRemoveUntil(
-              context,
-              AuthPage.route,
-              (route) => true,
-            ),
-          );
+      await CoreModule().start();
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AuthPage.route,
+        (route) => true,
+      );
     } catch (e) {
       Helps.log(e);
       AppHelps.confirmaDialog(

@@ -1,13 +1,17 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/core_module.dart';
+import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/recuperacao_module.dart';
+import 'package:dashboard_manga_easy/modules/recupercao/views/recuperacao_page.dart';
 import 'package:dashboard_manga_easy/modules/splash/splash_module.dart';
 import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
 import 'package:dashboard_manga_easy/modules/users/users_module.dart';
@@ -49,13 +53,58 @@ class MyApp extends StatelessWidget {
         canvasColor: AppTheme.secondaryColor,
       ),
       initialRoute: SplashPage.route,
-      routes: {
-        SplashPage.route: (context) => const SplashPage(),
-        MainPage.route: (context) => const MainPage(),
-        UsersPage.route: (context) => const UsersPage(),
-        UserDetalhesPage.route: (context) => const UserDetalhesPage(),
-        AuthPage.route: (context) => const AuthPage(),
-        CriarRecomendacaoPage.route: (context) => const CriarRecomendacaoPage(),
+      onGenerateRoute: (settings) {
+        if ((SplashPage.route == settings.name || di.get<Global>().user == null) &&
+            settings.name != AuthPage.route) {
+          return MaterialPageRoute(
+            builder: (_) => const SplashPage(),
+            settings: settings,
+          );
+        }
+        switch (settings.name) {
+          case MainPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const MainPage(),
+              settings: settings,
+            );
+          case UsersPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const UsersPage(),
+              settings: settings,
+            );
+          case UserDetalhesPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const UserDetalhesPage(),
+              settings: settings,
+            );
+          case AuthPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const AuthPage(),
+              settings: settings,
+            );
+          case CriarRecomendacaoPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const CriarRecomendacaoPage(),
+              settings: settings,
+            );
+          case RecomendacaoPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const RecomendacaoPage(),
+              settings: settings,
+            );
+          case NotificacaoPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const NotificacaoPage(),
+              settings: settings,
+            );
+          case RecuperacaoPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const RecuperacaoPage(),
+              settings: settings,
+            );
+          default:
+            return null;
+        }
       },
     );
   }

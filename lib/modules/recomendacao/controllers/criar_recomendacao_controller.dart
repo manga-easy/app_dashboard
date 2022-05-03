@@ -24,9 +24,7 @@ class CriarRecomendacaoController extends IController {
   }
 
   @override
-  void onInit(BuildContext context) {
-    global.validaLogin(context);
-  }
+  void onInit(BuildContext context) {}
 
   void criarRecomendacao(context) async {
     try {
