@@ -1,6 +1,6 @@
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/config/app_config.dart';
-import 'package:dashboard_manga_easy/core/services/service.dart';
+import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 
 class AppwriteAdmin extends IService {
   late Client client;

@@ -1,3 +1,4 @@
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
@@ -18,6 +19,7 @@ class RecomendacaoController extends IController {
 
   @override
   void onInit(BuildContext context) {
+    global.validaLogin(context);
     listaRecomendacao();
   }
 
@@ -31,6 +33,26 @@ class RecomendacaoController extends IController {
           response.documents.map((e) => RecomendacoesModel.fromJson(e.data)).toList();
     } catch (e) {
       Helps.log(e);
+    }
+  }
+
+  Future<void> deleteRecomendacao(RecomendacoesModel reco, context) async {
+    try {
+      await app.database.deleteDocument(
+        collectionId: RecomendacoesModel.collectionID,
+        documentId: reco.id!,
+      );
+      AppHelps.confirmaDialog(
+        title: 'Sucesso',
+        content: 'Recomendação deletada com sucesso',
+        context: context,
+      );
+    } catch (e) {
+      AppHelps.confirmaDialog(
+        title: 'Erro',
+        content: e.toString(),
+        context: context,
+      );
     }
   }
 }

@@ -10,6 +10,7 @@ class CampoPadraoAtom extends StatelessWidget {
   final TextEditingController? controller;
   final bool? obscureText;
   final int? numberLines;
+  final String? initialValue;
   const CampoPadraoAtom({
     Key? key,
     this.obscureText,
@@ -19,11 +20,13 @@ class CampoPadraoAtom extends StatelessWidget {
     this.onChange,
     this.onEditComplet,
     this.controller,
+    this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      initialValue: initialValue,
       obscureText: obscureText != null,
       maxLines: numberLines,
       style: Theme.of(context).textTheme.subtitle1!.copyWith(color: AppTheme.bgColor),

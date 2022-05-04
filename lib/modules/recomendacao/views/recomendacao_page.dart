@@ -48,9 +48,9 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                   ButtonPadraoAtom(
                     title: 'Nova recomendação',
                     icone: Icons.add,
-                    onPress: () => Navigator.of(context).pushNamed(CriarRecomendacaoPage.route).then(
-                          (value) => ct.listaRecomendacao(),
-                        ),
+                    onPress: () => Navigator.of(context)
+                        .pushNamed(CriarRecomendacaoPage.route)
+                        .then((value) => ct.listaRecomendacao()),
                   ),
                 ],
               ),
@@ -92,12 +92,23 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
-                                        ButtonPadraoAtom(title: "Editar", icone: Icons.edit, onPress: () {}),
+                                        ButtonPadraoAtom(
+                                          title: "Editar",
+                                          icone: Icons.edit,
+                                          onPress: () => Navigator.of(context)
+                                              .pushNamed(
+                                                CriarRecomendacaoPage.route,
+                                                arguments: reco,
+                                              )
+                                              .then((value) => ct.listaRecomendacao()),
+                                        ),
                                         ElevatedButton.icon(
                                           style: ButtonStyle(
                                             backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () => ct
+                                              .deleteRecomendacao(reco, context)
+                                              .then((value) => ct.listaRecomendacao()),
                                           icon: const Icon(Icons.delete_forever),
                                           label: const Text('Deletar'),
                                         ),
