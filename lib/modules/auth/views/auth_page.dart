@@ -57,6 +57,7 @@ class _AuthPageState extends State<AuthPage> {
                 hintText: 'Senha',
                 controller: ct.password,
                 obscureText: true,
+                onSubmitted: (v) => ct.logar(context),
               ),
               const SizedBox(height: AppTheme.defaultPadding * 2),
               ButtonPadraoAtom(

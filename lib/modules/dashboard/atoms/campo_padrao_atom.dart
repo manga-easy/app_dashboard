@@ -11,6 +11,8 @@ class CampoPadraoAtom extends StatelessWidget {
   final bool? obscureText;
   final int? numberLines;
   final String? initialValue;
+  final void Function(String)? onSubmitted;
+
   const CampoPadraoAtom({
     Key? key,
     this.obscureText,
@@ -21,6 +23,7 @@ class CampoPadraoAtom extends StatelessWidget {
     this.onEditComplet,
     this.controller,
     this.initialValue,
+    this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -29,6 +32,7 @@ class CampoPadraoAtom extends StatelessWidget {
       initialValue: initialValue,
       obscureText: obscureText != null,
       maxLines: numberLines,
+      onFieldSubmitted: onSubmitted,
       style: Theme.of(context).textTheme.subtitle1!.copyWith(color: AppTheme.bgColor),
       onChanged: onChange,
       controller: controller,
