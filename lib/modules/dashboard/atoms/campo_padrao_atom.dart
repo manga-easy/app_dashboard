@@ -28,38 +28,41 @@ class CampoPadraoAtom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: initialValue,
-      obscureText: obscureText != null,
-      maxLines: numberLines,
-      onFieldSubmitted: onSubmitted,
-      style: Theme.of(context).textTheme.subtitle1!.copyWith(color: AppTheme.bgColor),
-      onChanged: onChange,
-      controller: controller,
-      cursorColor: Colors.white,
-      onEditingComplete: onEditComplet,
-      decoration: InputDecoration(
-        hintText: hintText,
-        fillColor: AppTheme.primaryColor,
-        filled: true,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        suffixIcon: icone != null
-            ? InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: const EdgeInsets.all(AppTheme.defaultPadding * 0.75),
-                  margin: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding / 2),
-                  decoration: const BoxDecoration(
-                    color: AppTheme.secondaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+    return Theme(
+      data: ThemeData(textSelectionTheme: const TextSelectionThemeData(selectionColor: Colors.green)),
+      child: TextFormField(
+        initialValue: initialValue,
+        obscureText: obscureText != null,
+        maxLines: numberLines,
+        onFieldSubmitted: onSubmitted,
+        style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+        onChanged: onChange,
+        controller: controller,
+        cursorColor: Colors.white,
+        onEditingComplete: onEditComplet,
+        decoration: InputDecoration(
+          hintText: hintText,
+          fillColor: AppTheme.primaryColor,
+          filled: true,
+          border: const OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          suffixIcon: icone != null
+              ? InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.all(AppTheme.defaultPadding * 0.75),
+                    margin: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding / 2),
+                    decoration: const BoxDecoration(
+                      color: AppTheme.secondaryColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: SvgPicture.asset("assets/icons/Search.svg"),
                   ),
-                  child: SvgPicture.asset("assets/icons/Search.svg"),
-                ),
-              )
-            : null,
+                )
+              : null,
+        ),
       ),
     );
   }
