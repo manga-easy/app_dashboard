@@ -148,7 +148,7 @@ class UsersDetalhesController extends IController {
                   .map(
                     (e) => TextButton(
                       child: Text(e.name),
-                      onPressed: () => addEmblema(e.id, context),
+                      onPressed: () => addEmblema(e.id!, context),
                     ),
                   )
                   .toList(),

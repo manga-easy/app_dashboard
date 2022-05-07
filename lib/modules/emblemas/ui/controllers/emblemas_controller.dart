@@ -9,11 +9,7 @@ class EmblemasController implements IController {
   final AppwriteAdmin app;
   var pesquisa = '';
   var status = ValueNotifier(StatusBuild.loading);
-  EmblemasController({
-    required this.app,
-    required this.lista,
-    required this.pesquisa,
-  });
+  EmblemasController({required this.app});
 
   @override
   void onClose() {}
@@ -25,11 +21,13 @@ class EmblemasController implements IController {
   }
 
   void carregaEmblemas() async {
+    status.value = StatusBuild.loading;
     lista.clear();
     var retorno = await app.database.listDocuments(
       collectionId: Emblema.collectionId,
       limit: 100,
     );
-    lista = retorno.documents.map((e) => Emblema.fromJson(e.toMap())).toList();
+    lista = retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
+    status.value = StatusBuild.done;
   }
 }

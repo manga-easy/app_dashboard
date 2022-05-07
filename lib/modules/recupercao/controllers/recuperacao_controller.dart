@@ -43,7 +43,7 @@ class RecuperacaoController extends IController {
     for (var item in embs) {
       await app.database.createDocument(
         collectionId: Emblema.collectionId,
-        documentId: item.id,
+        documentId: item.id!,
         data: item.toJson(),
         write: ['role:all'],
         read: ['role:all'],
