@@ -1,9 +1,9 @@
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/drawer_list_tile_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/ui/views/emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/views/recuperacao_page.dart';
-import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,8 @@ class SideMenu extends StatelessWidget {
               UsersPage.route,
               RecomendacaoPage.route,
               RecuperacaoPage.route,
-              NotificacaoPage.route
+              NotificacaoPage.route,
+              EmblemasPage.route,
             ]
                 .map(
                   (e) => DrawerListTileAtom(

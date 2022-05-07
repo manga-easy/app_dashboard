@@ -5,6 +5,9 @@ import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/emblemas_module.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblema_page.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/ui/views/emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
@@ -32,6 +35,7 @@ Future<void> main() async {
   RecomendacaoModule().register();
   RecuperacaooModule().register();
   UsersModule().register();
+  EmblemasModule().register();
   runApp(const MyApp());
 }
 
@@ -100,6 +104,16 @@ class MyApp extends StatelessWidget {
           case RecuperacaoPage.route:
             return MaterialPageRoute(
               builder: (_) => const RecuperacaoPage(),
+              settings: settings,
+            );
+          case EmblemasPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const EmblemasPage(),
+              settings: settings,
+            );
+          case CriaEditaEmblemaPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const CriaEditaEmblemaPage(),
               settings: settings,
             );
           default:
