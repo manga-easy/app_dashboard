@@ -19,7 +19,7 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
     super.initState();
   }
 

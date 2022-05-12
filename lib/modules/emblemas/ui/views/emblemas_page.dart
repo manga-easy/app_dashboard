@@ -18,7 +18,7 @@ class _EmblemasPageState extends State<EmblemasPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
     super.initState();
   }
 

@@ -19,7 +19,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
     super.initState();
   }
 

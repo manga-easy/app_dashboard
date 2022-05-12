@@ -3,7 +3,6 @@ import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/criar_recomendacao_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
@@ -20,7 +19,7 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
     super.initState();
   }
 

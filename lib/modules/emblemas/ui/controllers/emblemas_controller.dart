@@ -16,7 +16,6 @@ class EmblemasController implements IController {
 
   @override
   void onInit(BuildContext context) {
-    var arguments = ModalRoute.of(context)!.settings.arguments;
     carregaEmblemas();
   }
 
