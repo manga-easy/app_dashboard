@@ -19,7 +19,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
     super.initState();
   }
 
@@ -196,13 +196,13 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             ),
                           ],
                         ),
-                        DropdownButton<String>(
+                        DropdownButton<RarityEmblema>(
                           isExpanded: true,
-                          value: Helps.convertUniqueid(ct.emblema!.rarity.toLowerCase()),
+                          value: ct.emblema!.rarity,
                           items: RarityEmblema.values
-                              .map((e) => DropdownMenuItem<String>(
+                              .map((e) => DropdownMenuItem<RarityEmblema>(
                                     child: Text(e.name),
-                                    value: e.name,
+                                    value: e,
                                   ))
                               .toList(),
                           onChanged: (v) {

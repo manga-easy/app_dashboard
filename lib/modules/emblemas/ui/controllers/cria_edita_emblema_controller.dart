@@ -18,7 +18,7 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
     emblema ??= Emblema(
       name: '',
       timeCria: DateTime.now().millisecondsSinceEpoch,
-      rarity: RarityEmblema.comum.name,
+      rarity: RarityEmblema.comum,
       description: '',
       percent: 0.0,
       url: '',
