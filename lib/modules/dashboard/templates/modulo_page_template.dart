@@ -13,7 +13,7 @@ class ModuloPageTemplate extends StatelessWidget {
   final StatusBuild statusBuild;
   final void Function()? onPressedAtualiza;
   final void Function()? onPressedNovoItem;
-  final String labelNovoItem;
+  final String? labelNovoItem;
   final Function(String)? onChangePesquisa;
   final void Function()? onEditCompletPesquisa;
   final List listaItems;
@@ -49,17 +49,20 @@ class ModuloPageTemplate extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(onPressed: onPressedAtualiza, child: const Text('Atualiza')),
-                        ElevatedButton.icon(
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: AppTheme.defaultPadding * 1.5,
-                              vertical: AppTheme.defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
-                            ),
-                          ),
-                          onPressed: onPressedNovoItem,
-                          icon: const Icon(Icons.add),
-                          label: Text(labelNovoItem),
-                        ),
+                        labelNovoItem != null
+                            ? ElevatedButton.icon(
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: AppTheme.defaultPadding * 1.5,
+                                    vertical:
+                                        AppTheme.defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                                  ),
+                                ),
+                                onPressed: onPressedNovoItem,
+                                icon: const Icon(Icons.add),
+                                label: Text(labelNovoItem!),
+                              )
+                            : const SizedBox(),
                       ],
                     ),
                     const SizedBox(height: AppTheme.defaultPadding),
