@@ -8,13 +8,14 @@ import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 class RecomendacaoController extends IController {
   final AppwriteClient app;
   final Global global;
-  var listaRecomendacaoItens = ValueNotifier(<RecomendacoesModel>[]);
+  var listaRecomendacaoItens = <RecomendacoesModel>[];
+  var status = ValueNotifier(StatusBuild.loading);
 
   RecomendacaoController({required this.app, required this.global});
 
   @override
   void onClose() {
-    listaRecomendacaoItens.dispose();
+    status.dispose();
   }
 
   @override
@@ -24,14 +25,16 @@ class RecomendacaoController extends IController {
   }
 
   void listaRecomendacao() async {
-    listaRecomendacaoItens.value.clear();
+    status.value = StatusBuild.loading;
+    listaRecomendacaoItens.clear();
     try {
       var response = await app.database.listDocuments(
         collectionId: RecomendacoesModel.collectionID,
       );
-      listaRecomendacaoItens.value =
-          response.documents.map((e) => RecomendacoesModel.fromJson(e.data)).toList();
+      listaRecomendacaoItens = response.documents.map((e) => RecomendacoesModel.fromJson(e.data)).toList();
+      status.value = StatusBuild.done;
     } catch (e) {
+      status.value = StatusBuild.erro;
       Helps.log(e);
     }
   }
