@@ -63,10 +63,12 @@ class ModuloPageTemplate extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: AppTheme.defaultPadding),
-                    CampoPadraoAtom(
-                      onChange: onChangePesquisa,
-                      onEditComplet: onEditCompletPesquisa,
-                    ),
+                    onChangePesquisa != null || onEditCompletPesquisa != null
+                        ? CampoPadraoAtom(
+                            onChange: onChangePesquisa,
+                            onEditComplet: onEditCompletPesquisa,
+                          )
+                        : const SizedBox(),
                     const SizedBox(height: AppTheme.defaultPadding / 2),
                     Expanded(
                       child: ListView.builder(
