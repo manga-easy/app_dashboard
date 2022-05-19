@@ -12,7 +12,8 @@ class AppwriteClient extends IService {
     client = Client();
     client
         .setEndpoint(AppConfig.ipserver) // Your Appwrite Endpoint
-        .setProject(AppConfig.projectID); // Your project ID
+        .setProject(AppConfig.projectID)
+        .setSelfSigned(); // Your project ID
 
     account = Account(client);
     database = Database(client);
