@@ -21,6 +21,7 @@ class CriarRecomendacaoController extends ValueNotifier implements IController {
   void onInit(BuildContext context) {
     recomendacao = ModalRoute.of(context)!.settings.arguments as RecomendacoesModel?;
     recomendacao ??= RecomendacoesModel(
+      dataCria: DateTime.now().millisecondsSinceEpoch,
       link: '',
       title: '',
       uniqueid: '',
