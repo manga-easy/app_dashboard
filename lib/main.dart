@@ -4,6 +4,7 @@ import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/views/detalhes_emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/emblemas_module.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblema_page.dart';
@@ -114,6 +115,11 @@ class MyApp extends StatelessWidget {
           case CriaEditaEmblemaPage.route:
             return MaterialPageRoute(
               builder: (_) => const CriaEditaEmblemaPage(),
+              settings: settings,
+            );
+          case DetalhesEmblemasPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const DetalhesEmblemasPage(),
               settings: settings,
             );
           default:

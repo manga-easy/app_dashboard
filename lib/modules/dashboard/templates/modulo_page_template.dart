@@ -25,7 +25,7 @@ class ModuloPageTemplate extends StatelessWidget {
     required this.statusBuild,
     this.onPressedAtualiza,
     this.onPressedNovoItem,
-    required this.labelNovoItem,
+    this.labelNovoItem,
     required this.itemBuilderLista,
     required this.listaItems,
     this.onChangePesquisa,
