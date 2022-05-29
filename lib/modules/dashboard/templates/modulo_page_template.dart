@@ -18,9 +18,10 @@ class ModuloPageTemplate extends StatelessWidget {
   final void Function()? onEditCompletPesquisa;
   final List listaItems;
   final Widget Function(BuildContext, int) itemBuilderLista;
+  final String? initialValueCampoPesquisa;
 
   const ModuloPageTemplate({
-    Key? key,
+    super.key,
     required this.route,
     required this.statusBuild,
     this.onPressedAtualiza,
@@ -30,7 +31,8 @@ class ModuloPageTemplate extends StatelessWidget {
     required this.listaItems,
     this.onChangePesquisa,
     this.onEditCompletPesquisa,
-  }) : super(key: key);
+    this.initialValueCampoPesquisa,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,7 @@ class ModuloPageTemplate extends StatelessWidget {
                         ? CampoPadraoAtom(
                             onChange: onChangePesquisa,
                             onEditComplet: onEditCompletPesquisa,
+                            initialValue: initialValueCampoPesquisa,
                           )
                         : const SizedBox(),
                     const SizedBox(height: AppTheme.defaultPadding / 2),
