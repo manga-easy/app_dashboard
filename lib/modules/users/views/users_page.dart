@@ -1,8 +1,5 @@
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
 import 'package:dashboard_manga_easy/modules/users/controllers/users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +35,11 @@ class _UsersPageState extends State<UsersPage> {
         return ModuloPageTemplate(
           route: UsersPage.route,
           statusBuild: ct.status.value,
-          labelNovoItem: 'labelNovoItem',
           listaItems: ct.lista,
+          initialValueCampoPesquisa: ct.pesquisa.value,
+          onChangePesquisa: (p) => ct.pesquisa.value = p,
+          onEditCompletPesquisa: ct.carregaUsers,
+          onPressedAtualiza: ct.carregaUsers,
           itemBuilderLista: (context, index) {
             User use = ct.lista[index];
             return ListTile(
