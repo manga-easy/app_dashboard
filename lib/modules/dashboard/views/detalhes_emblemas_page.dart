@@ -39,7 +39,7 @@ class _DetalhesEmblemasPageState extends State<DetalhesEmblemasPage> {
             return Row(
               children: [
                 Text(e.userId),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 InformacoesUserAtom(future: ct.getUser(e.userId)),
               ],
             );

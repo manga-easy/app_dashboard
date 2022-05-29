@@ -77,7 +77,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             activeColor: AppTheme.primaryColor,
                             onChanged: (v) {
                               ct.emblema!.adsOff = v;
-                              ct.notifyListeners();
+                              ct.update();
                             }),
                         const SizedBox(height: AppTheme.defaultPadding),
                         Row(
@@ -104,14 +104,14 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                                   IconButton(
                                     onPressed: () {
                                       ct.emblema!.benefits.add('');
-                                      ct.notifyListeners();
+                                      ct.update();
                                     },
                                     icon: const Icon(Icons.add),
                                   ),
                                   IconButton(
                                     onPressed: () {
                                       ct.emblema!.benefits.removeLast();
-                                      ct.notifyListeners();
+                                      ct.update();
                                     },
                                     icon: const Icon(Icons.remove),
                                   )
@@ -136,13 +136,13 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           value: ct.emblema!.categoria,
                           items: CategoriaEmblema.values
                               .map((e) => DropdownMenuItem<String>(
-                                    child: Text(e.name),
                                     value: e.name,
+                                    child: Text(e.name),
                                   ))
                               .toList(),
                           onChanged: (v) {
                             ct.emblema!.categoria = v!;
-                            ct.notifyListeners();
+                            ct.update();
                           },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding),
@@ -158,7 +158,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             activeColor: AppTheme.primaryColor,
                             onChanged: (v) {
                               ct.emblema!.disponivel = v;
-                              ct.notifyListeners();
+                              ct.update();
                             }),
                         const SizedBox(height: AppTheme.defaultPadding),
                         Row(
@@ -176,13 +176,13 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           value: ct.emblema!.type,
                           items: TypeEmblema.values
                               .map((e) => DropdownMenuItem<String>(
-                                    child: Text(e.name),
                                     value: e.name,
+                                    child: Text(e.name),
                                   ))
                               .toList(),
                           onChanged: (v) {
                             ct.emblema!.type = v!;
-                            ct.notifyListeners();
+                            ct.update();
                           },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding),
@@ -201,13 +201,13 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           value: ct.emblema!.rarity,
                           items: RarityEmblema.values
                               .map((e) => DropdownMenuItem<RarityEmblema>(
-                                    child: Text(e.name),
                                     value: e,
+                                    child: Text(e.name),
                                   ))
                               .toList(),
                           onChanged: (v) {
                             ct.emblema!.rarity = v!;
-                            ct.notifyListeners();
+                            ct.update();
                           },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding),

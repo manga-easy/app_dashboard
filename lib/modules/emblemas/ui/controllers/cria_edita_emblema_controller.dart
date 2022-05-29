@@ -59,4 +59,6 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
     }
     notifyListeners();
   }
+
+  void update() => notifyListeners();
 }
