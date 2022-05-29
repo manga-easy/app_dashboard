@@ -19,6 +19,7 @@ class ModuloPageTemplate extends StatelessWidget {
   final List listaItems;
   final Widget Function(BuildContext, int) itemBuilderLista;
   final String? initialValueCampoPesquisa;
+  final bool isModule;
 
   const ModuloPageTemplate({
     super.key,
@@ -32,58 +33,70 @@ class ModuloPageTemplate extends StatelessWidget {
     this.onChangePesquisa,
     this.onEditCompletPesquisa,
     this.initialValueCampoPesquisa,
+    this.isModule = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: SideMenu(atual: route),
-      appBar: AppBar(title: Text(route.replaceAll('/', ''))),
+      drawer: width <= 1000 && isModule ? SideMenu(atual: route) : null,
+      appBar: width <= 1000 ? AppBar(title: Text(route.replaceAll('/', ''))) : null,
       body: SafeArea(
         child: statusBuild == StatusBuild.loading
             ? const LoadingAtom()
-            : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Column(
-                  children: [
-                    const SizedBox(height: AppTheme.defaultPadding),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(onPressed: onPressedAtualiza, child: const Text('Atualiza')),
-                        labelNovoItem != null
-                            ? ElevatedButton.icon(
-                                style: TextButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: AppTheme.defaultPadding * 1.5,
-                                    vertical:
-                                        AppTheme.defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
-                                  ),
-                                ),
-                                onPressed: onPressedNovoItem,
-                                icon: const Icon(Icons.add),
-                                label: Text(labelNovoItem!),
-                              )
-                            : const SizedBox(),
-                      ],
-                    ),
-                    const SizedBox(height: AppTheme.defaultPadding),
-                    onChangePesquisa != null || onEditCompletPesquisa != null
-                        ? CampoPadraoAtom(
-                            onChange: onChangePesquisa,
-                            onEditComplet: onEditCompletPesquisa,
-                            initialValue: initialValueCampoPesquisa,
-                          )
-                        : const SizedBox(),
-                    const SizedBox(height: AppTheme.defaultPadding / 2),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: listaItems.length,
-                        itemBuilder: itemBuilderLista,
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Visibility(visible: width > 1000, child: SideMenu(atual: route)),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(height: AppTheme.defaultPadding),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(onPressed: onPressedAtualiza, child: const Text('Atualiza')),
+                              labelNovoItem != null
+                                  ? ElevatedButton.icon(
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: AppTheme.defaultPadding * 1.5,
+                                          vertical: AppTheme.defaultPadding /
+                                              (Responsive.isMobile(context) ? 2 : 1),
+                                        ),
+                                      ),
+                                      onPressed: onPressedNovoItem,
+                                      icon: const Icon(Icons.add),
+                                      label: Text(labelNovoItem!),
+                                    )
+                                  : const SizedBox(),
+                            ],
+                          ),
+                          const SizedBox(height: AppTheme.defaultPadding),
+                          onChangePesquisa != null || onEditCompletPesquisa != null
+                              ? CampoPadraoAtom(
+                                  onChange: onChangePesquisa,
+                                  onEditComplet: onEditCompletPesquisa,
+                                  initialValue: initialValueCampoPesquisa,
+                                )
+                              : const SizedBox(),
+                          const SizedBox(height: AppTheme.defaultPadding / 2),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: listaItems.length,
+                              itemBuilder: itemBuilderLista,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
       ),
     );
