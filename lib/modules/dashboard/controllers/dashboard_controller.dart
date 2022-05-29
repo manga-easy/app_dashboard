@@ -9,6 +9,7 @@ class DashboardController extends IController {
   final Global global;
   final AppwriteAdmin appwriteAdmin;
   var emblemasDoadores = ValueNotifier(<Emblema>[]);
+  var status = ValueNotifier(StatusBuild.done);
 
   DashboardController({
     required this.global,
