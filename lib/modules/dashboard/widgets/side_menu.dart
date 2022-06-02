@@ -1,3 +1,4 @@
+import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/drawer_list_tile_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/emblemas_page.dart';
@@ -33,6 +34,7 @@ class SideMenu extends StatelessWidget {
               RecuperacaoPage.route,
               NotificacaoPage.route,
               EmblemasPage.route,
+              BannerPage.route,
             ]
                 .map(
                   (e) => DrawerListTileAtom(

@@ -3,6 +3,9 @@ import 'package:dashboard_manga_easy/core/core_module.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
+import 'package:dashboard_manga_easy/modules/banners/banners_module.dart';
+import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
+import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/detalhes_emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
@@ -37,6 +40,7 @@ Future<void> main() async {
   RecuperacaooModule().register();
   UsersModule().register();
   EmblemasModule().register();
+  BannersModule().register();
   runApp(const MyApp());
 }
 
@@ -120,6 +124,16 @@ class MyApp extends StatelessWidget {
           case DetalhesEmblemasPage.route:
             return MaterialPageRoute(
               builder: (_) => const DetalhesEmblemasPage(),
+              settings: settings,
+            );
+          case CriarBannerPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const CriarBannerPage(),
+              settings: settings,
+            );
+          case BannerPage.route:
+            return MaterialPageRoute(
+              builder: (_) => const BannerPage(),
               settings: settings,
             );
           default:
