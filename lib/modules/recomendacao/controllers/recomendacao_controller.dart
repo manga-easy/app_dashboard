@@ -20,7 +20,6 @@ class RecomendacaoController extends IController {
 
   @override
   void onInit(BuildContext context) {
-    global.validaLogin(context);
     listaRecomendacao();
   }
 

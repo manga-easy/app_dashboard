@@ -6,10 +6,11 @@ import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class MangasController extends IController {
   final AppwriteAdmin appwriteAdmin;
+  final Global global;
   var mangas = ValueNotifier(<InfoComicModel>[]);
   var status = ValueNotifier(StatusBuild.loading);
 
-  MangasController({required this.appwriteAdmin});
+  MangasController({required this.appwriteAdmin, required this.global});
 
   @override
   void onClose() {

@@ -20,13 +20,11 @@ class BannerController extends IController {
 
   @override
   void onInit(BuildContext context) {
-    global.validaLogin(context);
     listaBanner();
   }
 
   void listaBanner() async {
     status.value = StatusBuild.loading;
-    listaBannerItens.clear();
     try {
       var response = await app.database.listDocuments(
         collectionId: BannerModel.collectionID,

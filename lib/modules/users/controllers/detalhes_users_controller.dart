@@ -34,7 +34,6 @@ class UsersDetalhesController extends IController {
 
   @override
   void onInit(BuildContext context) {
-    gb.validaLogin(context);
     user = ModalRoute.of(context)!.settings.arguments as User;
     carrega();
     carregaEmblemas();
