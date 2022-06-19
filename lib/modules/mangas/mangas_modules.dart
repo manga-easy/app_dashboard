@@ -5,6 +5,6 @@ import 'package:dashboard_manga_easy/modules/mangas/presenter/controllers/mangas
 class MangasModule extends IModuleFactory {
   @override
   void register() {
-    di.registerFactory(() => MangasController(appwriteAdmin: di()));
+    di.registerFactory(() => MangasController(appwriteAdmin: di(), global: di()));
   }
 }
