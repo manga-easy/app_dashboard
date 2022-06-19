@@ -29,6 +29,8 @@ class RecomendacaoController extends IController {
     try {
       var response = await app.database.listDocuments(
         collectionId: RecomendacoesModel.collectionID,
+        orderAttributes: ['dataCria'],
+        orderTypes: ['DESC'],
       );
       listaRecomendacaoItens = response.documents.map((e) => RecomendacoesModel.fromJson(e.data)).toList();
       status.value = StatusBuild.done;
