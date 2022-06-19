@@ -55,7 +55,7 @@ class _BannerPageState extends State<BannerPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Image.network(
-                      reco.link,
+                      reco.image,
                       height: 300,
                     ),
                   ),
