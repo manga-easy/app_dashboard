@@ -28,6 +28,7 @@ class MangasController extends IController {
 
   void carregarMangas() async {
     try {
+      status.value = StatusBuild.loading;
       var ret = await appwriteAdmin.database.listDocuments(
         collectionId: InfoComicModel.collectionId,
         limit: 100,
