@@ -58,6 +58,7 @@ class _MangasPageState extends State<MangasPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(manga.name),
+                        Text('Ultimo capítulo: ${manga.ultimoCap}'),
                         FutureBuilder<int>(
                           future: ct.carregaViews(manga.uniqueid),
                           builder: (context, value) {
