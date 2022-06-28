@@ -1,12 +1,14 @@
+import 'package:dashboard_manga_easy/core/interfaces/local_data_interface.dart';
 import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 import 'package:uuid/uuid.dart';
 
-class HiveDb extends IService {
+class HiveDb extends IService implements ILocalData {
   final String tableNotFound = 'Tabela não existe';
-  late Box general;
+  late Box cred;
 
+  @override
   Map<String, dynamic>? get({required String table, required String id}) {
     var box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
@@ -15,18 +17,21 @@ class HiveDb extends IService {
     return Map<String, dynamic>.from(dados);
   }
 
+  @override
   Future<void> delet({required String table, required String id}) async {
     var box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
     await box.delete(id);
   }
 
+  @override
   Future<void> deletAll({required String table}) async {
     var box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
     await box.clear();
   }
 
+  @override
   Future<void> createUpdate({required String table, required IModelData dados}) async {
     var box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
@@ -34,6 +39,7 @@ class HiveDb extends IService {
     await box.put(dados.id, dados.toJson());
   }
 
+  @override
   List<Map<String, dynamic>> list({required String table, String? orderField, bool desc = true}) {
     var box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
