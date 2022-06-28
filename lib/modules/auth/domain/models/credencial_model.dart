@@ -1,7 +1,6 @@
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class CredencialModel implements IModelData {
-  static const tableName = 'general';
   @override
   String? id;
   String email;
