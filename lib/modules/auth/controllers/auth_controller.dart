@@ -17,6 +17,7 @@ class AuthController extends IController {
   final ServiceRoute serviceRoute;
   final AppwriteClient app;
   CredencialModel? credencialModel;
+  sdk.Permissions? permissions;
   var email = TextEditingController();
   var password = TextEditingController();
 
@@ -36,9 +37,9 @@ class AuthController extends IController {
 
   void logar(context) async {
     try {
-      Session response = await checkUsuario();
-      await validacaoAdmin(response);
+      await checkUsuario();
       var dataUser = await app.account.get();
+      await validacaoPermissao(dataUser);
       serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
       salvaCredencial();
       Navigator.pushNamedAndRemoveUntil(
@@ -63,19 +64,21 @@ class AuthController extends IController {
     );
   }
 
-  Future<void> validacaoAdmin(Session response) async {
+  Future<void> validacaoPermissao(User response) async {
     DocumentList result = await app.database.listDocuments(
       collectionId: sdk.Permissions.collectionId,
       queries: [
         Query.equal(
           'userId',
-          response.userId,
+          response.$id,
         )
       ],
     );
     if (result.total <= 0) {
       throw Exception(ErrosAuth.isNotAdmin);
     }
+    var data = result.documents.first.data;
+    permissions = sdk.Permissions.fromJson(data);
   }
 
   void carregaCredencial() {
@@ -97,7 +100,9 @@ class AuthController extends IController {
   Future<void> loginAutomatico(context) async {
     try {
       var dataUser = await app.account.get();
+      await validacaoPermissao(dataUser);
       serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
+      serviceRoute.permissions = permissions;
       Navigator.pushNamedAndRemoveUntil(
         context,
         MainPage.route,

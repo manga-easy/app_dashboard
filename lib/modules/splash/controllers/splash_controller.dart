@@ -16,7 +16,7 @@ class SplashController extends IController {
     loadingServices(context);
   }
 
-  loadingServices(context) async {
+  void loadingServices(context) async {
     try {
       await CoreModule().start();
       Navigator.pushNamedAndRemoveUntil(
