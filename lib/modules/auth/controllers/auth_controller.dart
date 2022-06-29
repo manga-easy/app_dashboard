@@ -3,7 +3,7 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/erros_auth.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/credencial_repo.dart';
@@ -13,13 +13,14 @@ import 'package:sdk_manga_easy/sdk_manga_easy.dart' as sdk;
 
 class AuthController extends IController {
   final CredencialRepo credencialRepo;
-  final Global gb;
+  //final Global gb;
+  final ServiceRoute serviceRoute;
   final AppwriteClient app;
   CredencialModel? credencialModel;
   var email = TextEditingController();
   var password = TextEditingController();
 
-  AuthController({required this.gb, required this.app, required this.credencialRepo});
+  AuthController({required this.serviceRoute, required this.app, required this.credencialRepo});
 
   @override
   void onClose() {
@@ -36,7 +37,8 @@ class AuthController extends IController {
     try {
       Session response = await checkUsuario();
       await validacaoAdmin(response);
-      gb.user = response.userId;
+      var dataUser = await app.account.get();
+      serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
       salvaCredencial();
       Navigator.pushNamedAndRemoveUntil(
         context,
