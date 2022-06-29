@@ -41,6 +41,7 @@ class AuthController extends IController {
       var dataUser = await app.account.get();
       await validacaoPermissao(dataUser);
       serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
+      serviceRoute.permissions = permissions;
       salvaCredencial();
       Navigator.pushNamedAndRemoveUntil(
         context,
