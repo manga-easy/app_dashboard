@@ -6,25 +6,31 @@ class CredencialRepo extends IRepo<CredencialModel, CredencialParams?> {
   CredencialRepo(super.db);
 
   @override
-  List<CredencialModel> getAllData({CredencialParams? where}) {
-    return db.list(table: 'credencial').map((e) => CredencialModel.fromJson(e)).toList();
+  String get table => 'credencial';
+
+  @override
+  List<CredencialModel> list({CredencialParams? where}) {
+    return db.list(table: table).map((e) => CredencialModel.fromJson(e)).toList();
   }
 
   @override
-  CredencialModel? getData({required String id}) {
-    // TODO: implement getData
-    throw UnimplementedError();
+  CredencialModel? get({required String id}) {
+    var dados = db.get(table: table, id: id);
+    if (dados == null) return null;
+    return CredencialModel.fromJson(dados);
   }
 
   @override
-  Future<void> putData({required CredencialModel objeto, required String id}) {
-    // TODO: implement putData
-    throw UnimplementedError();
+  Future<void> put({required CredencialModel objeto}) async {
+    await db.createUpdate(
+      table: table,
+      dados: objeto.toJson(),
+      id: objeto.id,
+    );
   }
 
   @override
-  Future<void> removeData({required String id}) {
-    // TODO: implement removeData
-    throw UnimplementedError();
+  Future<void> remove({required String id}) async {
+    await db.delet(table: table, id: id);
   }
 }
