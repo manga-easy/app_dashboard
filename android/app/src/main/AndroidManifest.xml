@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dashboard_manga_easy">
+    package="br.com.lucas_cm.dashboard_manga_easy">
    <application
-        android:label="dashboard_manga_easy"
+        android:label="Dash Mangá Easy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
