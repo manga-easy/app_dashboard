@@ -1,17 +1,12 @@
-import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
+import 'package:dashboard_manga_easy/core/services/service_route.dart';
+import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/drawer_list_tile_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/ui/views/emblemas_page.dart';
-import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pages.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
-import 'package:dashboard_manga_easy/modules/recupercao/views/recuperacao_page.dart';
-import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatelessWidget {
+  final ServiceRoute serviceRoute = di.get();
   final String atual;
-  const SideMenu({
+  SideMenu({
     Key? key,
     required this.atual,
   }) : super(key: key);
@@ -28,16 +23,8 @@ class SideMenu extends StatelessWidget {
             ),
           ),
           Column(
-            children: [
-              MainPage.route,
-              UsersPage.route,
-              RecomendacaoPage.route,
-              RecuperacaoPage.route,
-              NotificacaoPage.route,
-              EmblemasPage.route,
-              BannerPage.route,
-              MangasPage.route,
-            ]
+            children: serviceRoute
+                .menuRoutes()
                 .map(
                   (e) => DrawerListTileAtom(
                     title: e.replaceAll('/', ''),

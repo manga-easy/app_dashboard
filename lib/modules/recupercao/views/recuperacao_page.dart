@@ -31,7 +31,7 @@ class _RecuperacaoPageState extends State<RecuperacaoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SideMenu(atual: RecuperacaoPage.route),
+      drawer: SideMenu(atual: RecuperacaoPage.route),
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
