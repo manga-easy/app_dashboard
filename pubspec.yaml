@@ -35,6 +35,8 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.3
+  flutter_native_splash: ^2.2.3+1
 
 flutter:
   uses-material-design: true
@@ -44,3 +46,23 @@ flutter:
     - assets/images/
     - assets/icons/
   #   - images/a_dot_ham.jpeg
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/logo.png
+  #branding: assets/branding-production.png
+  color_dark: "#121212"
+  #image_dark: assets/logo-production.png
+  #branding_dark: assets/branding-production.png
+
+  android_12:
+    image: assets/images/logo.png
+    icon_background_color: "#ffffff"
+    #image_dark: assets/logo-production.png
+    icon_background_color_dark: "#121212"
+# flutter pub run flutter_native_splash:create
+flutter_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/logo.png"
+  adaptive_icon_background: "#ffffff"
+# flutter pub run flutter_launcher_icons:main

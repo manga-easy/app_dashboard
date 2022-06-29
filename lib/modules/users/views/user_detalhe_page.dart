@@ -30,7 +30,7 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const SideMenu(atual: UserDetalhesPage.route),
+      drawer: SideMenu(atual: UserDetalhesPage.route),
       appBar: AppBar(),
       body: SafeArea(
         child: ValueListenableBuilder(
