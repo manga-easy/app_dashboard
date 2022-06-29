@@ -1,12 +1,18 @@
 import 'package:dashboard_manga_easy/core/interfaces/local_data_interface.dart';
 import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 import 'package:uuid/uuid.dart';
+
+class TablesHive {
+  Box table;
+  final String name;
+  TablesHive({required this.table, required this.name});
+  static List<String> listTables = ['credencial', 'user'];
+}
 
 class HiveDb extends IService implements ILocalData {
   final String tableNotFound = 'Tabela não existe';
-  late Box cred;
+  List<TablesHive> tables = [];
 
   @override
   Map<String, dynamic>? get({required String table, required String id}) {
@@ -32,11 +38,11 @@ class HiveDb extends IService implements ILocalData {
   }
 
   @override
-  Future<void> createUpdate({required String table, required IModelData dados}) async {
+  Future<void> createUpdate({required String table, required Map<String, dynamic> dados, String? id}) async {
     var box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
-    dados.id ??= const Uuid().v4();
-    await box.put(dados.id, dados.toJson());
+    id ??= const Uuid().v4();
+    await box.put(id, dados);
   }
 
   @override
@@ -59,17 +65,23 @@ class HiveDb extends IService implements ILocalData {
   }
 
   Box? switchBox(String table) {
-    switch (table) {
-      case 'general':
-        return general;
-      default:
-        return null;
+    try {
+      return tables.firstWhere((element) => element.name == table).table;
+    } catch (e) {
+      return null;
     }
   }
 
   @override
   Future<void> initialise() async {
     await Hive.initFlutter();
-    general = await Hive.openBox('general');
+    for (var element in TablesHive.listTables) {
+      tables.add(
+        TablesHive(
+          table: await Hive.openBox(element),
+          name: element,
+        ),
+      );
+    }
   }
 }
