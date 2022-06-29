@@ -1,5 +1,4 @@
 import 'package:dashboard_manga_easy/core/interfaces/local_data_interface.dart';
-import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
 
@@ -10,7 +9,7 @@ class TablesHive {
   static List<String> listTables = ['credencial', 'user'];
 }
 
-class HiveDb extends IService implements ILocalData {
+class HiveDb implements ILocalData {
   final String tableNotFound = 'Tabela não existe';
   List<TablesHive> tables = [];
 

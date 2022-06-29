@@ -1,4 +1,6 @@
-abstract class ILocalData {
+import 'package:dashboard_manga_easy/core/interfaces/service.dart';
+
+abstract class ILocalData extends IService {
   Map<String, dynamic>? get({required String table, required String id});
 
   Future<void> delet({required String table, required String id});
