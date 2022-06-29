@@ -6,6 +6,12 @@ class AuthModule extends IModuleFactory {
   @override
   void register() {
     //register controllers
-    di.registerFactory(() => AuthController(app: di(), gb: di(), hiveDb: di()));
+    di.registerFactory(
+      () => AuthController(
+        app: di(),
+        gb: di(),
+        credencialRepo: di(),
+      ),
+    );
   }
 }

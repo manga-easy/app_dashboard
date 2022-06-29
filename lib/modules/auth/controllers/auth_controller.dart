@@ -4,22 +4,22 @@ import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/core/services/hive_service.dart';
-import 'package:dashboard_manga_easy/modules/auth/models/credencial_model.dart';
-import 'package:dashboard_manga_easy/modules/auth/models/erros_auth.dart';
+import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
+import 'package:dashboard_manga_easy/modules/auth/domain/models/erros_auth.dart';
+import 'package:dashboard_manga_easy/modules/auth/domain/repo/credencial_repo.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart' as sdk;
 
 class AuthController extends IController {
-  final HiveDb hiveDb;
+  final CredencialRepo credencialRepo;
   final Global gb;
   final AppwriteClient app;
   CredencialModel? credencialModel;
   var email = TextEditingController();
   var password = TextEditingController();
 
-  AuthController({required this.gb, required this.app, required this.hiveDb});
+  AuthController({required this.gb, required this.app, required this.credencialRepo});
 
   @override
   void onClose() {
@@ -62,7 +62,7 @@ class AuthController extends IController {
 
   Future<void> validacaoAdmin(Session response) async {
     DocumentList result = await app.database.listDocuments(
-      collectionId: sdk.User.collectionIdAdmin,
+      collectionId: sdk.Permissions.collectionId,
       queries: [
         Query.equal(
           'userId',
@@ -76,21 +76,18 @@ class AuthController extends IController {
   }
 
   void carregaCredencial() {
-    var ret = hiveDb.list(table: CredencialModel.tableName);
+    var ret = credencialRepo.list();
     if (ret.isNotEmpty) {
-      credencialModel = CredencialModel.fromJson(ret.first);
+      credencialModel = ret.first;
       email.text = credencialModel!.email;
     }
   }
 
-  void salvaCredencial() {
+  Future<void> salvaCredencial() async {
     var cred = CredencialModel(
       datetime: DateTime.now(),
       email: email.text,
     );
-    hiveDb.createUpdate(
-      table: CredencialModel.tableName,
-      dados: cred,
-    );
+    await credencialRepo.put(objeto: cred);
   }
 }
