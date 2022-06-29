@@ -1,15 +1,16 @@
 import 'package:dashboard_manga_easy/core/interfaces/local_data_interface.dart';
 
 abstract class IRepo<T, B> {
+  String get table;
   final ILocalData db;
 
   IRepo(this.db);
 
-  T? getData({required String id});
+  T? get({required String id});
 
-  Future<void> putData({required T objeto, required String id});
+  Future<void> put({required T objeto});
 
-  Future<void> removeData({required String id});
+  Future<void> remove({required String id});
 
-  List<T> getAllData({B where});
+  List<T> list({B where});
 }
