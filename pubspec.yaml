@@ -1,5 +1,5 @@
 name: dashboard_manga_easy
-description: A new Flutter project.
+description: Painel administrativo para os autores, parceiros e admins do app
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
@@ -30,6 +30,7 @@ dependencies:
   hive_flutter: ^1.1.0
   uuid: ^3.0.6
   octo_image: ^1.0.2
+  package_info_plus: ^1.4.2
 
 dev_dependencies:
   flutter_lints: ^2.0.1
