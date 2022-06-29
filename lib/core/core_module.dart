@@ -28,5 +28,6 @@ class CoreModule extends IModuleService {
     await di.get<AppwriteClient>().initialise();
     await di.get<AppwriteAdmin>().initialise();
     await di.get<Global>().initialise();
+    await di.get<ServiceRoute>().initialise();
   }
 }

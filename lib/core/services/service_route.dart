@@ -18,14 +18,25 @@ import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class ServiceRoute extends IService {
+  bool isInicialize = false;
   User? user;
   @override
-  Future<void> initialise() async {}
+  Future<void> initialise() async {
+    isInicialize = true;
+  }
+
   Route<MaterialPageRoute>? generationRoutes(RouteSettings settings) {
     print(user);
-    if ((SplashPage.route == settings.name || user == null) && settings.name != AuthPage.route) {
+    print(settings.name);
+    if (!isInicialize) {
       return MaterialPageRoute(
         builder: (_) => const SplashPage(),
+        settings: settings,
+      );
+    }
+    if (user == null) {
+      return MaterialPageRoute(
+        builder: (_) => const AuthPage(),
         settings: settings,
       );
     }
@@ -43,11 +54,6 @@ class ServiceRoute extends IService {
       case UserDetalhesPage.route:
         return MaterialPageRoute(
           builder: (_) => const UserDetalhesPage(),
-          settings: settings,
-        );
-      case AuthPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const AuthPage(),
           settings: settings,
         );
       case CriarRecomendacaoPage.route:

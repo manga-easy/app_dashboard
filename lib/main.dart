@@ -51,7 +51,6 @@ class MyApp extends StatelessWidget {
         ),
         canvasColor: AppTheme.secondaryColor,
       ),
-      initialRoute: SplashPage.route,
       onGenerateRoute: serviceRoute.generationRoutes,
     );
   }

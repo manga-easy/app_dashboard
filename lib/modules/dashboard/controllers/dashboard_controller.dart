@@ -27,11 +27,15 @@ class DashboardController extends IController {
   }
 
   void carregaEmblemaDoadores() async {
-    var ret = await appwriteAdmin.database.listDocuments(
-      collectionId: Emblema.collectionId,
-      queries: [Query.equal('categoria', CategoriaEmblema.doacao.name)],
-    );
-    emblemasDoadores.value = ret.documents.map((e) => Emblema.fromJson(e.data)).toList();
+    try {
+      var ret = await appwriteAdmin.database.listDocuments(
+        collectionId: Emblema.collectionId,
+        queries: [Query.equal('categoria', CategoriaEmblema.doacao.name)],
+      );
+      emblemasDoadores.value = ret.documents.map((e) => Emblema.fromJson(e.data)).toList();
+    } catch (e) {
+      Helps.log(e);
+    }
   }
 
   Future<int> calculaTotalAdquirido(String idEmblema) async {

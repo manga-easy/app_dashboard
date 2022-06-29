@@ -30,6 +30,7 @@ class AuthController extends IController {
 
   @override
   void onInit(BuildContext context) {
+    loginAutomatico(context);
     carregaCredencial();
   }
 
@@ -91,5 +92,19 @@ class AuthController extends IController {
       email: email.text,
     );
     await credencialRepo.put(objeto: cred);
+  }
+
+  Future<void> loginAutomatico(context) async {
+    try {
+      var dataUser = await app.account.get();
+      serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        MainPage.route,
+        (route) => false,
+      );
+    } catch (e) {
+      sdk.Helps.log(e);
+    }
   }
 }
