@@ -1,4 +1,5 @@
 class EmblemaParams {
   int limit;
-  EmblemaParams({this.limit = 100});
+  String? categoria;
+  EmblemaParams({this.limit = 100, this.categoria});
 }
