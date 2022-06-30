@@ -1,3 +1,4 @@
+import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user_params.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
@@ -51,7 +52,17 @@ class EmblemaUserRepository extends IRepoExternal<EmblemaUser, EmblemaUserParams
 
   @override
   Future<DataRepoExternal<EmblemaUser>> listDocument({EmblemaUserParams? where}) async {
-    var ret = await db.database.listDocuments(collectionId: table);
+    var filtro = [];
+    if (where != null) {
+      if (where.idEmblema != null) {
+        filtro.add(Query.equal('idEmblema', where.idEmblema));
+      }
+    }
+    var ret = await db.database.listDocuments(
+      collectionId: table,
+      limit: where?.limit,
+      queries: filtro,
+    );
     var data = ret.documents.map((e) => EmblemaUser.fromJson(e.data)).toList();
     return DataRepoExternal(data: data, total: ret.total);
   }
