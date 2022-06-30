@@ -7,10 +7,10 @@ import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/emblemas_module.dart';
 import 'package:dashboard_manga_easy/modules/mangas/mangas_modules.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/permissoes_module.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/recuperacao_module.dart';
 import 'package:dashboard_manga_easy/modules/splash/splash_module.dart';
-import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
 import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -30,6 +30,7 @@ Future<void> main() async {
   EmblemasModule().register();
   BannersModule().register();
   MangasModule().register();
+  PermissoesModule().register();
   runApp(const MyApp());
 }
 
