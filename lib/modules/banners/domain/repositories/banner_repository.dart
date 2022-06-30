@@ -41,17 +41,21 @@ class BannerRepository extends IRepoExternal<BannerModel, BannerParams> {
   }
 
   @override
-  Future<List<BannerModel>> listDocument({BannerParams? where}) async {
-    var ret = await db.database.listDocuments(collectionId: table);
-    return ret.documents.map((e) => BannerModel.fromJson(e.data)).toList();
-  }
-
-  @override
   Future<void> updateDocument({required BannerModel objeto}) async {
     await db.database.updateDocument(
       collectionId: table,
       documentId: objeto.id!,
       data: objeto.toJson(),
+    );
+  }
+
+  @override
+  Future<DataRepoExternal<BannerModel>> listDocument({BannerParams? where}) async {
+    var ret = await db.database.listDocuments(collectionId: table);
+    var data = ret.documents.map((e) => BannerModel.fromJson(e.data)).toList();
+    return DataRepoExternal(
+      data: data,
+      total: ret.total,
     );
   }
 }

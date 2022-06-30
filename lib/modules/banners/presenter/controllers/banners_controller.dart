@@ -26,7 +26,8 @@ class BannerController extends IController {
   void listaBanner() async {
     status.value = StatusBuild.loading;
     try {
-      listaBannerItens = await bannerRepository.listDocument();
+      var ret = await bannerRepository.listDocument();
+      listaBannerItens = ret.data;
       status.value = StatusBuild.done;
     } catch (e) {
       status.value = StatusBuild.erro;

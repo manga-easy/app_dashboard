@@ -1,5 +1,4 @@
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
@@ -24,7 +23,8 @@ class EmblemasController implements IController {
 
   void carregaEmblemas() async {
     status.value = StatusBuild.loading;
-    lista = await emblemasRepository.listDocument(where: EmblemaParams());
+    var ret = await emblemasRepository.listDocument(where: EmblemaParams());
+    lista = ret.data;
     status.value = StatusBuild.done;
   }
 }
