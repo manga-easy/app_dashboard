@@ -1,16 +1,16 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/modules/banners/domain/repositories/banner_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class CriarBannerController extends ValueNotifier implements IController {
-  final AppwriteClient app;
+  final BannerRepository bannerRepository;
   final Global global;
   BannerModel? banner;
   CriarBannerController({
-    required this.app,
+    required this.bannerRepository,
     required this.global,
   }) : super(null);
 
@@ -32,19 +32,9 @@ class CriarBannerController extends ValueNotifier implements IController {
     try {
       String tipo = 'criado';
       if (banner!.id == null) {
-        await app.database.createDocument(
-          collectionId: BannerModel.collectionID,
-          documentId: 'unique()',
-          data: banner!.toJson(),
-          read: ['role:all'],
-          write: ['role:all'],
-        );
+        await bannerRepository.creatDocument(objeto: banner!);
       } else {
-        await app.database.updateDocument(
-          collectionId: BannerModel.collectionID,
-          documentId: banner!.id!,
-          data: banner!.toJson(),
-        );
+        await bannerRepository.updateDocument(objeto: banner!);
         tipo = 'salvo';
       }
       Navigator.of(context).pop();
