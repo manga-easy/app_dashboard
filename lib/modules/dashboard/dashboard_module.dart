@@ -8,6 +8,12 @@ class DashboardModule extends IModuleFactory {
   void register() {
     //register controllers
     di.registerFactory(() => DetalhesEmblemasController(appwriteAdmin: di()));
-    di.registerFactory(() => DashboardController(serviceRoute: di(), appwriteAdmin: di()));
+    di.registerFactory(
+      () => DashboardController(
+        serviceRoute: di(),
+        emblemaUserRepository: di(),
+        emblemasRepository: di(),
+      ),
+    );
   }
 }

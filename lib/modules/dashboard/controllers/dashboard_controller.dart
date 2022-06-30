@@ -1,20 +1,24 @@
-import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/core/services/service_route.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user_params.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
 
 class DashboardController extends IController {
   final ServiceRoute serviceRoute;
-  final AppwriteAdmin appwriteAdmin;
+  final EmblemaUserRepository emblemaUserRepository;
+  final EmblemasRepository emblemasRepository;
   var emblemasDoadores = ValueNotifier(<Emblema>[]);
   var status = ValueNotifier(StatusBuild.done);
 
   DashboardController({
     required this.serviceRoute,
-    required this.appwriteAdmin,
+    required this.emblemaUserRepository,
+    required this.emblemasRepository,
   });
 
   @override
@@ -30,11 +34,13 @@ class DashboardController extends IController {
   void carregaEmblemaDoadores() async {
     try {
       if (serviceRoute.permissions!.value >= serviceRoute.levelAdmin) {
-        var ret = await appwriteAdmin.database.listDocuments(
-          collectionId: Emblema.collectionId,
-          queries: [Query.equal('categoria', CategoriaEmblema.doacao.name)],
+        var ret = await emblemasRepository.listDocument(
+          where: EmblemaParams(
+            categoria: CategoriaEmblema.doacao.name,
+            limit: 100,
+          ),
         );
-        emblemasDoadores.value = ret.documents.map((e) => Emblema.fromJson(e.data)).toList();
+        emblemasDoadores.value = ret.data;
       }
     } catch (e) {
       Helps.log(e);
@@ -42,10 +48,8 @@ class DashboardController extends IController {
   }
 
   Future<int> calculaTotalAdquirido(String idEmblema) async {
-    var ret = await appwriteAdmin.database.listDocuments(
-      collectionId: EmblemaUser.collectionId,
-      queries: [Query.equal('idEmblema', idEmblema)],
-      limit: 10,
+    var ret = await emblemaUserRepository.listDocument(
+      where: EmblemaUserParams(idEmblema: idEmblema),
     );
     return ret.total;
   }
