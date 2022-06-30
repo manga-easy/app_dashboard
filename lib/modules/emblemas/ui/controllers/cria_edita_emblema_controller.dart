@@ -1,13 +1,13 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class CriaEditaEmblemaController extends ValueNotifier implements IController {
-  final AppwriteAdmin app;
+  final EmblemasRepository emblemasRepository;
   Emblema? emblema;
-  CriaEditaEmblemaController({required this.app}) : super(null);
+  CriaEditaEmblemaController({required this.emblemasRepository}) : super(null);
 
   @override
   void onClose() {}
@@ -34,19 +34,9 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
   void criaAlteraEmblema(context) async {
     try {
       if (emblema!.id == null) {
-        await app.database.createDocument(
-          collectionId: Emblema.collectionId,
-          documentId: 'unique()',
-          data: emblema!.toJson(),
-          read: ['role:all'],
-          write: ['role:all'],
-        );
+        await emblemasRepository.creatDocument(objeto: emblema!);
       } else {
-        await app.database.updateDocument(
-          collectionId: Emblema.collectionId,
-          documentId: emblema!.id!,
-          data: emblema!.toJson(),
-        );
+        await emblemasRepository.updateDocument(objeto: emblema!);
       }
       Navigator.of(context).pop();
       AppHelps.confirmaDialog(

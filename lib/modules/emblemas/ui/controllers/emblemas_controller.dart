@@ -1,15 +1,18 @@
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class EmblemasController implements IController {
   var lista = <Emblema>[];
-  final AppwriteAdmin app;
+  final EmblemasRepository emblemasRepository;
+
   var pesquisa = '';
   var status = ValueNotifier(StatusBuild.loading);
-  EmblemasController({required this.app});
+  EmblemasController({required this.emblemasRepository});
 
   @override
   void onClose() {}
@@ -21,12 +24,7 @@ class EmblemasController implements IController {
 
   void carregaEmblemas() async {
     status.value = StatusBuild.loading;
-    lista.clear();
-    var retorno = await app.database.listDocuments(
-      collectionId: Emblema.collectionId,
-      limit: 100,
-    );
-    lista = retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
+    lista = await emblemasRepository.listDocument(where: EmblemaParams());
     status.value = StatusBuild.done;
   }
 }
