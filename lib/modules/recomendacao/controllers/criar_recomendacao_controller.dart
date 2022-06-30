@@ -1,3 +1,4 @@
+import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
@@ -32,6 +33,15 @@ class CriarRecomendacaoController extends ValueNotifier implements IController {
   void criarRecomendacao(context) async {
     try {
       if (recomendacao!.id == null) {
+        if (await verificaExisteRecomendacao(recomendacao!.uniqueid)) {
+          Navigator.of(context).pop();
+          AppHelps.confirmaDialog(
+            title: 'Erro',
+            content: 'Recomendação já foi feita, edite a recomenção anterior do mangá',
+            context: context,
+          );
+          return;
+        }
         await app.database.createDocument(
           collectionId: RecomendacoesModel.collectionID,
           documentId: 'unique()',
@@ -55,5 +65,13 @@ class CriarRecomendacaoController extends ValueNotifier implements IController {
     } catch (e) {
       Helps.log(e);
     }
+  }
+
+  Future<bool> verificaExisteRecomendacao(String uniqueid) async {
+    var ret = await app.database.listDocuments(
+      collectionId: RecomendacoesModel.collectionID,
+      queries: [Query.equal('uniqueid', uniqueid)],
+    );
+    return ret.documents.isNotEmpty;
   }
 }
