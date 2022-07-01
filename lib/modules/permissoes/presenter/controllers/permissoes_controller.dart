@@ -32,6 +32,7 @@ class PermissoesController extends IController {
   }
 
   void carregaPermissoes() async {
+    status.value = StatusBuild.loading;
     var ret = await permissoesRepository.listDocument();
     permissoes = ret.data;
     status.value = StatusBuild.done;

@@ -9,6 +9,7 @@ import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblem
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pages.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
@@ -125,6 +126,11 @@ class ServiceRoute extends IService {
       case PermissoesPage.route:
         return MaterialPageRoute(
           builder: (_) => const PermissoesPage(),
+          settings: settings,
+        );
+      case EditPermissoesPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditPermissoesPage(),
           settings: settings,
         );
       default:
