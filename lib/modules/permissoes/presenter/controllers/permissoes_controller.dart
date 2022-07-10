@@ -1,3 +1,4 @@
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
@@ -36,5 +37,17 @@ class PermissoesController extends IController {
     var ret = await permissoesRepository.listDocument();
     permissoes = ret.data;
     status.value = StatusBuild.done;
+  }
+
+  Future<void> removePermissoes(String id, context) async {
+    var ret = await AppHelps.confirmaDialog(
+      title: 'Tem certeza?',
+      content: 'removerá as permissões do usuario',
+      context: context,
+    );
+    if (ret) {
+      await permissoesRepository.deletDocument(id: id);
+      carregaPermissoes();
+    }
   }
 }
