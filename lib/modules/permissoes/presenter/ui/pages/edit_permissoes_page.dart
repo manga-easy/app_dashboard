@@ -1,17 +1,21 @@
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/edit_permissoes_controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/organisms/select_user.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 enum LevelPermissoes {
   none(value: 0),
   admin(value: 90),
   parceiro(value: 40),
-  autor(value: 30);
+  autor(value: 30),
+  root(value: 100);
 
   final int value;
   const LevelPermissoes({required this.value});
@@ -73,17 +77,18 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
                   },
                 ),
                 const SizedBox(height: AppTheme.defaultPadding),
-                DropdownSearch<String>(
-                  popupProps: PopupProps.menu(
-                    showSelectedItems: true,
-                    disabledItemFn: (String s) => s.startsWith('I'),
-                  ),
-                  items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
-                  onChanged: print,
-                  selectedItem: "Brazil",
-                ),
                 OutlinedButton(
-                  onPressed: () => null,
+                  onPressed: () async {
+                    var user = await AppHelps.bottomSheet(
+                      context: context,
+                      child: SelectUser(future: ct.pesquisaUser),
+                    );
+                    if (user is User) {
+                      setState(() {
+                        ct.permissoes!.userId = user.id!;
+                      });
+                    }
+                  },
                   child: NameUserBuild(
                     future: ct.getNameUser(userId: ct.permissoes!.userId),
                   ),

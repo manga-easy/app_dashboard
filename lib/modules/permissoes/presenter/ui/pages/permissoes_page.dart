@@ -57,6 +57,13 @@ class _PermissoesPageState extends State<PermissoesPage> {
                   'Nivel: ${data.value}',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
+                trailing: IconButton(
+                  icon: const Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  ),
+                  onPressed: () => ct.removePermissoes(data.id!, context),
+                ),
               ),
             );
           },

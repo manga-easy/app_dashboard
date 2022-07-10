@@ -1,16 +1,23 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
+import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_params.dart';
+import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissoes_repository.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class EditPermissoesController extends ValueNotifier implements IController {
+  final UserRepositoryExternal userRepo;
   final PermissoesRepository permissoesRepository;
   final AppwriteAdmin appwriteAdmin;
   Permissions? permissoes;
-  EditPermissoesController({required this.appwriteAdmin, required this.permissoesRepository}) : super(null);
+  EditPermissoesController({
+    required this.appwriteAdmin,
+    required this.permissoesRepository,
+    required this.userRepo,
+  }) : super(null);
 
   @override
   void onClose() {
@@ -59,5 +66,9 @@ class EditPermissoesController extends ValueNotifier implements IController {
       );
       Helps.log(e);
     }
+  }
+
+  Future<List<User>> pesquisaUser(String pesquisa) async {
+    return await userRepo.list(search: pesquisa);
   }
 }
