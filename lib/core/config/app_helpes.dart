@@ -27,13 +27,13 @@ class AppHelps {
         false;
   }
 
-  static void bottomSheet({
+  static bottomSheet({
     required BuildContext context,
     Widget? child,
     bool isScrollControlled = false,
     ShapeBorder? shape,
   }) async {
-    await showModalBottomSheet<void>(
+    return await showModalBottomSheet(
       context: context,
       builder: (BuildContext context) => child ?? Container(),
       isScrollControlled: isScrollControlled,
