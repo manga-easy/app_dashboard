@@ -31,7 +31,7 @@ dependencies:
   octo_image: ^1.0.2
   package_info_plus: ^1.4.2
   dropdown_search: ^5.0.2
-  api_fcm: ^1.1.0
+  api_fcm: ^1.1.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1
