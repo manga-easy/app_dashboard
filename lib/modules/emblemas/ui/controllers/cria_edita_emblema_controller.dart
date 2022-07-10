@@ -20,7 +20,7 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
       timeCria: DateTime.now().millisecondsSinceEpoch,
       rarity: RarityEmblema.comum,
       description: '',
-      percent: 0.0,
+      percent: 0.1,
       url: '',
       benefits: [],
       adsOff: false,
@@ -33,6 +33,9 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
 
   void criaAlteraEmblema(context) async {
     try {
+      if (emblema!.benefits.isEmpty) {
+        throw Exception('Benefícios não pode ta vazio');
+      }
       if (emblema!.id == null) {
         await emblemasRepository.creatDocument(objeto: emblema!);
       } else {
@@ -45,6 +48,11 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
         context: context,
       );
     } catch (e) {
+      AppHelps.confirmaDialog(
+        title: 'Erro',
+        content: e.toString(),
+        context: context,
+      );
       Helps.log(e);
     }
     notifyListeners();
