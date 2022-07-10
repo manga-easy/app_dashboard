@@ -1,0 +1,48 @@
+import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
+import 'package:flutter/material.dart';
+
+class FormNotificacao extends StatelessWidget {
+  final NotificacaoController controller;
+  const FormNotificacao({super.key, required this.controller});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppTheme.bgColor,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 20),
+          Text(
+            'Novo Aviso',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          const SizedBox(height: 20),
+          CampoPadraoAtom(
+            hintText: 'Digite o titulo',
+            onChange: (v) => controller.nova.titulo = v,
+          ),
+          const SizedBox(height: 10),
+          CampoPadraoAtom(
+            hintText: 'Digite a mensagem',
+            onChange: (v) => controller.nova.menssege = v,
+          ),
+          const SizedBox(height: 10),
+          CampoPadraoAtom(
+            hintText: 'Digite o link',
+            onChange: (v) => controller.nova.image = v,
+          ),
+          const SizedBox(height: 20),
+          ButtonPadraoAtom(
+            onPress: () => controller.enviaNotificacao(context),
+            icone: Icons.send,
+            title: "Enviar",
+          )
+        ],
+      ),
+    );
+  }
+}
