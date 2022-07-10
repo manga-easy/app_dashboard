@@ -3,6 +3,7 @@ import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/auth/controllers/auth_controller.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/credencial_repo.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repo.dart';
+import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
 
 class AuthModule extends IModuleFactory {
   @override
@@ -10,6 +11,7 @@ class AuthModule extends IModuleFactory {
     //register repositories
     di.registerFactory(() => CredencialRepo(di()));
     di.registerFactory(() => UserRepo(di()));
+    di.registerFactory(() => UserRepositoryExternal(appwriteAdmin: di()));
     //register controllers
     di.registerFactory(
       () => AuthController(
