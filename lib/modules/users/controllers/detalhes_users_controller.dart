@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/apis/fcm_api.dart';
+import 'package:api_fcm/api_fcm.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
@@ -13,7 +13,7 @@ import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 class UsersDetalhesController extends IController {
   final AppwriteAdmin app;
   final Global gb;
-  final FCMApi apiFcm;
+  final ApiFcm apiFcm;
   var status = ValueNotifier(StatusBuild.loading);
   var nova = Notificacao(
     menssege: '',
@@ -67,11 +67,13 @@ class UsersDetalhesController extends IController {
       documentId: 'unique()',
       data: nova.toJson(),
     );
-    await apiFcm.postMensagem(
+    await apiFcm.postMessage(
       listtokens: tokens,
-      msg: nova.menssege,
-      title: nova.titulo,
-      idmsg: noti.data['\$id'],
+      notification: MessageModel(
+        body: nova.menssege,
+        title: nova.titulo,
+        image: nova.image,
+      ),
     );
   }
 
