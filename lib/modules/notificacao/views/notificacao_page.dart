@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
 import 'package:flutter/material.dart';
 
 class NotificacaoPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
           route: NotificacaoPage.route,
           statusBuild: ct.status.value,
           onPressedAtualiza: ct.carregaNotificacao,
-          onPressedNovoItem: () => ct.addNotificacao(context),
+          onPressedNovoItem: () => Navigator.pushNamed(context, SendNotificationPage.route),
           labelNovoItem: "Enviar notificação",
           itemBuilderLista: (context, index) {
             var use = ct.lista.value[index];

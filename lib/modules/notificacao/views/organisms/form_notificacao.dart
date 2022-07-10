@@ -1,11 +1,11 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/controllers/send_notification_controller.dart';
 import 'package:flutter/material.dart';
 
 class FormNotificacao extends StatelessWidget {
-  final NotificacaoController controller;
+  final SendNotificationController controller;
   const FormNotificacao({super.key, required this.controller});
   @override
   Widget build(BuildContext context) {
