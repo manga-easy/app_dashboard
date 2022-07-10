@@ -1,4 +1,5 @@
 import 'package:api_fcm/api_fcm.dart';
+import 'package:dashboard_manga_easy/core/config/app_config.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
@@ -13,7 +14,7 @@ import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 class UsersDetalhesController extends IController {
   final AppwriteAdmin app;
   final Global gb;
-  final ApiFcm apiFcm;
+  final ApiFcm apiFcm = ApiFcm(tokenServer: AppConfig.tokenServer);
   var status = ValueNotifier(StatusBuild.loading);
   var nova = Notificacao(
     menssege: '',
@@ -29,7 +30,6 @@ class UsersDetalhesController extends IController {
   UsersDetalhesController({
     required this.app,
     required this.gb,
-    required this.apiFcm,
   });
 
   @override

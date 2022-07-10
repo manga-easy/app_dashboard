@@ -8,6 +8,6 @@ class UsersModule extends IModuleFactory {
   void register() {
     //register controllers
     di.registerFactory(() => UsersController(app: di(), global: di()));
-    di.registerFactory(() => UsersDetalhesController(app: di(), apiFcm: di(), gb: di()));
+    di.registerFactory(() => UsersDetalhesController(app: di(), gb: di()));
   }
 }
