@@ -2,22 +2,27 @@ import 'package:dashboard_manga_easy/core/apis/fcm_api.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class NotificacaoController extends IController {
-  final AppwriteAdmin app;
+  final NotificacaoRepository notificacaoRepository;
   final Global global;
   final FCMApi apiFcm;
   var status = ValueNotifier(StatusBuild.loading);
-  var nova = Notificacao(menssege: '', titulo: '');
+  var nova = Notificacao(
+    menssege: '',
+    titulo: '',
+    dateMade: DateTime.now().millisecondsSinceEpoch,
+    image: '',
+  );
   var lista = ValueNotifier(<Notificacao>[]);
 
-  NotificacaoController({required this.app, required this.global, required this.apiFcm});
+  NotificacaoController({required this.notificacaoRepository, required this.global, required this.apiFcm});
   @override
   void onClose() {
     status.dispose();
@@ -32,23 +37,17 @@ class NotificacaoController extends IController {
   void carregaNotificacao() async {
     status.value = StatusBuild.loading;
     lista.value.clear();
-    var retorno = await app.database.listDocuments(
-      collectionId: Notificacao.collectionId,
-    );
-    lista.value = retorno.documents.map((e) => Notificacao.fromJson(e.data)).toList();
+    var retorno = await notificacaoRepository.listDocument();
+    lista.value = retorno.data;
     status.value = StatusBuild.done;
   }
 
   void enviaNotificacao(context) async {
-    var noti = await app.database.createDocument(
-      documentId: 'unique()',
-      collectionId: Notificacao.collectionId,
-      data: nova.toJson(),
-    );
+    var noti = await notificacaoRepository.creatDocument(objeto: nova);
     var ret = await apiFcm.postAviso(
       msg: nova.menssege,
       title: nova.titulo,
-      idmsg: noti.data['\$id'],
+      idmsg: 'noti.data]',
     );
 
     if (ret) {
@@ -102,5 +101,17 @@ class NotificacaoController extends IController {
         ),
       ),
     );
+  }
+
+  Future<void> removePermissoes(String id, context) async {
+    var ret = await AppHelps.confirmaDialog(
+      title: 'Tem certeza?',
+      content: '',
+      context: context,
+    );
+    if (ret) {
+      await notificacaoRepository.deletDocument(id: id);
+      carregaNotificacao();
+    }
   }
 }

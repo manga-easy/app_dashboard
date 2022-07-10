@@ -15,7 +15,12 @@ class UsersDetalhesController extends IController {
   final Global gb;
   final FCMApi apiFcm;
   var status = ValueNotifier(StatusBuild.loading);
-  var nova = Notificacao(menssege: '', titulo: '');
+  var nova = Notificacao(
+    menssege: '',
+    titulo: '',
+    dateMade: DateTime.now().millisecondsSinceEpoch,
+    image: '',
+  );
   User? user;
   List<EmblemaUser> emblemasUsers = [];
   List<Emblema> listEmblema = [];
