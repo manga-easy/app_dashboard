@@ -1,18 +1,16 @@
-import 'package:dashboard_manga_easy/core/apis/fcm_api.dart';
+import 'package:api_fcm/api_fcm.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/views/organisms/form_notificacao.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class NotificacaoController extends IController {
   final NotificacaoRepository notificacaoRepository;
   final Global global;
-  final FCMApi apiFcm;
+  final ApiFcm apiFcm;
   var status = ValueNotifier(StatusBuild.loading);
   var nova = Notificacao(
     menssege: '',
@@ -43,14 +41,17 @@ class NotificacaoController extends IController {
   }
 
   void enviaNotificacao(context) async {
-    var noti = await notificacaoRepository.creatDocument(objeto: nova);
-    var ret = await apiFcm.postAviso(
-      msg: nova.menssege,
-      title: nova.titulo,
-      idmsg: 'noti.data]',
+    await notificacaoRepository.creatDocument(objeto: nova);
+    var ret = await apiFcm.postTopics(
+      topics: 'avisos',
+      notification: MessageModel(
+        body: nova.menssege,
+        title: nova.titulo,
+        image: nova.image,
+      ),
     );
 
-    if (ret) {
+    if (ret.isSend) {
       Navigator.pop(context);
       AppHelps.confirmaDialog(
         title: 'Sucesso',
@@ -70,36 +71,7 @@ class NotificacaoController extends IController {
     AppHelps.bottomSheet(
       context: context,
       isScrollControlled: true,
-      child: Container(
-        color: AppTheme.bgColor,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 20),
-            Text(
-              'Novo Aviso',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            const SizedBox(height: 20),
-            CampoPadraoAtom(
-              hintText: 'Digite o titulo',
-              onChange: (v) => nova.titulo = v,
-            ),
-            const SizedBox(height: 10),
-            CampoPadraoAtom(
-              hintText: 'Digite a mensagem',
-              onChange: (v) => nova.menssege = v,
-            ),
-            const SizedBox(height: 20),
-            ButtonPadraoAtom(
-              onPress: () => enviaNotificacao(context),
-              icone: Icons.send,
-              title: "Enviar",
-            )
-          ],
-        ),
-      ),
+      child: FormNotificacao(controller: this),
     );
   }
 

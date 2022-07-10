@@ -38,23 +38,35 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
           labelNovoItem: "Enviar notificação",
           itemBuilderLista: (context, index) {
             var use = ct.lista.value[index];
-            return ListTile(
-              leading: CircleAvatar(
-                radius: 35,
-                child: Text(use.titulo.substring(0, use.titulo.length > 1 ? 1 : 0)),
-              ),
-              title: Text(use.titulo),
-              subtitle: Text(
-                use.menssege,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
-              ),
-              trailing: IconButton(
-                icon: const Icon(
-                  Icons.close,
-                  color: Colors.red,
+            return Column(
+              children: [
+                ListTile(
+                  leading: CircleAvatar(
+                    radius: 35,
+                    child: Text(use.titulo.substring(0, use.titulo.length > 1 ? 1 : 0)),
+                  ),
+                  title: Text(use.titulo),
+                  subtitle: Text(
+                    use.menssege,
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.close,
+                      color: Colors.red,
+                    ),
+                    onPressed: () => ct.removePermissoes(use.id!, context),
+                  ),
                 ),
-                onPressed: () => ct.removePermissoes(use.id!, context),
-              ),
+                use.image.isNotEmpty
+                    ? SizedBox(
+                        height: MediaQuery.of(context).size.height / 4,
+                        child: Image.network(
+                          use.image,
+                        ),
+                      )
+                    : const SizedBox()
+              ],
             );
           },
           listaItems: ct.lista.value,
