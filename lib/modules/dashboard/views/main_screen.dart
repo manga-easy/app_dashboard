@@ -4,7 +4,6 @@ import 'package:dashboard_manga_easy/modules/dashboard/atoms/total_adquirido_ato
 import 'package:dashboard_manga_easy/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/detalhes_emblemas_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {

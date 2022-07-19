@@ -62,7 +62,7 @@ class UsersDetalhesController extends IController {
   void enviaNotificacao() async {
     List<String> tokens = [user!.prefs.tokenFcm];
 
-    var noti = await app.database.createDocument(
+    await app.database.createDocument(
       collectionId: Notificacao.collectionId,
       documentId: 'unique()',
       data: nova.toJson(),

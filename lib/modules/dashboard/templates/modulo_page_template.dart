@@ -38,8 +38,7 @@ class ModuloPageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
-    var width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: width <= 1000 && isModule ? SideMenu(atual: route) : null,
       appBar: width <= 1000 ? AppBar(title: Text(route.replaceAll('/', ''))) : null,

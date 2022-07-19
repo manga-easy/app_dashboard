@@ -24,7 +24,6 @@ class PermissoesController extends IController {
   @override
   void onInit(BuildContext context) {
     carregaPermissoes();
-    var arguments = ModalRoute.of(context)!.settings.arguments;
   }
 
   Future<String> getNameUser({required String userId}) async {

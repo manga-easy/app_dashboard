@@ -22,7 +22,6 @@ class MangasController extends IController {
 
   @override
   void onInit(BuildContext context) {
-    var arguments = ModalRoute.of(context)!.settings.arguments;
     carregarMangas();
   }
 

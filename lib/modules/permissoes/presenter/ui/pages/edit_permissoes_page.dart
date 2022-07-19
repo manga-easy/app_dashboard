@@ -6,7 +6,6 @@ import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/edit_permissoes_controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/organisms/select_user.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 

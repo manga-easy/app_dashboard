@@ -1,7 +1,6 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_params.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissoes_repository.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';

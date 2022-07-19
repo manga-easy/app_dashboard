@@ -22,13 +22,11 @@ class SendNotificationController extends ValueNotifier implements IController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
+    dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
-    // TODO: implement onInit
-  }
+  void onInit(BuildContext context) {}
 
   void enviaNotificacao(context) async {
     await notificacaoRepository.creatDocument(objeto: nova);

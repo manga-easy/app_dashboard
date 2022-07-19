@@ -5,7 +5,6 @@ import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class CriarBannerPage extends StatefulWidget {
   static const route = '/CriarBanner';
