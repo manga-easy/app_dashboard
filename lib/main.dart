@@ -11,6 +11,7 @@ import 'package:dashboard_manga_easy/modules/permissoes/permissoes_module.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/recuperacao_module.dart';
 import 'package:dashboard_manga_easy/modules/splash/splash_module.dart';
+import 'package:dashboard_manga_easy/modules/temporadas/temporadas_module.dart';
 import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -31,6 +32,7 @@ Future<void> main() async {
   BannersModule().register();
   MangasModule().register();
   PermissoesModule().register();
+  TemporadasModule().register();
   runApp(const MyApp());
 }
 
