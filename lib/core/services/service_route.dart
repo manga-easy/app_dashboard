@@ -16,6 +16,8 @@ import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendac
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recupercao/views/recuperacao_page.dart';
 import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
+import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/edit_temporada_page.dart';
+import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/temporada_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/views/users_page.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +34,6 @@ class ServiceRoute extends IService {
   }
 
   Route<MaterialPageRoute>? generationRoutes(RouteSettings settings) {
-    print(user);
-    print(settings.name);
     //verifica se foi inicializado os modulos
     if (!isInicialize) {
       return MaterialPageRoute(
@@ -139,6 +139,16 @@ class ServiceRoute extends IService {
           builder: (_) => const SendNotificationPage(),
           settings: settings,
         );
+      case TemporadasPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const TemporadasPage(),
+          settings: settings,
+        );
+      case EditTemporadasPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditTemporadasPage(),
+          settings: settings,
+        );
       default:
         return null;
     }
@@ -156,6 +166,7 @@ class ServiceRoute extends IService {
         BannerPage.route,
         MangasPage.route,
         PermissoesPage.route,
+        TemporadasPage.route,
       ];
     }
     return [
