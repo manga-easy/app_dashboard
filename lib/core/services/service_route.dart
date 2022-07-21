@@ -179,6 +179,7 @@ class ServiceRoute extends IService {
         MangasPage.route,
         PermissoesPage.route,
         TemporadasPage.route,
+        EnquetePage.route,
       ];
     }
     return [
