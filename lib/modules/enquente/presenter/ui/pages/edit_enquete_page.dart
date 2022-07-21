@@ -55,6 +55,12 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
                   onChange: (p0) => ct.enquete!.name = p0,
                 ),
                 const SizedBox(height: AppTheme.defaultPadding),
+                CampoPadraoAtom(
+                  hintText: 'Link do banner',
+                  initialValue: ct.enquete!.bannerLink,
+                  onChange: (p0) => ct.enquete!.bannerLink = p0,
+                ),
+                const SizedBox(height: AppTheme.defaultPadding),
                 Row(
                   children: [
                     Text(
