@@ -3,6 +3,8 @@ import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_tem
 import 'package:dashboard_manga_easy/modules/enquente/presenter/controllers/enquete_controller.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_enquete_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class EnquetePage extends StatefulWidget {
   static const route = '/Enquete';
@@ -49,6 +51,31 @@ class _EnquetePageState extends State<EnquetePage> {
                   EditEnquetePage.route,
                   arguments: data,
                 ).then((value) => ct.carregaEnquete()),
+                title: Text(data.name),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      DateFormat.yMMMMEEEEd().format(
+                        DateTime.fromMillisecondsSinceEpoch(data.createDate),
+                      ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white54),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Status: ',
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white54),
+                        ),
+                        Text(
+                          data.status.name,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: data.status == EnqueteStatus.progress ? Colors.green : Colors.red),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
                 trailing: IconButton(
                   icon: const Icon(
                     Icons.close,
