@@ -7,6 +7,8 @@ import 'package:dashboard_manga_easy/modules/dashboard/views/forbiden_page.dart'
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblema_page.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/emblemas_page.dart';
+import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_enquete_page.dart';
+import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/enquete_page.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pages.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
@@ -147,6 +149,16 @@ class ServiceRoute extends IService {
       case EditTemporadasPage.route:
         return MaterialPageRoute(
           builder: (_) => const EditTemporadasPage(),
+          settings: settings,
+        );
+      case EnquetePage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EnquetePage(),
+          settings: settings,
+        );
+      case EditEnquetePage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditEnquetePage(),
           settings: settings,
         );
       default:
