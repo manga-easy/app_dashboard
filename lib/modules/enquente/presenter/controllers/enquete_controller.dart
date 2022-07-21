@@ -41,4 +41,19 @@ class EnqueteController extends IController {
       carregaEnquete();
     }
   }
+
+  Future<void> finalizarEnquete(EnqueteModel enquete) async {
+    status.value = StatusBuild.loading;
+    enquete.status = EnqueteStatus.finished;
+    enquete.finishedDate = DateTime.now().millisecondsSinceEpoch;
+    await permissoesRepository.updateDocument(objeto: enquete);
+    status.value = StatusBuild.done;
+  }
+
+  Future<void> comecarEnquete(EnqueteModel enquete) async {
+    status.value = StatusBuild.loading;
+    enquete.status = EnqueteStatus.progress;
+    await permissoesRepository.updateDocument(objeto: enquete);
+    status.value = StatusBuild.done;
+  }
 }

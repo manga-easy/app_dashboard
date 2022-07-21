@@ -1,10 +1,10 @@
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/controllers/enquete_controller.dart';
+import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/organisms/status_bar_enquete.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_enquete_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class EnquetePage extends StatefulWidget {
   static const route = '/Enquete';
@@ -46,6 +46,7 @@ class _EnquetePageState extends State<EnquetePage> {
             var data = ct.enquetes[index];
             return Card(
               child: ListTile(
+                isThreeLine: true,
                 onTap: () => Navigator.pushNamed(
                   context,
                   EditEnquetePage.route,
@@ -61,19 +62,11 @@ class _EnquetePageState extends State<EnquetePage> {
                       ),
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white54),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          'Status: ',
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white54),
-                        ),
-                        Text(
-                          data.status.name,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: data.status == EnqueteStatus.progress ? Colors.green : Colors.red),
-                        ),
-                      ],
-                    ),
+                    StatusBarEnquete(
+                      enqueteStatus: data.status,
+                      onFinished: () => ct.finalizarEnquete(data),
+                      onStart: () => ct.comecarEnquete(data),
+                    )
                   ],
                 ),
                 trailing: IconButton(
