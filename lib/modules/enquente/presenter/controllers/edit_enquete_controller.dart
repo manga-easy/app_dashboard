@@ -26,7 +26,7 @@ class EditEnqueteController extends ValueNotifier implements IController {
       createDate: DateTime.now().millisecondsSinceEpoch,
       name: '',
       questions: [],
-      status: EnqueteStatus.progress,
+      status: EnqueteStatus.started,
       finishedDate: null,
     );
     notifyListeners();
@@ -35,6 +35,9 @@ class EditEnqueteController extends ValueNotifier implements IController {
   Future<void> salvarEditaDados(BuildContext context) async {
     try {
       var op = 'criado';
+      if (enquete!.questions.isEmpty) {
+        throw Exception('Escolhas não pode ser vazia');
+      }
       if (enquete!.id == null) {
         await permissoesRepository.creatDocument(objeto: enquete!);
       } else {
