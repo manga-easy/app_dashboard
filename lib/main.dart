@@ -5,6 +5,7 @@ import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/banners/banners_module.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/emblemas_module.dart';
+import 'package:dashboard_manga_easy/modules/enquente/enquete_module.dart';
 import 'package:dashboard_manga_easy/modules/mangas/mangas_modules.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/permissoes_module.dart';
@@ -33,6 +34,7 @@ Future<void> main() async {
   MangasModule().register();
   PermissoesModule().register();
   TemporadasModule().register();
+  EnqueteModule().register();
   runApp(const MyApp());
 }
 

@@ -1,6 +1,5 @@
-import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
-import 'package:dashboard_manga_easy/modules/enquente/domain/models/permissoes_params.dart';
+import 'package:dashboard_manga_easy/modules/enquente/domain/models/enquete_params.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class EnqueteRepository extends IRepoExternal<EnqueteModel, EnqueteParams> {

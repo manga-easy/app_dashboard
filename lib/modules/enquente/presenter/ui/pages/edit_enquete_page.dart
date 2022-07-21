@@ -1,12 +1,9 @@
-import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/organisms/select_user.dart';
+import 'package:dashboard_manga_easy/modules/enquente/presenter/controllers/edit_enquete_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class EditEnquetePage extends StatefulWidget {
   static const route = '/EditEnquete';
@@ -35,7 +32,7 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
     return ValueListenableBuilder(
       valueListenable: ct,
       builder: (context, value, child) {
-        if (ct.permissoes == null) return const LoadingAtom();
+        if (ct.enquete == null) return const LoadingAtom();
         return Scaffold(
           appBar: AppBar(
             title: const Text('Criar Enquete'),
