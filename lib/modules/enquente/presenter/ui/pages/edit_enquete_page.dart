@@ -1,9 +1,12 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/controllers/edit_enquete_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:uuid/uuid.dart';
 
 class EditEnquetePage extends StatefulWidget {
   static const route = '/EditEnquete';
@@ -46,6 +49,52 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
               children: [
+                CampoPadraoAtom(
+                  hintText: 'Pergunta',
+                  initialValue: ct.enquete!.name,
+                  onChange: (p0) => ct.enquete!.name = p0,
+                ),
+                const SizedBox(height: AppTheme.defaultPadding),
+                Row(
+                  children: [
+                    Text(
+                      'Escolhas',
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.white,
+                          ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding * 2),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: AppTheme.defaultPadding / 2),
+                      Column(
+                        children: beneficios(),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              ct.enquete!.questions.add(Question(id: const Uuid().v4(), name: ''));
+                              ct.notifyListeners();
+                            },
+                            icon: const Icon(Icons.add),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              ct.enquete!.questions.removeLast();
+                              ct.notifyListeners();
+                            },
+                            icon: const Icon(Icons.remove),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: AppTheme.defaultPadding),
                 ButtonPadraoAtom(
                   title: 'Salvar',
@@ -58,5 +107,22 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
         );
       },
     );
+  }
+
+  List<Widget> beneficios() {
+    var widiget = <Widget>[];
+    for (var i = 0; i < ct.enquete!.questions.length; i++) {
+      widiget.add(
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: CampoPadraoAtom(
+            onChange: (p0) => ct.enquete!.questions[i].name = p0,
+            initialValue: ct.enquete!.questions[i].name,
+          ),
+        ),
+      );
+    }
+
+    return widiget;
   }
 }
