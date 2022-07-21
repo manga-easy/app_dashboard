@@ -47,7 +47,7 @@ class EditEnqueteController extends ValueNotifier implements IController {
       Navigator.of(context).pop();
       AppHelps.confirmaDialog(
         title: 'Sucesso',
-        content: 'Permissão $op com sucesso',
+        content: 'Enquete $op com sucesso',
         context: context,
       );
     } catch (e) {
