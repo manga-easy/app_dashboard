@@ -10,7 +10,6 @@ import 'package:dashboard_manga_easy/modules/mangas/mangas_modules.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/permissoes_module.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
-import 'package:dashboard_manga_easy/modules/recupercao/recuperacao_module.dart';
 import 'package:dashboard_manga_easy/modules/splash/splash_module.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/temporadas_module.dart';
 import 'package:dashboard_manga_easy/modules/users/users_module.dart';
@@ -27,7 +26,6 @@ Future<void> main() async {
   DashboardModule().register();
   NotificacaoModule().register();
   RecomendacaoModule().register();
-  RecuperacaooModule().register();
   UsersModule().register();
   EmblemasModule().register();
   BannersModule().register();

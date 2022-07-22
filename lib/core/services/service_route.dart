@@ -16,7 +16,6 @@ import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
-import 'package:dashboard_manga_easy/modules/recupercao/views/recuperacao_page.dart';
 import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/edit_temporada_page.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/temporada_page.dart';
@@ -96,11 +95,6 @@ class ServiceRoute extends IService {
           builder: (_) => const NotificacaoPage(),
           settings: settings,
         );
-      case RecuperacaoPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const RecuperacaoPage(),
-          settings: settings,
-        );
       case EmblemasPage.route:
         return MaterialPageRoute(
           builder: (_) => const EmblemasPage(),
@@ -172,7 +166,6 @@ class ServiceRoute extends IService {
         MainPage.route,
         UsersPage.route,
         RecomendacaoPage.route,
-        RecuperacaoPage.route,
         NotificacaoPage.route,
         EmblemasPage.route,
         BannerPage.route,
