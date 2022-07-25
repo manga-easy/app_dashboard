@@ -56,6 +56,7 @@ class UsersDetalhesController extends IController {
         EmblemaUser.fromJson(item.data),
       );
     }
+    emblemasUsers = emblemasUsers.reversed.toList();
     status.value = StatusBuild.done;
   }
 
@@ -167,7 +168,10 @@ class UsersDetalhesController extends IController {
 
   void carregaEmblemas() async {
     listEmblema.clear();
-    var retorno = await app.database.listDocuments(limit: 100, collectionId: Emblema.collectionId);
+    var retorno = await app.database.listDocuments(
+      limit: 100,
+      collectionId: Emblema.collectionId,
+    );
     listEmblema = retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
   }
 }

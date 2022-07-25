@@ -30,8 +30,14 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideMenu(atual: UserDetalhesPage.route),
-      appBar: AppBar(),
+      // drawer: SideMenu(atual: UserDetalhesPage.route),
+      appBar: AppBar(
+        title: Text(ct.user!.name),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => ct.showAddemblema(context),
+        label: const Text('Adicionar emblema'),
+      ),
       body: SafeArea(
         child: ValueListenableBuilder(
           valueListenable: ct.status,
@@ -43,46 +49,27 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
                 ),
               );
             }
-            return Scaffold(
-              appBar: AppBar(
-                title: Text(ct.user!.name),
-              ),
-              floatingActionButton: FloatingActionButton.extended(
-                onPressed: () => ct.showAddemblema(context),
-                label: const Text('Adicionar emblema'),
-              ),
-              body: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    DefaultTabController(
-                      length: 3,
-                      child: TabBar(
-                        onTap: (v) => ct.indexP.value = v,
-                        tabs: const [
-                          Tab(text: 'Geral'),
-                          Tab(text: 'Emblemas'),
-                          Tab(text: 'não sei ainda'),
-                        ],
-                      ),
-                    ),
-                    ValueListenableBuilder(
-                      valueListenable: ct.indexP,
-                      builder: (context, value, child) => Expanded(
-                        child: [
-                          InfoUsersW(
-                            email: ct.user!.email,
-                            id: ct.user!.id!,
-                            onPress: () => ct.addNotificacao(context),
-                          ),
-                          EmblemasUsersW(ct: ct, list: ct.emblemasUsers),
-                          EmblemasUsersW(ct: ct, list: ct.emblemasUsers),
-                        ].elementAt(ct.indexP.value),
-                      ),
-                    )
-                  ],
+            return Column(
+              //padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              children: [
+                SizedBox(
+                  height: 300,
+                  width: 300,
+                  child: InfoUsersW(
+                    user: ct.user!,
+                    onPress: () => ct.addNotificacao(context),
+                  ),
                 ),
-              ),
+                SizedBox(height: 15),
+                SizedBox(
+                  height: 140,
+                  width: MediaQuery.of(context).size.width,
+                  child: EmblemasUsersW(
+                    ct: ct,
+                    list: ct.emblemasUsers,
+                  ),
+                ),
+              ],
             );
           },
         ),
