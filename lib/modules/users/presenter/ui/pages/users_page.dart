@@ -1,7 +1,7 @@
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
-import 'package:dashboard_manga_easy/modules/users/controllers/users_controller.dart';
-import 'package:dashboard_manga_easy/modules/users/views/user_detalhe_page.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/controllers/users_controller.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/user_detalhe_page.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 

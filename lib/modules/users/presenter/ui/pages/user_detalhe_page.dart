@@ -1,8 +1,9 @@
+import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
-import 'package:dashboard_manga_easy/modules/users/controllers/detalhes_users_controller.dart';
-import 'package:dashboard_manga_easy/modules/users/views/widgets/emblemas_users.dart';
-import 'package:dashboard_manga_easy/modules/users/views/widgets/info_users.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/emblemas_users.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/info_users.dart';
 import 'package:flutter/material.dart';
 
 class UserDetalhesPage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
     return Scaffold(
       // drawer: SideMenu(atual: UserDetalhesPage.route),
       appBar: AppBar(
-        title: Text(ct.user!.name),
+        title: Text(ct.user?.name ?? 'Carregando...'),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => ct.showAddemblema(context),
@@ -42,7 +43,7 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
         child: ValueListenableBuilder(
           valueListenable: ct.status,
           builder: (context, value, child) {
-            if (ct.user == null) {
+            if (ct.status.value == StatusBuild.loading) {
               return const Scaffold(
                 body: Center(
                   child: CircularProgressIndicator(),
@@ -60,14 +61,10 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
                     onPress: () => ct.addNotificacao(context),
                   ),
                 ),
-                SizedBox(height: 15),
-                SizedBox(
-                  height: 140,
-                  width: MediaQuery.of(context).size.width,
-                  child: EmblemasUsersW(
-                    ct: ct,
-                    list: ct.emblemasUsers,
-                  ),
+                const SizedBox(height: 15),
+                EmblemasUsersW(
+                  ct: ct,
+                  list: ct.emblemasUsers,
                 ),
               ],
             );

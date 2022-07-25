@@ -38,26 +38,22 @@ class UsersDetalhesController extends IController {
   }
 
   @override
-  void onInit(BuildContext context) {
+  Future<void> onInit(BuildContext context) async {
     user = ModalRoute.of(context)!.settings.arguments as User;
-    carrega();
-    carregaEmblemas();
+    await carrega();
+    await carregaEmblemas();
+    status.value = StatusBuild.done;
   }
 
-  void carrega() async {
+  Future<void> carrega() async {
     var retorno = await app.database.listDocuments(
       collectionId: EmblemaUser.collectionId,
       queries: [
         Query.equal('userId', user!.id),
       ],
     );
-    for (var item in retorno.documents) {
-      emblemasUsers.add(
-        EmblemaUser.fromJson(item.data),
-      );
-    }
+    emblemasUsers = retorno.documents.map((e) => EmblemaUser.fromJson(e.data)).toList();
     emblemasUsers = emblemasUsers.reversed.toList();
-    status.value = StatusBuild.done;
   }
 
   void enviaNotificacao() async {
@@ -166,7 +162,7 @@ class UsersDetalhesController extends IController {
     );
   }
 
-  void carregaEmblemas() async {
+  Future<void> carregaEmblemas() async {
     listEmblema.clear();
     var retorno = await app.database.listDocuments(
       limit: 100,

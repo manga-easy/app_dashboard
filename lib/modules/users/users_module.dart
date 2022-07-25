@@ -1,7 +1,7 @@
 import 'package:dashboard_manga_easy/core/interfaces/module_factory.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/users/controllers/detalhes_users_controller.dart';
-import 'package:dashboard_manga_easy/modules/users/controllers/users_controller.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/controllers/users_controller.dart';
 
 class UsersModule extends IModuleFactory {
   @override
