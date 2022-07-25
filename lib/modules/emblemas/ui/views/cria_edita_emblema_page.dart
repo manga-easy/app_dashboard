@@ -219,7 +219,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),
                         ButtonPadraoAtom(
-                          title: 'Criar Emblema',
+                          title: 'Salvar',
                           icone: Icons.create,
                           onPress: () => ct.criaAlteraEmblema(context),
                         ),
