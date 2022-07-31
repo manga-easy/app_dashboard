@@ -25,6 +25,7 @@ class UsersDetalhesController extends IController {
   User? user;
   List<EmblemaUser> emblemasUsers = [];
   List<Emblema> listEmblema = [];
+  var listXps = ValueNotifier(<NivelUser>[]);
   var indexP = ValueNotifier(0);
 
   UsersDetalhesController({
@@ -40,6 +41,7 @@ class UsersDetalhesController extends IController {
   @override
   Future<void> onInit(BuildContext context) async {
     user = ModalRoute.of(context)!.settings.arguments as User;
+    carregaXpsUser();
     await carrega();
     await carregaEmblemas();
     status.value = StatusBuild.done;
@@ -58,7 +60,6 @@ class UsersDetalhesController extends IController {
 
   void enviaNotificacao() async {
     List<String> tokens = [user!.prefs.tokenFcm];
-
     await app.database.createDocument(
       collectionId: Notificacao.collectionId,
       documentId: 'unique()',
@@ -169,5 +170,18 @@ class UsersDetalhesController extends IController {
       collectionId: Emblema.collectionId,
     );
     listEmblema = retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
+  }
+
+  Future<void> carregaXpsUser() async {
+    var retorno = await app.database.listDocuments(
+      limit: 100,
+      collectionId: NivelUser.collectionId,
+      queries: [
+        Query.equal('userId', user!.id!),
+      ],
+      orderAttributes: ['\$id'],
+      orderTypes: ['DESC'],
+    );
+    listXps.value = retorno.documents.map((e) => NivelUser.fromJson(e.data)).toList();
   }
 }

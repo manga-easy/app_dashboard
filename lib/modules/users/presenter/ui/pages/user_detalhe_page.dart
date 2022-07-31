@@ -2,6 +2,7 @@ import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/card_xp_user.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/emblemas_users.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/info_users.dart';
 import 'package:flutter/material.dart';
@@ -30,36 +31,38 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // drawer: SideMenu(atual: UserDetalhesPage.route),
-      appBar: AppBar(
-        title: Text(ct.user?.name ?? 'Carregando...'),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => ct.showAddemblema(context),
-        label: const Text('Adicionar emblema'),
-      ),
-      body: SafeArea(
-        child: ValueListenableBuilder(
-          valueListenable: ct.status,
-          builder: (context, value, child) {
-            if (ct.status.value == StatusBuild.loading) {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-            return Column(
-              //padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    return ValueListenableBuilder(
+      valueListenable: ct.status,
+      builder: (context, value, child) {
+        if (ct.status.value == StatusBuild.loading) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(ct.user?.name ?? 'Carregando...'),
+          ),
+          body: SafeArea(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
-                SizedBox(
-                  height: 300,
-                  width: 300,
-                  child: InfoUsersW(
-                    user: ct.user!,
-                    onPress: () => ct.addNotificacao(context),
-                  ),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  runSpacing: 15,
+                  spacing: 15,
+                  children: [
+                    InfoUsersW(
+                      user: ct.user!,
+                      onPress: () => ct.addNotificacao(context),
+                    ),
+                    CardXpUser(
+                      ct: ct,
+                    )
+                  ],
                 ),
                 const SizedBox(height: 15),
                 EmblemasUsersW(
@@ -67,10 +70,10 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
                   list: ct.emblemasUsers,
                 ),
               ],
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

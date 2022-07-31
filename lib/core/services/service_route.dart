@@ -19,6 +19,7 @@ import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_pag
 import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/edit_temporada_page.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/temporada_page.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/edite_nivel_user.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
 import 'package:flutter/material.dart';
@@ -153,6 +154,11 @@ class ServiceRoute extends IService {
       case EditEnquetePage.route:
         return MaterialPageRoute(
           builder: (_) => const EditEnquetePage(),
+          settings: settings,
+        );
+      case EditeNivelUserPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditeNivelUserPage(),
           settings: settings,
         );
       default:
