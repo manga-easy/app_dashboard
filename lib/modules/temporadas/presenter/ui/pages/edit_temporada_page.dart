@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/controllers/edit_temporada_controller.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,11 @@ class _EditTemporadasPageState extends State<EditTemporadasPage> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
               children: [
+                CampoPadraoAtom(
+                  hintText: 'Titulo da temporada',
+                  initialValue: ct.temporada!.nome,
+                  onChange: (x) => ct.temporada!.nome = x,
+                ),
                 const SizedBox(height: AppTheme.defaultPadding),
                 ButtonPadraoAtom(
                   title: 'Salvar Temporada',

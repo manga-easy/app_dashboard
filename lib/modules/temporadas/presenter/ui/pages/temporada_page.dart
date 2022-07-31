@@ -50,11 +50,11 @@ class _TemporadasPageState extends State<TemporadasPage> {
                   arguments: data,
                 ).then((value) => ct.carregaTemporadas()),
                 title: Text(
-                  'Nivel: ${data.nome}',
+                  'Titulo: ${data.nome}',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 subtitle: Text(
-                  'Nivel: ${data.number}',
+                  'Ordem: ${data.number}',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 trailing: IconButton(

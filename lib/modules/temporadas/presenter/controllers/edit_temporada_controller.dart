@@ -36,6 +36,8 @@ class EditTemporadasController extends ValueNotifier implements IController {
     try {
       var op = 'criado';
       if (temporada!.id == null) {
+        var retTempo = await temporadasRepository.listDocument();
+        temporada!.number = retTempo.total + 1;
         await temporadasRepository.creatDocument(objeto: temporada!);
       } else {
         await temporadasRepository.updateDocument(objeto: temporada!);
