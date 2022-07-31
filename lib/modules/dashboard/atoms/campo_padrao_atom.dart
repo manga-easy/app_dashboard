@@ -47,14 +47,14 @@ class CampoPadraoAtom extends StatelessWidget {
             obscureText: obscureText != null,
             maxLines: numberLines,
             onFieldSubmitted: onSubmitted,
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.subtitle1,
             onChanged: onChange,
             controller: controller,
             cursorColor: Colors.white,
             onEditingComplete: onEditComplet,
             decoration: InputDecoration(
               hintText: hintText,
-              fillColor: AppTheme.primaryColor,
+              fillColor: Theme.of(context).colorScheme.primary,
               filled: true,
               border: const OutlineInputBorder(
                 borderSide: BorderSide.none,
@@ -67,7 +67,6 @@ class CampoPadraoAtom extends StatelessWidget {
                         padding: const EdgeInsets.all(AppTheme.defaultPadding * 0.75),
                         margin: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding / 2),
                         decoration: const BoxDecoration(
-                          color: AppTheme.secondaryColor,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: SvgPicture.asset("assets/icons/Search.svg"),

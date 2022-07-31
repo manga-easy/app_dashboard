@@ -48,7 +48,6 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                     padding: const EdgeInsets.all(AppTheme.defaultPadding),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: AppTheme.secondaryColor,
                     ),
                     child: Column(
                       children: [
@@ -74,7 +73,6 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                                   ),
                             ),
                             value: ct.emblema!.adsOff,
-                            activeColor: AppTheme.primaryColor,
                             onChanged: (v) {
                               ct.emblema!.adsOff = v;
                               ct.update();
@@ -155,7 +153,6 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                                   ),
                             ),
                             value: ct.emblema!.disponivel,
-                            activeColor: AppTheme.primaryColor,
                             onChanged: (v) {
                               ct.emblema!.disponivel = v;
                               ct.update();

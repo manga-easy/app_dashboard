@@ -42,7 +42,6 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
           itemBuilderLista: (context, index) {
             RecomendacoesModel reco = ct.listaRecomendacaoItens[index];
             return Card(
-              color: AppTheme.primaryColor,
               child: Column(
                 children: [
                   ListTile(

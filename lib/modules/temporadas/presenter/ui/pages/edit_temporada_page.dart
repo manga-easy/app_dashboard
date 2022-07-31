@@ -42,7 +42,6 @@ class _EditTemporadasPageState extends State<EditTemporadasPage> {
             margin: const EdgeInsets.all(AppTheme.defaultPadding),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: AppTheme.secondaryColor,
             ),
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),

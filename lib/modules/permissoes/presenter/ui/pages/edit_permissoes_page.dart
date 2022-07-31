@@ -52,54 +52,47 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
           appBar: AppBar(
             title: const Text('Criar Permissões'),
           ),
-          body: Container(
-            margin: const EdgeInsets.all(AppTheme.defaultPadding),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppTheme.secondaryColor,
-            ),
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
-              children: [
-                DropdownButton<int>(
-                  isExpanded: true,
-                  value: ct.permissoes!.value,
-                  items: LevelPermissoes.values
-                      .map((e) => DropdownMenuItem<int>(
-                            value: e.value,
-                            child: Text(e.name),
-                          ))
-                      .toList(),
-                  onChanged: (v) {
-                    ct.permissoes!.value = v!;
-                    ct.notifyListeners();
-                  },
+          body: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
+            children: [
+              DropdownButton<int>(
+                isExpanded: true,
+                value: ct.permissoes!.value,
+                items: LevelPermissoes.values
+                    .map((e) => DropdownMenuItem<int>(
+                          value: e.value,
+                          child: Text(e.name),
+                        ))
+                    .toList(),
+                onChanged: (v) {
+                  ct.permissoes!.value = v!;
+                  ct.notifyListeners();
+                },
+              ),
+              const SizedBox(height: AppTheme.defaultPadding),
+              OutlinedButton(
+                onPressed: () async {
+                  var user = await AppHelps.bottomSheet(
+                    context: context,
+                    child: SelectUser(future: ct.pesquisaUser),
+                  );
+                  if (user is User) {
+                    setState(() {
+                      ct.permissoes!.userId = user.id!;
+                    });
+                  }
+                },
+                child: NameUserBuild(
+                  future: ct.getNameUser(userId: ct.permissoes!.userId),
                 ),
-                const SizedBox(height: AppTheme.defaultPadding),
-                OutlinedButton(
-                  onPressed: () async {
-                    var user = await AppHelps.bottomSheet(
-                      context: context,
-                      child: SelectUser(future: ct.pesquisaUser),
-                    );
-                    if (user is User) {
-                      setState(() {
-                        ct.permissoes!.userId = user.id!;
-                      });
-                    }
-                  },
-                  child: NameUserBuild(
-                    future: ct.getNameUser(userId: ct.permissoes!.userId),
-                  ),
-                ),
-                const SizedBox(height: AppTheme.defaultPadding),
-                ButtonPadraoAtom(
-                  title: 'Salvar permissão',
-                  icone: Icons.create,
-                  onPress: () => ct.salvarEditaDados(context),
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: AppTheme.defaultPadding),
+              ButtonPadraoAtom(
+                title: 'Salvar permissão',
+                icone: Icons.create,
+                onPress: () => ct.salvarEditaDados(context),
+              ),
+            ],
           ),
         );
       },

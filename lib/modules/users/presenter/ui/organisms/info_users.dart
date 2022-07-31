@@ -23,36 +23,37 @@ class InfoUsersW extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 5),
-        Container(
+        SizedBox(
           height: 300,
           width: 300,
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: AppTheme.secondaryColor,
-            borderRadius: BorderRadius.circular(18),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  CircleAvatar(
-                    radius: 45,
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      CircleAvatar(
+                        radius: 45,
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 5),
+                  SelectableText('Name ${user.name}'),
+                  const SizedBox(height: 5),
+                  SelectableText('Email: ${user.email}'),
+                  const SizedBox(height: 5),
+                  SelectableText(user.id!),
+                  const SizedBox(height: 5),
+                  SelectableText("Tipo de autenticação: ${user.prefs.provider}"),
                 ],
               ),
-              const SizedBox(height: 5),
-              SelectableText('Name ${user.name}'),
-              const SizedBox(height: 5),
-              SelectableText('Email: ${user.email}'),
-              const SizedBox(height: 5),
-              SelectableText(user.id!),
-              const SizedBox(height: 5),
-              SelectableText("Tipo de autenticação: ${user.prefs.provider}"),
-            ],
+            ),
           ),
         ),
       ],

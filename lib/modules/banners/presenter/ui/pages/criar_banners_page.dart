@@ -48,7 +48,6 @@ class _CriarBannerPageState extends State<CriarBannerPage> {
                     padding: const EdgeInsets.all(AppTheme.defaultPadding),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: AppTheme.secondaryColor,
                     ),
                     child: Column(
                       children: [

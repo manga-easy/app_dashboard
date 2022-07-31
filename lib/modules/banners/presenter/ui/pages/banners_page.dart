@@ -42,7 +42,6 @@ class _BannerPageState extends State<BannerPage> {
           itemBuilderLista: (context, index) {
             BannerModel reco = ct.listaBannerItens[index];
             return Card(
-              color: AppTheme.primaryColor,
               child: Column(
                 children: [
                   ListTile(
@@ -73,13 +72,10 @@ class _BannerPageState extends State<BannerPage> {
                             )
                             .then((value) => ct.listaBanner()),
                       ),
-                      ElevatedButton.icon(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                        ),
-                        onPressed: () => ct.deleteBanner(reco, context).then((value) => ct.listaBanner()),
-                        icon: const Icon(Icons.delete_forever),
-                        label: const Text('Deletar'),
+                      ButtonPadraoAtom(
+                        title: 'Deletar',
+                        icone: Icons.delete_forever,
+                        onPress: () => ct.deleteBanner(reco, context).then((value) => ct.listaBanner()),
                       ),
                     ],
                   ),

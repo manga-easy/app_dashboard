@@ -59,18 +59,19 @@ class _MainPageState extends State<MainPage> {
                               DetalhesEmblemasPage.route,
                               arguments: e,
                             ),
-                            child: Container(
-                              width: 150,
-                              height: 150,
-                              color: AppTheme.secondaryColor,
-                              margin: const EdgeInsets.all(8),
-                              padding: const EdgeInsets.all(8),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(e.name),
-                                  TotalAdquiridoAtom(future: ct.calculaTotalAdquirido(e.id!)),
-                                ],
+                            child: Card(
+                              child: Container(
+                                width: 150,
+                                height: 150,
+                                margin: const EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(e.name),
+                                    TotalAdquiridoAtom(future: ct.calculaTotalAdquirido(e.id!)),
+                                  ],
+                                ),
                               ),
                             ),
                           ))
