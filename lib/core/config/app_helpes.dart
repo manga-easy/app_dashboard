@@ -27,7 +27,7 @@ class AppHelps {
         false;
   }
 
-  static bottomSheet({
+  static Future bottomSheet({
     required BuildContext context,
     Widget? child,
     bool isScrollControlled = false,
