@@ -42,25 +42,36 @@ class EmblemasUsersW extends StatelessWidget {
             itemBuilder: (context, index) {
               var userEmblema = list[index];
               var emb = ct.listEmblema.firstWhere((element) => element.id == userEmblema.idEmblema);
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Image.network(
-                      emb.url,
-                      width: 50,
-                      height: 50,
+              return Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Image.network(
+                          emb.url,
+                          width: 50,
+                          height: 50,
+                        ),
+                        Text(
+                          emb.name,
+                        ),
+                        Text(
+                          DateFormat.yMMMMEEEEd().format(
+                            DateTime.fromMillisecondsSinceEpoch(userEmblema.timeCria),
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      emb.name,
+                  ),
+                  IconButton(
+                    onPressed: () => ct.removerEmblema(userEmblema.id!, context),
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
                     ),
-                    Text(
-                      DateFormat.yMMMMEEEEd().format(
-                        DateTime.fromMillisecondsSinceEpoch(userEmblema.timeCria),
-                      ),
-                    ),
-                  ],
-                ),
+                  )
+                ],
               );
             },
           ),

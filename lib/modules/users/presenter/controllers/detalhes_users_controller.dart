@@ -8,11 +8,14 @@ import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class UsersDetalhesController extends IController {
   final AppwriteAdmin app;
+  final EmblemaUserRepository emblemaUserRepository;
   final Global gb;
   final ApiFcm apiFcm = ApiFcm(tokenServer: AppConfig.tokenServer);
   var status = ValueNotifier(StatusBuild.loading);
@@ -31,6 +34,7 @@ class UsersDetalhesController extends IController {
   UsersDetalhesController({
     required this.app,
     required this.gb,
+    required this.emblemaUserRepository,
   });
 
   @override
@@ -183,5 +187,19 @@ class UsersDetalhesController extends IController {
       orderTypes: ['DESC'],
     );
     listXps.value = retorno.documents.map((e) => NivelUser.fromJson(e.data)).toList();
+  }
+
+  Future<void> removerEmblema(String id, BuildContext context) async {
+    var ret = await AppHelps.confirmaDialog(
+      title: 'Tem certeza?',
+      content: '',
+      context: context,
+    );
+    if (ret) {
+      status.value = StatusBuild.loading;
+      await emblemaUserRepository.deletDocument(id: id);
+      await carrega();
+      status.value = StatusBuild.done;
+    }
   }
 }
