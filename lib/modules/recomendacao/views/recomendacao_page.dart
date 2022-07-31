@@ -72,14 +72,11 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                             )
                             .then((value) => ct.listaRecomendacao()),
                       ),
-                      ElevatedButton.icon(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                        ),
-                        onPressed: () =>
+                      ButtonPadraoAtom(
+                        title: "Deletar",
+                        icone: Icons.delete_forever,
+                        onPress: () =>
                             ct.deleteRecomendacao(reco, context).then((value) => ct.listaRecomendacao()),
-                        icon: const Icon(Icons.delete_forever),
-                        label: const Text('Deletar'),
                       ),
                     ],
                   ),

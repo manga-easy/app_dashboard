@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/core_module.dart';
 import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
@@ -16,15 +15,14 @@ import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 bool _isDemoUsingDynamicColors = false;
 
 // Fictitious brand color.
 const _brandBlue = Color(0xFF1E88E5);
 
-CustomColors lightCustomColors = const CustomColors(danger: Color(0xFFE53935));
-CustomColors darkCustomColors = const CustomColors(danger: Color(0xFFEF9A9A));
+CustomColors lightCustomColors = const CustomColors(danger: Color.fromARGB(255, 56, 53, 229));
+CustomColors darkCustomColors = const CustomColors(danger: Color.fromARGB(255, 154, 198, 239));
 final di = GetIt.instance;
 Future<void> main() async {
   //register all modules
@@ -127,83 +125,5 @@ class CustomColors extends ThemeExtension<CustomColors> {
 
   CustomColors harmonized(ColorScheme dynamic) {
     return copyWith(danger: danger!.harmonizeWith(dynamic.primary));
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  final _textEditingController = TextEditingController();
-
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    String _dynamicMsg = _isDemoUsingDynamicColors ? ' (dynamic)' : ' (not dynamic)';
-    String _harmonizedMsg =
-        _isDemoUsingDynamicColors ? ' (harmonized with ColorScheme.primary)' : ' (not harmonized)';
-
-    return Scaffold(
-      body: Container(
-        constraints: contentMaxWidth,
-        padding: contentPadding,
-        child: Column(
-          children: [
-            ColoredSquare(
-              Theme.of(context).colorScheme.primary,
-              'ColorScheme.primary$_dynamicMsg',
-            ),
-            ColoredSquare(
-              Theme.of(context).extension<CustomColors>()!.danger,
-              'CustomColors.danger$_harmonizedMsg',
-            ),
-            TextField(
-              controller: _textEditingController,
-              decoration: InputDecoration(
-                errorText: 'This color is ColorScheme.error$_dynamicMsg',
-              ),
-            ),
-          ],
-        ),
-      ),
-      resizeToAvoidBottomInset: false,
-    );
-  }
-}
-
-const contentMaxWidth = BoxConstraints(maxWidth: 400);
-const contentPadding = EdgeInsets.symmetric(horizontal: 10);
-
-class ColoredSquare extends StatelessWidget {
-  const ColoredSquare(this.color, this.description, {super.key});
-
-  final Color? color;
-  final String description;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          Container(
-            width: 100,
-            height: 100,
-            color: color,
-          ),
-          const SizedBox(width: 10),
-          Flexible(child: Text(description)),
-        ],
-      ),
-    );
   }
 }
