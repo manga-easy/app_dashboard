@@ -9,7 +9,6 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
@@ -80,6 +79,7 @@ class UsersDetalhesController extends IController {
   }
 
   Future<void> addEmblema(String idEmblema, BuildContext context) async {
+    status.value = StatusBuild.loading;
     var emble = await app.database.listDocuments(
       collectionId: EmblemaUser.collectionId,
       queries: [
@@ -100,7 +100,10 @@ class UsersDetalhesController extends IController {
         write: ['role:all'],
         read: ['role:all'],
       );
+      await carrega();
+      status.value = StatusBuild.done;
     } else {
+      status.value = StatusBuild.done;
       AppHelps.confirmaDialog(
         title: 'Já adquirido',
         content: 'Você já adquiriu o emblema',
@@ -113,7 +116,6 @@ class UsersDetalhesController extends IController {
     AppHelps.bottomSheet(
       context: context,
       child: Container(
-        color: AppTheme.bgColor,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
@@ -144,36 +146,15 @@ class UsersDetalhesController extends IController {
     );
   }
 
-  void showAddemblema(BuildContext context) {
-    AppHelps.bottomSheet(
-      context: context,
-      child: Container(
-        color: AppTheme.bgColor,
-        child: Wrap(
-          children: [
-            Column(
-              children: listEmblema
-                  .map(
-                    (e) => TextButton(
-                      child: Text(e.name),
-                      onPressed: () => addEmblema(e.id!, context),
-                    ),
-                  )
-                  .toList(),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Future<void> carregaEmblemas() async {
+  Future<List<Emblema>> carregaEmblemas([String pesquisa = '']) async {
     listEmblema.clear();
     var retorno = await app.database.listDocuments(
       limit: 100,
       collectionId: Emblema.collectionId,
     );
     listEmblema = retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
+    listEmblema.removeWhere((element) => !element.name.toLowerCase().contains(pesquisa.toLowerCase()));
+    return listEmblema;
   }
 
   Future<void> carregaXpsUser() async {
