@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class ApiEasyComic {
-  final String urlBase = 'http://localhost:8083';
+  final String urlBase = 'http://localhost:8083/';
   final client = Client();
 
-  Future<Map<String, dynamic>?> get(String path) async {
+  Future get(String path) async {
     var ret = await client.get(Uri.parse(urlBase + path));
     return json.decode(ret.body);
   }
