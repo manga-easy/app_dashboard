@@ -33,7 +33,7 @@ class ComicModel {
         scans = json['scans'],
         status = json['status'],
         cover = json['cover'],
-        chapter = json['chapter'].map((v) => Chapter.fromJson(v));
+        chapter = json['chapter']?.map((v) => Chapter.fromJson(v)) ?? [];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
