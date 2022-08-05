@@ -1,5 +1,6 @@
 import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/comic_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/detalhes_emblemas_page.dart';
@@ -60,6 +61,11 @@ class ServiceRoute extends IService {
       case MangasPage.route:
         return MaterialPageRoute(
           builder: (_) => const MangasPage(),
+          settings: settings,
+        );
+      case ComicPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const ComicPage(),
           settings: settings,
         );
     }
@@ -179,11 +185,13 @@ class ServiceRoute extends IService {
         PermissoesPage.route,
         TemporadasPage.route,
         EnquetePage.route,
+        ComicPage.route,
       ];
     }
     return [
       MainPage.route,
       MangasPage.route,
+      ComicPage.route,
     ];
   }
 }
