@@ -1,6 +1,6 @@
-import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/api_easy_comic.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/comic_model.dart';
+import 'package:flutter/foundation.dart';
 
 class ComicRepository {
   final ApiEasyComic apiEasyComic = ApiEasyComic();
@@ -17,7 +17,7 @@ class ComicRepository {
   Future<ComicModel?> get({required String id}) async {
     try {
       var ret = await apiEasyComic.get('comic/$id');
-      return ComicModel.fromJson(ret!);
+      return ComicModel.fromJson(ret);
     } catch (e) {
       return null;
     }
@@ -26,8 +26,13 @@ class ComicRepository {
   Future<List<ComicModel>> list({String? where}) async {
     try {
       var ret = await apiEasyComic.get('comic');
+      if (ret is List) {
+        return compute(_parseComic, ret);
+      }
+      print(ret.runtimeType);
       return [];
     } catch (e) {
+      print(e);
       return [];
     }
   }
@@ -35,5 +40,9 @@ class ComicRepository {
   Future<void> update({required ComicModel objeto}) {
     // TODO: implement updateDocument
     throw UnimplementedError();
+  }
+
+  static List<ComicModel> _parseComic(dynamic map) {
+    return map.map<ComicModel>((e) => ComicModel.fromJson(e)).toList();
   }
 }
