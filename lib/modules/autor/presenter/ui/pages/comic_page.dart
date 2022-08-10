@@ -40,32 +40,45 @@ class _ComicPageState extends State<ComicPage> {
           onPressedAtualiza: ct.carregaComicAutor,
           itemBuilderLista: (context, index) {
             var comic = ct.list[index];
-            return Card(
-              child: Row(
-                //direction: Axis.horizontal,
-                children: [
-                  OctoImage(
-                    width: 100,
-                    height: 150,
-                    image: NetworkImage(comic.cover),
-                    placeholderBuilder: OctoPlaceholder.blurHash(
-                      'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => null,
+                      icon: Icon(Icons.delete_forever),
                     ),
-                    errorBuilder: OctoError.icon(color: Colors.red),
-                    fit: BoxFit.cover,
+                  ],
+                ),
+                Card(
+                  child: Row(
+                    children: [
+                      OctoImage(
+                        width: 100,
+                        height: 150,
+                        image: NetworkImage(comic.cover),
+                        placeholderBuilder: OctoPlaceholder.blurHash(
+                          'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
+                        ),
+                        errorBuilder: OctoError.icon(color: Colors.red),
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Titulo: ${comic.title}'),
+                            Text('Ano: ${comic.yearUp.toString()}'),
+                            Text('Autor: ${comic.autor}'),
+                            Text('Ultimo capítulo: ${comic.chapter.last.title}'),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 10),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(comic.title),
-                        Text('Ultimo capítulo:'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             );
           },
           listaItems: ct.list,
