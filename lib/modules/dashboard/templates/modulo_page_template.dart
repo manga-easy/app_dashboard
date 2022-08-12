@@ -56,6 +56,12 @@ class ModuloPageTemplate extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const SizedBox(height: AppTheme.defaultPadding),
+                          width > 1000
+                              ? Text(
+                                  route.replaceAll('/', ''),
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                )
+                              : const SizedBox(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
