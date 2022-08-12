@@ -1,4 +1,6 @@
 import 'package:dashboard_manga_easy/core/interfaces/service.dart';
+import 'package:dashboard_manga_easy/core/services/presence_discord_service.dart';
+import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/comic_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
@@ -44,6 +46,7 @@ class ServiceRoute extends IService {
         settings: settings,
       );
     }
+    di.get<PresenceDiscordService>().updatePresence(settings.name ?? 'iniciando');
     //verifica se está logado
     if (user == null) {
       return MaterialPageRoute(

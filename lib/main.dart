@@ -1,3 +1,4 @@
+import 'package:dart_discord_rpc/dart_discord_rpc.dart';
 import 'package:dashboard_manga_easy/core/core_module.dart';
 import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
@@ -27,6 +28,7 @@ CustomColors darkCustomColors = const CustomColors(danger: Color.fromARGB(255, 1
 final di = GetIt.instance;
 Future<void> main() async {
   //register all modules
+  DiscordRPC.initialize();
   CoreModule().register();
   AuthModule().register();
   SplashModule().register();
