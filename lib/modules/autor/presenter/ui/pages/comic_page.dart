@@ -43,9 +43,16 @@ class _ComicPageState extends State<ComicPage> {
             return Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconButton(
+                    TextButton.icon(
                       onPressed: () => null,
+                      label: Text('Editar'),
+                      icon: Icon(Icons.edit),
+                    ),
+                    TextButton.icon(
+                      onPressed: () => null,
+                      label: Text('Remover'),
                       icon: Icon(Icons.delete_forever),
                     ),
                   ],
@@ -71,7 +78,7 @@ class _ComicPageState extends State<ComicPage> {
                             Text('Titulo: ${comic.title}'),
                             Text('Ano: ${comic.yearUp.toString()}'),
                             Text('Autor: ${comic.autor}'),
-                            Text('Ultimo capítulo: ${comic.chapter.last.title}'),
+                            //Text('Ultimo capítulo: ${comic.chapter.last.title}'),
                           ],
                         ),
                       ),
