@@ -38,7 +38,7 @@ class CardXpUser extends StatelessWidget {
                           context,
                           EditeNivelUserPage.route,
                           arguments: nivel,
-                        ),
+                        ).then((value) => ct.carregaXpsUser()),
                         title: Text(
                           'Temporada: ${nivel.temporada}',
                           style: Theme.of(context).textTheme.titleMedium,

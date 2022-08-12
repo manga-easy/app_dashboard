@@ -37,6 +37,7 @@ class _EditeNivelUserPageState extends State<EditeNivelUserPage> {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Editar Nível'),
+            actions: [IconButton(onPressed: () => ct.deletarNivel(context), icon: Icon(Icons.delete))],
           ),
           body: Container(
             margin: const EdgeInsets.all(AppTheme.defaultPadding),

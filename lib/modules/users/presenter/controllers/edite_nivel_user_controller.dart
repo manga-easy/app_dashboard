@@ -45,4 +45,38 @@ class EditeNivelUserController extends ValueNotifier implements IController {
       Helps.log(e);
     }
   }
+
+  void deletarNivel(BuildContext context) async {
+    try {
+      var ret = await AppHelps.confirmaDialog(
+        title: 'Tem certeza ?',
+        content: '',
+        context: context,
+      );
+      if (ret) {
+        if (nivelUser!.id != null) {
+          await nivelUserRepository.deletDocument(id: nivelUser!.id!);
+          Navigator.of(context).pop();
+          AppHelps.confirmaDialog(
+            title: 'Sucesso',
+            content: 'Nível deletado com sucesso',
+            context: context,
+          );
+        } else {
+          AppHelps.confirmaDialog(
+            title: 'Erro',
+            content: 'Nivel ainda não foi salvo',
+            context: context,
+          );
+        }
+      }
+    } catch (e) {
+      AppHelps.confirmaDialog(
+        title: 'Erro',
+        content: e.toString(),
+        context: context,
+      );
+      Helps.log(e);
+    }
+  }
 }
