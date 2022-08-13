@@ -5,12 +5,12 @@ import 'package:dashboard_manga_easy/modules/autor/domain/comic_repository.dart'
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class ComicController extends IController {
-  final ComicRepository comicRepository;
+class ComicAuthorialController extends IController {
+  final ComicAuthorialRepository comicRepository;
   var status = ValueNotifier(StatusBuild.loading);
-  var list = <ComicModel>[];
+  var list = <ComicAuthorialModel>[];
 
-  ComicController({required this.comicRepository});
+  ComicAuthorialController({required this.comicRepository});
 
   @override
   void onClose() {
@@ -19,10 +19,10 @@ class ComicController extends IController {
 
   @override
   void onInit(BuildContext context) {
-    carregaComicAutor();
+    carregaComicAuthorialAutor();
   }
 
-  Future<void> carregaComicAutor() async {
+  Future<void> carregaComicAuthorialAutor() async {
     try {
       status.value = StatusBuild.loading;
       list = await comicRepository.list();

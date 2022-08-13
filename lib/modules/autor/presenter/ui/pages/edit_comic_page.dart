@@ -6,15 +6,15 @@ import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.d
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
 import 'package:flutter/material.dart';
 
-class EditComicPage extends StatefulWidget {
-  static const route = '/EditComic';
-  const EditComicPage({Key? key}) : super(key: key);
+class EditComicAuthorialPage extends StatefulWidget {
+  static const route = '/EditComicAuthorial';
+  const EditComicAuthorialPage({Key? key}) : super(key: key);
   @override
-  State<EditComicPage> createState() => _EditComicPageState();
+  State<EditComicAuthorialPage> createState() => _EditComicAuthorialPageState();
 }
 
-class _EditComicPageState extends State<EditComicPage> {
-  final ct = di.get<EditComicController>();
+class _EditComicAuthorialPageState extends State<EditComicAuthorialPage> {
+  final ct = di.get<EditComicAuthorialController>();
 
   @override
   void initState() {
@@ -32,7 +32,7 @@ class _EditComicPageState extends State<EditComicPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Criar Comic'),
+        title: const Text('Criar ComicAuthorial'),
       ),
       body: Container(
         margin: const EdgeInsets.all(AppTheme.defaultPadding),

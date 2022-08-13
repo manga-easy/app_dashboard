@@ -1,4 +1,4 @@
-class ComicModel {
+class ComicAuthorialModel {
   int? id;
   String title;
   String uniqueid;
@@ -10,7 +10,7 @@ class ComicModel {
   String cover;
   List<Chapter> chapter;
 
-  ComicModel({
+  ComicAuthorialModel({
     this.id,
     required this.title,
     required this.uniqueid,
@@ -23,7 +23,7 @@ class ComicModel {
     required this.chapter,
   });
 
-  ComicModel.fromJson(Map<String, dynamic> json)
+  ComicAuthorialModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         title = json['title'],
         uniqueid = json['uniqueid'],
@@ -53,14 +53,14 @@ class ComicModel {
 
 class Chapter {
   int? id;
-  int idComic;
+  int idComicAuthorial;
   String title;
   double number;
   String dateUp;
 
   Chapter({
     this.id,
-    required this.idComic,
+    required this.idComicAuthorial,
     required this.title,
     required this.number,
     required this.dateUp,
@@ -68,7 +68,7 @@ class Chapter {
 
   Chapter.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        idComic = json['id_comic'],
+        idComicAuthorial = json['id_comic'],
         title = json['title'],
         number = json['number'],
         dateUp = json['date_up'];
@@ -76,7 +76,7 @@ class Chapter {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = id;
-    data['id_comic'] = idComic;
+    data['id_comic'] = idComicAuthorial;
     data['title'] = title;
     data['number'] = number;
     data['date_up'] = dateUp;

@@ -7,8 +7,8 @@ class AutorModule extends IModuleFactory {
   @override
   void register() {
     // Repositories
-    di.registerFactory(() => ComicRepository());
+    di.registerFactory(() => ComicAuthorialRepository());
     // Controllers
-    di.registerFactory(() => ComicController(comicRepository: di()));
+    di.registerFactory(() => ComicAuthorialController(comicRepository: di()));
   }
 }

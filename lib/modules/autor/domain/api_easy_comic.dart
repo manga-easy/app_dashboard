@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-class ApiEasyComic {
+class ApiEasyComicAuthorial {
   final String urlBase = 'http://localhost:8083/';
   final client = Client();
 

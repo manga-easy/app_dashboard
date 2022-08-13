@@ -6,15 +6,15 @@ import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_tem
 import 'package:flutter/material.dart';
 import 'package:octo_image/octo_image.dart';
 
-class ComicPage extends StatefulWidget {
-  static const route = '/Comic';
-  const ComicPage({Key? key}) : super(key: key);
+class ComicAuthorialPage extends StatefulWidget {
+  static const route = '/ComicAuthorial';
+  const ComicAuthorialPage({Key? key}) : super(key: key);
   @override
-  State<ComicPage> createState() => _ComicPageState();
+  State<ComicAuthorialPage> createState() => _ComicAuthorialPageState();
 }
 
-class _ComicPageState extends State<ComicPage> {
-  final ct = di.get<ComicController>();
+class _ComicAuthorialPageState extends State<ComicAuthorialPage> {
+  final ct = di.get<ComicAuthorialController>();
 
   @override
   void initState() {
@@ -34,10 +34,10 @@ class _ComicPageState extends State<ComicPage> {
       valueListenable: ct.status,
       builder: (context, value, chil) {
         return ModuloPageTemplate(
-          onPressedNovoItem: () => Navigator.pushNamed(context, EditComicPage.route),
-          route: ComicPage.route,
+          onPressedNovoItem: () => Navigator.pushNamed(context, EditComicAuthorialPage.route),
+          route: ComicAuthorialPage.route,
           statusBuild: value,
-          onPressedAtualiza: ct.carregaComicAutor,
+          onPressedAtualiza: ct.carregaComicAuthorialAutor,
           itemBuilderLista: (context, index) {
             var comic = ct.list[index];
             return Column(
