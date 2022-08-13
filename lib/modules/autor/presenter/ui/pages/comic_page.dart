@@ -46,7 +46,11 @@ class _ComicAuthorialPageState extends State<ComicAuthorialPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton.icon(
-                      onPressed: () => null,
+                      onPressed: () => Navigator.pushNamed(
+                        context,
+                        EditComicAuthorialPage.route,
+                        arguments: comic,
+                      ),
                       label: Text('Editar'),
                       icon: Icon(Icons.edit),
                     ),
