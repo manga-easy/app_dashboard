@@ -90,7 +90,7 @@ class _EditComicAuthorialPageState extends State<EditComicAuthorialPage> {
                 ButtonPadraoAtom(
                   title: 'Salvar',
                   icone: Icons.create,
-                  onPress: () => null,
+                  onPress: () => ct.salvarComic(context),
                 ),
               ],
             );

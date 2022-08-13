@@ -11,6 +11,7 @@ class AutorModule extends IModuleFactory {
     di.registerFactory(() => ComicAuthorialRepository());
     // Controllers
     di.registerFactory(() => ComicAuthorialController(comicRepository: di()));
-    di.registerFactory(() => EditComicAuthorialController(comicAuthorialRepository: di()));
+    di.registerFactory(
+        () => EditComicAuthorialController(comicAuthorialRepository: di(), serviceRoute: di()));
   }
 }

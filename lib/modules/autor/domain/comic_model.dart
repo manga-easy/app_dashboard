@@ -1,5 +1,6 @@
 class ComicAuthorialModel {
   int? id;
+  String idUser;
   String title;
   String uniqueid;
   String sinopse;
@@ -9,19 +10,23 @@ class ComicAuthorialModel {
   bool status;
   String cover;
   List<Chapter> chapter;
+  String createAt;
+  String updateAt;
 
-  ComicAuthorialModel({
-    this.id,
-    required this.title,
-    required this.uniqueid,
-    required this.sinopse,
-    required this.autor,
-    required this.yearUp,
-    required this.scans,
-    required this.status,
-    required this.cover,
-    required this.chapter,
-  });
+  ComicAuthorialModel(
+      {this.id,
+      required this.title,
+      required this.uniqueid,
+      required this.sinopse,
+      required this.autor,
+      required this.yearUp,
+      required this.scans,
+      required this.status,
+      required this.cover,
+      required this.chapter,
+      required this.idUser,
+      required this.createAt,
+      required this.updateAt});
 
   ComicAuthorialModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -33,6 +38,9 @@ class ComicAuthorialModel {
         scans = json['scans'],
         status = json['status'],
         cover = json['cover'],
+        idUser = json['id_user'],
+        createAt = json['createAt'],
+        updateAt = json['updateAt'],
         chapter = json['chapter']?.map((v) => Chapter.fromJson(v)) ?? [];
 
   Map<String, dynamic> toJson() {
@@ -46,6 +54,9 @@ class ComicAuthorialModel {
     data['scans'] = scans;
     data['status'] = status;
     data['cover'] = cover;
+    data['id_user'] = idUser;
+    data['createAt'] = createAt;
+    data['updateAt'] = updateAt;
     data['chapter'] = chapter.map((v) => v.toJson()).toList();
     return data;
   }

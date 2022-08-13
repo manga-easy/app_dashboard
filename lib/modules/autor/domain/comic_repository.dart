@@ -6,7 +6,10 @@ class ComicAuthorialRepository {
   final ApiEasyComicAuthorial apiEasyComicAuthorial = ApiEasyComicAuthorial();
 
   Future<void> create({required ComicAuthorialModel objeto}) async {
-    await apiEasyComicAuthorial.post('comic', objeto.toJson());
+    var ret = await apiEasyComicAuthorial.post('comic', objeto.toJson());
+    if (ret.containsKey('erro')) {
+      throw Exception(ret['erro']);
+    }
   }
 
   Future<void> delete({required String id}) {
@@ -37,9 +40,11 @@ class ComicAuthorialRepository {
     }
   }
 
-  Future<void> update({required ComicAuthorialModel objeto}) {
-    // TODO: implement updateDocument
-    throw UnimplementedError();
+  Future<void> update({required ComicAuthorialModel objeto}) async {
+    var ret = await apiEasyComicAuthorial.put('comic', objeto.toJson());
+    if (ret.containsKey('erro')) {
+      throw Exception(ret['erro']);
+    }
   }
 
   static List<ComicAuthorialModel> _parseComicAuthorial(dynamic map) {
