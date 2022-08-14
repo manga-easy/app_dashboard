@@ -38,6 +38,7 @@ class _ComicAuthorialPageState extends State<ComicAuthorialPage> {
           route: ComicAuthorialPage.route,
           statusBuild: value,
           onPressedAtualiza: ct.carregaComicAuthorialAutor,
+          labelNovoItem: 'Nova obra',
           itemBuilderLista: (context, index) {
             var comic = ct.list[index];
             return Column(

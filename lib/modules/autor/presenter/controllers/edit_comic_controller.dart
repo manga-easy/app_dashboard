@@ -45,6 +45,9 @@ class EditComicAuthorialController extends ValueNotifier implements IController 
         throw Exception('Titulo não pode ta vazio');
       }
       if (comic!.id == null) {
+        comic!.uniqueid = Helps.convertUniqueid(comic!.title);
+        comic!.autor = serviceRoute.user!.name;
+        comic!.scans = 'Easy Originals';
         await comicAuthorialRepository.create(objeto: comic!);
       } else {
         await comicAuthorialRepository.update(objeto: comic!);

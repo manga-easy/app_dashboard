@@ -39,8 +39,8 @@ class ComicAuthorialModel {
         status = json['status'],
         cover = json['cover'],
         idUser = json['id_user'],
-        createAt = json['createAt'],
-        updateAt = json['updateAt'],
+        createAt = json['createat'],
+        updateAt = json['updateat'],
         chapter = json['chapter']?.map((v) => Chapter.fromJson(v)) ?? [];
 
   Map<String, dynamic> toJson() {
@@ -55,8 +55,8 @@ class ComicAuthorialModel {
     data['status'] = status;
     data['cover'] = cover;
     data['id_user'] = idUser;
-    data['createAt'] = createAt;
-    data['updateAt'] = updateAt;
+    data['createat'] = createAt;
+    data['updateat'] = updateAt;
     data['chapter'] = chapter.map((v) => v.toJson()).toList();
     return data;
   }
