@@ -6,6 +6,7 @@ class PresenceDiscordService implements IService {
     applicationId: '899061153001533510',
   );
   bool inicialization = false;
+  final int timestamp = DateTime.now().millisecondsSinceEpoch;
   @override
   Future<void> initialise() async {}
 
@@ -18,7 +19,7 @@ class PresenceDiscordService implements IService {
       DiscordPresence(
         state: 'Dashboard Mangá Easy',
         details: page,
-        startTimeStamp: DateTime.now().millisecondsSinceEpoch,
+        startTimeStamp: timestamp,
       ),
     );
   }
