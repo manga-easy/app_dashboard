@@ -1,7 +1,7 @@
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/modules/autor/domain/comic_model.dart';
-import 'package:dashboard_manga_easy/modules/autor/domain/comic_repository.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/models/comic_model.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/repositories/comic_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 

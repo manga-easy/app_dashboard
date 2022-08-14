@@ -1,8 +1,9 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/service_route.dart';
-import 'package:dashboard_manga_easy/modules/autor/domain/comic_model.dart';
-import 'package:dashboard_manga_easy/modules/autor/domain/comic_repository.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/models/chapter_authoral_model.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/models/comic_model.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/repositories/comic_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
@@ -68,5 +69,13 @@ class EditComicAuthorialController extends ValueNotifier implements IController 
       Helps.log(e);
     }
     notifyListeners();
+  }
+
+  Future<List<ChapterAuthorial>> getComic() async {
+    if (comic?.id == null) {
+      return [];
+    }
+    var ret = await comicAuthorialRepository.get(id: comic!.id!);
+    return ret!.chapter;
   }
 }

@@ -1,6 +1,10 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/models/chapter_authoral_model.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/models/comic_model.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_chapter_comic_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_comic_controller.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_chapter_comic_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
@@ -85,6 +89,65 @@ class _EditComicAuthorialPageState extends State<EditComicAuthorialPage> {
                       ),
                     )
                   ],
+                ),
+                const SizedBox(height: AppTheme.defaultPadding),
+                SizedBox(
+                  height: 350,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Chapters',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          IconButton(
+                            onPressed: () => Navigator.pushNamed(
+                              context,
+                              EditChapterComicPage.route,
+                              arguments: EditChapterComicParams(null, ct.comic!),
+                            ),
+                            icon: const Icon(Icons.add_box),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      FutureBuilder<List<ChapterAuthorial>>(
+                        future: ct.getComic(),
+                        builder: (context, snap) {
+                          if (snap.hasError) {
+                            return Text(snap.error.toString());
+                          }
+                          if (snap.data != null) {
+                            return Expanded(
+                              child: ListView.builder(
+                                itemCount: snap.data!.length,
+                                itemBuilder: (context, index) {
+                                  var chapter = snap.data![index];
+                                  return ListTile(
+                                    onTap: () => Navigator.pushNamed(
+                                      context,
+                                      EditChapterComicPage.route,
+                                      arguments: EditChapterComicParams(chapter, ct.comic!),
+                                    ),
+                                    title: Text(chapter.title),
+                                    subtitle: Text(chapter.updateAt),
+                                    trailing: Text(
+                                      chapter.number.toString(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: AppTheme.defaultPadding),
                 ButtonPadraoAtom(
