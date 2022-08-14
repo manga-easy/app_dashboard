@@ -3,6 +3,7 @@ import 'package:dashboard_manga_easy/core/services/presence_discord_service.dart
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/comic_page.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_chapter_comic_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_comic_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
@@ -75,6 +76,11 @@ class ServiceRoute extends IService {
       case EditComicAuthorialPage.route:
         return MaterialPageRoute(
           builder: (_) => const EditComicAuthorialPage(),
+          settings: settings,
+        );
+      case EditChapterComicPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditChapterComicPage(),
           settings: settings,
         );
     }
