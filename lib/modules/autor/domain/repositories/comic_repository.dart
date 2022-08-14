@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/modules/autor/domain/api_easy_comic.dart';
-import 'package:dashboard_manga_easy/modules/autor/domain/comic_model.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/models/comic_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class ComicAuthorialRepository {
   final ApiEasyComicAuthorial apiEasyComicAuthorial = ApiEasyComicAuthorial();
@@ -17,11 +18,12 @@ class ComicAuthorialRepository {
     throw UnimplementedError();
   }
 
-  Future<ComicAuthorialModel?> get({required String id}) async {
+  Future<ComicAuthorialModel?> get({required int id}) async {
     try {
       var ret = await apiEasyComicAuthorial.get('comic/$id');
       return ComicAuthorialModel.fromJson(ret);
     } catch (e) {
+      Helps.log(e);
       return null;
     }
   }
