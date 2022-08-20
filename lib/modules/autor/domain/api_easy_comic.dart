@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 class ApiEasyComicAuthorial {
-  final String urlBase = 'http://localhost:8083/';
+  final String urlBase = 'http://192.168.15.8:8083/';
   final client = Dio();
 
   Future get(String path) async {

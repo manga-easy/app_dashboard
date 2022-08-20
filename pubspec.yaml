@@ -31,6 +31,7 @@ dependencies:
   dynamic_color: ^1.4.0
   http: ^0.13.5
   dart_discord_rpc: ^0.0.2
+  html_editor_enhanced: ^2.5.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1

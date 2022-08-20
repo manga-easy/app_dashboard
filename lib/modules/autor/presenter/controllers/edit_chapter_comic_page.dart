@@ -2,8 +2,10 @@ import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/models/chapter_authoral_model.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/models/comic_model.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/models/content_chapter_model.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/repositories/chapter_authoral_repository.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/repositories/comic_repository.dart';
+import 'package:dashboard_manga_easy/modules/autor/domain/repositories/content_chapter_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
@@ -17,11 +19,14 @@ class EditChapterComicParams {
 class EditChapterComicController extends ValueNotifier implements IController {
   final ChapterAuthoralRepository chapterAuthoralRepository;
   final ComicAuthorialRepository comicAuthorialRepository;
+  final ContentChapterRepository contentChapterRepository;
 
   ChapterAuthorial? chapterAuthorial;
+
   EditChapterComicController({
     required this.chapterAuthoralRepository,
     required this.comicAuthorialRepository,
+    required this.contentChapterRepository,
   }) : super(null);
 
   @override
@@ -70,5 +75,9 @@ class EditChapterComicController extends ValueNotifier implements IController {
       Helps.log(e);
     }
     notifyListeners();
+  }
+
+  Future<List<ContentChapterModel>> contentList() async {
+    return await contentChapterRepository.list();
   }
 }
