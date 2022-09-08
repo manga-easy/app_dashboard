@@ -4,7 +4,6 @@ import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/core/services/hive_service.dart';
-import 'package:dashboard_manga_easy/core/services/presence_discord_service.dart';
 import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/main.dart';
 
@@ -17,7 +16,6 @@ class CoreModule extends IModuleService {
     di.registerLazySingleton(() => AppwriteAdmin());
     di.registerLazySingleton(() => Global());
     di.registerLazySingleton(() => ServiceRoute());
-    di.registerLazySingleton(() => PresenceDiscordService());
   }
 
   @override
@@ -27,6 +25,5 @@ class CoreModule extends IModuleService {
     await di.get<AppwriteAdmin>().initialise();
     await di.get<Global>().initialise();
     await di.get<ServiceRoute>().initialise();
-    await di.get<PresenceDiscordService>().initialise();
   }
 }
