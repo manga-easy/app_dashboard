@@ -37,7 +37,7 @@ class BannerController extends IController {
 
   Future<void> deleteBanner(BannerModel reco, context) async {
     try {
-      await bannerRepository.deletDocument(id: BannerModel.collectionID);
+      await bannerRepository.deletDocument(id: reco.id!);
       AppHelps.confirmaDialog(
         title: 'Sucesso',
         content: 'Banner deletada com sucesso',
