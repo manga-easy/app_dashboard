@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_content_chapter_page.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/oranisms/editor_texto.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
@@ -44,29 +45,12 @@ class _EditContentChapterPageState extends State<EditContentChapterPage> {
           valueListenable: ct,
           builder: (context, value, child) {
             if (ct.contentChapter == null) return const LoadingAtom();
-            return ListView(
-              padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
-              children: [
-                ct.contentChapter!.type == 'text'
-                    ? HtmlEditor(
-                        controller: ct.controller, //required
-                        htmlEditorOptions: const HtmlEditorOptions(
-                          hint: "Your text here...",
-                          //initalText: "text content initial, if any",
-                        ),
-                        otherOptions: const OtherOptions(
-                          height: 400,
-                        ),
-                      )
-                    : const SizedBox(),
-                const SizedBox(height: AppTheme.defaultPadding),
-                ButtonPadraoAtom(
-                  title: 'Salvar',
-                  icone: Icons.create,
-                  onPress: () => ct.salvarContent(context),
-                ),
-              ],
-            );
+            return ct.contentChapter!.type == 'text'
+                ? HtmlEditorExample(
+                    title: 'Conteudo',
+                    controller: ct.controller,
+                  )
+                : const SizedBox();
           },
         ),
       ),

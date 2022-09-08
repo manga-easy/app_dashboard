@@ -1,10 +1,9 @@
 import 'package:dashboard_manga_easy/core/interfaces/service.dart';
-import 'package:dashboard_manga_easy/core/services/presence_discord_service.dart';
-import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/comic_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_chapter_comic_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_comic_page.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_content_chapter_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/detalhes_emblemas_page.dart';
@@ -48,7 +47,6 @@ class ServiceRoute extends IService {
         settings: settings,
       );
     }
-    di.get<PresenceDiscordService>().updatePresence(settings.name ?? 'iniciando');
     //verifica se está logado
     if (user == null) {
       return MaterialPageRoute(
@@ -81,6 +79,11 @@ class ServiceRoute extends IService {
       case EditChapterComicPage.route:
         return MaterialPageRoute(
           builder: (_) => const EditChapterComicPage(),
+          settings: settings,
+        );
+      case EditContentChapterPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditContentChapterPage(),
           settings: settings,
         );
     }
