@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 class AppwriteAdmin extends IService {
   late Client client;
   late Account account;
-  late Database database;
+  late Databases database;
   late Users users;
 
   @override
@@ -18,6 +18,6 @@ class AppwriteAdmin extends IService {
 
     account = Account(client);
     users = Users(client);
-    database = Database(client);
+    database = Databases(client, databaseId: 'default');
   }
 }

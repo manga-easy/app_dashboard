@@ -59,7 +59,7 @@ class AuthController extends IController {
   }
 
   Future<Session> checkUsuario() async {
-    return await app.account.createSession(
+    return await app.account.createEmailSession(
       email: email.text,
       password: password.text,
     );

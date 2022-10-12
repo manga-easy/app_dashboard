@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 class AppwriteClient extends IService {
   late Client client;
   late Account account;
-  late Database database;
+  late Databases database;
 
   @override
   Future<void> initialise() async {
@@ -16,6 +16,6 @@ class AppwriteClient extends IService {
         .setSelfSigned(); // Your project ID
 
     account = Account(client);
-    database = Database(client);
+    database = Databases(client, databaseId: 'default');
   }
 }

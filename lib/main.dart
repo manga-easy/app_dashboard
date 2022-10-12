@@ -17,7 +17,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-bool _isDemoUsingDynamicColors = false;
+bool isDemoUsingDynamicColors = false;
 
 // Fictitious brand color.
 const _brandBlue = Color(0xFF1E88E5);
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
           darkColorScheme = darkColorScheme.copyWith(secondary: _brandBlue);
           darkCustomColors = darkCustomColors.harmonized(darkColorScheme);
 
-          _isDemoUsingDynamicColors = true; // ignore, only for demo purposes
+          isDemoUsingDynamicColors = true; // ignore, only for demo purposes
         } else {
           // Otherwise, use fallback schemes.
           lightColorScheme = ColorScheme.fromSeed(
