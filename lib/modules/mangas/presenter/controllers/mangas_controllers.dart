@@ -1,22 +1,28 @@
-import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/info_comic_repository_inter.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/view_comic_repository_inter.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
 class MangasController extends IController {
-  final AppwriteAdmin appwriteAdmin;
+  final IViewComicRepository viewComicRepository;
+  final IInforComicRepository infoComicRepository;
   final Global global;
-  String pesquisa = '';
-  var mangas = ValueNotifier(<InfoComicModel>[]);
-  var status = ValueNotifier(StatusBuild.loading);
 
-  MangasController({required this.appwriteAdmin, required this.global});
+  MangasController({
+    required this.infoComicRepository,
+    required this.global,
+    required this.viewComicRepository,
+  });
+
+  String search = '';
+  List<InfoComicModel> mangas = [];
+  var status = ValueNotifier(StatusBuild.loading);
 
   @override
   void onClose() {
-    mangas.dispose();
+    mangas;
     status.dispose();
   }
 
@@ -28,14 +34,7 @@ class MangasController extends IController {
   void carregarMangas() async {
     try {
       status.value = StatusBuild.loading;
-      var ret = await appwriteAdmin.database.listDocuments(
-        collectionId: InfoComicModel.collectionId,
-        limit: 100,
-        orderAttributes: ['dateUp'],
-        orderTypes: ['DESC'],
-        queries: pesquisa.isNotEmpty ? [Query.equal('uniqueid', Helps.convertUniqueid(pesquisa))] : null,
-      );
-      mangas.value = ret.documents.map((e) => InfoComicModel.fromJson(e.data)).toList();
+      mangas = await infoComicRepository.list(search: search);
       status.value = StatusBuild.done;
     } catch (e) {
       status.value = StatusBuild.erro;
@@ -43,16 +42,9 @@ class MangasController extends IController {
     }
   }
 
+  void alterIsAdult(InfoComicModel manga) {}
+
   Future<int> carregaViews(String uniqueid) async {
-    var ret = await appwriteAdmin.database.listDocuments(
-      collectionId: ViewsComics.collectionId,
-      limit: 1,
-      queries: [
-        Query.notEqual('idUser', 'seila'),
-        Query.notEqual('dateCria', 'seila'),
-        Query.equal('uniqueid', uniqueid),
-      ],
-    );
-    return ret.total;
+    return await viewComicRepository.total(uniqueid: uniqueid);
   }
 }
