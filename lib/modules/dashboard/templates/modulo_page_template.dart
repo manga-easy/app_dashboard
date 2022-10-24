@@ -16,10 +16,11 @@ class ModuloPageTemplate extends StatelessWidget {
   final String? labelNovoItem;
   final Function(String)? onChangePesquisa;
   final void Function()? onEditCompletPesquisa;
-  final List listaItems;
-  final Widget Function(BuildContext, int) itemBuilderLista;
+  final List? listaItems;
+  final Widget Function(BuildContext, int)? itemBuilderLista;
   final String? initialValueCampoPesquisa;
   final bool isModule;
+  final Widget? child;
 
   const ModuloPageTemplate({
     super.key,
@@ -28,12 +29,13 @@ class ModuloPageTemplate extends StatelessWidget {
     this.onPressedAtualiza,
     this.onPressedNovoItem,
     this.labelNovoItem,
-    required this.itemBuilderLista,
-    required this.listaItems,
+    this.itemBuilderLista,
+    this.listaItems,
     this.onChangePesquisa,
     this.onEditCompletPesquisa,
     this.initialValueCampoPesquisa,
     this.isModule = true,
+    this.child,
   });
 
   @override
@@ -91,12 +93,13 @@ class ModuloPageTemplate extends StatelessWidget {
                                 )
                               : const SizedBox(),
                           const SizedBox(height: AppTheme.defaultPadding / 2),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: listaItems.length,
-                              itemBuilder: itemBuilderLista,
-                            ),
-                          ),
+                          child ??
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: listaItems!.length,
+                                  itemBuilder: itemBuilderLista!,
+                                ),
+                              ),
                         ],
                       ),
                     ),
