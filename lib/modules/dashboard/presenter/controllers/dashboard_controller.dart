@@ -4,6 +4,7 @@ import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user_params.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
@@ -35,7 +36,7 @@ class DashboardController extends IController {
 
   void carregaEmblemaDoadores() async {
     try {
-      if (serviceRoute.permissions!.value >= serviceRoute.levelAdmin) {
+      if (serviceRoute.permissions!.value >= LevelPermissoes.admin.value) {
         var ret = await emblemasRepository.listDocument(
           where: EmblemaParams(
             categoria: CategoriaEmblema.doacao.name,
