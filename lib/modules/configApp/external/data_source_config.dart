@@ -28,17 +28,36 @@ class DataSourceConfig implements IDataSourceConfig {
 
   @override
   Future<void> updateConfig({required ConfigAppModel configApp}) async {
+    var token = await authentication();
     await dio.put(
       '$host/$version/config',
       data: configApp.toJson(),
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
     );
   }
 
   @override
   Future<void> updateBlockList({required BlockListModel blockList}) async {
+    var token = await authentication();
     await dio.put(
       '$host/$version/block_list',
       data: blockList.toJson(),
+      options: Options(
+        headers: {'Authorization': 'Bearer $token'},
+      ),
     );
+  }
+
+  Future<String> authentication() async {
+    var ret = await dio.post(
+      '$host/$version/authenticate',
+      data: {
+        "email": "mangaeasysuporte@gmail.com",
+        "password": "Easy@2020",
+      },
+    );
+    return ret.data['Token'];
   }
 }
