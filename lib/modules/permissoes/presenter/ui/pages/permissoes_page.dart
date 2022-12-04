@@ -17,13 +17,13 @@ class _PermissoesPageState extends State<PermissoesPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 

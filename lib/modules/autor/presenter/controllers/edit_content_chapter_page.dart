@@ -14,21 +14,24 @@ class EditcontentChapterParams {
   EditcontentChapterParams(this.chapterAuthorial, this.contentChapterModel);
 }
 
-class EditContentChapterController extends ValueNotifier implements IController {
+class EditContentChapterController extends ValueNotifier
+    implements IController {
   final HtmlEditorController controller = HtmlEditorController();
   final ContentChapterRepository contentChapterRepository;
   ContentChapterModel? contentChapter;
-  EditContentChapterController({required this.contentChapterRepository}) : super(null);
+  EditContentChapterController({required this.contentChapterRepository})
+      : super(null);
 
   @override
-  void onClose() {
-    dispose();
+  void dispose() {
+    super.dispose();
     controller.disable();
   }
 
   @override
-  void onInit(BuildContext context) {
-    var arguments = ModalRoute.of(context)!.settings.arguments as EditcontentChapterParams;
+  void init(BuildContext context) {
+    var arguments =
+        ModalRoute.of(context)!.settings.arguments as EditcontentChapterParams;
     contentChapter = arguments.contentChapterModel;
     contentChapter ??= ContentChapterModel(
       idChapter: arguments.chapterAuthorial.id!,

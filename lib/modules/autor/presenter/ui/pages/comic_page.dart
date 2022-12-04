@@ -18,13 +18,13 @@ class _ComicAuthorialPageState extends State<ComicAuthorialPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -34,7 +34,8 @@ class _ComicAuthorialPageState extends State<ComicAuthorialPage> {
       valueListenable: ct.status,
       builder: (context, value, chil) {
         return ModuloPageTemplate(
-          onPressedNovoItem: () => Navigator.pushNamed(context, EditComicAuthorialPage.route),
+          onPressedNovoItem: () =>
+              Navigator.pushNamed(context, EditComicAuthorialPage.route),
           route: ComicAuthorialPage.route,
           statusBuild: value,
           onPressedAtualiza: ct.carregaComicAuthorialAutor,

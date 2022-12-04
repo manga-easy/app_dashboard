@@ -22,19 +22,22 @@ class MangasController extends IController {
     required this.configAppRepository,
   });
 
-  final PagingController<int, InfoComicModel> pagingController = PagingController(firstPageKey: 0);
+  final PagingController<int, InfoComicModel> pagingController =
+      PagingController(firstPageKey: 0);
   String search = '';
   var total = ValueNotifier(0);
   var status = ValueNotifier(StatusBuild.loading);
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
+    total.dispose();
     pagingController.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     status.value = StatusBuild.done;
   }
 

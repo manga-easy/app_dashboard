@@ -10,10 +10,12 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
   CriaEditaEmblemaController({required this.emblemasRepository}) : super(null);
 
   @override
-  void onClose() {}
+  void dispose() {
+    super.dispose();
+  }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     emblema = ModalRoute.of(context)!.settings.arguments as Emblema?;
     emblema ??= Emblema(
       name: '',

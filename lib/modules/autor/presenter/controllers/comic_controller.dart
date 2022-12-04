@@ -13,12 +13,13 @@ class ComicAuthorialController extends IController {
   ComicAuthorialController({required this.comicRepository});
 
   @override
-  void onClose() {
-    // TODO: implement onClose
+  void close() {
+    status.dispose();
+    dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     carregaComicAuthorialAutor();
   }
 

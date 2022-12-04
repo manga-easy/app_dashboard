@@ -20,13 +20,13 @@ class _SendNotificationPageState extends State<SendNotificationPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -55,7 +55,8 @@ class _SendNotificationPageState extends State<SendNotificationPage> {
                     });
                   }
                 },
-                child: Text(ct.test == null ? 'Escolha um user' : ct.test!.name),
+                child:
+                    Text(ct.test == null ? 'Escolha um user' : ct.test!.name),
               ),
               const SizedBox(height: AppTheme.defaultPadding),
               ButtonPadraoAtom(

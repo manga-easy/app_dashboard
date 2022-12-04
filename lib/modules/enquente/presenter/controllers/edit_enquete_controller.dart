@@ -15,12 +15,7 @@ class EditEnqueteController extends ValueNotifier implements IController {
   }) : super(null);
 
   @override
-  void onClose() {
-    dispose();
-  }
-
-  @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     enquete = ModalRoute.of(context)!.settings.arguments as EnqueteModel?;
     enquete ??= EnqueteModel(
       createDate: DateTime.now().millisecondsSinceEpoch,

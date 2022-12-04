@@ -17,13 +17,14 @@ class NotificacaoController extends IController {
     required this.global,
   });
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
     lista.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     carregaNotificacao();
   }
 

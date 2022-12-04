@@ -20,13 +20,13 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -46,7 +46,8 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.defaultPadding),
               children: [
                 CampoPadraoAtom(
                   hintText: 'Pergunta',
@@ -71,7 +72,8 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding * 2),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.defaultPadding * 2),
                   child: Column(
                     children: [
                       const SizedBox(height: AppTheme.defaultPadding / 2),
@@ -83,7 +85,8 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              ct.enquete!.questions.add(Question(id: const Uuid().v4(), name: ''));
+                              ct.enquete!.questions.add(
+                                  Question(id: const Uuid().v4(), name: ''));
                               ct.notifyListeners();
                             },
                             icon: const Icon(Icons.add),

@@ -14,12 +14,13 @@ class DetalhesEmblemasController extends IController {
   DetalhesEmblemasController({required this.appwriteAdmin});
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     emblema = ModalRoute.of(context)!.settings.arguments as Emblema;
     carreEmblemasUser();
   }

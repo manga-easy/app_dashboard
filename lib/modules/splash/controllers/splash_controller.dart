@@ -9,10 +9,7 @@ class SplashController extends IController {
   SplashController();
 
   @override
-  void onClose() {}
-
-  @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     loadingServices(context);
   }
 

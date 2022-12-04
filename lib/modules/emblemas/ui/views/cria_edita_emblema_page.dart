@@ -19,13 +19,13 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -68,7 +68,10 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             contentPadding: EdgeInsets.zero,
                             title: Text(
                               'Remove ADS',
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
                                     color: Colors.white,
                                   ),
                             ),
@@ -82,22 +85,28 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           children: [
                             Text(
                               'Beneficios',
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
                                     color: Colors.white,
                                   ),
                             ),
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding * 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppTheme.defaultPadding * 2),
                           child: Column(
                             children: [
-                              const SizedBox(height: AppTheme.defaultPadding / 2),
+                              const SizedBox(
+                                  height: AppTheme.defaultPadding / 2),
                               Column(
                                 children: beneficios(),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   IconButton(
                                     onPressed: () {
@@ -123,7 +132,10 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           children: [
                             Text(
                               'Categoria',
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
                                     color: Colors.white,
                                   ),
                             ),
@@ -148,7 +160,10 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             contentPadding: EdgeInsets.zero,
                             title: Text(
                               'Disponivel para resgatar',
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
                                     color: Colors.white,
                                   ),
                             ),
@@ -162,7 +177,10 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           children: [
                             Text(
                               'Tipo de imagem',
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
                                     color: Colors.white,
                                   ),
                             ),
@@ -187,7 +205,10 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           children: [
                             Text(
                               'Raridade',
-                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
                                     color: Colors.white,
                                   ),
                             ),

@@ -32,13 +32,13 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -53,7 +53,8 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
             title: const Text('Criar Permissões'),
           ),
           body: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
             children: [
               DropdownButton<int>(
                 isExpanded: true,

@@ -19,13 +19,13 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -57,7 +57,8 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
                           initialValue: ct.recomendacao!.title,
                           onChange: (v) {
                             ct.recomendacao!.title = v;
-                            ct.recomendacao!.uniqueid = Helps.convertUniqueid(v);
+                            ct.recomendacao!.uniqueid =
+                                Helps.convertUniqueid(v);
                           },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),

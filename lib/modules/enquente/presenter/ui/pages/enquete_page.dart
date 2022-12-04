@@ -18,13 +18,13 @@ class _EnquetePageState extends State<EnquetePage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -60,7 +60,10 @@ class _EnquetePageState extends State<EnquetePage> {
                       DateFormat.yMMMMEEEEd().format(
                         DateTime.fromMillisecondsSinceEpoch(data.createDate),
                       ),
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white54),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: Colors.white54),
                     ),
                     StatusBarEnquete(
                       enqueteStatus: data.status,

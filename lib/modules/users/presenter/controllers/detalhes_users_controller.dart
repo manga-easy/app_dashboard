@@ -37,12 +37,13 @@ class UsersDetalhesController extends IController {
   });
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     indexP.dispose();
   }
 
   @override
-  Future<void> onInit(BuildContext context) async {
+  Future<void> init(BuildContext context) async {
     user = ModalRoute.of(context)!.settings.arguments as User;
     carregaXpsUser();
     await carrega();
@@ -57,7 +58,8 @@ class UsersDetalhesController extends IController {
         Query.equal('userId', user!.id),
       ],
     );
-    emblemasUsers = retorno.documents.map((e) => EmblemaUser.fromJson(e.data)).toList();
+    emblemasUsers =
+        retorno.documents.map((e) => EmblemaUser.fromJson(e.data)).toList();
     emblemasUsers = emblemasUsers.reversed.toList();
   }
 
@@ -152,8 +154,10 @@ class UsersDetalhesController extends IController {
       limit: 100,
       collectionId: Emblema.collectionId,
     );
-    listEmblema = retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
-    listEmblema.removeWhere((element) => !element.name.toLowerCase().contains(pesquisa.toLowerCase()));
+    listEmblema =
+        retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
+    listEmblema.removeWhere((element) =>
+        !element.name.toLowerCase().contains(pesquisa.toLowerCase()));
     return listEmblema;
   }
 
@@ -167,7 +171,8 @@ class UsersDetalhesController extends IController {
       orderAttributes: ['\$id'],
       orderTypes: ['DESC'],
     );
-    listXps.value = retorno.documents.map((e) => NivelUser.fromJson(e.data)).toList();
+    listXps.value =
+        retorno.documents.map((e) => NivelUser.fromJson(e.data)).toList();
   }
 
   Future<void> removerEmblema(String id, BuildContext context) async {

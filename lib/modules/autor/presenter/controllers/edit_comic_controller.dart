@@ -7,21 +7,23 @@ import 'package:dashboard_manga_easy/modules/autor/domain/repositories/comic_rep
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class EditComicAuthorialController extends ValueNotifier implements IController {
+class EditComicAuthorialController extends ValueNotifier
+    implements IController {
   final ServiceRoute serviceRoute;
   final ComicAuthorialRepository comicAuthorialRepository;
   ComicAuthorialModel? comic;
 
-  EditComicAuthorialController({required this.comicAuthorialRepository, required this.serviceRoute})
+  EditComicAuthorialController(
+      {required this.comicAuthorialRepository, required this.serviceRoute})
       : super(null);
 
   @override
-  void onClose() {
-    dispose();
+  void dispose() {
+    super.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     comic = ModalRoute.of(context)!.settings.arguments as ComicAuthorialModel?;
     comic ??= ComicAuthorialModel(
       autor: '',

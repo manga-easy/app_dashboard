@@ -15,12 +15,7 @@ class EditTemporadasController extends ValueNotifier implements IController {
   }) : super(null);
 
   @override
-  void onClose() {
-    dispose();
-  }
-
-  @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     temporada = ModalRoute.of(context)!.settings.arguments as TemporadaModel?;
     temporada ??= TemporadaModel(
       id: null,

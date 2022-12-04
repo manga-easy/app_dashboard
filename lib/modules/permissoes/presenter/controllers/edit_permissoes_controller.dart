@@ -19,12 +19,12 @@ class EditPermissoesController extends ValueNotifier implements IController {
   }) : super(null);
 
   @override
-  void onClose() {
-    dispose();
+  void dispose() {
+    super.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     permissoes = ModalRoute.of(context)!.settings.arguments as Permissions?;
     permissoes ??= Permissions(
       userId: '',

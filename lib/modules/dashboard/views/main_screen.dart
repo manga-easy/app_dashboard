@@ -18,13 +18,13 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -66,10 +66,13 @@ class _MainPageState extends State<MainPage> {
                                 margin: const EdgeInsets.all(8),
                                 padding: const EdgeInsets.all(8),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(e.name),
-                                    TotalAdquiridoAtom(future: ct.calculaTotalAdquirido(e.id!)),
+                                    TotalAdquiridoAtom(
+                                        future:
+                                            ct.calculaTotalAdquirido(e.id!)),
                                   ],
                                 ),
                               ),

@@ -18,15 +18,17 @@ class SendNotificationController extends ValueNotifier implements IController {
     dateMade: DateTime.now().millisecondsSinceEpoch,
     image: '',
   );
-  SendNotificationController({required this.notificacaoRepository, required this.userRepo}) : super(null);
+  SendNotificationController(
+      {required this.notificacaoRepository, required this.userRepo})
+      : super(null);
 
   @override
-  void onClose() {
-    dispose();
+  void dispose() {
+    super.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {}
+  void init(BuildContext context) {}
 
   void enviaNotificacao(context) async {
     await notificacaoRepository.creatDocument(objeto: nova);

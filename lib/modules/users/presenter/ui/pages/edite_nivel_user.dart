@@ -18,13 +18,13 @@ class _EditeNivelUserPageState extends State<EditeNivelUserPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -37,7 +37,11 @@ class _EditeNivelUserPageState extends State<EditeNivelUserPage> {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Editar Nível'),
-            actions: [IconButton(onPressed: () => ct.deletarNivel(context), icon: Icon(Icons.delete))],
+            actions: [
+              IconButton(
+                  onPressed: () => ct.deletarNivel(context),
+                  icon: Icon(Icons.delete))
+            ],
           ),
           body: Container(
             margin: const EdgeInsets.all(AppTheme.defaultPadding),
@@ -45,14 +49,16 @@ class _EditeNivelUserPageState extends State<EditeNivelUserPage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.defaultPadding),
               children: [
                 // String temporada;
                 const SizedBox(height: AppTheme.defaultPadding),
                 CampoPadraoAtom(
                   initialValue: ct.nivelUser!.quantity.toString(),
                   hintText: 'Quantidade de xp do nível atual',
-                  onChange: (x) => ct.nivelUser!.quantity = int.tryParse(x) ?? 0,
+                  onChange: (x) =>
+                      ct.nivelUser!.quantity = int.tryParse(x) ?? 0,
                 ),
                 const SizedBox(height: AppTheme.defaultPadding),
                 CampoPadraoAtom(

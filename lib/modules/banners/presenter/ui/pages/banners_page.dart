@@ -19,13 +19,13 @@ class _BannerPageState extends State<BannerPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -75,7 +75,9 @@ class _BannerPageState extends State<BannerPage> {
                       ButtonPadraoAtom(
                         title: 'Deletar',
                         icone: Icons.delete_forever,
-                        onPress: () => ct.deleteBanner(reco, context).then((value) => ct.listaBanner()),
+                        onPress: () => ct
+                            .deleteBanner(reco, context)
+                            .then((value) => ct.listaBanner()),
                       ),
                     ],
                   ),
@@ -85,8 +87,9 @@ class _BannerPageState extends State<BannerPage> {
             );
           },
           listaItems: ct.listaBannerItens,
-          onPressedNovoItem: () =>
-              Navigator.of(context).pushNamed(CriarBannerPage.route).then((value) => ct.listaBanner()),
+          onPressedNovoItem: () => Navigator.of(context)
+              .pushNamed(CriarBannerPage.route)
+              .then((value) => ct.listaBanner()),
         );
       },
     );

@@ -21,13 +21,13 @@ class _MangasPageState extends State<MangasPage> {
     ct.pagingController.addPageRequestListener((pageKey) {
       ct.fetchPage(pageKey);
     });
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -49,7 +49,8 @@ class _MangasPageState extends State<MangasPage> {
                   children: [
                     ValueListenableBuilder(
                       valueListenable: ct.total,
-                      builder: (context, value, child) => Text('Total de mangas: $value'),
+                      builder: (context, value, child) =>
+                          Text('Total de mangas: $value'),
                     ),
                   ],
                 ),

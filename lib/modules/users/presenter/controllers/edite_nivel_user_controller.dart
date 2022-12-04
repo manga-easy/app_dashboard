@@ -11,12 +11,13 @@ class EditeNivelUserController extends ValueNotifier implements IController {
   EditeNivelUserController({required this.nivelUserRepository}) : super(null);
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     nivelUser = ModalRoute.of(context)!.settings.arguments as NivelUser;
     notifyListeners();
   }

@@ -19,13 +19,13 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -75,8 +75,9 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                       ButtonPadraoAtom(
                         title: "Deletar",
                         icone: Icons.delete_forever,
-                        onPress: () =>
-                            ct.deleteRecomendacao(reco, context).then((value) => ct.listaRecomendacao()),
+                        onPress: () => ct
+                            .deleteRecomendacao(reco, context)
+                            .then((value) => ct.listaRecomendacao()),
                       ),
                     ],
                   ),

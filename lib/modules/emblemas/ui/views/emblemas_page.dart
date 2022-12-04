@@ -18,13 +18,13 @@ class _EmblemasPageState extends State<EmblemasPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -40,7 +40,9 @@ class _EmblemasPageState extends State<EmblemasPage> {
           itemBuilderLista: (context, index) {
             Emblema emb = ct.lista[index];
             return ListTile(
-              onTap: () => Navigator.pushNamed(context, CriaEditaEmblemaPage.route, arguments: emb),
+              onTap: () => Navigator.pushNamed(
+                  context, CriaEditaEmblemaPage.route,
+                  arguments: emb),
               leading: emb.type == TypeEmblema.link.name
                   ? CircleAvatar(
                       radius: 25,
@@ -50,13 +52,17 @@ class _EmblemasPageState extends State<EmblemasPage> {
               title: Text(emb.name),
               subtitle: Text(
                 emb.categoria,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: Colors.white),
               ),
             );
           },
           onPressedAtualiza: () => ct.carregaEmblemas(),
           listaItems: ct.lista,
-          onPressedNovoItem: () => Navigator.pushNamed(context, CriaEditaEmblemaPage.route),
+          onPressedNovoItem: () =>
+              Navigator.pushNamed(context, CriaEditaEmblemaPage.route),
         );
       },
     );

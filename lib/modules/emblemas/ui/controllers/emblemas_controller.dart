@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblem
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
-class EmblemasController implements IController {
+class EmblemasController extends IController {
   var lista = <Emblema>[];
   final EmblemasRepository emblemasRepository;
 
@@ -14,10 +14,13 @@ class EmblemasController implements IController {
   EmblemasController({required this.emblemasRepository});
 
   @override
-  void onClose() {}
+  void dispose() {
+    super.dispose();
+    status.dispose();
+  }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     carregaEmblemas();
   }
 

@@ -14,12 +14,13 @@ class BannerController extends IController {
   BannerController({required this.bannerRepository, required this.global});
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     listaBanner();
   }
 

@@ -21,13 +21,13 @@ class _EditChapterComicPageState extends State<EditChapterComicPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -47,7 +47,8 @@ class _EditChapterComicPageState extends State<EditChapterComicPage> {
           builder: (context, value, child) {
             if (ct.chapterAuthorial == null) return const LoadingAtom();
             return ListView(
-              padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.defaultPadding),
               children: [
                 CampoPadraoAtom(
                   hintText: 'Titulo',
@@ -57,7 +58,8 @@ class _EditChapterComicPageState extends State<EditChapterComicPage> {
                 CampoPadraoAtom(
                   hintText: 'Number',
                   initialValue: ct.chapterAuthorial!.number.toString(),
-                  onChange: (p0) => ct.chapterAuthorial!.number = double.tryParse(p0) ?? 0,
+                  onChange: (p0) =>
+                      ct.chapterAuthorial!.number = double.tryParse(p0) ?? 0,
                 ),
                 SizedBox(
                   height: 350,
@@ -74,7 +76,8 @@ class _EditChapterComicPageState extends State<EditChapterComicPage> {
                             onPressed: () => Navigator.pushNamed(
                               context,
                               EditContentChapterPage.route,
-                              arguments: EditcontentChapterParams(ct.chapterAuthorial!, null),
+                              arguments: EditcontentChapterParams(
+                                  ct.chapterAuthorial!, null),
                             ).then((value) => ct.notifyListeners()),
                             icon: const Icon(Icons.add_box),
                           )
@@ -97,7 +100,8 @@ class _EditChapterComicPageState extends State<EditChapterComicPage> {
                                     onTap: () => Navigator.pushNamed(
                                       context,
                                       EditContentChapterPage.route,
-                                      arguments: EditcontentChapterParams(ct.chapterAuthorial!, chapter),
+                                      arguments: EditcontentChapterParams(
+                                          ct.chapterAuthorial!, chapter),
                                     ),
                                     title: Text(chapter.content),
                                     subtitle: Text(chapter.updateAt),

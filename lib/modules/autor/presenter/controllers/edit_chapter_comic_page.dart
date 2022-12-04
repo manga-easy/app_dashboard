@@ -30,19 +30,23 @@ class EditChapterComicController extends ValueNotifier implements IController {
   }) : super(null);
 
   @override
-  void onClose() {
-    dispose();
+  void dispose() {
+    super.dispose();
   }
 
   @override
-  Future<void> onInit(BuildContext context) async {
-    var arguments = ModalRoute.of(context)!.settings.arguments as EditChapterComicParams;
+  Future<void> init(BuildContext context) async {
+    var arguments =
+        ModalRoute.of(context)!.settings.arguments as EditChapterComicParams;
     chapterAuthorial = arguments.chapterAuthorial;
-    var detailComic = await comicAuthorialRepository.get(id: arguments.comicAuthorialModel.id!);
+    var detailComic = await comicAuthorialRepository.get(
+        id: arguments.comicAuthorialModel.id!);
     chapterAuthorial ??= ChapterAuthorial(
       idComicAuthorial: arguments.comicAuthorialModel.id!,
       title: '',
-      number: detailComic!.chapter.isNotEmpty ? ++detailComic.chapter.last.number : 1,
+      number: detailComic!.chapter.isNotEmpty
+          ? ++detailComic.chapter.last.number
+          : 1,
       createAt: 'now()',
       updateAt: 'now()',
     );

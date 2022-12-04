@@ -13,13 +13,14 @@ class UsersController extends IController {
 
   UsersController({required this.app, required this.global});
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
     pesquisa.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     carregaUsers();
   }
 

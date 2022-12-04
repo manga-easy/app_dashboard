@@ -14,12 +14,13 @@ class TemporadasController extends IController {
   });
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     carregaTemporadas();
   }
 

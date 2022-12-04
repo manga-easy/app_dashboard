@@ -21,16 +21,21 @@ class AuthController extends IController {
   var email = TextEditingController();
   var password = TextEditingController();
 
-  AuthController({required this.serviceRoute, required this.app, required this.credencialRepo});
+  AuthController({
+    required this.serviceRoute,
+    required this.app,
+    required this.credencialRepo,
+  });
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     email.dispose();
     password.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     loginAutomatico(context);
     carregaCredencial();
   }

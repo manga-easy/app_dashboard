@@ -17,13 +17,13 @@ class _UsersPageState extends State<UsersPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -43,7 +43,8 @@ class _UsersPageState extends State<UsersPage> {
           itemBuilderLista: (context, index) {
             User use = ct.lista[index];
             return ListTile(
-              onTap: () => Navigator.pushNamed(context, UserDetalhesPage.route, arguments: use),
+              onTap: () => Navigator.pushNamed(context, UserDetalhesPage.route,
+                  arguments: use),
               leading: CircleAvatar(
                 radius: 35,
                 child: Text(use.name.substring(0, use.name.length > 1 ? 1 : 0)),
@@ -51,7 +52,10 @@ class _UsersPageState extends State<UsersPage> {
               title: Text(use.name),
               subtitle: Text(
                 use.email,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: Colors.white),
               ),
             );
           },

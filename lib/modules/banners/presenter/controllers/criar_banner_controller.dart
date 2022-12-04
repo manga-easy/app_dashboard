@@ -15,10 +15,12 @@ class CriarBannerController extends ValueNotifier implements IController {
   }) : super(null);
 
   @override
-  void onClose() {}
+  void dispose() {
+    super.dispose();
+  }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     banner = ModalRoute.of(context)!.settings.arguments as BannerModel?;
     banner ??= BannerModel(
       image: '',
