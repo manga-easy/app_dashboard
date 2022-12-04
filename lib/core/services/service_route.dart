@@ -6,6 +6,7 @@ import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_comic
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_content_chapter_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
+import 'package:dashboard_manga_easy/modules/configApp/presenter/ui/pages/config_app_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/detalhes_emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/forbiden_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
@@ -185,6 +186,11 @@ class ServiceRoute extends IService {
           builder: (_) => const EditeNivelUserPage(),
           settings: settings,
         );
+      case ConfigAppPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const ConfigAppPage(),
+          settings: settings,
+        );
       default:
         return null;
     }
@@ -194,6 +200,7 @@ class ServiceRoute extends IService {
     if (permissions!.value >= levelAdmin) {
       return [
         MainPage.route,
+        ConfigAppPage.route,
         UsersPage.route,
         RecomendacaoPage.route,
         NotificacaoPage.route,
