@@ -7,7 +7,11 @@ abstract class IConfigAppRepository {
 
   IConfigAppRepository(this.dataSourceConfig);
 
-  Future<ConfigAppModel> get();
+  Future<ConfigAppModel> getConfig();
 
-  Future<void> update(ConfigAppModel configApp);
+  Future<BlockListModel> getBlockList();
+
+  Future<void> updateConfig(ConfigAppModel configApp);
+
+  Future<void> updateBlockList(BlockListModel blockList);
 }

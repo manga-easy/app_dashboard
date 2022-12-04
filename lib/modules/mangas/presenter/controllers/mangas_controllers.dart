@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/modules/configApp/domain/repositories/config_app_repository_inter.dart';
+import 'package:dashboard_manga_easy/modules/configApp/domain/usercases/get_block_list_case.dart';
+import 'package:dashboard_manga_easy/modules/configApp/domain/usercases/up_block_list_case.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/info_comic_repository_inter.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/view_comic_repository_inter.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +11,16 @@ import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 class MangasController extends IController {
   final IViewComicRepository viewComicRepository;
   final IInforComicRepository infoComicRepository;
-  final IConfigAppRepository configAppRepository;
+  final GetBlockListCase getBlockListCase;
+  final UpBlockListCase upBlockListCase;
   final Global global;
 
   MangasController({
     required this.infoComicRepository,
     required this.global,
     required this.viewComicRepository,
-    required this.configAppRepository,
+    required this.getBlockListCase,
+    required this.upBlockListCase,
   });
 
   final PagingController<int, InfoComicModel> pagingController =
@@ -44,15 +45,15 @@ class MangasController extends IController {
   Future<void> alterIsAdult(InfoComicModel manga) async {
     try {
       status.value = StatusBuild.loading;
-      var config = await configAppRepository.get();
+      var block = await getBlockListCase();
       if (manga.isAdult) {
         manga.isAdult = false;
-        config.over18List.remove(manga.name);
+        block.over18List.remove(manga.name);
       } else {
         manga.isAdult = true;
-        config.over18List.add(manga.name);
+        block.over18List.add(manga.name);
       }
-      configAppRepository.update(config);
+      await upBlockListCase(block);
       infoComicRepository.update(comic: manga);
     } catch (e) {
       Helps.log(e);

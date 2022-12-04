@@ -17,7 +17,8 @@ class MangasModule extends IModuleFactory {
           infoComicRepository: di(),
           global: di(),
           viewComicRepository: di(),
-          configAppRepository: di(),
+          getBlockListCase: di(),
+          upBlockListCase: di(),
         ));
   }
 }
