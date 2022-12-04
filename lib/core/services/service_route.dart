@@ -17,6 +17,7 @@ import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/enquete
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pages.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
@@ -34,7 +35,6 @@ class ServiceRoute extends IService {
   bool isInicialize = false;
   User? user;
   Permissions? permissions;
-  final levelAdmin = 80;
   @override
   Future<void> initialise() async {
     isInicialize = true;
@@ -89,7 +89,7 @@ class ServiceRoute extends IService {
         );
     }
     //somnte admin podem acessar as rotas abaixo
-    if (permissions!.value < levelAdmin) {
+    if (permissions!.value < LevelPermissoes.admin.value) {
       return MaterialPageRoute(
         builder: (_) => const ForbidenPage(),
         settings: settings,
@@ -197,26 +197,25 @@ class ServiceRoute extends IService {
   }
 
   List<String> menuRoutes() {
-    if (permissions!.value >= levelAdmin) {
-      return [
-        MainPage.route,
+    var routes = [MainPage.route, MangasPage.route];
+    if (permissions!.value == LevelPermissoes.admin.value) {
+      routes.addAll([
         ConfigAppPage.route,
         UsersPage.route,
         RecomendacaoPage.route,
         NotificacaoPage.route,
         EmblemasPage.route,
         BannerPage.route,
-        MangasPage.route,
         PermissoesPage.route,
         TemporadasPage.route,
         EnquetePage.route,
-        ComicAuthorialPage.route,
-      ];
+      ]);
+      return routes;
     }
-    return [
-      MainPage.route,
-      MangasPage.route,
-      ComicAuthorialPage.route,
-    ];
+    if (permissions!.value == LevelPermissoes.autor.value) {
+      routes.add(ComicAuthorialPage.route);
+      return routes;
+    }
+    return routes;
   }
 }
