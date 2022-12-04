@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:flutter/material.dart';
 
 class SelectDados<T> extends StatefulWidget {
@@ -31,7 +31,8 @@ class _SelectDadosState<T> extends State<SelectDados<T>> {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: ListView(
           children: [
             Text(
@@ -62,7 +63,10 @@ class _SelectDadosState<T> extends State<SelectDados<T>> {
                           title: Text(widget.getTitle(dado)),
                           subtitle: Text(
                             widget.getSubTitle(dado),
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
                                   color: Colors.white,
                                 ),
                           ),

@@ -4,9 +4,9 @@ import 'package:dashboard_manga_easy/modules/autor/domain/models/content_chapter
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_chapter_comic_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_content_chapter_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_content_chapter_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:flutter/material.dart';
 
 class EditChapterComicPage extends StatefulWidget {

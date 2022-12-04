@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/side_menu.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/card_xp_user.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/emblemas_users.dart';

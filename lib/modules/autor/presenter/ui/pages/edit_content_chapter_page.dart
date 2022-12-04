@@ -2,9 +2,9 @@ import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_content_chapter_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/oranisms/editor_texto.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 

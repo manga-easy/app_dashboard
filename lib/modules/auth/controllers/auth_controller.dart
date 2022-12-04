@@ -7,7 +7,7 @@ import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/erros_auth.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/credencial_repo.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart' as sdk;
 

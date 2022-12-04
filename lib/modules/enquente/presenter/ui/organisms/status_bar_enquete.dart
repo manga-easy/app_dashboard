@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
@@ -20,11 +20,17 @@ class StatusBarEnquete extends StatelessWidget {
       children: [
         Text(
           'Status: ',
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white54),
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(color: Colors.white54),
         ),
         Text(
           enqueteStatus.name,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: retornaCorStatus()),
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(color: retornaCorStatus()),
         ),
         const Spacer(),
         ButtonPadraoAtom(

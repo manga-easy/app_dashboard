@@ -7,9 +7,9 @@ import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_conte
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
 import 'package:dashboard_manga_easy/modules/configApp/presenter/ui/pages/config_app_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/detalhes_emblemas_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/forbiden_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/detalhes_emblemas_page.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/forbiden_page.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblema_page.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_enquete_page.dart';

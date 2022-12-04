@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/controllers/enquete_controller.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/organisms/status_bar_enquete.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_enquete_page.dart';

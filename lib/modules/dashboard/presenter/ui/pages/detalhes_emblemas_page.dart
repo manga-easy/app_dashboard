@@ -1,7 +1,7 @@
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/informacoes_user_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/controllers/detalhes_emblemas_controller.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/informacoes_user_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/controllers/detalhes_emblemas_controller.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:flutter/material.dart';
 
 class DetalhesEmblemasPage extends StatefulWidget {

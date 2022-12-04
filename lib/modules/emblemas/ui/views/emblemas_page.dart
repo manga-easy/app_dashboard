@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/controllers/emblemas_controller.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblema_page.dart';
 import 'package:flutter/material.dart';

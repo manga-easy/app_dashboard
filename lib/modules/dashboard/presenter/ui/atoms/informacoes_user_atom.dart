@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 

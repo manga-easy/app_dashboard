@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/controllers/mangas_controllers.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/atoms/card_manga.dart';
 import 'package:flutter/material.dart';

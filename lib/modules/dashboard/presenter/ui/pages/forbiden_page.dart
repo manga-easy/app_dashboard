@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:flutter/material.dart';
 
 class ForbidenPage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:flutter/material.dart';
 import 'package:sdk_manga_easy/sdk_manga_easy.dart';
 
@@ -27,7 +27,8 @@ class InfoUsersW extends StatelessWidget {
           height: 300,
           width: 300,
           child: Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -50,7 +51,8 @@ class InfoUsersW extends StatelessWidget {
                   const SizedBox(height: 5),
                   SelectableText(user.id!),
                   const SizedBox(height: 5),
-                  SelectableText("Tipo de autenticação: ${user.prefs.provider}"),
+                  SelectableText(
+                      "Tipo de autenticação: ${user.prefs.provider}"),
                 ],
               ),
             ),

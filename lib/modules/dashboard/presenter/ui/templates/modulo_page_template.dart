@@ -1,10 +1,10 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/config/responsive.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 
-import 'package:dashboard_manga_easy/modules/dashboard/widgets/side_menu.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/side_menu.dart';
 
 import 'package:flutter/material.dart';
 
@@ -43,17 +43,20 @@ class ModuloPageTemplate extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: width <= 1000 && isModule ? SideMenu(atual: route) : null,
-      appBar: width <= 1000 ? AppBar(title: Text(route.replaceAll('/', ''))) : null,
+      appBar:
+          width <= 1000 ? AppBar(title: Text(route.replaceAll('/', ''))) : null,
       body: SafeArea(
         child: statusBuild == StatusBuild.loading
             ? const LoadingAtom()
             : Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Visibility(visible: width > 1000, child: SideMenu(atual: route)),
+                  Visibility(
+                      visible: width > 1000, child: SideMenu(atual: route)),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -67,14 +70,19 @@ class ModuloPageTemplate extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextButton(onPressed: onPressedAtualiza, child: const Text('Atualiza')),
+                              TextButton(
+                                  onPressed: onPressedAtualiza,
+                                  child: const Text('Atualiza')),
                               labelNovoItem != null
                                   ? ElevatedButton.icon(
                                       style: TextButton.styleFrom(
                                         padding: EdgeInsets.symmetric(
-                                          horizontal: AppTheme.defaultPadding * 1.5,
+                                          horizontal:
+                                              AppTheme.defaultPadding * 1.5,
                                           vertical: AppTheme.defaultPadding /
-                                              (Responsive.isMobile(context) ? 2 : 1),
+                                              (Responsive.isMobile(context)
+                                                  ? 2
+                                                  : 1),
                                         ),
                                       ),
                                       onPressed: onPressedNovoItem,
@@ -85,7 +93,8 @@ class ModuloPageTemplate extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: AppTheme.defaultPadding),
-                          onChangePesquisa != null || onEditCompletPesquisa != null
+                          onChangePesquisa != null ||
+                                  onEditCompletPesquisa != null
                               ? CampoPadraoAtom(
                                   onChange: onChangePesquisa,
                                   onEditComplet: onEditCompletPesquisa,
