@@ -12,6 +12,7 @@ class CampoPadraoAtom extends StatelessWidget {
   final int? numberLines;
   final String? initialValue;
   final void Function(String)? onSubmitted;
+  final TextInputType? keyboardType;
 
   const CampoPadraoAtom({
     Key? key,
@@ -24,12 +25,16 @@ class CampoPadraoAtom extends StatelessWidget {
     this.controller,
     this.initialValue,
     this.onSubmitted,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: ThemeData(textSelectionTheme: const TextSelectionThemeData(selectionColor: Colors.green)),
+      data: ThemeData(
+        textSelectionTheme:
+            const TextSelectionThemeData(selectionColor: Colors.green),
+      ),
       child: Column(
         children: [
           hintText != null
@@ -52,6 +57,7 @@ class CampoPadraoAtom extends StatelessWidget {
             controller: controller,
             cursorColor: Colors.white,
             onEditingComplete: onEditComplet,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               hintText: hintText,
               fillColor: Theme.of(context).colorScheme.primary,
@@ -64,8 +70,12 @@ class CampoPadraoAtom extends StatelessWidget {
                   ? InkWell(
                       onTap: () {},
                       child: Container(
-                        padding: const EdgeInsets.all(AppTheme.defaultPadding * 0.75),
-                        margin: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding / 2),
+                        padding: const EdgeInsets.all(
+                          AppTheme.defaultPadding * 0.75,
+                        ),
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: AppTheme.defaultPadding / 2,
+                        ),
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
