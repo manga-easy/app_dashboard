@@ -17,19 +17,7 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
   @override
   void init(BuildContext context) {
     emblema = ModalRoute.of(context)!.settings.arguments as Emblema?;
-    emblema ??= Emblema(
-      name: '',
-      timeCria: DateTime.now().millisecondsSinceEpoch,
-      rarity: RarityEmblema.comum,
-      description: '',
-      percent: 0.1,
-      url: '',
-      benefits: [],
-      adsOff: false,
-      disponivel: false,
-      type: TypeEmblema.link.name,
-      categoria: CategoriaEmblema.evento.name,
-    );
+    emblema ??= Emblema.empty();
     notifyListeners();
   }
 
