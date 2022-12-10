@@ -41,6 +41,8 @@ class ModuloPageTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final ratio = width * 0.005;
+    print(ratio);
     return Scaffold(
       drawer: width <= 1000 && isModule ? SideMenu(atual: route) : null,
       appBar:
@@ -55,8 +57,8 @@ class ModuloPageTemplate extends StatelessWidget {
                       visible: width > 1000, child: SideMenu(atual: route)),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16 * ratio, vertical: 8),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
