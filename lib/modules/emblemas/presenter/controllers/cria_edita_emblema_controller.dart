@@ -1,18 +1,21 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/usecases/create_emblema_case.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/usecases/update_emblema_case.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CriaEditaEmblemaController extends ValueNotifier implements IController {
-  final EmblemasRepository emblemasRepository;
-  Emblema? emblema;
-  CriaEditaEmblemaController({required this.emblemasRepository}) : super(null);
+  final CreateEmblemaCase createEmblemaCase;
+  final UpdateEmblemaCase updateEmblemaCase;
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  CriaEditaEmblemaController(
+    super.value, {
+    required this.createEmblemaCase,
+    required this.updateEmblemaCase,
+  });
+
+  Emblema? emblema;
 
   @override
   void init(BuildContext context) {
@@ -27,9 +30,9 @@ class CriaEditaEmblemaController extends ValueNotifier implements IController {
         throw Exception('Benefícios não pode ta vazio');
       }
       if (emblema!.id == null) {
-        await emblemasRepository.creatDocument(objeto: emblema!);
+        await createEmblemaCase(emblema: emblema!);
       } else {
-        await emblemasRepository.updateDocument(objeto: emblema!);
+        await updateEmblemaCase(emblema: emblema!);
       }
       Navigator.of(context).pop();
       AppHelps.confirmaDialog(

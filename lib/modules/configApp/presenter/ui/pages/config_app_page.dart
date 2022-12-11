@@ -4,7 +4,6 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/switch_default.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblema_page.dart';
 import 'package:flutter/material.dart';
 
 class ConfigAppPage extends StatefulWidget {

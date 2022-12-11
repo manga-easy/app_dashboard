@@ -3,7 +3,7 @@ import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/ui/controllers/cria_edita_emblema_controller.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/presenter/controllers/cria_edita_emblema_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
@@ -15,7 +15,7 @@ class CriaEditaEmblemaPage extends StatefulWidget {
 }
 
 class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
-  final ct = di.get<CriaEditaEmblemaController>();
+  final CriaEditaEmblemaController ct = di();
 
   @override
   void initState() {

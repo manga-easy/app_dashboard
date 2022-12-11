@@ -11,7 +11,7 @@ class EmblemasController extends IController {
 
   var pesquisa = '';
   var status = ValueNotifier(StatusBuild.loading);
-  EmblemasController({required this.emblemasRepository});
+  EmblemasController(this.emblemasRepository);
 
   @override
   void dispose() {
