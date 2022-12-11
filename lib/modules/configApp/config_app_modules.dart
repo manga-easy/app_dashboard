@@ -20,7 +20,11 @@ class ConfigAppModule extends IModuleFactory {
     //usecases
     di.registerFactory(() => GetBlockListCase(di()));
     di.registerFactory(() => GetConfigAppCase(di()));
-    di.registerFactory(() => UpBlockListCase(di()));
+    di.registerFactory<UpBlockListCase>(() => UpBlockListCaseImpl(
+          di(),
+          di(),
+          di(),
+        ));
     di.registerFactory(() => UpConfigAppCase(di()));
     //controllers
     di.registerFactory(
