@@ -57,13 +57,6 @@ class _TemporadasPageState extends State<TemporadasPage> {
                   'Ordem: ${data.number}',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                    color: Colors.red,
-                  ),
-                  onPressed: () => ct.removeTemporadas(data.id!, context),
-                ),
               ),
             );
           },

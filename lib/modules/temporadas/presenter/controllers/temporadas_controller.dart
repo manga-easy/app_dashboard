@@ -1,17 +1,16 @@
-import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
-import 'package:dashboard_manga_easy/modules/temporadas/domain/repositories/temporadas_repository.dart';
+import 'package:dashboard_manga_easy/modules/temporadas/domain/usercases/list_temporada_case.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class TemporadasController extends IController {
-  final TemporadasRepository temporadasRepository;
+  final ListTemporadaCase listTemporadaCase;
+  TemporadasController({
+    required this.listTemporadaCase,
+  });
   var status = ValueNotifier(StatusBuild.loading);
   var temporadas = <TemporadaModel>[];
-  TemporadasController({
-    required this.temporadasRepository,
-  });
 
   @override
   void dispose() {
@@ -26,20 +25,7 @@ class TemporadasController extends IController {
 
   void carregaTemporadas() async {
     status.value = StatusBuild.loading;
-    var ret = await temporadasRepository.listDocument();
-    temporadas = ret.data;
+    temporadas = await listTemporadaCase();
     status.value = StatusBuild.done;
-  }
-
-  Future<void> removeTemporadas(String id, context) async {
-    var ret = await AppHelps.confirmaDialog(
-      title: 'Tem certeza?',
-      content: 'removerá a temporda',
-      context: context,
-    );
-    if (ret) {
-      await temporadasRepository.deletDocument(id: id);
-      carregaTemporadas();
-    }
   }
 }

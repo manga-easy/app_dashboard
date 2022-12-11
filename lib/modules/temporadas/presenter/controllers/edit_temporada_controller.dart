@@ -1,18 +1,27 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
-import 'package:dashboard_manga_easy/modules/temporadas/domain/repositories/temporadas_repository.dart';
+import 'package:dashboard_manga_easy/modules/temporadas/domain/usercases/create_temporada_case.dart';
+import 'package:dashboard_manga_easy/modules/temporadas/domain/usercases/list_temporada_case.dart';
+import 'package:dashboard_manga_easy/modules/temporadas/domain/usercases/update_temporada_case.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EditTemporadasController extends ValueNotifier implements IController {
   final UserRepositoryExternal userRepo;
-  final TemporadasRepository temporadasRepository;
-  TemporadaModel? temporada;
-  EditTemporadasController({
-    required this.temporadasRepository,
+  final CreateTemporadaCase createTemporadaCase;
+  final ListTemporadaCase listTemporadaCase;
+  final UpdateTemporadaCase updateTemporadaCase;
+
+  EditTemporadasController(
+    super.value, {
+    required this.createTemporadaCase,
     required this.userRepo,
-  }) : super(null);
+    required this.listTemporadaCase,
+    required this.updateTemporadaCase,
+  });
+
+  TemporadaModel? temporada;
 
   @override
   void init(BuildContext context) {
@@ -31,11 +40,11 @@ class EditTemporadasController extends ValueNotifier implements IController {
     try {
       var op = 'criado';
       if (temporada!.id == null) {
-        var retTempo = await temporadasRepository.listDocument();
-        temporada!.number = retTempo.total + 1;
-        await temporadasRepository.creatDocument(objeto: temporada!);
+        var retTempo = await listTemporadaCase();
+        temporada!.number = retTempo.length + 1;
+        await createTemporadaCase(temporada: temporada!);
       } else {
-        await temporadasRepository.updateDocument(objeto: temporada!);
+        await updateTemporadaCase(temporada: temporada!);
         op = 'atualizado';
       }
       Navigator.of(context).pop();
