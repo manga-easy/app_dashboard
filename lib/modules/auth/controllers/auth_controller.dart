@@ -9,7 +9,7 @@ import 'package:dashboard_manga_easy/modules/auth/domain/models/erros_auth.dart'
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/credencial_repo.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart' as sdk;
+import 'package:manga_easy_sdk/manga_easy_sdk.dart' as sdk;
 
 class AuthController extends IController {
   final CredencialRepo credencialRepo;

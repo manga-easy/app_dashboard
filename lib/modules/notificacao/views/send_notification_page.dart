@@ -6,7 +6,7 @@ import 'package:dashboard_manga_easy/modules/notificacao/controllers/send_notifi
 import 'package:dashboard_manga_easy/modules/notificacao/views/organisms/form_notificacao.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/organisms/select_user.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class SendNotificationPage extends StatefulWidget {
   static const route = '/SendNotification';

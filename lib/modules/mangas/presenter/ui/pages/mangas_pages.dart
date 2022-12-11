@@ -4,7 +4,7 @@ import 'package:dashboard_manga_easy/modules/mangas/presenter/controllers/mangas
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/atoms/card_manga.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangasPage extends StatefulWidget {
   static const route = '/Mangas';

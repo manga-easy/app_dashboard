@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/mo
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/recomendacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class RecomendacaoPage extends StatefulWidget {
   static const route = '/Recomendacao';

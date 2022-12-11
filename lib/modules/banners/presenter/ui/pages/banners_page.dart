@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_ba
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class BannerPage extends StatefulWidget {
   static const route = '/Banner';

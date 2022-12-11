@@ -8,7 +8,7 @@ import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/ed
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/organisms/select_user.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EditPermissoesPage extends StatefulWidget {
   static const route = '/EditPermissoes';

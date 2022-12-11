@@ -2,7 +2,7 @@ import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CardManga extends StatelessWidget {
   final InfoComicModel manga;
@@ -28,7 +28,8 @@ class CardManga extends StatelessWidget {
             OctoImage(
               width: 100,
               height: 150,
-              image: NetworkImage(manga.thumb, headers: Map.from(Global.header)),
+              image:
+                  NetworkImage(manga.thumb, headers: Map.from(Global.header)),
               placeholderBuilder: OctoPlaceholder.blurHash(
                 'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
               ),

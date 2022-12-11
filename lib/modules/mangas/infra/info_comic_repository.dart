@@ -1,13 +1,14 @@
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/models/result_data.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/info_comic_repository_inter.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class InfoComicRepository extends IInforComicRepository {
   InfoComicRepository(super.appwriteAdmin);
 
   @override
-  Future<ResultData<InfoComicModel>> list({required String search, int? offset, String? gender}) async {
+  Future<ResultData<InfoComicModel>> list(
+      {required String search, int? offset, String? gender}) async {
     var queries = [];
     if (search.isNotEmpty) {
       queries.add(Query.search('name', search.trim()));

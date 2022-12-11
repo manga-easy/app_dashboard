@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/interfaces/repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_params.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class UserRepo extends IRepo<User, CredencialParams?> {
   UserRepo(super.db);

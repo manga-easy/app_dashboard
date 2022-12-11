@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_params.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class BannerRepository extends IRepoExternal<BannerModel, BannerParams> {
   @override
@@ -50,7 +50,8 @@ class BannerRepository extends IRepoExternal<BannerModel, BannerParams> {
   }
 
   @override
-  Future<DataRepoExternal<BannerModel>> listDocument({BannerParams? where}) async {
+  Future<DataRepoExternal<BannerModel>> listDocument(
+      {BannerParams? where}) async {
     var ret = await db.database.listDocuments(collectionId: table);
     var data = ret.documents.map((e) => BannerModel.fromJson(e.data)).toList();
     return DataRepoExternal(

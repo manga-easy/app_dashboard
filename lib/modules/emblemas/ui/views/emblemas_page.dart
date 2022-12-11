@@ -4,7 +4,7 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/mo
 import 'package:dashboard_manga_easy/modules/emblemas/ui/controllers/emblemas_controller.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblema_page.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EmblemasPage extends StatefulWidget {
   static const route = '/Emblemas';
