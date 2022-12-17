@@ -14,6 +14,8 @@ import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/cria_ed
 import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_enquete_page.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/enquete_page.dart';
+import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_details_page.dart';
+import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_pages.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pages.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
@@ -191,15 +193,26 @@ class ServiceRoute extends IService {
           builder: (_) => const ConfigAppPage(),
           settings: settings,
         );
+      case HostPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const HostPage(),
+          settings: settings,
+        );
+      case HostDetailsPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const HostDetailsPage(),
+          settings: settings,
+        );
       default:
         return null;
     }
   }
 
   List<String> menuRoutes() {
-    var routes = [MainPage.route, MangasPage.route];
+    var routes = [MainPage.route];
     if (permissions!.value == LevelPermissoes.admin.value) {
       routes.addAll([
+        MangasPage.route,
         ConfigAppPage.route,
         UsersPage.route,
         RecomendacaoPage.route,
@@ -209,6 +222,7 @@ class ServiceRoute extends IService {
         PermissoesPage.route,
         TemporadasPage.route,
         EnquetePage.route,
+        HostPage.route,
       ]);
       return routes;
     }

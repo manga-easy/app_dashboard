@@ -7,6 +7,7 @@ import 'package:dashboard_manga_easy/modules/configApp/config_app_modules.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/emblemas_module.dart';
 import 'package:dashboard_manga_easy/modules/enquente/enquete_module.dart';
+import 'package:dashboard_manga_easy/modules/host/host_module.dart';
 import 'package:dashboard_manga_easy/modules/mangas/mangas_modules.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/permissoes_module.dart';
@@ -23,8 +24,10 @@ bool isDemoUsingDynamicColors = false;
 // Fictitious brand color.
 const _brandBlue = Color(0xFF1E88E5);
 
-CustomColors lightCustomColors = const CustomColors(danger: Color.fromARGB(255, 56, 53, 229));
-CustomColors darkCustomColors = const CustomColors(danger: Color.fromARGB(255, 154, 198, 239));
+var lightCustomColors =
+    const CustomColors(danger: Color.fromARGB(255, 56, 53, 229));
+var darkCustomColors =
+    const CustomColors(danger: Color.fromARGB(255, 154, 198, 239));
 final di = GetIt.instance;
 Future<void> main() async {
   //register all modules
@@ -43,6 +46,7 @@ Future<void> main() async {
   EnqueteModule().register();
   AutorModule().register();
   ConfigAppModule().register();
+  HostModule().register();
   runApp(const MyApp());
 }
 

@@ -30,7 +30,6 @@ class EmblemasModule extends IModuleFactory {
         di(),
       ),
     );
-    di.registerFactory(() => EmblemasRepository(di()));
     //register controllers
     di.registerFactory(() => EmblemasController(di()));
     di.registerFactory(
