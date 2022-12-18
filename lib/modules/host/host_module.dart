@@ -32,6 +32,7 @@ class HostModule extends IModuleFactory {
     di.registerFactory(() => HostController(
           listHostCase: di(),
           deleteHostCase: di(),
+          updateHostCase: di(),
         ));
   }
 }
