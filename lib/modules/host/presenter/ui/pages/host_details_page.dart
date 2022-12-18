@@ -78,16 +78,17 @@ class _HostDetailsPageState extends State<HostDetailsPage> {
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),
                         CampoPadraoAtom(
-                          hintText: 'Status',
-                          initialValue: ct.host!.status,
-                          onChange: (v) => ct.host!.status = v,
-                        ),
-                        const SizedBox(height: AppTheme.defaultPadding * 2),
-                        CampoPadraoAtom(
                           hintText: 'Ordem',
                           initialValue: ct.host!.order.toString(),
                           onChange: (v) =>
                               ct.host!.order = int.tryParse(v) ?? 0,
+                        ),
+                        const SizedBox(height: AppTheme.defaultPadding * 2),
+                        CampoPadraoAtom(
+                          hintText: 'Idhost',
+                          initialValue: ct.host!.idHost.toString(),
+                          onChange: (v) =>
+                              ct.host!.idHost = int.tryParse(v) ?? 0,
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),
                         ButtonPadraoAtom(
