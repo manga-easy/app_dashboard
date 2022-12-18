@@ -16,9 +16,6 @@ class UpdateHostCase {
     if (host.interstitialAdUnitId.isEmpty) {
       throw Exception('interstitialAdUnitId não pode ser vazio');
     }
-    if (host.status.isEmpty) {
-      throw Exception('Status não pode ser vazio');
-    }
     await hostRepository.updateDocument(objeto: host);
   }
 }

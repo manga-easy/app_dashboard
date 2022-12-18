@@ -16,9 +16,6 @@ class CreateHostCase {
     if (host.interstitialAdUnitId.isEmpty) {
       throw Exception('interstitialAdUnitId não pode ser vazio');
     }
-    if (host.status.isEmpty) {
-      throw Exception('Status não pode ser vazio');
-    }
     var ret = await hostRepository.listDocument();
 
     host.order = ++ret.first.order;
