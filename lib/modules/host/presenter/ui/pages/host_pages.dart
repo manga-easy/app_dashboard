@@ -1,3 +1,4 @@
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_controller.dart';
@@ -36,27 +37,61 @@ class _HostPageState extends State<HostPage> {
       labelNovoItem: 'Host',
       itemBuilderLista: (context, index) {
         HostModel host = ct.list[index];
-        return Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              onTap: () => Navigator.pushNamed(
-                context,
-                HostDetailsPage.route,
-                arguments: host,
-              ),
-              leading: Text(host.name),
-              title: Text(host.name),
-              subtitle: Text(
-                host.status,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: Colors.white),
-              ),
-              trailing: IconButton(
-                onPressed: () => ct.deleteHost(context, host),
-                icon: const Icon(Icons.delete),
+        return InkWell(
+          onTap: () => Navigator.pushNamed(
+            context,
+            HostDetailsPage.route,
+            arguments: host,
+          ),
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 10, right: 16),
+            color: Theme.of(context).cardColor,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(host.name),
+                        Text(
+                          host.host.length > 30
+                              ? '${host.host.substring(0, 30)} ...'
+                              : host.host,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () => ct.deleteHost(context, host),
+                        child: const Icon(Icons.close),
+                      ),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () => ct.changStatus(host),
+                        style: TextButton.styleFrom(
+                          backgroundColor: host.status == HostStatus.enable
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                        child: Text(
+                          host.status.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           ),
