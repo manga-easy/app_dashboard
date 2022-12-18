@@ -20,9 +20,9 @@ class HostModule extends IModuleFactory {
     di.registerFactory<HostRepository>(() => HostRepositoryImp(di()));
     //usecase
     di.registerFactory(() => ListHostCase(di()));
-    di.registerFactory(() => CreateHostCase(di()));
-    di.registerFactory(() => UpdateHostCase(di()));
-    di.registerFactory(() => DeleteHostCase(di()));
+    di.registerFactory(() => CreateHostCase(di(), di(), di()));
+    di.registerFactory(() => UpdateHostCase(di(), di(), di()));
+    di.registerFactory(() => DeleteHostCase(di(), di(), di()));
     //controllers
     di.registerFactory(() => HostDetailsController(
           createHostCase: di(),
