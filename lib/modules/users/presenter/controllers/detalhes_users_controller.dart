@@ -6,11 +6,11 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dart_appwrite/dart_appwrite.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class UsersDetalhesController extends IController {
   final AppwriteAdmin app;
@@ -37,12 +37,13 @@ class UsersDetalhesController extends IController {
   });
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     indexP.dispose();
   }
 
   @override
-  Future<void> onInit(BuildContext context) async {
+  Future<void> init(BuildContext context) async {
     user = ModalRoute.of(context)!.settings.arguments as User;
     carregaXpsUser();
     await carrega();
@@ -57,7 +58,8 @@ class UsersDetalhesController extends IController {
         Query.equal('userId', user!.id),
       ],
     );
-    emblemasUsers = retorno.documents.map((e) => EmblemaUser.fromJson(e.data)).toList();
+    emblemasUsers =
+        retorno.documents.map((e) => EmblemaUser.fromJson(e.data)).toList();
     emblemasUsers = emblemasUsers.reversed.toList();
   }
 
@@ -152,8 +154,10 @@ class UsersDetalhesController extends IController {
       limit: 100,
       collectionId: Emblema.collectionId,
     );
-    listEmblema = retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
-    listEmblema.removeWhere((element) => !element.name.toLowerCase().contains(pesquisa.toLowerCase()));
+    listEmblema =
+        retorno.documents.map((e) => Emblema.fromJson(e.data)).toList();
+    listEmblema.removeWhere((element) =>
+        !element.name.toLowerCase().contains(pesquisa.toLowerCase()));
     return listEmblema;
   }
 
@@ -167,7 +171,8 @@ class UsersDetalhesController extends IController {
       orderAttributes: ['\$id'],
       orderTypes: ['DESC'],
     );
-    listXps.value = retorno.documents.map((e) => NivelUser.fromJson(e.data)).toList();
+    listXps.value =
+        retorno.documents.map((e) => NivelUser.fromJson(e.data)).toList();
   }
 
   Future<void> removerEmblema(String id, BuildContext context) async {

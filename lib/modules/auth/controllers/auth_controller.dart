@@ -7,9 +7,9 @@ import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/erros_auth.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/credencial_repo.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart' as sdk;
+import 'package:manga_easy_sdk/manga_easy_sdk.dart' as sdk;
 
 class AuthController extends IController {
   final CredencialRepo credencialRepo;
@@ -21,16 +21,21 @@ class AuthController extends IController {
   var email = TextEditingController();
   var password = TextEditingController();
 
-  AuthController({required this.serviceRoute, required this.app, required this.credencialRepo});
+  AuthController({
+    required this.serviceRoute,
+    required this.app,
+    required this.credencialRepo,
+  });
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     email.dispose();
     password.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     loginAutomatico(context);
     carregaCredencial();
   }
@@ -59,7 +64,7 @@ class AuthController extends IController {
   }
 
   Future<Session> checkUsuario() async {
-    return await app.account.createSession(
+    return await app.account.createEmailSession(
       email: email.text,
       password: password.text,
     );

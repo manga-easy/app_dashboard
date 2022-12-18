@@ -1,10 +1,13 @@
 import 'package:dashboard_manga_easy/core/core_module.dart';
 import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
+import 'package:dashboard_manga_easy/modules/autor/autor_module.dart';
 import 'package:dashboard_manga_easy/modules/banners/banners_module.dart';
+import 'package:dashboard_manga_easy/modules/configApp/config_app_modules.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/emblemas_module.dart';
 import 'package:dashboard_manga_easy/modules/enquente/enquete_module.dart';
+import 'package:dashboard_manga_easy/modules/host/host_module.dart';
 import 'package:dashboard_manga_easy/modules/mangas/mangas_modules.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/permissoes_module.dart';
@@ -16,13 +19,15 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-bool _isDemoUsingDynamicColors = false;
+bool isDemoUsingDynamicColors = false;
 
 // Fictitious brand color.
 const _brandBlue = Color(0xFF1E88E5);
 
-CustomColors lightCustomColors = const CustomColors(danger: Color.fromARGB(255, 56, 53, 229));
-CustomColors darkCustomColors = const CustomColors(danger: Color.fromARGB(255, 154, 198, 239));
+var lightCustomColors =
+    const CustomColors(danger: Color.fromARGB(255, 56, 53, 229));
+var darkCustomColors =
+    const CustomColors(danger: Color.fromARGB(255, 154, 198, 239));
 final di = GetIt.instance;
 Future<void> main() async {
   //register all modules
@@ -39,6 +44,9 @@ Future<void> main() async {
   PermissoesModule().register();
   TemporadasModule().register();
   EnqueteModule().register();
+  AutorModule().register();
+  ConfigAppModule().register();
+  HostModule().register();
   runApp(const MyApp());
 }
 
@@ -69,7 +77,7 @@ class MyApp extends StatelessWidget {
           darkColorScheme = darkColorScheme.copyWith(secondary: _brandBlue);
           darkCustomColors = darkCustomColors.harmonized(darkColorScheme);
 
-          _isDemoUsingDynamicColors = true; // ignore, only for demo purposes
+          isDemoUsingDynamicColors = true; // ignore, only for demo purposes
         } else {
           // Otherwise, use fallback schemes.
           lightColorScheme = ColorScheme.fromSeed(

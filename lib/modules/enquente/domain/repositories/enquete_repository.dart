@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/enquente/domain/models/enquete_params.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EnqueteRepository extends IRepoExternal<EnqueteModel, EnqueteParams> {
   @override
@@ -50,7 +50,8 @@ class EnqueteRepository extends IRepoExternal<EnqueteModel, EnqueteParams> {
   }
 
   @override
-  Future<DataRepoExternal<EnqueteModel>> listDocument({EnqueteParams? where}) async {
+  Future<DataRepoExternal<EnqueteModel>> listDocument(
+      {EnqueteParams? where}) async {
     // var filtro = [];
     // if (where != null) {
     //   if (where.userId != null) {

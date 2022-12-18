@@ -3,7 +3,7 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/repositories/banner_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class BannerController extends IController {
   final BannerRepository bannerRepository;
@@ -14,12 +14,13 @@ class BannerController extends IController {
   BannerController({required this.bannerRepository, required this.global});
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     listaBanner();
   }
 
@@ -37,7 +38,7 @@ class BannerController extends IController {
 
   Future<void> deleteBanner(BannerModel reco, context) async {
     try {
-      await bannerRepository.deletDocument(id: BannerModel.collectionID);
+      await bannerRepository.deletDocument(id: reco.id!);
       AppHelps.confirmaDialog(
         title: 'Sucesso',
         content: 'Banner deletada com sucesso',

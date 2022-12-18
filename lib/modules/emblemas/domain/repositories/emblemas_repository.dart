@@ -1,7 +1,7 @@
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EmblemasRepository extends IRepoExternal<Emblema, EmblemaParams> {
   @override

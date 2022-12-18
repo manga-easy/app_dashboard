@@ -1,11 +1,11 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/recomendacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class RecomendacaoPage extends StatefulWidget {
   static const route = '/Recomendacao';
@@ -19,13 +19,13 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -75,8 +75,9 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                       ButtonPadraoAtom(
                         title: "Deletar",
                         icone: Icons.delete_forever,
-                        onPress: () =>
-                            ct.deleteRecomendacao(reco, context).then((value) => ct.listaRecomendacao()),
+                        onPress: () => ct
+                            .deleteRecomendacao(reco, context)
+                            .then((value) => ct.listaRecomendacao()),
                       ),
                     ],
                   ),

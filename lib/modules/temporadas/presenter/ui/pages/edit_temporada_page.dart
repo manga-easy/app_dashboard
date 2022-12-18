@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/controllers/edit_temporada_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -18,13 +18,13 @@ class _EditTemporadasPageState extends State<EditTemporadasPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -44,7 +44,8 @@ class _EditTemporadasPageState extends State<EditTemporadasPage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.defaultPadding),
               children: [
                 CampoPadraoAtom(
                   hintText: 'Titulo da temporada',

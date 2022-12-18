@@ -1,9 +1,10 @@
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user_params.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class EmblemaUserRepository extends IRepoExternal<EmblemaUser, EmblemaUserParams> {
+class EmblemaUserRepository
+    extends IRepoExternal<EmblemaUser, EmblemaUserParams> {
   @override
   String get table => EmblemaUser.collectionId;
 
@@ -51,7 +52,8 @@ class EmblemaUserRepository extends IRepoExternal<EmblemaUser, EmblemaUserParams
   }
 
   @override
-  Future<DataRepoExternal<EmblemaUser>> listDocument({EmblemaUserParams? where}) async {
+  Future<DataRepoExternal<EmblemaUser>> listDocument(
+      {EmblemaUserParams? where}) async {
     var filtro = [];
     if (where != null) {
       if (where.idEmblema != null) {

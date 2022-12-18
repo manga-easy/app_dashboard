@@ -3,7 +3,7 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/repositories/banner_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CriarBannerController extends ValueNotifier implements IController {
   final BannerRepository bannerRepository;
@@ -15,10 +15,12 @@ class CriarBannerController extends ValueNotifier implements IController {
   }) : super(null);
 
   @override
-  void onClose() {}
+  void dispose() {
+    super.dispose();
+  }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     banner = ModalRoute.of(context)!.settings.arguments as BannerModel?;
     banner ??= BannerModel(
       image: '',

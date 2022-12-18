@@ -4,13 +4,14 @@ import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhe
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/select_dados.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EmblemasUsersW extends StatelessWidget {
   final UsersDetalhesController ct;
   final List<EmblemaUser> list;
 
-  const EmblemasUsersW({Key? key, required this.list, required this.ct}) : super(key: key);
+  const EmblemasUsersW({Key? key, required this.list, required this.ct})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,8 @@ class EmblemasUsersW extends StatelessWidget {
         SizedBox(
           height: 140,
           child: Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
             child: ListView.separated(
               separatorBuilder: (context, index) => Divider(
                 color: Theme.of(context).colorScheme.primary,
@@ -55,7 +57,8 @@ class EmblemasUsersW extends StatelessWidget {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 var userEmblema = list[index];
-                var emb = ct.listEmblema.firstWhere((element) => element.id == userEmblema.idEmblema);
+                var emb = ct.listEmblema.firstWhere(
+                    (element) => element.id == userEmblema.idEmblema);
                 return Stack(
                   children: [
                     Padding(
@@ -72,14 +75,16 @@ class EmblemasUsersW extends StatelessWidget {
                           ),
                           Text(
                             DateFormat.yMMMMEEEEd().format(
-                              DateTime.fromMillisecondsSinceEpoch(userEmblema.timeCria),
+                              DateTime.fromMillisecondsSinceEpoch(
+                                  userEmblema.timeCria),
                             ),
                           ),
                         ],
                       ),
                     ),
                     IconButton(
-                      onPressed: () => ct.removerEmblema(userEmblema.id!, context),
+                      onPressed: () =>
+                          ct.removerEmblema(userEmblema.id!, context),
                       icon: const Icon(
                         Icons.delete,
                         color: Colors.red,

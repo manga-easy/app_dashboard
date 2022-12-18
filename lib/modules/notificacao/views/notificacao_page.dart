@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +16,13 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -35,7 +35,8 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
           route: NotificacaoPage.route,
           statusBuild: ct.status.value,
           onPressedAtualiza: ct.carregaNotificacao,
-          onPressedNovoItem: () => Navigator.pushNamed(context, SendNotificationPage.route),
+          onPressedNovoItem: () =>
+              Navigator.pushNamed(context, SendNotificationPage.route),
           labelNovoItem: "Enviar notificação",
           itemBuilderLista: (context, index) {
             var use = ct.lista.value[index];
@@ -44,12 +45,16 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
                 ListTile(
                   leading: CircleAvatar(
                     radius: 35,
-                    child: Text(use.titulo.substring(0, use.titulo.length > 1 ? 1 : 0)),
+                    child: Text(
+                        use.titulo.substring(0, use.titulo.length > 1 ? 1 : 0)),
                   ),
                   title: Text(use.titulo),
                   subtitle: Text(
                     use.menssege,
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1!
+                        .copyWith(color: Colors.white),
                   ),
                   trailing: IconButton(
                     icon: const Icon(

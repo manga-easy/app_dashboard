@@ -1,6 +1,6 @@
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class SelectUser extends StatefulWidget {
   final Future<List<User>> Function(String v) future;
@@ -25,7 +25,8 @@ class _SelectUserState extends State<SelectUser> {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: ListView(
           children: [
             Text(
@@ -56,7 +57,10 @@ class _SelectUserState extends State<SelectUser> {
                           title: Text(user.name),
                           subtitle: Text(
                             user.email,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
                                   color: Colors.white,
                                 ),
                           ),

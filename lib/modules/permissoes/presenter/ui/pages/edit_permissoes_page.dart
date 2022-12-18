@@ -1,24 +1,14 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/edit_permissoes_controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/organisms/select_user.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
-
-enum LevelPermissoes {
-  none(value: 0),
-  admin(value: 90),
-  parceiro(value: 40),
-  autor(value: 30),
-  root(value: 100);
-
-  final int value;
-  const LevelPermissoes({required this.value});
-}
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EditPermissoesPage extends StatefulWidget {
   static const route = '/EditPermissoes';
@@ -32,13 +22,13 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -53,7 +43,8 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
             title: const Text('Criar Permissões'),
           ),
           body: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppTheme.defaultPadding),
             children: [
               DropdownButton<int>(
                 isExpanded: true,

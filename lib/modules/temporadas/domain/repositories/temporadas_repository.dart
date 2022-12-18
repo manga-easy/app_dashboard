@@ -1,9 +1,10 @@
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/domain/models/temporadas_params.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class TemporadasRepository extends IRepoExternal<TemporadaModel, TemporadasParams> {
+class TemporadasRepository
+    extends IRepoExternal<TemporadaModel, TemporadasParams> {
   @override
   String get table => TemporadaModel.collectionId;
 
@@ -51,7 +52,8 @@ class TemporadasRepository extends IRepoExternal<TemporadaModel, TemporadasParam
   }
 
   @override
-  Future<DataRepoExternal<TemporadaModel>> listDocument({TemporadasParams? where}) async {
+  Future<DataRepoExternal<TemporadaModel>> listDocument(
+      {TemporadasParams? where}) async {
     var filtro = [];
     if (where != null) {
       if (where.userId != null) {
@@ -62,7 +64,8 @@ class TemporadasRepository extends IRepoExternal<TemporadaModel, TemporadasParam
       collectionId: table,
       queries: filtro,
     );
-    var data = ret.documents.map((e) => TemporadaModel.fromJson(e.data)).toList();
+    var data =
+        ret.documents.map((e) => TemporadaModel.fromJson(e.data)).toList();
     return DataRepoExternal(
       data: data,
       total: ret.total,

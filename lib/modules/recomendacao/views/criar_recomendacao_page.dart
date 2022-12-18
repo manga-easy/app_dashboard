@@ -1,11 +1,11 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/criar_recomendacao_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CriarRecomendacaoPage extends StatefulWidget {
   static const route = '/CriarRecomendacao';
@@ -19,13 +19,13 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -57,7 +57,8 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
                           initialValue: ct.recomendacao!.title,
                           onChange: (v) {
                             ct.recomendacao!.title = v;
-                            ct.recomendacao!.uniqueid = Helps.convertUniqueid(v);
+                            ct.recomendacao!.uniqueid =
+                                Helps.convertUniqueid(v);
                           },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),

@@ -3,7 +3,7 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class RecomendacaoController extends IController {
   final AppwriteClient app;
@@ -14,12 +14,13 @@ class RecomendacaoController extends IController {
   RecomendacaoController({required this.app, required this.global});
 
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     listaRecomendacao();
   }
 
@@ -32,7 +33,9 @@ class RecomendacaoController extends IController {
         orderAttributes: ['dataCria'],
         orderTypes: ['DESC'],
       );
-      listaRecomendacaoItens = response.documents.map((e) => RecomendacoesModel.fromJson(e.data)).toList();
+      listaRecomendacaoItens = response.documents
+          .map((e) => RecomendacoesModel.fromJson(e.data))
+          .toList();
       status.value = StatusBuild.done;
     } catch (e) {
       status.value = StatusBuild.erro;

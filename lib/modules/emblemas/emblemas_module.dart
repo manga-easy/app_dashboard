@@ -2,8 +2,11 @@ import 'package:dashboard_manga_easy/core/interfaces/module_factory.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/ui/controllers/cria_edita_emblema_controller.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/ui/controllers/emblemas_controller.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/usecases/create_emblema_case.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/usecases/list_emblema_case.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/usecases/update_emblema_case.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/presenter/controllers/cria_edita_emblema_controller.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/presenter/controllers/emblemas_controller.dart';
 
 class EmblemasModule extends IModuleFactory {
   @override
@@ -11,8 +14,30 @@ class EmblemasModule extends IModuleFactory {
     //repositories
     di.registerFactory(() => EmblemasRepository(di()));
     di.registerFactory(() => EmblemaUserRepository(di()));
+    //usercases
+    di.registerFactory<ListEmblemasCase>(() => ListEmblemasCaseImpl(di()));
+    di.registerFactory<CreateEmblemaCase>(
+      () => CreateEmblemaCaseImpl(
+        di(),
+        di(),
+        di(),
+      ),
+    );
+    di.registerFactory<UpdateEmblemaCase>(
+      () => UpdateEmblemaCaseImpl(
+        di(),
+        di(),
+        di(),
+      ),
+    );
     //register controllers
-    di.registerFactory(() => EmblemasController(emblemasRepository: di()));
-    di.registerFactory(() => CriaEditaEmblemaController(emblemasRepository: di()));
+    di.registerFactory(() => EmblemasController(di()));
+    di.registerFactory(
+      () => CriaEditaEmblemaController(
+        null,
+        updateEmblemaCase: di(),
+        createEmblemaCase: di(),
+      ),
+    );
   }
 }

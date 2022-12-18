@@ -4,7 +4,7 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CriarRecomendacaoController extends ValueNotifier implements IController {
   final AppwriteClient app;
@@ -16,11 +16,14 @@ class CriarRecomendacaoController extends ValueNotifier implements IController {
   }) : super(null);
 
   @override
-  void onClose() {}
+  void dispose() {
+    super.dispose();
+  }
 
   @override
-  void onInit(BuildContext context) {
-    recomendacao = ModalRoute.of(context)!.settings.arguments as RecomendacoesModel?;
+  void init(BuildContext context) {
+    recomendacao =
+        ModalRoute.of(context)!.settings.arguments as RecomendacoesModel?;
     recomendacao ??= RecomendacoesModel(
       dataCria: DateTime.now().millisecondsSinceEpoch,
       link: '',
@@ -37,7 +40,8 @@ class CriarRecomendacaoController extends ValueNotifier implements IController {
           Navigator.of(context).pop();
           AppHelps.confirmaDialog(
             title: 'Erro',
-            content: 'Recomendação já foi feita, edite a recomenção anterior do mangá',
+            content:
+                'Recomendação já foi feita, edite a recomenção anterior do mangá',
             context: context,
           );
           return;

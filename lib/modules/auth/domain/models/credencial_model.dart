@@ -1,4 +1,4 @@
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CredencialModel implements IModelData {
   @override

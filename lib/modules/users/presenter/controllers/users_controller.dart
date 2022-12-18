@@ -2,7 +2,7 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class UsersController extends IController {
   var lista = <User>[];
@@ -13,13 +13,14 @@ class UsersController extends IController {
 
   UsersController({required this.app, required this.global});
   @override
-  void onClose() {
+  void dispose() {
+    super.dispose();
     status.dispose();
     pesquisa.dispose();
   }
 
   @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     carregaUsers();
   }
 

@@ -3,7 +3,7 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
 import 'package:dashboard_manga_easy/modules/enquente/domain/repositories/enquete_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EditEnqueteController extends ValueNotifier implements IController {
   final UserRepositoryExternal userRepo;
@@ -15,12 +15,7 @@ class EditEnqueteController extends ValueNotifier implements IController {
   }) : super(null);
 
   @override
-  void onClose() {
-    dispose();
-  }
-
-  @override
-  void onInit(BuildContext context) {
+  void init(BuildContext context) {
     enquete = ModalRoute.of(context)!.settings.arguments as EnqueteModel?;
     enquete ??= EnqueteModel(
       createDate: DateTime.now().millisecondsSinceEpoch,

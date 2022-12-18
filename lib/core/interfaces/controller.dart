@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-abstract class IController {
-  void onClose();
-  void onInit(BuildContext context);
+abstract class IController extends ChangeNotifier {
+  void init(BuildContext context);
 }

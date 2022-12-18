@@ -1,8 +1,9 @@
 import 'package:dashboard_manga_easy/core/interfaces/external_repositories_interface.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/filtro_notificacao.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class NotificacaoRepository extends IRepoExternal<Notificacao, FiltroNotificacao> {
+class NotificacaoRepository
+    extends IRepoExternal<Notificacao, FiltroNotificacao> {
   @override
   String get table => Notificacao.collectionId;
 
@@ -50,7 +51,8 @@ class NotificacaoRepository extends IRepoExternal<Notificacao, FiltroNotificacao
   }
 
   @override
-  Future<DataRepoExternal<Notificacao>> listDocument({FiltroNotificacao? where}) async {
+  Future<DataRepoExternal<Notificacao>> listDocument(
+      {FiltroNotificacao? where}) async {
     var filtro = [];
 
     var ret = await db.database.listDocuments(

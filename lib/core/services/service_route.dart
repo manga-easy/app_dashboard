@@ -1,17 +1,25 @@
 import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/comic_page.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_chapter_comic_page.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_comic_page.dart';
+import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_content_chapter_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/detalhes_emblemas_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/forbiden_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/views/main_screen.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/ui/views/cria_edita_emblema_page.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/ui/views/emblemas_page.dart';
+import 'package:dashboard_manga_easy/modules/configApp/presenter/ui/pages/config_app_page.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/detalhes_emblemas_page.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/forbiden_page.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/cria_edita_emblema_page.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_enquete_page.dart';
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/enquete_page.dart';
+import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_details_page.dart';
+import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_pages.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pages.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
@@ -23,13 +31,12 @@ import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/edite_nive
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class ServiceRoute extends IService {
   bool isInicialize = false;
   User? user;
   Permissions? permissions;
-  final levelAdmin = 80;
   @override
   Future<void> initialise() async {
     isInicialize = true;
@@ -62,9 +69,29 @@ class ServiceRoute extends IService {
           builder: (_) => const MangasPage(),
           settings: settings,
         );
+      case ComicAuthorialPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const ComicAuthorialPage(),
+          settings: settings,
+        );
+      case EditComicAuthorialPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditComicAuthorialPage(),
+          settings: settings,
+        );
+      case EditChapterComicPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditChapterComicPage(),
+          settings: settings,
+        );
+      case EditContentChapterPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const EditContentChapterPage(),
+          settings: settings,
+        );
     }
     //somnte admin podem acessar as rotas abaixo
-    if (permissions!.value < levelAdmin) {
+    if (permissions!.value < LevelPermissoes.admin.value) {
       return MaterialPageRoute(
         builder: (_) => const ForbidenPage(),
         settings: settings,
@@ -161,29 +188,48 @@ class ServiceRoute extends IService {
           builder: (_) => const EditeNivelUserPage(),
           settings: settings,
         );
+      case ConfigAppPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const ConfigAppPage(),
+          settings: settings,
+        );
+      case HostPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const HostPage(),
+          settings: settings,
+        );
+      case HostDetailsPage.route:
+        return MaterialPageRoute(
+          builder: (_) => const HostDetailsPage(),
+          settings: settings,
+        );
       default:
         return null;
     }
   }
 
   List<String> menuRoutes() {
-    if (permissions!.value >= levelAdmin) {
-      return [
-        MainPage.route,
+    var routes = [MainPage.route];
+    if (permissions!.value == LevelPermissoes.admin.value) {
+      routes.addAll([
+        MangasPage.route,
+        ConfigAppPage.route,
         UsersPage.route,
         RecomendacaoPage.route,
         NotificacaoPage.route,
         EmblemasPage.route,
         BannerPage.route,
-        MangasPage.route,
         PermissoesPage.route,
         TemporadasPage.route,
         EnquetePage.route,
-      ];
+        HostPage.route,
+      ]);
+      return routes;
     }
-    return [
-      MainPage.route,
-      MangasPage.route,
-    ];
+    if (permissions!.value == LevelPermissoes.autor.value) {
+      routes.add(ComicAuthorialPage.route);
+      return routes;
+    }
+    return routes;
   }
 }

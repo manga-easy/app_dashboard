@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/controllers/temporadas_controller.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/edit_temporada_page.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +16,13 @@ class _TemporadasPageState extends State<TemporadasPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -56,13 +56,6 @@ class _TemporadasPageState extends State<TemporadasPage> {
                 subtitle: Text(
                   'Ordem: ${data.number}',
                   style: Theme.of(context).textTheme.labelMedium,
-                ),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                    color: Colors.red,
-                  ),
-                  onPressed: () => ct.removeTemporadas(data.id!, context),
                 ),
               ),
             );

@@ -2,10 +2,10 @@ import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/banners_controller.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class BannerPage extends StatefulWidget {
   static const route = '/Banner';
@@ -19,13 +19,13 @@ class _BannerPageState extends State<BannerPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -75,7 +75,9 @@ class _BannerPageState extends State<BannerPage> {
                       ButtonPadraoAtom(
                         title: 'Deletar',
                         icone: Icons.delete_forever,
-                        onPress: () => ct.deleteBanner(reco, context).then((value) => ct.listaBanner()),
+                        onPress: () => ct
+                            .deleteBanner(reco, context)
+                            .then((value) => ct.listaBanner()),
                       ),
                     ],
                   ),
@@ -85,8 +87,9 @@ class _BannerPageState extends State<BannerPage> {
             );
           },
           listaItems: ct.listaBannerItens,
-          onPressedNovoItem: () =>
-              Navigator.of(context).pushNamed(CriarBannerPage.route).then((value) => ct.listaBanner()),
+          onPressedNovoItem: () => Navigator.of(context)
+              .pushNamed(CriarBannerPage.route)
+              .then((value) => ct.listaBanner()),
         );
       },
     );

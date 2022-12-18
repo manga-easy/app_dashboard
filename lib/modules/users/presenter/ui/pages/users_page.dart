@@ -1,9 +1,9 @@
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/user_detalhe_page.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk_manga_easy/sdk_manga_easy.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class UsersPage extends StatefulWidget {
   static const route = '/Users';
@@ -17,13 +17,13 @@ class _UsersPageState extends State<UsersPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.onInit(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     super.initState();
   }
 
   @override
   void dispose() {
-    ct.onClose();
+    ct.dispose();
     super.dispose();
   }
 
@@ -43,7 +43,8 @@ class _UsersPageState extends State<UsersPage> {
           itemBuilderLista: (context, index) {
             User use = ct.lista[index];
             return ListTile(
-              onTap: () => Navigator.pushNamed(context, UserDetalhesPage.route, arguments: use),
+              onTap: () => Navigator.pushNamed(context, UserDetalhesPage.route,
+                  arguments: use),
               leading: CircleAvatar(
                 radius: 35,
                 child: Text(use.name.substring(0, use.name.length > 1 ? 1 : 0)),
@@ -51,7 +52,10 @@ class _UsersPageState extends State<UsersPage> {
               title: Text(use.name),
               subtitle: Text(
                 use.email,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: Colors.white),
               ),
             );
           },
