@@ -29,11 +29,7 @@ class EditChapterComicController extends ValueNotifier implements IController {
     required this.contentChapterRepository,
   }) : super(null);
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
+  
   @override
   Future<void> init(BuildContext context) async {
     var arguments =

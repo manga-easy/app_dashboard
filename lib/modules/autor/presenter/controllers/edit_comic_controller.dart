@@ -18,11 +18,6 @@ class EditComicAuthorialController extends ValueNotifier
       : super(null);
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void init(BuildContext context) {
     comic = ModalRoute.of(context)!.settings.arguments as ComicAuthorialModel?;
     comic ??= ComicAuthorialModel(

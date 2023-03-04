@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/config/responsive.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
+
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 

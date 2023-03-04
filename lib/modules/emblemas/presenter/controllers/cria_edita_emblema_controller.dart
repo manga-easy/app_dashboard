@@ -5,12 +5,12 @@ import 'package:dashboard_manga_easy/modules/emblemas/domain/usecases/update_emb
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class CriaEditaEmblemaController extends ValueNotifier implements IController {
+class CriaEditaEmblemaController extends  IController {
   final CreateEmblemaCase createEmblemaCase;
   final UpdateEmblemaCase updateEmblemaCase;
 
   CriaEditaEmblemaController(
-    super.value, {
+    {
     required this.createEmblemaCase,
     required this.updateEmblemaCase,
   });

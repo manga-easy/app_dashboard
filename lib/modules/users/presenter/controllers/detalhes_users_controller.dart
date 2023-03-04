@@ -1,10 +1,11 @@
 import 'package:api_fcm/api_fcm.dart';
-import 'package:dashboard_manga_easy/core/config/app_config.dart';
+
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
+
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
+
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
@@ -15,7 +16,6 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 class UsersDetalhesController extends IController {
   final AppwriteAdmin app;
   final EmblemaUserRepository emblemaUserRepository;
-  final Global gb;
   final ApiFcm apiFcm = ApiFcm(tokenServer: AppConfig.tokenServer);
   var status = ValueNotifier(StatusBuild.loading);
   var nova = Notificacao(

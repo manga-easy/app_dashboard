@@ -1,5 +1,6 @@
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
+
 import 'package:dashboard_manga_easy/modules/autor/domain/models/comic_model.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/repositories/comic_repository.dart';
 import 'package:flutter/material.dart';
