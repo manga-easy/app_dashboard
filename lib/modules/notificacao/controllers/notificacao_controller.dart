@@ -7,14 +7,13 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class NotificacaoController extends IController {
   final NotificacaoRepository notificacaoRepository;
-  final Global global;
+  
   var status = ValueNotifier(StatusBuild.loading);
 
   var lista = ValueNotifier(<Notificacao>[]);
 
   NotificacaoController({
     required this.notificacaoRepository,
-    required this.global,
   });
   @override
   void dispose() {

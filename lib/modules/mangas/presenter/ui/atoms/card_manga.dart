@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/services/global.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:octo_image/octo_image.dart';

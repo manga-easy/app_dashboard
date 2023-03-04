@@ -15,7 +15,7 @@ class MangasModule extends IModuleFactory {
     //controllers
     di.registerFactory(() => MangasController(
           infoComicRepository: di(),
-          global: di(),
+          
           viewComicRepository: di(),
           getBlockListCase: di(),
           upBlockListCase: di(),

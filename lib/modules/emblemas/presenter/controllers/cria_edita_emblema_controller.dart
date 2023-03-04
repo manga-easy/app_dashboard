@@ -9,7 +9,7 @@ class CriaEditaEmblemaController extends  IController {
   final CreateEmblemaCase createEmblemaCase;
   final UpdateEmblemaCase updateEmblemaCase;
 
-  CriaEditaEmblemaController(
+  CriaEditaEmblemaController(param0, 
     {
     required this.createEmblemaCase,
     required this.updateEmblemaCase,

@@ -16,10 +16,6 @@ class CriarRecomendacaoController extends ValueNotifier implements IController {
     required this.global,
   }) : super(null);
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   void init(BuildContext context) {

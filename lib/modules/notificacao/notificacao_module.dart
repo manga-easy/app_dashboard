@@ -11,6 +11,6 @@ class NotificacaoModule extends IModuleFactory {
     di.registerFactory(() => NotificacaoRepository(di()));
     //register controllers
     di.registerFactory(() => SendNotificationController(notificacaoRepository: di(), userRepo: di()));
-    di.registerFactory(() => NotificacaoController(notificacaoRepository: di(), global: di()));
+    di.registerFactory(() => NotificacaoController(notificacaoRepository: di(), ));
   }
 }

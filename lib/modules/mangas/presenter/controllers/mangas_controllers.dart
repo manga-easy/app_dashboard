@@ -13,11 +13,10 @@ class MangasController extends IController {
   final IInforComicRepository infoComicRepository;
   final GetBlockListCase getBlockListCase;
   final UpBlockListCase upBlockListCase;
-  final Global global;
+ 
 
   MangasController({
     required this.infoComicRepository,
-    required this.global,
     required this.viewComicRepository,
     required this.getBlockListCase,
     required this.upBlockListCase,

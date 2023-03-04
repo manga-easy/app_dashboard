@@ -1,5 +1,4 @@
 import 'package:api_fcm/api_fcm.dart';
-import 'package:dashboard_manga_easy/core/config/app_config.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
@@ -22,10 +21,7 @@ class SendNotificationController extends ValueNotifier implements IController {
       {required this.notificacaoRepository, required this.userRepo})
       : super(null);
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  
 
   @override
   void init(BuildContext context) {}
