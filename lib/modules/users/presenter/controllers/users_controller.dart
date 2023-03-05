@@ -7,16 +7,14 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class UsersController extends IController {
   var lista = <User>[];
-  final Global global;
+
   final AppwriteAdmin app;
   var pesquisa = ValueNotifier('');
-  var status = ValueNotifier(StatusBuild.loading);
 
-  UsersController({required this.app, required this.global});
+  UsersController({required this.app});
   @override
   void dispose() {
     super.dispose();
-    status.dispose();
     pesquisa.dispose();
   }
 
@@ -27,13 +25,13 @@ class UsersController extends IController {
 
   void carregaUsers() async {
     try {
-      status.value = StatusBuild.loading;
+      state = StatusBuild.loading;
       lista.clear();
       var retorno = await app.users.list(limit: 100, search: pesquisa.value);
       lista = retorno.users.map((e) => User.fromJson(e.toMap())).toList();
-      status.value = StatusBuild.done;
+      state = StatusBuild.done;
     } catch (e) {
-      status.value = StatusBuild.erro;
+      state = StatusBuild.erro;
     }
   }
 }

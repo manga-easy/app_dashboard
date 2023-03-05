@@ -32,9 +32,9 @@ class _SendNotificationPageState extends State<SendNotificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Enviar Notificações'),

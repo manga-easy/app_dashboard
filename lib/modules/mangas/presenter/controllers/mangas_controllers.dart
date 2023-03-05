@@ -1,5 +1,5 @@
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/configApp/domain/usercases/get_block_list_case.dart';
 import 'package:dashboard_manga_easy/modules/configApp/domain/usercases/up_block_list_case.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/info_comic_repository_inter.dart';
@@ -13,7 +13,6 @@ class MangasController extends IController {
   final IInforComicRepository infoComicRepository;
   final GetBlockListCase getBlockListCase;
   final UpBlockListCase upBlockListCase;
- 
 
   MangasController({
     required this.infoComicRepository,
@@ -26,24 +25,22 @@ class MangasController extends IController {
       PagingController(firstPageKey: 0);
   String search = '';
   var total = ValueNotifier(0);
-  var status = ValueNotifier(StatusBuild.loading);
 
   @override
   void dispose() {
     super.dispose();
-    status.dispose();
     total.dispose();
     pagingController.dispose();
   }
 
   @override
   void init(BuildContext context) {
-    status.value = StatusBuild.done;
+    state = StatusBuild.done;
   }
 
   Future<void> alterIsAdult(InfoComicModel manga) async {
     try {
-      status.value = StatusBuild.loading;
+      state = StatusBuild.loading;
       var block = await getBlockListCase();
       if (manga.isAdult) {
         manga.isAdult = false;
@@ -57,7 +54,7 @@ class MangasController extends IController {
     } catch (e) {
       Helps.log(e);
     }
-    status.value = StatusBuild.done;
+    state = StatusBuild.done;
   }
 
   Future<int> carregaViews(String uniqueid) async {

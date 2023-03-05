@@ -33,14 +33,14 @@ class _MangasPageState extends State<MangasPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         return ModuloPageTemplate(
           route: MangasPage.route,
           onChangePesquisa: (v) => ct.search = v,
           onEditCompletPesquisa: () => ct.pagingController.refresh(),
-          statusBuild: ct.status.value,
+          statusBuild: ct.state,
           child: Expanded(
             child: Column(
               children: [

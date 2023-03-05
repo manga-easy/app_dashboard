@@ -5,7 +5,9 @@ import 'package:file_picker/file_picker.dart';
 
 class HtmlEditorExample extends StatefulWidget {
   final HtmlEditorController controller;
-  const HtmlEditorExample({Key? key, required this.title, required this.controller}) : super(key: key);
+  const HtmlEditorExample(
+      {Key? key, required this.title, required this.controller})
+      : super(key: key);
 
   final String title;
 
@@ -44,7 +46,8 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
           onPressed: () {
             widget.controller.toggleCodeView();
           },
-          child: const Text(r'<\>', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+          child: const Text(r'<\>',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -60,49 +63,38 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                 htmlToolbarOptions: HtmlToolbarOptions(
                   toolbarPosition: ToolbarPosition.aboveEditor, //by default
                   toolbarType: ToolbarType.nativeScrollable, //by default
-                  onButtonPressed: (ButtonType type, bool? status, Function? updateStatus) {
-                    print("button '${describeEnum(type)}' pressed, the current selected status is $status");
+                  onButtonPressed:
+                      (ButtonType type, bool? status, Function? updateStatus) {
                     return true;
                   },
-                  onDropdownChanged:
-                      (DropdownType type, dynamic changed, Function(dynamic)? updateSelectedItem) {
-                    print("dropdown '${describeEnum(type)}' changed to $changed");
+                  onDropdownChanged: (DropdownType type, dynamic changed,
+                      Function(dynamic)? updateSelectedItem) {
                     return true;
                   },
-                  mediaLinkInsertInterceptor: (String url, InsertFileType type) {
-                    print(url);
+                  mediaLinkInsertInterceptor:
+                      (String url, InsertFileType type) {
                     return true;
                   },
-                  mediaUploadInterceptor: (PlatformFile file, InsertFileType type) async {
-                    print(file.name); //filename
-                    print(file.size); //size in bytes
-                    print(file.extension); //file extension (eg jpeg or mp4)
+                  mediaUploadInterceptor:
+                      (PlatformFile file, InsertFileType type) async {
+                    //filename
+                    //size in bytes
+                    //file extension (eg jpeg or mp4)
                     return true;
                   },
                 ),
                 otherOptions: const OtherOptions(height: 550),
-                callbacks: Callbacks(onBeforeCommand: (String? currentHtml) {
-                  print('html before change is $currentHtml');
-                }, onChangeContent: (String? changed) {
-                  print('content changed to $changed');
-                }, onChangeCodeview: (String? changed) {
-                  print('code changed to $changed');
-                }, onChangeSelection: (EditorSettings settings) {
-                  print('parent element is ${settings.parentElement}');
-                  print('font name is ${settings.fontName}');
-                }, onDialogShown: () {
-                  print('dialog shown');
-                }, onEnter: () {
-                  print('enter/return pressed');
-                }, onFocus: () {
-                  print('editor focused');
-                }, onBlur: () {
-                  print('editor unfocused');
-                }, onBlurCodeview: () {
-                  print('codeview either focused or unfocused');
-                }, onInit: () {
-                  print('init');
-                },
+                callbacks: Callbacks(
+                    onBeforeCommand: (String? currentHtml) {},
+                    onChangeContent: (String? changed) {},
+                    onChangeCodeview: (String? changed) {},
+                    onChangeSelection: (EditorSettings settings) {},
+                    onDialogShown: () {},
+                    onEnter: () {},
+                    onFocus: () {},
+                    onBlur: () {},
+                    onBlurCodeview: () {},
+                    onInit: () {},
                     //this is commented because it overrides the default Summernote handlers
                     /*onImageLinkInsert: (String? url) {
                     print(url ?? "unknown url");
@@ -113,37 +105,26 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                     print(file.type);
                     print(file.base64);
                   },*/
-                    onImageUploadError: (FileUpload? file, String? base64Str, UploadError error) {
-                  print(describeEnum(error));
-                  print(base64Str ?? '');
-                  if (file != null) {
-                    print(file.name);
-                    print(file.size);
-                    print(file.type);
-                  }
-                }, onKeyDown: (int? keyCode) {
-                  print('$keyCode key downed');
-                }, onKeyUp: (int? keyCode) {
-                  print('$keyCode key released');
-                }, onMouseDown: () {
-                  print('mouse downed');
-                }, onMouseUp: () {
-                  print('mouse released');
-                }, onPaste: () {
-                  print('pasted into editor');
-                }, onScroll: () {
-                  print('editor scrolled');
-                }),
+                    onImageUploadError: (FileUpload? file, String? base64Str,
+                        UploadError error) {
+                      if (file != null) {}
+                    },
+                    onKeyDown: (int? keyCode) {},
+                    onKeyUp: (int? keyCode) {},
+                    onMouseDown: () {},
+                    onMouseUp: () {},
+                    onPaste: () {},
+                    onScroll: () {}),
                 plugins: [
                   SummernoteAtMention(
                       getSuggestionsMobile: (String value) {
                         var mentions = <String>['test1', 'test2', 'test3'];
-                        return mentions.where((element) => element.contains(value)).toList();
+                        return mentions
+                            .where((element) => element.contains(value))
+                            .toList();
                       },
                       mentionsWeb: ['test1', 'test2', 'test3'],
-                      onSelect: (String value) {
-                        print(value);
-                      }),
+                      onSelect: (String value) {}),
                 ],
               ),
               Padding(
@@ -152,30 +133,36 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.blueGrey),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.blueGrey),
                       onPressed: () {
                         widget.controller.undo();
                       },
-                      child: const Text('Undo', style: const TextStyle(color: Colors.white)),
+                      child: const Text('Undo',
+                          style: TextStyle(color: Colors.white)),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.blueGrey),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.blueGrey),
                       onPressed: () {
                         widget.controller.clear();
                       },
-                      child: const Text('Reset', style: TextStyle(color: Colors.white)),
+                      child: const Text('Reset',
+                          style: TextStyle(color: Colors.white)),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () async {
                         var txt = await widget.controller.getText();
-                        if (txt.contains('src=\"data:')) {
+                        if (txt.contains(r'src=\"data:')) {
                           txt =
                               '<text removed due to base-64 data, displaying the text could cause the app to crash>';
                         }
@@ -185,14 +172,16 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                       },
                       child: const Text(
                         'Submit',
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () {
                         widget.controller.redo();
                       },
@@ -214,17 +203,21 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.blueGrey),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.blueGrey),
                       onPressed: () {
                         widget.controller.disable();
                       },
-                      child: const Text('Disable', style: TextStyle(color: Colors.white)),
+                      child: const Text('Disable',
+                          style: TextStyle(color: Colors.white)),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () async {
                         widget.controller.enable();
                       },
@@ -243,21 +236,28 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () {
                         widget.controller.insertText('Google');
                       },
-                      child: const Text('Insert Text', style: const TextStyle(color: Colors.white)),
+                      child: const Text('Insert Text',
+                          style: TextStyle(color: Colors.white)),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () {
-                        widget.controller.insertHtml('''<p style="color: blue">Google in blue</p>''');
+                        widget.controller.insertHtml(
+                            '''<p style="color: blue">Google in blue</p>''');
                       },
-                      child: const Text('Insert HTML', style: const TextStyle(color: Colors.white)),
+                      child: const Text('Insert HTML',
+                          style: TextStyle(color: Colors.white)),
                     ),
                   ],
                 ),
@@ -268,20 +268,25 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () async {
-                        widget.controller.insertLink('Google linked', 'https://google.com', true);
+                        widget.controller.insertLink(
+                            'Google linked', 'https://google.com', true);
                       },
                       child: const Text(
                         'Insert Link',
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () {
                         widget.controller.insertNetworkImage(
                             'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png',
@@ -302,29 +307,38 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.blueGrey),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.blueGrey),
                       onPressed: () {
-                        widget.controller.addNotification('Info notification', NotificationType.info);
+                        widget.controller.addNotification(
+                            'Info notification', NotificationType.info);
                       },
-                      child: const Text('Info', style: TextStyle(color: Colors.white)),
+                      child: const Text('Info',
+                          style: TextStyle(color: Colors.white)),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.blueGrey),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.blueGrey),
                       onPressed: () {
-                        widget.controller.addNotification('Warning notification', NotificationType.warning);
+                        widget.controller.addNotification(
+                            'Warning notification', NotificationType.warning);
                       },
-                      child: const Text('Warning', style: const TextStyle(color: Colors.white)),
+                      child: const Text('Warning',
+                          style: TextStyle(color: Colors.white)),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () async {
-                        widget.controller.addNotification('Success notification', NotificationType.success);
+                        widget.controller.addNotification(
+                            'Success notification', NotificationType.success);
                       },
                       child: const Text(
                         'Success',
@@ -335,9 +349,12 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () {
-                        widget.controller.addNotification('Danger notification', NotificationType.danger);
+                        widget.controller.addNotification(
+                            'Danger notification', NotificationType.danger);
                       },
                       child: const Text(
                         'Danger',
@@ -354,18 +371,23 @@ class HtmlEditorExampleState extends State<HtmlEditorExample> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Colors.blueGrey),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.blueGrey),
                       onPressed: () {
-                        widget.controller
-                            .addNotification('Plaintext notification', NotificationType.plaintext);
+                        widget.controller.addNotification(
+                            'Plaintext notification',
+                            NotificationType.plaintext);
                       },
-                      child: const Text('Plaintext', style: TextStyle(color: Colors.white)),
+                      child: const Text('Plaintext',
+                          style: TextStyle(color: Colors.white)),
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.secondary),
+                      style: TextButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary),
                       onPressed: () async {
                         widget.controller.removeNotification();
                       },

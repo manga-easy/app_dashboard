@@ -26,7 +26,6 @@ class TemporadasModule extends IModuleFactory {
     di.registerFactory(() => TemporadasController(listTemporadaCase: di()));
     di.registerFactory(
       () => EditTemporadasController(
-        null,
         userRepo: di(),
         createTemporadaCase: di(),
         listTemporadaCase: di(),

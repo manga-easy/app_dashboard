@@ -52,7 +52,7 @@ class CampoPadraoAtom extends StatelessWidget {
             obscureText: obscureText != null,
             maxLines: numberLines,
             onFieldSubmitted: onSubmitted,
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
             onChanged: onChange,
             controller: controller,
             cursorColor: Colors.white,

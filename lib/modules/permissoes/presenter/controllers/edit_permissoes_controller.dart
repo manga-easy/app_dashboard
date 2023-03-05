@@ -8,7 +8,7 @@ import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/perm
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class EditPermissoesController extends ValueNotifier implements IController {
+class EditPermissoesController extends IController {
   final UserRepositoryExternal userRepo;
   final PermissoesRepository permissoesRepository;
   final AppwriteAdmin appwriteAdmin;
@@ -17,9 +17,7 @@ class EditPermissoesController extends ValueNotifier implements IController {
     required this.appwriteAdmin,
     required this.permissoesRepository,
     required this.userRepo,
-  }) : super(null);
-
-  
+  });
 
   @override
   void init(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/modules/configApp/infra/datasources/data_source_config.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 

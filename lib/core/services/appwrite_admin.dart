@@ -1,4 +1,5 @@
 import 'package:dart_appwrite/dart_appwrite.dart';
+import 'package:dashboard_manga_easy/core/config/app_config.dart';
 
 import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 
@@ -12,7 +13,7 @@ class AppwriteAdmin extends IService {
   Future<void> initialise() async {
     client = Client();
     client
-    //esta em oculto
+        //esta em oculto
         .setEndpoint(AppConfig.ipserver) // Your Appwrite Endpoint
         .setProject(AppConfig.projectID) // Your project ID
         .setKey(AppConfig.keyAppwrite);

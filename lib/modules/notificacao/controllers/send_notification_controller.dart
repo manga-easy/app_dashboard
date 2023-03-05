@@ -1,4 +1,5 @@
 import 'package:api_fcm/api_fcm.dart';
+import 'package:dashboard_manga_easy/core/config/app_config.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
@@ -6,10 +7,15 @@ import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/no
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class SendNotificationController extends ValueNotifier implements IController {
+class SendNotificationController extends IController {
   final ApiFcm apiFcm = ApiFcm(tokenServer: AppConfig.tokenServer);
   final NotificacaoRepository notificacaoRepository;
   final UserRepositoryExternal userRepo;
+
+  SendNotificationController({
+    required this.notificacaoRepository,
+    required this.userRepo,
+  });
   User? test;
   var nova = Notificacao(
     menssege: '',
@@ -17,11 +23,6 @@ class SendNotificationController extends ValueNotifier implements IController {
     dateMade: DateTime.now().millisecondsSinceEpoch,
     image: '',
   );
-  SendNotificationController(
-      {required this.notificacaoRepository, required this.userRepo})
-      : super(null);
-
-  
 
   @override
   void init(BuildContext context) {}

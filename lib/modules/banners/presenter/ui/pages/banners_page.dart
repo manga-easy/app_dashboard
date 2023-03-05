@@ -30,12 +30,12 @@ class _BannerPageState extends State<BannerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.state,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         return ModuloPageTemplate(
           route: BannerPage.route,
-          statusBuild: ct.state.value,
+          statusBuild: ct.state,
           labelNovoItem: 'Nova Banner',
           onPressedAtualiza: ct.listaBanner,
           itemBuilderLista: (context, index) {

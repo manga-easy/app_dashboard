@@ -1,4 +1,3 @@
-
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/main.dart';
 
@@ -32,10 +31,10 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
-        if (ct.status.value == StatusBuild.loading) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
+        if (ct.state == StatusBuild.loading) {
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),

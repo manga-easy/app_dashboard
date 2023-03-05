@@ -7,15 +7,16 @@ import 'package:dashboard_manga_easy/modules/autor/domain/repositories/comic_rep
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class EditComicAuthorialController extends ValueNotifier
-    implements IController {
+class EditComicAuthorialController extends IController {
   final ServiceRoute serviceRoute;
   final ComicAuthorialRepository comicAuthorialRepository;
-  ComicAuthorialModel? comic;
 
-  EditComicAuthorialController(
-      {required this.comicAuthorialRepository, required this.serviceRoute})
-      : super(null);
+  EditComicAuthorialController({
+    required this.comicAuthorialRepository,
+    required this.serviceRoute,
+  });
+
+  ComicAuthorialModel? comic;
 
   @override
   void init(BuildContext context) {

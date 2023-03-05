@@ -1,7 +1,6 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/models/chapter_authoral_model.dart';
-import 'package:dashboard_manga_easy/modules/autor/domain/models/comic_model.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_chapter_comic_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_comic_controller.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_chapter_comic_page.dart';
@@ -43,9 +42,9 @@ class _EditComicAuthorialPageState extends State<EditComicAuthorialPage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
         ),
-        child: ValueListenableBuilder(
-          valueListenable: ct,
-          builder: (context, value, child) {
+        child: AnimatedBuilder(
+          animation: ct,
+          builder: (context, child) {
             if (ct.comic == null) return const LoadingAtom();
             return ListView(
               padding: const EdgeInsets.symmetric(

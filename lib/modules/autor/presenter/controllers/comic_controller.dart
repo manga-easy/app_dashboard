@@ -8,16 +8,9 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class ComicAuthorialController extends IController {
   final ComicAuthorialRepository comicRepository;
-  var status = ValueNotifier(StatusBuild.loading);
   var list = <ComicAuthorialModel>[];
 
   ComicAuthorialController({required this.comicRepository});
-
-  @override
-  void close() {
-    status.dispose();
-    dispose();
-  }
 
   @override
   void init(BuildContext context) {
@@ -26,12 +19,12 @@ class ComicAuthorialController extends IController {
 
   Future<void> carregaComicAuthorialAutor() async {
     try {
-      status.value = StatusBuild.loading;
+      state = StatusBuild.loading;
       list = await comicRepository.list();
-      status.value = StatusBuild.done;
+      state = StatusBuild.done;
     } catch (e) {
       Helps.log(e);
-      status.value = StatusBuild.erro;
+      state = StatusBuild.erro;
     }
   }
 }
