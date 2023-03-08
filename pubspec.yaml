@@ -11,16 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  manga_easy_sdk:
-      git:
-        url: https://github.com/manga-easy/manga_easy_sdk.git
-        ref: 1.1.5
   google_fonts: ^4.0.3
   flutter_svg: ^2.0.2
   dart_appwrite: 6.0.1
   appwrite: 7.0.0
   get_it: ^7.2.0
-  dio: ^5.0.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   uuid: ^3.0.7
@@ -34,7 +29,23 @@ dependencies:
   html_editor_enhanced: 2.5.1
   infinite_scroll_pagination: ^3.2.0
   file_picker: ^5.2.5
-
+  #### MICRO APPS #####
+  manga_easy_advanced_search:
+    git:
+      url: https://github.com/manga-easy/manga_easy_advanced_search.git
+      ref: 0.0.1
+  manga_easy_sdk:
+    git:
+      url: https://github.com/manga-easy/manga_easy_sdk.git
+      ref: v.0.11.x
+  client_driver:
+    git:
+      url: https://github.com/manga-easy/manga_easy_client_driver.git
+      ref: 0.0.1
+  coffee_cup:
+    git:
+      url: https://github.com/manga-easy/manga_easy_coffee_cup.git
+      ref: v0.11.x
 dependency_overrides:
   package_info_plus: ^3.0.3
 
