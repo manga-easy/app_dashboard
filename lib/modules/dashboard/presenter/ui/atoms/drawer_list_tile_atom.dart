@@ -20,9 +20,7 @@ class DrawerListTileAtom extends StatelessWidget {
       horizontalTitleGap: 0.0,
       leading: SvgPicture.asset(
         svgSrc,
-        theme: const SvgTheme(
-          currentColor: Colors.white54,
-        ),
+        color: Colors.white54,
         height: 16,
       ),
       title: Text(
