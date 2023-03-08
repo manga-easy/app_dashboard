@@ -16,6 +16,7 @@ import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_en
 import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/enquete_page.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_details_page.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_pages.dart';
+import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/details_manga_page.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pages.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
@@ -31,6 +32,7 @@ import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/edite_nive
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
 import 'package:flutter/material.dart';
+import 'package:manga_easy_advanced_search/manga_easy_advanced_search.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class ServiceRoute extends IService {
@@ -66,7 +68,12 @@ class ServiceRoute extends IService {
         );
       case MangasPage.route:
         return MaterialPageRoute(
-          builder: (_) => const MangasPage(),
+          builder: (_) => AdvancedMicroApp().routers['/advanced-search']!,
+          settings: settings,
+        );
+      case '/migrate':
+        return MaterialPageRoute(
+          builder: (_) => const DetailsMangaPage(),
           settings: settings,
         );
       case ComicAuthorialPage.route:

@@ -18,6 +18,7 @@ import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:manga_easy_advanced_search/manga_easy_advanced_search.dart';
 
 bool isDemoUsingDynamicColors = false;
 
@@ -47,6 +48,7 @@ Future<void> main() async {
   AutorModule().register();
   ConfigAppModule().register();
   HostModule().register();
+  AdvancedMicroApp().registerDependencies();
   runApp(const MyApp());
 }
 
