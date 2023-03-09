@@ -230,11 +230,20 @@ class ServiceRoute extends IService {
         TemporadasPage.route,
         EnquetePage.route,
         HostPage.route,
+        ComicAuthorialPage.route
       ]);
       return routes;
     }
     if (permissions!.value == LevelPermissoes.autor.value) {
       routes.add(ComicAuthorialPage.route);
+      return routes;
+    }
+    if (permissions!.value == LevelPermissoes.suporte.value) {
+      routes.addAll([
+        MangasPage.route,
+        ComicAuthorialPage.route,
+        UsersPage.route,
+      ]);
       return routes;
     }
     return routes;

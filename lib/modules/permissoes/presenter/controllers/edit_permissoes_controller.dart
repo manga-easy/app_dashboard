@@ -24,7 +24,7 @@ class EditPermissoesController extends IController {
     permissoes = ModalRoute.of(context)!.settings.arguments as Permissions?;
     permissoes ??= Permissions(
       userId: '',
-      value: LevelPermissoes.autor.value,
+      value: LevelPermissoes.none.value,
     );
     notifyListeners();
   }
