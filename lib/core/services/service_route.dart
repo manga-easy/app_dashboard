@@ -97,6 +97,21 @@ class ServiceRoute extends IService {
           settings: settings,
         );
     }
+    if (permissions!.value < LevelPermissoes.suporte.value) {
+      switch (settings.name) {
+        case UsersPage.route:
+          return MaterialPageRoute(
+            builder: (_) => const UsersPage(),
+            settings: settings,
+          );
+        case UserDetalhesPage.route:
+          return MaterialPageRoute(
+            builder: (_) => const UserDetalhesPage(),
+            settings: settings,
+          );
+        default:
+      }
+    }
     //somnte admin podem acessar as rotas abaixo
     if (permissions!.value < LevelPermissoes.admin.value) {
       return MaterialPageRoute(
@@ -105,16 +120,6 @@ class ServiceRoute extends IService {
       );
     }
     switch (settings.name) {
-      case UsersPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const UsersPage(),
-          settings: settings,
-        );
-      case UserDetalhesPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const UserDetalhesPage(),
-          settings: settings,
-        );
       case CriarRecomendacaoPage.route:
         return MaterialPageRoute(
           builder: (_) => const CriarRecomendacaoPage(),
