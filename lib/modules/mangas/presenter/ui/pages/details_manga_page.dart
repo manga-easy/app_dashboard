@@ -7,6 +7,7 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/controllers/details_manga_controller.dart';
+import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/organisms/all_genders.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/organisms/section_genders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,21 +61,24 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                       children: [
                         CoffeeMangaCover(
                           filtraImg: true,
-                          height: 200,
-                          width: 100,
+                          height: 250,
+                          width: 200,
                           cover: ct.manga!.thumb,
                           headers: Global.header,
                         ),
                       ],
                     ),
+                    const SizedBox(height: AppTheme.defaultPadding),
                     GestureDetector(
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: ct.manga!.name));
                       },
                       child: Text(
                         'Nome: ${ct.manga!.name}',
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
+                    const SizedBox(height: AppTheme.defaultPadding),
                     CampoPadraoAtom(
                       hintText: 'Capa',
                       onChange: (v) => ct.manga!.thumb = v,
@@ -100,7 +104,30 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                       initialValue: ct.manga!.sinopse,
                     ),
                     const SizedBox(height: AppTheme.defaultPadding),
-                    SectionGenders(genders: ct.manga!.generos.split('<>')),
+                    SectionGenders(
+                      genders: ct.manga!.generos.split('<>'),
+                      onRemove: (String gender) {
+                        setState(() {
+                          ct.manga!.generos = ct.manga!.generos.replaceFirst(
+                            '<>$gender',
+                            '',
+                          );
+                        });
+                      },
+                      onAdd: () async {
+                        var ret = await showModalBottomSheet(
+                          context: context,
+                          builder: (context) => const AllGenders(),
+                        );
+                        if (ret != null) {
+                          if (!ct.manga!.generos.contains(ret)) {
+                            setState(() {
+                              ct.manga!.generos += '<>$ret';
+                            });
+                          }
+                        }
+                      },
+                    ),
                     const SizedBox(height: AppTheme.defaultPadding),
                     ButtonPadraoAtom(
                       title: 'Salvar',

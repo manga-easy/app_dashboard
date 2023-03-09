@@ -1,8 +1,16 @@
+import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/molecules/gender_label.dart';
 import 'package:flutter/material.dart';
 
 class SectionGenders extends StatelessWidget {
+  final void Function()? onAdd;
+  final void Function(String gender) onRemove;
   final List<String> genders;
-  const SectionGenders({super.key, required this.genders});
+  const SectionGenders({
+    super.key,
+    required this.genders,
+    this.onAdd,
+    required this.onRemove,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +24,7 @@ class SectionGenders extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             TextButton(
-              onPressed: () => null,
+              onPressed: onAdd,
               child: const Text('Adicionar'),
             ),
           ],
@@ -33,15 +41,9 @@ class SectionGenders extends StatelessWidget {
             itemCount: genders.length,
             itemBuilder: (context, index) {
               var gender = genders[index];
-              return Container(
-                margin: const EdgeInsets.only(right: 20),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
-                child: Center(
-                  child: Text(
-                    gender,
-                  ),
-                ),
+              return GenderLabel(
+                gender: gender,
+                onRemove: onRemove,
               );
             },
           ),
