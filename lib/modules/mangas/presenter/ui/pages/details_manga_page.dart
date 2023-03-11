@@ -87,8 +87,8 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                     const SizedBox(height: AppTheme.defaultPadding),
                     CampoPadraoAtom(
                       hintText: 'Autor',
-                      onChange: (v) => ct.manga!.autor = v,
-                      initialValue: ct.manga!.autor,
+                      onChange: (v) => ct.manga!.author = v,
+                      initialValue: ct.manga!.author,
                     ),
                     const SizedBox(height: AppTheme.defaultPadding),
                     CampoPadraoAtom(
@@ -99,16 +99,16 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                     const SizedBox(height: AppTheme.defaultPadding),
                     CampoPadraoAtom(
                       hintText: 'Sinopse',
-                      onChange: (v) => ct.manga!.sinopse = v,
+                      onChange: (v) => ct.manga!.synopsis = v,
                       numberLines: 5,
-                      initialValue: ct.manga!.sinopse,
+                      initialValue: ct.manga!.synopsis,
                     ),
                     const SizedBox(height: AppTheme.defaultPadding),
                     SectionGenders(
-                      genders: ct.manga!.generos.split('<>'),
+                      genders: ct.manga!.genres.split('<>'),
                       onRemove: (String gender) {
                         setState(() {
-                          ct.manga!.generos = ct.manga!.generos.replaceFirst(
+                          ct.manga!.genres = ct.manga!.genres.replaceFirst(
                             '<>$gender',
                             '',
                           );
@@ -120,9 +120,9 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                           builder: (context) => const AllGenders(),
                         );
                         if (ret != null) {
-                          if (!ct.manga!.generos.contains(ret)) {
+                          if (!ct.manga!.genres.contains(ret)) {
                             setState(() {
-                              ct.manga!.generos += '<>$ret';
+                              ct.manga!.genres += '<>$ret';
                             });
                           }
                         }
