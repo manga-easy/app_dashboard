@@ -2,15 +2,19 @@ import 'package:client_driver/client_driver.dart';
 import 'package:dashboard_manga_easy/modules/mangas/data/datasources/manga_datasource.dart';
 import 'package:dashboard_manga_easy/modules/mangas/data/dtos/manga_dto.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/entities/manga_filter_entity.dart';
-import 'package:manga_easy_sdk/src/modules/manga/info_comic_model.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/mappers/mapper_manga.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaDatasourceV1 extends MangaDatasource {
   final DriverHttp _clientDriver;
+  final MangaMapper _mangaMapper;
+
+  MangaDatasourceV1(this._clientDriver, this._mangaMapper);
+
   final String path = 'catalog';
   final String url = 'http://test-catalog.lucas-cm.com.br';
   final String version = 'v1';
 
-  MangaDatasourceV1(this._clientDriver);
   @override
   Future<MangaDto> list({
     required MangaFilterEntity filter,
@@ -46,7 +50,7 @@ class MangaDatasourceV1 extends MangaDatasource {
   Future<void> updateManga({required InfoComicModel manga}) async {
     await _clientDriver.put(
       path: '$url/$version/$path',
-      body: manga.toJson(),
+      body: _mangaMapper.toJson(manga),
     );
   }
 }
