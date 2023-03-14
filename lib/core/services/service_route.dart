@@ -97,7 +97,7 @@ class ServiceRoute extends IService {
           settings: settings,
         );
     }
-    if (permissions!.value < LevelPermissoes.suporte.value) {
+    if (permissions!.value >= LevelPermissoes.suporte.value) {
       switch (settings.name) {
         case UsersPage.route:
           return MaterialPageRoute(
