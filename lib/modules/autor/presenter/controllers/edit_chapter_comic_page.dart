@@ -16,7 +16,7 @@ class EditChapterComicParams {
   EditChapterComicParams(this.chapterAuthorial, this.comicAuthorialModel);
 }
 
-class EditChapterComicController extends ValueNotifier implements IController {
+class EditChapterComicController extends IController {
   final ChapterAuthoralRepository chapterAuthoralRepository;
   final ComicAuthorialRepository comicAuthorialRepository;
   final ContentChapterRepository contentChapterRepository;
@@ -27,12 +27,7 @@ class EditChapterComicController extends ValueNotifier implements IController {
     required this.chapterAuthoralRepository,
     required this.comicAuthorialRepository,
     required this.contentChapterRepository,
-  }) : super(null);
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  });
 
   @override
   Future<void> init(BuildContext context) async {

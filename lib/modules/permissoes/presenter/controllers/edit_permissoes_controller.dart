@@ -4,11 +4,11 @@ import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissoes_repository.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class EditPermissoesController extends ValueNotifier implements IController {
+class EditPermissoesController extends IController {
   final UserRepositoryExternal userRepo;
   final PermissoesRepository permissoesRepository;
   final AppwriteAdmin appwriteAdmin;
@@ -17,19 +17,14 @@ class EditPermissoesController extends ValueNotifier implements IController {
     required this.appwriteAdmin,
     required this.permissoesRepository,
     required this.userRepo,
-  }) : super(null);
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  });
 
   @override
   void init(BuildContext context) {
     permissoes = ModalRoute.of(context)!.settings.arguments as Permissions?;
     permissoes ??= Permissions(
       userId: '',
-      value: LevelPermissoes.autor.value,
+      value: LevelPermissoes.none.value,
     );
     notifyListeners();
   }

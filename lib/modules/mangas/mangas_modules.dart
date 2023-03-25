@@ -1,24 +1,22 @@
 import 'package:dashboard_manga_easy/core/interfaces/module_factory.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/info_comic_repository_inter.dart';
-import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/view_comic_repository_inter.dart';
-import 'package:dashboard_manga_easy/modules/mangas/infra/info_comic_repository.dart';
-import 'package:dashboard_manga_easy/modules/mangas/infra/view_comic_repository.dart';
-import 'package:dashboard_manga_easy/modules/mangas/presenter/controllers/mangas_controllers.dart';
+import 'package:dashboard_manga_easy/modules/mangas/data/datasources/manga_datasource.dart';
+import 'package:dashboard_manga_easy/modules/mangas/data/datasources/manga_datasource_v1.dart';
+import 'package:dashboard_manga_easy/modules/mangas/data/repositories/manga_repository_imp.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/mappers/mapper_manga.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/manga_repository.dart';
+import 'package:dashboard_manga_easy/modules/mangas/presenter/controllers/details_manga_controller.dart';
 
 class MangasModule extends IModuleFactory {
   @override
   void register() {
+    //mappers
+    di.registerFactory<MangaMapper>(() => MangaMapper());
+    //datasources
+    di.registerFactory<MangaDatasource>(() => MangaDatasourceV1(di(), di()));
     //repositories
-    di.registerFactory<IInforComicRepository>(() => InfoComicRepository(di()));
-    di.registerFactory<IViewComicRepository>(() => ViewComicRepository(di()));
+    di.registerFactory<MangaRepository>(() => MangaRepositoryImp(di(), di()));
     //controllers
-    di.registerFactory(() => MangasController(
-          infoComicRepository: di(),
-          global: di(),
-          viewComicRepository: di(),
-          getBlockListCase: di(),
-          upBlockListCase: di(),
-        ));
+    di.registerFactory(() => DetailsMangaController(di()));
   }
 }

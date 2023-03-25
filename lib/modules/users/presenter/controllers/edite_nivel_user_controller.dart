@@ -4,11 +4,11 @@ import 'package:dashboard_manga_easy/modules/users/domain/repositories/permissoe
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class EditeNivelUserController extends ValueNotifier implements IController {
+class EditeNivelUserController extends IController {
   final NivelUserRepository nivelUserRepository;
 
   NivelUser? nivelUser;
-  EditeNivelUserController({required this.nivelUserRepository}) : super(null);
+  EditeNivelUserController({required this.nivelUserRepository});
 
   @override
   void dispose() {

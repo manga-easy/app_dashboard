@@ -28,12 +28,12 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         return ModuloPageTemplate(
           route: NotificacaoPage.route,
-          statusBuild: ct.status.value,
+          statusBuild: ct.state,
           onPressedAtualiza: ct.carregaNotificacao,
           onPressedNovoItem: () =>
               Navigator.pushNamed(context, SendNotificationPage.route),

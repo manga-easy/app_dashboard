@@ -30,12 +30,12 @@ class _EnquetePageState extends State<EnquetePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         return ModuloPageTemplate(
           route: EnquetePage.route,
-          statusBuild: ct.status.value,
+          statusBuild: ct.state,
           onPressedAtualiza: ct.carregaEnquete,
           labelNovoItem: 'Adicionar enquete',
           onPressedNovoItem: () => Navigator.pushNamed(

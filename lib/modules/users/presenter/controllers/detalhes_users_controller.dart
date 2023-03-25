@@ -1,10 +1,12 @@
 import 'package:api_fcm/api_fcm.dart';
 import 'package:dashboard_manga_easy/core/config/app_config.dart';
+
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
+
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
+
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
@@ -15,9 +17,12 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 class UsersDetalhesController extends IController {
   final AppwriteAdmin app;
   final EmblemaUserRepository emblemaUserRepository;
-  final Global gb;
   final ApiFcm apiFcm = ApiFcm(tokenServer: AppConfig.tokenServer);
-  var status = ValueNotifier(StatusBuild.loading);
+
+  UsersDetalhesController({
+    required this.app,
+    required this.emblemaUserRepository,
+  });
   var nova = Notificacao(
     menssege: '',
     titulo: '',
@@ -29,12 +34,6 @@ class UsersDetalhesController extends IController {
   List<Emblema> listEmblema = [];
   var listXps = ValueNotifier(<NivelUser>[]);
   var indexP = ValueNotifier(0);
-
-  UsersDetalhesController({
-    required this.app,
-    required this.gb,
-    required this.emblemaUserRepository,
-  });
 
   @override
   void dispose() {
@@ -48,7 +47,7 @@ class UsersDetalhesController extends IController {
     carregaXpsUser();
     await carrega();
     await carregaEmblemas();
-    status.value = StatusBuild.done;
+    state = StatusBuild.done;
   }
 
   Future<void> carrega() async {
@@ -81,7 +80,7 @@ class UsersDetalhesController extends IController {
   }
 
   Future<void> addEmblema(String idEmblema, BuildContext context) async {
-    status.value = StatusBuild.loading;
+    state = StatusBuild.loading;
     var emble = await app.database.listDocuments(
       collectionId: EmblemaUser.collectionId,
       queries: [
@@ -103,9 +102,9 @@ class UsersDetalhesController extends IController {
         read: ['role:all'],
       );
       await carrega();
-      status.value = StatusBuild.done;
+      state = StatusBuild.done;
     } else {
-      status.value = StatusBuild.done;
+      state = StatusBuild.done;
       AppHelps.confirmaDialog(
         title: 'Já adquirido',
         content: 'Você já adquiriu o emblema',
@@ -124,7 +123,7 @@ class UsersDetalhesController extends IController {
             const SizedBox(height: 20),
             Text(
               'Novo Aviso',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 20),
             CampoPadraoAtom(
@@ -182,10 +181,10 @@ class UsersDetalhesController extends IController {
       context: context,
     );
     if (ret) {
-      status.value = StatusBuild.loading;
+      state = StatusBuild.loading;
       await emblemaUserRepository.deletDocument(id: id);
       await carrega();
-      status.value = StatusBuild.done;
+      state = StatusBuild.done;
     }
   }
 }

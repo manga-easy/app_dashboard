@@ -32,9 +32,9 @@ class _EditEnquetePageState extends State<EditEnquetePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         if (ct.enquete == null) return const LoadingAtom();
         return Scaffold(
           appBar: AppBar(

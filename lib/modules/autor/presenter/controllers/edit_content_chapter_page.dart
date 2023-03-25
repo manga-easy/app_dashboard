@@ -14,13 +14,13 @@ class EditcontentChapterParams {
   EditcontentChapterParams(this.chapterAuthorial, this.contentChapterModel);
 }
 
-class EditContentChapterController extends ValueNotifier
-    implements IController {
+class EditContentChapterController extends IController {
   final HtmlEditorController controller = HtmlEditorController();
   final ContentChapterRepository contentChapterRepository;
+
+  EditContentChapterController({required this.contentChapterRepository});
+
   ContentChapterModel? contentChapter;
-  EditContentChapterController({required this.contentChapterRepository})
-      : super(null);
 
   @override
   void dispose() {

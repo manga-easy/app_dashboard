@@ -5,13 +5,7 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 class DataSourceConfig implements IDataSourceConfig {
   final String host = 'http://micro-config.lucas-cm.com.br';
   final String version = 'v1';
-  final Dio dio = Dio(
-    BaseOptions(
-        receiveDataWhenStatusError: true,
-        connectTimeout: 5 * 1000, // 60 seconds
-        receiveTimeout: 5 * 1000 // 60 seconds
-        ),
-  );
+  final Dio dio = Dio();
   @override
   Future<Map<String, dynamic>> getBlockList() async {
     var ret = await dio.get(

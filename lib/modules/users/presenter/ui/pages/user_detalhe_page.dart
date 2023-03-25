@@ -1,6 +1,6 @@
-import 'package:dashboard_manga_easy/core/services/global.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/side_menu.dart';
+
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/card_xp_user.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/emblemas_users.dart';
@@ -31,10 +31,10 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
-        if (ct.status.value == StatusBuild.loading) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
+        if (ct.state == StatusBuild.loading) {
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),

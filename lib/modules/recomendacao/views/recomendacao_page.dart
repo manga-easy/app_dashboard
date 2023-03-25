@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
@@ -31,12 +30,12 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         return ModuloPageTemplate(
           route: RecomendacaoPage.route,
-          statusBuild: ct.status.value,
+          statusBuild: ct.state,
           labelNovoItem: 'Nova recomendação',
           onPressedAtualiza: ct.listaRecomendacao,
           itemBuilderLista: (context, index) {

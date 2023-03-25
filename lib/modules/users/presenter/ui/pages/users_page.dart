@@ -29,12 +29,12 @@ class _UsersPageState extends State<UsersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         return ModuloPageTemplate(
           route: UsersPage.route,
-          statusBuild: ct.status.value,
+          statusBuild: ct.state,
           listaItems: ct.lista,
           initialValueCampoPesquisa: ct.pesquisa.value,
           onChangePesquisa: (p) => ct.pesquisa.value = p,

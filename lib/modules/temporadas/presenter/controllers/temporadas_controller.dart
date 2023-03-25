@@ -1,5 +1,6 @@
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
+
 import 'package:dashboard_manga_easy/modules/temporadas/domain/usercases/list_temporada_case.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';

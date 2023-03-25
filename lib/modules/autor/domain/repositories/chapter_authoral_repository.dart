@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/modules/autor/domain/api_easy_comic.dart';
 import 'package:dashboard_manga_easy/modules/autor/domain/models/chapter_authoral_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class ChapterAuthoralRepository {
   final ApiEasyComicAuthorial apiEasyComicAuthorial = ApiEasyComicAuthorial();
@@ -32,10 +33,9 @@ class ChapterAuthoralRepository {
       if (ret is List) {
         return compute(_parseComicAuthorial, ret);
       }
-      print(ret.runtimeType);
       return [];
     } catch (e) {
-      print(e);
+      Helps.log(e);
       return [];
     }
   }
@@ -48,6 +48,8 @@ class ChapterAuthoralRepository {
   }
 
   static List<ChapterAuthorial> _parseComicAuthorial(dynamic map) {
-    return map.map<ChapterAuthorial>((e) => ChapterAuthorial.fromJson(e)).toList();
+    return map
+        .map<ChapterAuthorial>((e) => ChapterAuthorial.fromJson(e))
+        .toList();
   }
 }

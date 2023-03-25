@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/usercases/create_host_case.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/usercases/update_host_case.dart';
 import 'package:flutter/material.dart';
@@ -16,20 +16,17 @@ class HostDetailsController extends IController {
   });
 
   HostModel? host;
-  var status = StatusBuild.loading;
 
   @override
   void init(BuildContext context) {
     host = ModalRoute.of(context)!.settings.arguments as HostModel?;
     host ??= HostModel.empty();
-    status = StatusBuild.done;
-    notifyListeners();
+    state = StatusBuild.done;
   }
 
   Future<void> saveHost(BuildContext context) async {
     try {
-      status = StatusBuild.loading;
-      notifyListeners();
+      state = StatusBuild.loading;
       if (host!.id == null) {
         await createHostCase(host!);
       } else {
@@ -48,7 +45,6 @@ class HostDetailsController extends IController {
         context: context,
       );
     }
-    status = StatusBuild.done;
-    notifyListeners();
+    state = StatusBuild.done;
   }
 }

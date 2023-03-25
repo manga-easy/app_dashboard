@@ -11,8 +11,10 @@ class UsersModule extends IModuleFactory {
     //register Repositories
     di.registerFactory(() => NivelUserRepository(di()));
     //register controllers
-    di.registerFactory(() => EditeNivelUserController(nivelUserRepository: di()));
-    di.registerFactory(() => UsersController(app: di(), global: di()));
-    di.registerFactory(() => UsersDetalhesController(app: di(), gb: di(), emblemaUserRepository: di()));
+    di.registerFactory(
+        () => EditeNivelUserController(nivelUserRepository: di()));
+    di.registerFactory(() => UsersController(app: di()));
+    di.registerFactory(
+        () => UsersDetalhesController(app: di(), emblemaUserRepository: di()));
   }
 }

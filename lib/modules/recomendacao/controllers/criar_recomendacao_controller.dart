@@ -2,24 +2,18 @@ import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
+
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class CriarRecomendacaoController extends ValueNotifier implements IController {
+class CriarRecomendacaoController extends IController {
   final AppwriteClient app;
-  final Global global;
-  RecomendacoesModel? recomendacao;
+
   CriarRecomendacaoController({
     required this.app,
-    required this.global,
-  }) : super(null);
+  });
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
+  RecomendacoesModel? recomendacao;
   @override
   void init(BuildContext context) {
     recomendacao =

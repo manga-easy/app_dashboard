@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/comic_controller.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_comic_page.dart';
@@ -30,14 +29,14 @@ class _ComicAuthorialPageState extends State<ComicAuthorialPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<StatusBuild>(
-      valueListenable: ct.status,
-      builder: (context, value, chil) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, chil) {
         return ModuloPageTemplate(
           onPressedNovoItem: () =>
               Navigator.pushNamed(context, EditComicAuthorialPage.route),
           route: ComicAuthorialPage.route,
-          statusBuild: value,
+          statusBuild: ct.state,
           onPressedAtualiza: ct.carregaComicAuthorialAutor,
           labelNovoItem: 'Nova obra',
           itemBuilderLista: (context, index) {
@@ -53,13 +52,8 @@ class _ComicAuthorialPageState extends State<ComicAuthorialPage> {
                         EditComicAuthorialPage.route,
                         arguments: comic,
                       ),
-                      label: Text('Editar'),
-                      icon: Icon(Icons.edit),
-                    ),
-                    TextButton.icon(
-                      onPressed: () => null,
-                      label: Text('Remover'),
-                      icon: Icon(Icons.delete_forever),
+                      label: const Text('Editar'),
+                      icon: const Icon(Icons.edit),
                     ),
                   ],
                 ),
