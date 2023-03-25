@@ -33,19 +33,19 @@ dependencies:
   manga_easy_advanced_search:
     git:
       url: https://github.com/manga-easy/manga_easy_advanced_search.git
-      ref: v0.0.4
+      ref: v1.0.3
   manga_easy_sdk:
     git:
       url: https://github.com/manga-easy/manga_easy_sdk.git
-      ref: v.0.11.x
+      ref: v1.2.1
   client_driver:
     git:
       url: https://github.com/manga-easy/manga_easy_client_driver.git
-      ref: 0.0.1
+      ref: v1.0.0
   coffee_cup:
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
-      ref: v0.11.x
+      ref: v1.0.0
 dependency_overrides:
   package_info_plus: ^3.0.3
 
