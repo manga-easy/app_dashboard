@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/banners_controller.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
@@ -31,12 +30,12 @@ class _BannerPageState extends State<BannerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct.status,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         return ModuloPageTemplate(
           route: BannerPage.route,
-          statusBuild: ct.status.value,
+          statusBuild: ct.state,
           labelNovoItem: 'Nova Banner',
           onPressedAtualiza: ct.listaBanner,
           itemBuilderLista: (context, index) {

@@ -1,23 +1,14 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/repositories/banner_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class CriarBannerController extends ValueNotifier implements IController {
+class CriarBannerController extends IController {
   final BannerRepository bannerRepository;
-  final Global global;
   BannerModel? banner;
-  CriarBannerController({
-    required this.bannerRepository,
-    required this.global,
-  }) : super(null);
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  CriarBannerController({required this.bannerRepository});
 
   @override
   void init(BuildContext context) {

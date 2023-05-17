@@ -1,23 +1,16 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/global.dart';
 import 'package:dashboard_manga_easy/modules/enquente/domain/repositories/enquete_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EnqueteController extends IController {
   final EnqueteRepository permissoesRepository;
-  var status = ValueNotifier(StatusBuild.loading);
   var enquetes = <EnqueteModel>[];
   EnqueteController({
     required this.permissoesRepository,
   });
-
-  @override
-  void dispose() {
-    super.dispose();
-    status.dispose();
-  }
 
   @override
   void init(BuildContext context) {
@@ -25,10 +18,10 @@ class EnqueteController extends IController {
   }
 
   void carregaEnquete() async {
-    status.value = StatusBuild.loading;
+    state = StatusBuild.loading;
     var ret = await permissoesRepository.listDocument();
     enquetes = ret.data;
-    status.value = StatusBuild.done;
+    state = StatusBuild.done;
   }
 
   Future<void> removeEnquete(String id, context) async {
@@ -44,17 +37,17 @@ class EnqueteController extends IController {
   }
 
   Future<void> finalizarEnquete(EnqueteModel enquete) async {
-    status.value = StatusBuild.loading;
+    state = StatusBuild.loading;
     enquete.status = EnqueteStatus.finished;
     enquete.finishedDate = DateTime.now().millisecondsSinceEpoch;
     await permissoesRepository.updateDocument(objeto: enquete);
-    status.value = StatusBuild.done;
+    state = StatusBuild.done;
   }
 
   Future<void> comecarEnquete(EnqueteModel enquete) async {
-    status.value = StatusBuild.loading;
+    state = StatusBuild.loading;
     enquete.status = EnqueteStatus.progress;
     await permissoesRepository.updateDocument(objeto: enquete);
-    status.value = StatusBuild.done;
+    state = StatusBuild.done;
   }
 }

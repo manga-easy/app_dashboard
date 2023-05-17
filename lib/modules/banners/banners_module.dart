@@ -10,7 +10,7 @@ class BannersModule extends IModuleFactory {
     //register repositories
     di.registerFactory(() => BannerRepository(di()));
     //register controllers
-    di.registerFactory(() => CriarBannerController(bannerRepository: di(), global: di()));
-    di.registerFactory(() => BannerController(bannerRepository: di(), global: di()));
+    di.registerFactory(() => CriarBannerController(bannerRepository: di(), ));
+    di.registerFactory(() => BannerController(bannerRepository: di(), ));
   }
 }

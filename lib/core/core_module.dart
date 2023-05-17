@@ -1,3 +1,4 @@
+import 'package:client_driver/client_driver.dart';
 import 'package:dashboard_manga_easy/core/interfaces/local_data_interface.dart';
 import 'package:dashboard_manga_easy/core/interfaces/module_service.dart';
 import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
@@ -10,6 +11,7 @@ class CoreModule extends IModuleService {
   @override
   void register() {
     //register singletons
+    di.registerLazySingleton<DriverHttp>(() => DioDriver());
     di.registerLazySingleton<ILocalData>(() => HiveDb());
     di.registerLazySingleton(() => AppwriteClient());
     di.registerLazySingleton(() => AppwriteAdmin());

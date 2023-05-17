@@ -42,9 +42,9 @@ class _EditChapterComicPageState extends State<EditChapterComicPage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
         ),
-        child: ValueListenableBuilder(
-          valueListenable: ct,
-          builder: (context, value, child) {
+        child: AnimatedBuilder(
+          animation: ct,
+          builder: (context, child) {
             if (ct.chapterAuthorial == null) return const LoadingAtom();
             return ListView(
               padding: const EdgeInsets.symmetric(

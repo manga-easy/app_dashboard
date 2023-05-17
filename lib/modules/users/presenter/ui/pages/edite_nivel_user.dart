@@ -30,17 +30,20 @@ class _EditeNivelUserPageState extends State<EditeNivelUserPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: ct,
-      builder: (context, value, child) {
+    return AnimatedBuilder(
+      animation: ct,
+      builder: (context, child) {
         if (ct.nivelUser == null) return const LoadingAtom();
         return Scaffold(
           appBar: AppBar(
             title: const Text('Editar Nível'),
             actions: [
               IconButton(
-                  onPressed: () => ct.deletarNivel(context),
-                  icon: Icon(Icons.delete))
+                onPressed: () => ct.deletarNivel(context),
+                icon: const Icon(
+                  Icons.delete,
+                ),
+              )
             ],
           ),
           body: Container(

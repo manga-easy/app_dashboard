@@ -7,14 +7,13 @@ import 'package:dashboard_manga_easy/modules/temporadas/domain/usercases/update_
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class EditTemporadasController extends ValueNotifier implements IController {
+class EditTemporadasController extends IController {
   final UserRepositoryExternal userRepo;
   final CreateTemporadaCase createTemporadaCase;
   final ListTemporadaCase listTemporadaCase;
   final UpdateTemporadaCase updateTemporadaCase;
 
-  EditTemporadasController(
-    super.value, {
+  EditTemporadasController({
     required this.createTemporadaCase,
     required this.userRepo,
     required this.listTemporadaCase,

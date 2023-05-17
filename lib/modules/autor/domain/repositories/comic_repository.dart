@@ -34,10 +34,9 @@ class ComicAuthorialRepository {
       if (ret is List) {
         return compute(_parseComicAuthorial, ret);
       }
-      print(ret.runtimeType);
       return [];
     } catch (e) {
-      print(e);
+      Helps.log(e);
       return [];
     }
   }

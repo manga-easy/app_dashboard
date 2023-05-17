@@ -2,11 +2,8 @@ import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/controllers/edit_content_chapter_page.dart';
 import 'package:dashboard_manga_easy/modules/autor/presenter/ui/oranisms/editor_texto.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:flutter/material.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
 
 class EditContentChapterPage extends StatefulWidget {
   static const route = '/EditContentChapter';
@@ -41,9 +38,9 @@ class _EditContentChapterPageState extends State<EditContentChapterPage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
         ),
-        child: ValueListenableBuilder(
-          valueListenable: ct,
-          builder: (context, value, child) {
+        child: AnimatedBuilder(
+          animation: ct,
+          builder: (context, child) {
             if (ct.contentChapter == null) return const LoadingAtom();
             return ct.contentChapter!.type == 'text'
                 ? HtmlEditorExample(

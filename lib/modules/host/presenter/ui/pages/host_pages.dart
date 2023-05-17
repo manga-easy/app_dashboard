@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_controller.dart';
@@ -33,7 +32,7 @@ class _HostPageState extends State<HostPage> {
   Widget build(BuildContext context) {
     return ModuloPageTemplate(
       route: HostPage.route,
-      statusBuild: ct.status,
+      statusBuild: ct.state,
       labelNovoItem: 'Host',
       itemBuilderLista: (context, index) {
         HostModel host = ct.list[index];

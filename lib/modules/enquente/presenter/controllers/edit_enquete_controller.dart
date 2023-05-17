@@ -5,14 +5,14 @@ import 'package:dashboard_manga_easy/modules/enquente/domain/repositories/enquet
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class EditEnqueteController extends ValueNotifier implements IController {
+class EditEnqueteController extends IController {
   final UserRepositoryExternal userRepo;
   final EnqueteRepository permissoesRepository;
   EnqueteModel? enquete;
   EditEnqueteController({
     required this.permissoesRepository,
     required this.userRepo,
-  }) : super(null);
+  });
 
   @override
   void init(BuildContext context) {
