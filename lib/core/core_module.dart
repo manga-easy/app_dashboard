@@ -11,7 +11,7 @@ class CoreModule extends IModuleService {
   @override
   void register() {
     //register singletons
-    di.registerLazySingleton<DriverHttp>(() => DioDriver());
+    di.registerLazySingleton<ClientRequest>(() => ClientHttp());
     di.registerLazySingleton<ILocalData>(() => HiveDb());
     di.registerLazySingleton(() => AppwriteClient());
     di.registerLazySingleton(() => AppwriteAdmin());
