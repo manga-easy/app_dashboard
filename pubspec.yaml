@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #### PACKAGES ####
   google_fonts: ^4.0.3
   flutter_svg: ^2.0.2
   appwrite: ^9.0.0
@@ -27,10 +28,11 @@ dependencies:
   html_editor_enhanced: 2.5.1
   infinite_scroll_pagination: ^3.2.0
   file_picker: ^5.2.5
-  #### PACKAGES EASY #####
+  #### LIBS #####
   manga_easy_sdk:
   client_driver:
   coffee_cup:
+  toggle_config:
   #### MICRO APPS #####
   manga_easy_advanced_search:
     git:
@@ -50,6 +52,10 @@ dependency_overrides:
     git:
       url: https://github.com/manga-easy/manga_easy_sdk.git
       ref: v1.3.0
+  toggle_config:
+    git: 
+      url: https://github.com/manga-easy/lib_toggle_config.git
+      ref: v1.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
