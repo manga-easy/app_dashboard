@@ -1,3 +1,4 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EditPermissoesPage extends StatefulWidget {
-  static const route = '/EditPermissoes';
+  static const route = '/permissions/edit';
   const EditPermissoesPage({super.key});
   @override
   State<EditPermissoesPage> createState() => _EditPermissoesPageState();
@@ -40,7 +41,7 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
         if (ct.permissoes == null) return const LoadingAtom();
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Criar Permissões'),
+            title: const CoffeeText(text: 'Criar Permissões'),
           ),
           body: ListView(
             padding:
@@ -52,18 +53,17 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
                 items: LevelPermissoes.values
                     .map((e) => DropdownMenuItem<int>(
                           value: e.value,
-                          child: Text(e.name),
+                          child: CoffeeText(text: e.name),
                         ))
                     .toList(),
                 onChanged: (v) {
                   ct.permissoes!.value = v!;
-                  ct.notifyListeners();
                 },
               ),
               const SizedBox(height: AppTheme.defaultPadding),
               OutlinedButton(
                 onPressed: () async {
-                  var user = await AppHelps.bottomSheet(
+                  final user = await AppHelps.bottomSheet(
                     context: context,
                     child: SelectUser(future: ct.pesquisaUser),
                   );

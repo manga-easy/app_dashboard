@@ -6,7 +6,7 @@ import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_
 import 'package:flutter/material.dart';
 
 class PermissoesPage extends StatefulWidget {
-  static const route = '/Permissoes';
+  static const route = '/permissions';
   const PermissoesPage({super.key});
   @override
   State<PermissoesPage> createState() => _PermissoesPageState();
