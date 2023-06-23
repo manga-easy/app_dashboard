@@ -15,6 +15,7 @@ class UsersModule extends IModuleFactory {
         () => EditeNivelUserController(nivelUserRepository: di()));
     di.registerFactory(() => UsersController(app: di()));
     di.registerFactory(
-        () => UsersDetalhesController(app: di(), emblemaUserRepository: di()));
+      () => UsersDetalhesController(app: di(), emblemaUserRepository: di()),
+    );
   }
 }

@@ -1,30 +1,29 @@
 import 'package:appwrite/models.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
+import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/erros_auth.dart';
-import 'package:dashboard_manga_easy/modules/auth/domain/repo/credencial_repo.dart';
+import 'package:dashboard_manga_easy/modules/auth/domain/repositories/crendecial_repository.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart' as sdk;
 
 class AuthController extends IController {
-  final CredencialRepo credencialRepo;
-  //final Global gb;
-  final ServiceRoute serviceRoute;
-  final AppwriteClient app;
+  final CredencialRepository _credencialRepo;
+  final ServiceRoute _serviceRoute;
+  final AuthService _authService;
+
+  AuthController(
+    this._credencialRepo,
+    this._serviceRoute,
+    this._authService,
+  );
   CredencialModel? credencialModel;
   sdk.Permissions? permissions;
-  var email = TextEditingController();
-  var password = TextEditingController();
-
-  AuthController({
-    required this.serviceRoute,
-    required this.app,
-    required this.credencialRepo,
-  });
+  final email = TextEditingController();
+  final password = TextEditingController();
 
   @override
   void dispose() {
@@ -39,13 +38,13 @@ class AuthController extends IController {
     carregaCredencial();
   }
 
-  void logar(context) async {
+  Future<void> logar(context) async {
     try {
       await checkUsuario();
-      var dataUser = await app.account.get();
+      final dataUser = await _authService.getUser();
       await validacaoPermissao(dataUser);
-      serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
-      serviceRoute.permissions = permissions;
+      _serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
+      _serviceRoute.permissions = permissions;
       salvaCredencial();
       Navigator.pushNamedAndRemoveUntil(
         context,
@@ -63,14 +62,14 @@ class AuthController extends IController {
   }
 
   Future<Session> checkUsuario() async {
-    return await app.account.createEmailSession(
+    return _authService.createSession(
       email: email.text,
       password: password.text,
     );
   }
 
   Future<void> validacaoPermissao(User response) async {
-    DocumentList result = await app.database.listDocuments(
+    final DocumentList result = await .listDocuments(
       collectionId: sdk.Permissions.collectionId,
       queries: [
         Query.equal(
@@ -82,12 +81,12 @@ class AuthController extends IController {
     if (result.total <= 0) {
       throw Exception(ErrosAuth.isNotAdmin);
     }
-    var data = result.documents.first.data;
+    final data = result.documents.first.data;
     permissions = sdk.Permissions.fromJson(data);
   }
 
   void carregaCredencial() {
-    var ret = credencialRepo.list();
+    final ret = _credencialRepo.list();
     if (ret.isNotEmpty) {
       credencialModel = ret.first;
       email.text = credencialModel!.email;
@@ -95,19 +94,19 @@ class AuthController extends IController {
   }
 
   Future<void> salvaCredencial() async {
-    var cred = CredencialModel(
+    final cred = CredencialModel(
       datetime: DateTime.now(),
       email: email.text,
     );
-    await credencialRepo.put(objeto: cred);
+    await _credencialRepo.put(objeto: cred);
   }
 
   Future<void> loginAutomatico(context) async {
     try {
-      var dataUser = await app.account.get();
+      final dataUser = await _authService.getUser();
       await validacaoPermissao(dataUser);
-      serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
-      serviceRoute.permissions = permissions;
+      _serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
+      _serviceRoute.permissions = permissions;
       Navigator.pushNamedAndRemoveUntil(
         context,
         MainPage.route,
