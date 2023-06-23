@@ -1,33 +1,23 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
+import 'package:dashboard_manga_easy/core/config/app_config.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_exception.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
-import 'package:toggle_config/toggle_config.dart';
 
 class AuthAppwriteService implements AuthService {
-  final GetToggleConfigCase _getToggleConfigCase;
   late Account _account;
 
-  AuthAppwriteService(this._getToggleConfigCase);
+  AuthAppwriteService();
 
   @override
   Future<void> initialization() async {
-    final url = await _getToggleConfigCase.call<String>(
-      key: ToggleKey.urlAuth,
-    );
     final Client client = Client();
-    client.setEndpoint(url).setProject('64372675b0f256f58f4f').setSelfSigned();
+    client
+        .setEndpoint(AppConfig.ipserver)
+        .setProject('64372675b0f256f58f4f')
+        .setSelfSigned();
     _account = Account(client);
-  }
-
-  Future<void> _serverUnderMaintenance() async {
-    if (!await _getToggleConfigCase.call<bool>(key: ToggleKey.isAuth)) {
-      throw AuthException(
-        'Servidor em manutenção, em breve voltaremos'
-        ', para mais informações entre em contato!',
-      );
-    }
   }
 
   @override
@@ -35,7 +25,6 @@ class AuthAppwriteService implements AuthService {
     required String email,
     required String password,
   }) async {
-    await _serverUnderMaintenance();
     try {
       return await _account.createEmailSession(
         email: email.trim(),
@@ -49,7 +38,6 @@ class AuthAppwriteService implements AuthService {
 
   @override
   Future<String> getJwt({String? sessionId}) async {
-    await _serverUnderMaintenance();
     try {
       final ret = await _account.createJWT();
       Helps.log(ret.jwt);
@@ -62,7 +50,6 @@ class AuthAppwriteService implements AuthService {
 
   @override
   Future<models.User> updateName({required String name}) async {
-    await _serverUnderMaintenance();
     try {
       return await _account.updateName(name: name);
     } catch (e) {
@@ -76,7 +63,6 @@ class AuthAppwriteService implements AuthService {
     required String password,
     String? oldPassword,
   }) async {
-    await _serverUnderMaintenance();
     try {
       return await _account.updatePassword(
           password: password, oldPassword: oldPassword);
@@ -88,7 +74,6 @@ class AuthAppwriteService implements AuthService {
 
   @override
   Future<dynamic> deleteSession({String? sessionId}) async {
-    await _serverUnderMaintenance();
     try {
       return await _account.deleteSession(sessionId: sessionId ?? 'current');
     } catch (e) {
@@ -100,7 +85,6 @@ class AuthAppwriteService implements AuthService {
   @override
   Future<models.User> updatePrefs(
       {required Map<dynamic, dynamic> prefs}) async {
-    await _serverUnderMaintenance();
     try {
       return await _account.updatePrefs(prefs: prefs);
     } catch (e) {
@@ -115,7 +99,6 @@ class AuthAppwriteService implements AuthService {
     required String password,
     String? name,
   }) async {
-    await _serverUnderMaintenance();
     try {
       String? nameNull;
       // tiver quer merda por causa do appwrite n aceita ""
@@ -136,7 +119,6 @@ class AuthAppwriteService implements AuthService {
 
   @override
   Future<models.User> getUser() async {
-    await _serverUnderMaintenance();
     try {
       return await _account.get();
     } catch (e) {

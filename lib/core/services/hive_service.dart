@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/core/interfaces/local_data_interface.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
 
@@ -9,46 +8,49 @@ class TablesHive {
   static List<String> listTables = ['credencial', 'user'];
 }
 
-class HiveDb implements ILocalData {
+class HiveDb {
   final String tableNotFound = 'Tabela não existe';
   List<TablesHive> tables = [];
 
-  @override
   Map<String, dynamic>? get({required String table, required String id}) {
-    var box = switchBox(table);
+    final box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
-    var dados = box.get(id);
+    final dados = box.get(id);
     if (dados == null) return null;
     return Map<String, dynamic>.from(dados);
   }
 
-  @override
   Future<void> delet({required String table, required String id}) async {
-    var box = switchBox(table);
+    final box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
     await box.delete(id);
   }
 
-  @override
   Future<void> deletAll({required String table}) async {
-    var box = switchBox(table);
+    final box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
     await box.clear();
   }
 
-  @override
-  Future<void> createUpdate({required String table, required Map<String, dynamic> dados, String? id}) async {
-    var box = switchBox(table);
+  Future<void> createUpdate({
+    required String table,
+    required Map<String, dynamic> dados,
+    String? id,
+  }) async {
+    final box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
     id ??= const Uuid().v4();
     await box.put(id, dados);
   }
 
-  @override
-  List<Map<String, dynamic>> list({required String table, String? orderField, bool desc = true}) {
-    var box = switchBox(table);
+  List<Map<String, dynamic>> list({
+    required String table,
+    String? orderField,
+    bool desc = true,
+  }) {
+    final box = switchBox(table);
     if (box == null) throw Exception(tableNotFound);
-    var dados = box.values.map((e) => Map<String, dynamic>.from(e)).toList();
+    final dados = box.values.map((e) => Map<String, dynamic>.from(e)).toList();
     if (orderField != null) {
       try {
         if (desc) {
@@ -71,7 +73,6 @@ class HiveDb implements ILocalData {
     }
   }
 
-  @override
   Future<void> initialise() async {
     await Hive.initFlutter();
     for (var element in TablesHive.listTables) {
