@@ -13,15 +13,11 @@ class CriarBannerController extends IController {
   @override
   void init(BuildContext context) {
     banner = ModalRoute.of(context)!.settings.arguments as BannerModel?;
-    banner ??= BannerModel(
-      image: '',
-      link: '',
-      type: 'parceiro',
-    );
+    banner ??= BannerModel.empty();
     notifyListeners();
   }
 
-  void criarBanner(context) async {
+  Future<void> criarBanner(context) async {
     try {
       String tipo = 'criado';
       if (banner!.id == null) {

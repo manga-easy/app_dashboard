@@ -1,22 +1,20 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
-import 'package:dashboard_manga_easy/core/config/app_config.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_exception.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class AuthAppwriteService implements AuthService {
   late Account _account;
+  String get ipserver => 'https://auth.lucas-cm.com.br/v1';
+  String get projectID => '64372675b0f256f58f4f';
 
   AuthAppwriteService();
 
   @override
   Future<void> initialization() async {
     final Client client = Client();
-    client
-        .setEndpoint(AppConfig.ipserver)
-        .setProject('64372675b0f256f58f4f')
-        .setSelfSigned();
+    client.setEndpoint(ipserver).setProject(projectID).setSelfSigned();
     _account = Account(client);
   }
 

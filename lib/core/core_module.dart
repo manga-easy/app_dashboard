@@ -1,5 +1,6 @@
 import 'package:client_driver/client_driver.dart';
 import 'package:dashboard_manga_easy/core/interfaces/module_service.dart';
+import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_appwrite_service.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/hive_service.dart';
@@ -11,7 +12,9 @@ class CoreModule extends IModuleService {
   @override
   void register() {
     //register singletons
+    di.registerFactory(() => ApiResponseParser());
     di.registerFactory<ClientRequest>(() => ClientHttp());
+    di.registerFactory(() => ApiMonolito(di(), di()));
     di.registerFactory(() => ApiResponseParser());
     di.registerLazySingleton<HiveDb>(() => HiveDb());
     di.registerLazySingleton(() => ServiceRoute());

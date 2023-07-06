@@ -1,3 +1,4 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/criar_banner_controller.dart';
@@ -36,13 +37,12 @@ class _CriarBannerPageState extends State<CriarBannerPage> {
         if (ct.banner == null) return const LoadingAtom();
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Criar Banner'),
+            title: const CoffeeText(text: 'Criar Banner'),
           ),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(AppTheme.defaultPadding),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     padding: const EdgeInsets.all(AppTheme.defaultPadding),
@@ -55,14 +55,16 @@ class _CriarBannerPageState extends State<CriarBannerPage> {
                           hintText: 'Link da image',
                           initialValue: ct.banner!.image,
                           onChange: (v) {
-                            ct.banner!.image = v;
+                            ct.banner = ct.banner!.copyWith(image: v);
                           },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),
                         CampoPadraoAtom(
                           hintText: 'Link do redirecionamento',
                           initialValue: ct.banner!.link,
-                          onChange: (v) => ct.banner!.link = v,
+                          onChange: (v) {
+                            ct.banner = ct.banner!.copyWith(link: v);
+                          },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),
                         ButtonPadraoAtom(
