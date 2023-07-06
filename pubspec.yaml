@@ -12,22 +12,22 @@ dependencies:
   flutter:
     sdk: flutter
   #### PACKAGES ####
-  google_fonts: ^4.0.3
-  flutter_svg: ^2.0.2
-  appwrite: ^9.0.0
-  get_it: ^7.2.0
+  google_fonts: ^5.1.0
+  flutter_svg: ^2.0.7
+  appwrite: ^9.0.1
+  get_it: ^7.6.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   uuid: ^3.0.7
   octo_image: ^1.0.2
-  package_info_plus: ^3.0.3
+  package_info_plus: ^4.0.2
   dropdown_search: ^5.0.6
   api_fcm: ^1.1.1
-  intl: ^0.18.0
-  dynamic_color: ^1.6.2
+  intl: ^0.18.1
+  dynamic_color: ^1.6.6
   html_editor_enhanced: 2.5.1
   infinite_scroll_pagination: ^3.2.0
-  file_picker: ^5.2.5
+  file_picker: ^5.3.2
   #### LIBS #####
   manga_easy_sdk:
   client_driver:
@@ -37,28 +37,33 @@ dependencies:
   manga_easy_advanced_search:
     git:
       url: https://github.com/manga-easy/manga_easy_advanced_search.git
-      ref: v1.0.5
+      ref: v1.1.0
 
 dependency_overrides:
   client_driver:
     git:
       url: https://github.com/manga-easy/manga_easy_client_driver.git
-      ref: v1.1.2
+      ref: v1.2.0
   coffee_cup:
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
-      ref: v1.2.0
+      ref: v1.3.1
   manga_easy_sdk:
     git:
       url: https://github.com/manga-easy/manga_easy_sdk.git
-      ref: v1.3.0
+      ref: v1.4.1
   toggle_config:
     git: 
       url: https://github.com/manga-easy/lib_toggle_config.git
-      ref: v1.1.0
+      ref: v1.1.1
+  persistent_database:
+    git:
+      url: https://github.com/manga-easy/lib_persistent_database.git
+      ref: v1.2.2
+  http: ^1.1.0 
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.2
   custom_lint: 0.4.0
   manga_easy_lint_rules:
     git:
