@@ -15,11 +15,10 @@ class BannerController extends IController {
     listaBanner();
   }
 
-  void listaBanner() async {
+  Future<void> listaBanner() async {
     state = StatusBuild.loading;
     try {
-      var ret = await bannerRepository.listDocument();
-      listaBannerItens = ret.data;
+      listaBannerItens = await bannerRepository.listDocument();
       state = StatusBuild.done;
     } catch (e) {
       state = StatusBuild.erro;
