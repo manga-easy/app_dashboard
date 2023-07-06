@@ -36,7 +36,7 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class ServiceRoute extends IService {
   bool isInicialize = false;
-  User? user;
+  static User? user;
   Permissions? permissions;
   @override
   Future<void> initialise() async {
