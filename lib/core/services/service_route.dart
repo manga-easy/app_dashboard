@@ -11,8 +11,6 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/forbid
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/cria_edita_emblema_page.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/emblemas_page.dart';
-import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/edit_enquete_page.dart';
-import 'package:dashboard_manga_easy/modules/enquente/presenter/ui/pages/enquete_page.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_details_page.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_pages.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/details_manga_page.dart';
@@ -184,16 +182,6 @@ class ServiceRoute extends IService {
           builder: (_) => const EditTemporadasPage(),
           settings: settings,
         );
-      case EnquetePage.route:
-        return MaterialPageRoute(
-          builder: (_) => const EnquetePage(),
-          settings: settings,
-        );
-      case EditEnquetePage.route:
-        return MaterialPageRoute(
-          builder: (_) => const EditEnquetePage(),
-          settings: settings,
-        );
       case EditeNivelUserPage.route:
         return MaterialPageRoute(
           builder: (_) => const EditeNivelUserPage(),
@@ -226,7 +214,6 @@ class ServiceRoute extends IService {
         BannerPage.route,
         PermissoesPage.route,
         TemporadasPage.route,
-        EnquetePage.route,
         HostPage.route,
         ComicAuthorialPage.route
       ]);
