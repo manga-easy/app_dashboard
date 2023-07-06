@@ -1,28 +1,27 @@
 import 'package:client_driver/client_driver.dart';
-import 'package:dashboard_manga_easy/core/interfaces/local_data_interface.dart';
 import 'package:dashboard_manga_easy/core/interfaces/module_service.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
+import 'package:dashboard_manga_easy/core/services/auth/auth_appwrite_service.dart';
+import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/hive_service.dart';
 import 'package:dashboard_manga_easy/core/services/service_route.dart';
 import 'package:dashboard_manga_easy/main.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CoreModule extends IModuleService {
   @override
   void register() {
     //register singletons
-    di.registerLazySingleton<DriverHttp>(() => DioDriver());
-    di.registerLazySingleton<ILocalData>(() => HiveDb());
-    di.registerLazySingleton(() => AppwriteClient());
-    di.registerLazySingleton(() => AppwriteAdmin());
+    di.registerFactory<ClientRequest>(() => ClientHttp());
+    di.registerFactory(() => ApiResponseParser());
+    di.registerLazySingleton<HiveDb>(() => HiveDb());
     di.registerLazySingleton(() => ServiceRoute());
+    di.registerLazySingleton<AuthService>(() => AuthAppwriteService());
   }
 
   @override
   Future<void> start() async {
-    await di.get<ILocalData>().initialise();
-    await di.get<AppwriteClient>().initialise();
-    await di.get<AppwriteAdmin>().initialise();
+    await di.get<HiveDb>().initialise();
+    await di.get<AuthService>().initialization();
     await di.get<ServiceRoute>().initialise();
   }
 }

@@ -15,7 +15,6 @@ class ContentChapterRepository {
   }
 
   Future<void> delete({required String id}) {
-    // TODO: implement deletDocument
     throw UnimplementedError();
   }
 

@@ -6,7 +6,7 @@ import 'package:dashboard_manga_easy/modules/mangas/domain/mappers/mapper_manga.
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaDatasourceV1 extends MangaDatasource {
-  final DriverHttp _clientDriver;
+  final ClientRequest _clientDriver;
   final MangaMapper _mangaMapper;
 
   MangaDatasourceV1(this._clientDriver, this._mangaMapper);

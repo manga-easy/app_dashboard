@@ -6,15 +6,15 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.3.2+6
 
 environment:
-  sdk: ">=2.19.2 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  #### PACKAGES ####
   google_fonts: ^4.0.3
   flutter_svg: ^2.0.2
-  dart_appwrite: 6.0.1
-  appwrite: 7.0.0
+  appwrite: ^9.0.0
   get_it: ^7.2.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -25,36 +25,49 @@ dependencies:
   api_fcm: ^1.1.1
   intl: ^0.18.0
   dynamic_color: ^1.6.2
-  http: ^0.13.5
   html_editor_enhanced: 2.5.1
   infinite_scroll_pagination: ^3.2.0
   file_picker: ^5.2.5
+  #### LIBS #####
+  manga_easy_sdk:
+  client_driver:
+  coffee_cup:
+  toggle_config:
   #### MICRO APPS #####
   manga_easy_advanced_search:
     git:
       url: https://github.com/manga-easy/manga_easy_advanced_search.git
-      ref: v1.0.3
-  manga_easy_sdk:
-    git:
-      url: https://github.com/manga-easy/manga_easy_sdk.git
-      ref: v1.2.1
+      ref: v1.0.5
+
+dependency_overrides:
   client_driver:
     git:
       url: https://github.com/manga-easy/manga_easy_client_driver.git
-      ref: v1.0.0
+      ref: v1.1.2
   coffee_cup:
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
-      ref: v1.0.0
-dependency_overrides:
-  package_info_plus: ^3.0.3
+      ref: v1.2.0
+  manga_easy_sdk:
+    git:
+      url: https://github.com/manga-easy/manga_easy_sdk.git
+      ref: v1.3.0
+  toggle_config:
+    git: 
+      url: https://github.com/manga-easy/lib_toggle_config.git
+      ref: v1.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
+  custom_lint: 0.4.0
+  manga_easy_lint_rules:
+    git:
+      url: https://github.com/manga-easy/manga_easy_lint_rules.git
+      ref: v1.1.0
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.12.0
-  flutter_native_splash: ^2.2.18
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.1
 
 flutter:
   uses-material-design: true

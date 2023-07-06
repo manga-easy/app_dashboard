@@ -1,23 +1,15 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-import 'package:dashboard_manga_easy/modules/auth/domain/repo/user_repository_external.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissoes_repository.dart';
-
+import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EditPermissoesController extends IController {
-  final UserRepositoryExternal userRepo;
-  final PermissoesRepository permissoesRepository;
-  final AppwriteAdmin appwriteAdmin;
+  final PermissionsRepository _permissionsRepository;
+  EditPermissoesController(this._permissionsRepository);
+
   Permissions? permissoes;
-  EditPermissoesController({
-    required this.appwriteAdmin,
-    required this.permissoesRepository,
-    required this.userRepo,
-  });
 
   @override
   void init(BuildContext context) {
@@ -31,7 +23,6 @@ class EditPermissoesController extends IController {
 
   Future<String> getNameUser({required String userId}) async {
     if (userId.isEmpty) return 'Sem user';
-    var ret = await appwriteAdmin.users.get(userId: userId);
     return ret.name;
   }
 
@@ -42,9 +33,9 @@ class EditPermissoesController extends IController {
       }
       var op = 'criado';
       if (permissoes!.id == null) {
-        await permissoesRepository.creatDocument(objeto: permissoes!);
+        await _permissionsRepository.creatDocument(objeto: permissoes!);
       } else {
-        await permissoesRepository.updateDocument(objeto: permissoes!);
+        await _permissionsRepository.updateDocument(objeto: permissoes!);
         op = 'atualizado';
       }
       Navigator.of(context).pop();
