@@ -57,7 +57,7 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
                         ))
                     .toList(),
                 onChanged: (v) {
-                  ct.permissoes!.value = v!;
+                  ct.permissoes = ct.permissoes!.copyWith(value: v);
                 },
               ),
               const SizedBox(height: AppTheme.defaultPadding),
@@ -69,7 +69,7 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
                   );
                   if (user is User) {
                     setState(() {
-                      ct.permissoes!.userId = user.id!;
+                      ct.permissoes = ct.permissoes!.copyWith(userId: user.id!);
                     });
                   }
                 },

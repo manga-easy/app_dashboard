@@ -1,6 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
@@ -14,16 +13,13 @@ class EditPermissoesController extends IController {
   @override
   void init(BuildContext context) {
     permissoes = ModalRoute.of(context)!.settings.arguments as Permissions?;
-    permissoes ??= Permissions(
-      userId: '',
-      value: LevelPermissoes.none.value,
-    );
+    permissoes ??= Permissions.empty();
     notifyListeners();
   }
 
   Future<String> getNameUser({required String userId}) async {
     if (userId.isEmpty) return 'Sem user';
-    return ret.name;
+    throw UnimplementedError();
   }
 
   Future<void> salvarEditaDados(BuildContext context) async {
@@ -55,6 +51,6 @@ class EditPermissoesController extends IController {
   }
 
   Future<List<User>> pesquisaUser(String pesquisa) async {
-    return await userRepo.list(search: pesquisa);
+    throw UnimplementedError();
   }
 }

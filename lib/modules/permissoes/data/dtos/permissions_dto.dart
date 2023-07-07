@@ -1,7 +1,7 @@
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class PermissionsDto {
-  final String uid;
+  final String? uid;
   final String userid;
   final int value;
   final int? createdat;
@@ -40,6 +40,18 @@ class PermissionsDto {
       userId: userid,
       value: value,
       id: uid,
+      createdat: createdat ?? 0,
+      updatedat: updatedat ?? 0,
+    );
+  }
+
+  factory PermissionsDto.fromEntity(Permissions entity) {
+    return PermissionsDto(
+      createdat: entity.createdat,
+      uid: entity.id,
+      userid: entity.userId,
+      value: entity.value,
+      updatedat: entity.updatedat,
     );
   }
 }

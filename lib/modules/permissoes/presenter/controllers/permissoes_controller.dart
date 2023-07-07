@@ -17,13 +17,13 @@ class PermissoesController extends IController {
   }
 
   Future<String> getNameUser({required String userId}) async {
-    return ret.name;
+    throw UnimplementedError();
   }
 
   Future<void> carregaPermissoes() async {
     try {
       state = StatusBuild.loading;
-      permissoes = await _permissionsRepository.list();
+      permissoes = await _permissionsRepository.listDocument();
     } catch (e) {
       state = StatusBuild.erro;
     }
