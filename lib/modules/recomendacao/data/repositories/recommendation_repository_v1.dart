@@ -10,7 +10,7 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
   RecommendationsRepositoryV1(this._apiMonolito);
 
   String get version => 'v1';
-  String get feature => 'hosts';
+  String get feature => 'recommendations';
   @override
   Future<RecomendacoesModel?> getDocument({required String id}) async {
     final result = await _apiMonolito.get(endpoint: '$version/$feature/$id');

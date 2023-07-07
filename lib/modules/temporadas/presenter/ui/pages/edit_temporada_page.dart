@@ -50,7 +50,8 @@ class _EditTemporadasPageState extends State<EditTemporadasPage> {
                 CampoPadraoAtom(
                   hintText: 'Titulo da temporada',
                   initialValue: ct.temporada!.nome,
-                  onChange: (x) => ct.temporada!.nome = x,
+                  onChange: (x) =>
+                      ct.temporada = ct.temporada!.copyWith(nome: x),
                 ),
                 const SizedBox(height: AppTheme.defaultPadding),
                 ButtonPadraoAtom(
