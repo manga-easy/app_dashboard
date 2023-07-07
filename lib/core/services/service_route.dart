@@ -1,12 +1,7 @@
 import 'package:dashboard_manga_easy/core/interfaces/service.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
-import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/comic_page.dart';
-import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_chapter_comic_page.dart';
-import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_comic_page.dart';
-import 'package:dashboard_manga_easy/modules/autor/presenter/ui/pages/edit_content_chapter_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/detalhes_emblemas_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/forbiden_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/cria_edita_emblema_page.dart';
@@ -73,26 +68,6 @@ class ServiceRoute extends IService {
           builder: (_) => const DetailsMangaPage(),
           settings: settings,
         );
-      case ComicAuthorialPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const ComicAuthorialPage(),
-          settings: settings,
-        );
-      case EditComicAuthorialPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const EditComicAuthorialPage(),
-          settings: settings,
-        );
-      case EditChapterComicPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const EditChapterComicPage(),
-          settings: settings,
-        );
-      case EditContentChapterPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const EditContentChapterPage(),
-          settings: settings,
-        );
     }
     if (permissions!.value >= LevelPermissoes.suporte.value) {
       switch (settings.name) {
@@ -140,11 +115,6 @@ class ServiceRoute extends IService {
       case CriaEditaEmblemaPage.route:
         return MaterialPageRoute(
           builder: (_) => const CriaEditaEmblemaPage(),
-          settings: settings,
-        );
-      case DetalhesEmblemasPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const DetalhesEmblemasPage(),
           settings: settings,
         );
       case CriarBannerPage.route:
@@ -215,18 +185,12 @@ class ServiceRoute extends IService {
         PermissoesPage.route,
         TemporadasPage.route,
         HostPage.route,
-        ComicAuthorialPage.route
       ]);
-      return routes;
-    }
-    if (permissions!.value == LevelPermissoes.autor.value) {
-      routes.add(ComicAuthorialPage.route);
       return routes;
     }
     if (permissions!.value == LevelPermissoes.suporte.value) {
       routes.addAll([
         MangasPage.route,
-        ComicAuthorialPage.route,
         UsersPage.route,
       ]);
       return routes;

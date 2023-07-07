@@ -7,11 +7,14 @@ import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model
 import 'package:dashboard_manga_easy/modules/auth/domain/models/erros_auth.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repositories/crendecial_repository.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart' as sdk;
 
 class AuthController extends IController {
   final CredencialRepository _credencialRepo;
+  final PermissionsRepository _permissionsRepository;
   final ServiceRoute _serviceRoute;
   final AuthService _authService;
 
@@ -19,6 +22,7 @@ class AuthController extends IController {
     this._credencialRepo,
     this._serviceRoute,
     this._authService,
+    this._permissionsRepository,
   );
   CredencialModel? credencialModel;
   sdk.Permissions? permissions;
@@ -43,7 +47,7 @@ class AuthController extends IController {
       await checkUsuario();
       final dataUser = await _authService.getUser();
       await validacaoPermissao(dataUser);
-      _serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
+      ServiceRoute.user = sdk.User.fromJson(dataUser.toMap());
       _serviceRoute.permissions = permissions;
       salvaCredencial();
       Navigator.pushNamedAndRemoveUntil(
@@ -69,20 +73,15 @@ class AuthController extends IController {
   }
 
   Future<void> validacaoPermissao(User response) async {
-    final DocumentList result = await .listDocuments(
-      collectionId: sdk.Permissions.collectionId,
-      queries: [
-        Query.equal(
-          'userId',
-          response.$id,
-        )
-      ],
-    );
-    if (result.total <= 0) {
+    final result = await _permissionsRepository.listDocument(
+        where: PermissoesParams(
+      userId: response.$id,
+    ));
+    if (result.isEmpty) {
       throw Exception(ErrosAuth.isNotAdmin);
     }
-    final data = result.documents.first.data;
-    permissions = sdk.Permissions.fromJson(data);
+
+    permissions = result.first;
   }
 
   void carregaCredencial() {
@@ -105,7 +104,7 @@ class AuthController extends IController {
     try {
       final dataUser = await _authService.getUser();
       await validacaoPermissao(dataUser);
-      _serviceRoute.user = sdk.User.fromJson(dataUser.toMap());
+      ServiceRoute.user = sdk.User.fromJson(dataUser.toMap());
       _serviceRoute.permissions = permissions;
       Navigator.pushNamedAndRemoveUntil(
         context,

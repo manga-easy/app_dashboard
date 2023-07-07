@@ -45,7 +45,18 @@ class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
   }
 
   @override
-  Future<List<EmblemaUser>> listDocument({EmblemaUserParams? where}) async {
-    throw UnimplementedError();
+  Future<List<EmblemaUser>> listDocument({
+    required EmblemaUserParams where,
+  }) async {
+    String filter = '';
+    if (where.idEmblema != null) {
+      filter += 'idemblema=${where.idEmblema}&';
+    }
+    final result = await _apiMonolito.get(
+      endpoint: '$version/users/${where.userId}/achievements?$filter',
+    );
+    return result.data
+        .map((e) => AchievementsUserDto.fromMap(e).toEntity())
+        .toList();
   }
 }

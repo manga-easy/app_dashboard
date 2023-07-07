@@ -10,5 +10,5 @@ abstract interface class EmblemaUserRepository {
 
   Future<void> updateDocument({required EmblemaUser objeto});
 
-  Future<List<EmblemaUser>> listDocument({EmblemaUserParams? where});
+  Future<List<EmblemaUser>> listDocument({required EmblemaUserParams where});
 }

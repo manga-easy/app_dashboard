@@ -49,4 +49,14 @@ class AchievementsUserDto {
       map['updatedat'] ?? map['timecria'],
     );
   }
+  EmblemaUser toEntity() {
+    return EmblemaUser(
+      id: uid,
+      timeCria: timecria,
+      userId: userid,
+      idEmblema: idemblema,
+      createAt: createdat ?? timecria,
+      updateAt: createdat ?? timecria,
+    );
+  }
 }

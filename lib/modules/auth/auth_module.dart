@@ -13,7 +13,7 @@ class AuthModule extends IModuleFactory {
     );
     //register controllers
     di.registerFactory(
-      () => AuthController(di(), di(), di()),
+      () => AuthController(di(), di(), di(), di()),
     );
   }
 }
