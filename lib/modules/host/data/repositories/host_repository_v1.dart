@@ -10,7 +10,7 @@ class HostRepositoryV1 implements HostRepository {
   HostRepositoryV1(this._apiMonolito);
 
   String get version => 'v1';
-  String get feature => '';
+  String get feature => 'hosts';
 
   @override
   Future<void> creatDocument({required HostModel objeto}) async {

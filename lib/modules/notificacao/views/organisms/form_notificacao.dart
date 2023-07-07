@@ -1,3 +1,4 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/send_notification_controller.dart';
@@ -14,24 +15,24 @@ class FormNotificacao extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 20),
-          Text(
-            'Novo Aviso',
-            style: Theme.of(context).textTheme.headline6,
+          CoffeeText(
+            text: 'Novo Aviso',
+            typography: CoffeeTypography.title,
           ),
           const SizedBox(height: 20),
           CampoPadraoAtom(
             hintText: 'Digite o titulo',
-            onChange: (v) => controller.nova.titulo = v,
+            onChange: (v) => controller.nova!.titulo = v,
           ),
           const SizedBox(height: 10),
           CampoPadraoAtom(
             hintText: 'Digite a mensagem',
-            onChange: (v) => controller.nova.menssege = v,
+            onChange: (v) => controller.nova!.menssege = v,
           ),
           const SizedBox(height: 10),
           CampoPadraoAtom(
             hintText: 'Digite o link',
-            onChange: (v) => controller.nova.image = v,
+            onChange: (v) => controller.nova!.image = v,
           ),
           const SizedBox(height: 20),
           ButtonPadraoAtom(

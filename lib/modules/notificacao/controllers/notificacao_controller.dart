@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class NotificacaoController extends IController {
-  final NotificacaoRepository notificacaoRepository;
+  final NotificacaoRepository _notificacaoRepository;
+
+  NotificacaoController(this._notificacaoRepository);
 
   var lista = ValueNotifier(<Notificacao>[]);
 
-  NotificacaoController({
-    required this.notificacaoRepository,
-  });
   @override
   void dispose() {
     super.dispose();
@@ -24,22 +23,21 @@ class NotificacaoController extends IController {
     carregaNotificacao();
   }
 
-  void carregaNotificacao() async {
+  Future<void> carregaNotificacao() async {
     state = StatusBuild.loading;
     lista.value.clear();
-    var retorno = await notificacaoRepository.listDocument();
-    lista.value = retorno.data;
+    lista.value = await _notificacaoRepository.listDocument();
     state = StatusBuild.done;
   }
 
   Future<void> removePermissoes(String id, context) async {
-    var ret = await AppHelps.confirmaDialog(
+    final ret = await AppHelps.confirmaDialog(
       title: 'Tem certeza?',
       content: '',
       context: context,
     );
     if (ret) {
-      await notificacaoRepository.deletDocument(id: id);
+      await _notificacaoRepository.deletDocument(id: id);
       carregaNotificacao();
     }
   }
