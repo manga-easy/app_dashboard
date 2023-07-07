@@ -1,33 +1,26 @@
-import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_client.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
 
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CriarRecomendacaoController extends IController {
-  final AppwriteClient app;
+  final RecommendationsRepository _recomendationsRepository;
 
-  CriarRecomendacaoController({
-    required this.app,
-  });
+  CriarRecomendacaoController(this._recomendationsRepository);
 
   RecomendacoesModel? recomendacao;
   @override
   void init(BuildContext context) {
     recomendacao =
         ModalRoute.of(context)!.settings.arguments as RecomendacoesModel?;
-    recomendacao ??= RecomendacoesModel(
-      dataCria: DateTime.now().millisecondsSinceEpoch,
-      link: '',
-      title: '',
-      uniqueid: '',
-    );
+    recomendacao ??= RecomendacoesModel.empty();
     notifyListeners();
   }
 
-  void criarRecomendacao(context) async {
+  Future<void> criarRecomendacao(context) async {
     try {
       if (recomendacao!.id == null) {
         if (await verificaExisteRecomendacao(recomendacao!.uniqueid)) {
@@ -40,19 +33,9 @@ class CriarRecomendacaoController extends IController {
           );
           return;
         }
-        await app.database.createDocument(
-          collectionId: RecomendacoesModel.collectionID,
-          documentId: 'unique()',
-          data: recomendacao!.toJson(),
-          read: ['role:all'],
-          write: ['role:all'],
-        );
+        await _recomendationsRepository.creatDocument(objeto: recomendacao!);
       } else {
-        await app.database.updateDocument(
-          collectionId: RecomendacoesModel.collectionID,
-          documentId: recomendacao!.id!,
-          data: recomendacao!.toJson(),
-        );
+        await _recomendationsRepository.updateDocument(objeto: recomendacao!);
       }
       Navigator.of(context).pop();
       AppHelps.confirmaDialog(
@@ -66,10 +49,9 @@ class CriarRecomendacaoController extends IController {
   }
 
   Future<bool> verificaExisteRecomendacao(String uniqueid) async {
-    var ret = await app.database.listDocuments(
-      collectionId: RecomendacoesModel.collectionID,
-      queries: [Query.equal('uniqueid', uniqueid)],
+    final ret = await _recomendationsRepository.listDocument(
+      filter: RecommendationsFilter(uniqueid: uniqueid),
     );
-    return ret.documents.isNotEmpty;
+    return ret.isNotEmpty;
   }
 }

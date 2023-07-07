@@ -70,6 +70,6 @@ class SendNotificationController extends IController {
   }
 
   Future<List<User>> pesquisaUser(String pesquisa) async {
-    return await userRepo.list(search: pesquisa);
+    throw UnimplementedError();
   }
 }
