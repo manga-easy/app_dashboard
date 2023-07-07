@@ -1,22 +1,14 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/host/domain/usercases/delete_host_case.dart';
-import 'package:dashboard_manga_easy/modules/host/domain/usercases/list_host_case.dart';
-import 'package:dashboard_manga_easy/modules/host/domain/usercases/update_host_case.dart';
+import 'package:dashboard_manga_easy/modules/host/domain/repositories/host_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class HostController extends IController {
-  final ListHostCase listHostCase;
-  final DeleteHostCase deleteHostCase;
-  final UpdateHostCase updateHostCase;
+  final HostRepository _hostRepository;
 
-  HostController({
-    required this.listHostCase,
-    required this.deleteHostCase,
-    required this.updateHostCase,
-  });
+  HostController(this._hostRepository);
 
   var list = <HostModel>[];
 
@@ -27,7 +19,7 @@ class HostController extends IController {
 
   Future<void> loadingHost() async {
     try {
-      list = await listHostCase();
+      list = await _hostRepository.listDocument();
       state = StatusBuild.done;
     } catch (e) {
       Helps.log(e);
@@ -39,8 +31,8 @@ class HostController extends IController {
   Future<void> deleteHost(BuildContext context, HostModel host) async {
     try {
       state = StatusBuild.loading;
-      await deleteHostCase(host);
-      list = await listHostCase();
+      await _hostRepository.deletDocument(id: host.id!);
+      list = await _hostRepository.listDocument();
       AppHelps.confirmaDialog(
         title: 'Sucesso',
         content: 'Host salvo com sucesso',
@@ -62,8 +54,8 @@ class HostController extends IController {
       host.status = host.status == HostStatus.disable
           ? HostStatus.enable
           : HostStatus.disable;
-      await updateHostCase(host);
-      list = await listHostCase();
+      await _hostRepository.updateDocument(objeto: host);
+      list = await _hostRepository.listDocument();
     } catch (e) {
       Helps.log(e);
     }
