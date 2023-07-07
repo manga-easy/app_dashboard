@@ -1,14 +1,14 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/users/domain/repositories/permissoes_repository.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/repositories/levels_user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EditeNivelUserController extends IController {
-  final NivelUserRepository nivelUserRepository;
+  final LevelsUserRepository _levelsUserRepository;
 
   NivelUser? nivelUser;
-  EditeNivelUserController({required this.nivelUserRepository});
+  EditeNivelUserController(this._levelsUserRepository);
 
   @override
   void dispose() {
@@ -22,13 +22,13 @@ class EditeNivelUserController extends IController {
     notifyListeners();
   }
 
-  void salvarNivel(BuildContext context) async {
+  Future<void> salvarNivel(BuildContext context) async {
     try {
       var op = 'criado';
       if (nivelUser!.id == null) {
-        await nivelUserRepository.creatDocument(objeto: nivelUser!);
+        await _levelsUserRepository.creatDocument(objeto: nivelUser!);
       } else {
-        await nivelUserRepository.updateDocument(objeto: nivelUser!);
+        await _levelsUserRepository.updateDocument(objeto: nivelUser!);
         op = 'atualizado';
       }
       Navigator.of(context).pop();
@@ -47,16 +47,16 @@ class EditeNivelUserController extends IController {
     }
   }
 
-  void deletarNivel(BuildContext context) async {
+  Future<void> deletarNivel(BuildContext context) async {
     try {
-      var ret = await AppHelps.confirmaDialog(
+      final ret = await AppHelps.confirmaDialog(
         title: 'Tem certeza ?',
         content: '',
         context: context,
       );
       if (ret) {
         if (nivelUser!.id != null) {
-          await nivelUserRepository.deletDocument(id: nivelUser!.id!);
+          await _levelsUserRepository.deletDocument(id: nivelUser!.id!);
           Navigator.of(context).pop();
           AppHelps.confirmaDialog(
             title: 'Sucesso',

@@ -1,3 +1,4 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
@@ -16,9 +17,8 @@ class InfoUsersW extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Detalhes',
-          style: Theme.of(context).textTheme.titleLarge,
+        CoffeeText(
+          text: 'Detalhes',
         ),
         const SizedBox(height: 5),
         SizedBox(
@@ -35,7 +35,6 @@ class InfoUsersW extends StatelessWidget {
                   const SizedBox(height: 15),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CircleAvatar(
                         radius: 45,
@@ -50,7 +49,8 @@ class InfoUsersW extends StatelessWidget {
                   SelectableText(user.id!),
                   const SizedBox(height: 5),
                   SelectableText(
-                      "Tipo de autenticação: ${user.prefs.provider}"),
+                    'Tipo de autenticação: ${user.prefs.provider}',
+                  ),
                 ],
               ),
             ),

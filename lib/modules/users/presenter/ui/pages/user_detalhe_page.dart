@@ -1,3 +1,4 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/main.dart';
 
@@ -43,7 +44,7 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
         }
         return Scaffold(
           appBar: AppBar(
-            title: Text(ct.user?.name ?? 'Carregando...'),
+            title: CoffeeText(text: ct.user?.name ?? 'Carregando...'),
           ),
           body: SafeArea(
             child: ListView(
@@ -57,7 +58,6 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
                   children: [
                     InfoUsersW(
                       user: ct.user!,
-                      onPress: () => ct.addNotificacao(context),
                     ),
                     CardXpUser(
                       ct: ct,

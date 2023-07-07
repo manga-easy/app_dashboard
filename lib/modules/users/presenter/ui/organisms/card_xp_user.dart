@@ -1,5 +1,4 @@
-import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/edite_nivel_user.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +12,9 @@ class CardXpUser extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Nivels',
-          style: Theme.of(context).textTheme.titleLarge,
+        CoffeeText(
+          text: 'Nivels',
+          typography: CoffeeTypography.title,
         ),
         const SizedBox(height: 5),
         ValueListenableBuilder<List<NivelUser>>(
@@ -31,7 +30,7 @@ class CardXpUser extends StatelessWidget {
                   itemCount: value.length,
                   padding: const EdgeInsets.all(8),
                   itemBuilder: (context, index) {
-                    var nivel = value[index];
+                    final nivel = value[index];
                     return Card(
                       color: Theme.of(context).colorScheme.secondary,
                       child: ListTile(
@@ -40,13 +39,11 @@ class CardXpUser extends StatelessWidget {
                           EditeNivelUserPage.route,
                           arguments: nivel,
                         ).then((value) => ct.carregaXpsUser()),
-                        title: Text(
-                          'Temporada: ${nivel.temporada}',
-                          style: Theme.of(context).textTheme.titleMedium,
+                        title: CoffeeText(
+                          text: 'Temporada: ${nivel.temporada}',
                         ),
-                        subtitle: Text(
-                          'Nivel ${nivel.lvl}',
-                          style: Theme.of(context).textTheme.titleMedium,
+                        subtitle: CoffeeText(
+                          text: 'Nivel ${nivel.lvl}',
                         ),
                       ),
                     );

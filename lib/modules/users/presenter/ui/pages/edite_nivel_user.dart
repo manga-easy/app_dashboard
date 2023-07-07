@@ -60,20 +60,22 @@ class _EditeNivelUserPageState extends State<EditeNivelUserPage> {
                 CampoPadraoAtom(
                   initialValue: ct.nivelUser!.quantity.toString(),
                   hintText: 'Quantidade de xp do nível atual',
-                  onChange: (x) =>
-                      ct.nivelUser!.quantity = int.tryParse(x) ?? 0,
+                  onChange: (x) => ct.nivelUser =
+                      ct.nivelUser!.copyWith(quantity: int.tryParse(x) ?? 0),
                 ),
                 const SizedBox(height: AppTheme.defaultPadding),
                 CampoPadraoAtom(
                   initialValue: ct.nivelUser!.lvl.toString(),
                   hintText: 'Nível atual',
-                  onChange: (x) => ct.nivelUser!.lvl = int.tryParse(x) ?? 0,
+                  onChange: (x) => ct.nivelUser =
+                      ct.nivelUser!.copyWith(lvl: int.tryParse(x) ?? 0),
                 ),
                 const SizedBox(height: AppTheme.defaultPadding),
                 CampoPadraoAtom(
                   initialValue: ct.nivelUser!.total.toString(),
                   hintText: 'Total xp',
-                  onChange: (x) => ct.nivelUser!.total = int.tryParse(x) ?? 0,
+                  onChange: (x) => ct.nivelUser =
+                      ct.nivelUser!.copyWith(total: int.tryParse(x) ?? 0),
                 ),
                 const SizedBox(height: AppTheme.defaultPadding),
                 ButtonPadraoAtom(
