@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/core/core_module.dart';
-import 'package:dashboard_manga_easy/core/services/service_route.dart';
+import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
 import 'package:dashboard_manga_easy/modules/banners/banners_module.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';

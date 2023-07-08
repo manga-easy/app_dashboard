@@ -171,30 +171,4 @@ class ServiceRoute extends IService {
         return null;
     }
   }
-
-  List<String> menuRoutes() {
-    final routes = [MainPage.route];
-    if (permissions!.value == LevelPermissoes.admin.value) {
-      routes.addAll([
-        MangasPage.route,
-        UsersPage.route,
-        RecomendacaoPage.route,
-        NotificacaoPage.route,
-        EmblemasPage.route,
-        BannerPage.route,
-        PermissoesPage.route,
-        TemporadasPage.route,
-        HostPage.route,
-      ]);
-      return routes;
-    }
-    if (permissions!.value == LevelPermissoes.suporte.value) {
-      routes.addAll([
-        MangasPage.route,
-        UsersPage.route,
-      ]);
-      return routes;
-    }
-    return routes;
-  }
 }
