@@ -10,7 +10,7 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
   PermissionsRepositoryV1(this._apiMonolito);
 
   String get version => 'v1';
-  String get feature => 'hosts';
+  String get feature => 'permissions';
 
   @override
   Future<void> creatDocument({required Permissions objeto}) async {
@@ -21,26 +21,42 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
   }
 
   @override
-  Future<void> deletDocument({required String id}) {
-    // TODO: implement deletDocument
-    throw UnimplementedError();
+  Future<void> deletDocument({required String id}) async {
+    await _apiMonolito.delete(endpoint: '$version/$feature/$id');
   }
 
   @override
-  Future<Permissions?> getDocument({required String id}) {
-    // TODO: implement getDocument
-    throw UnimplementedError();
+  Future<Permissions?> getDocument({required String id}) async {
+    final result = await _apiMonolito.get(
+      endpoint: '$version/$feature/$id',
+    );
+    if (result.data.isEmpty) {
+      return null;
+    }
+    return PermissionsDto.fromMap(result.data.first).toEntity();
   }
 
   @override
-  Future<List<Permissions>> listDocument({PermissoesParams? where}) {
-    // TODO: implement listDocument
-    throw UnimplementedError();
+  Future<List<Permissions>> listDocument({PermissoesParams? where}) async {
+    String filter = '';
+    if (where != null) {
+      if (where.userId != null) {
+        filter += 'userId=${where.userId}&';
+      }
+    }
+    final result = await _apiMonolito.get(
+      endpoint: '$version/$feature/list?$filter',
+    );
+    return result.data
+        .map((e) => PermissionsDto.fromMap(e).toEntity())
+        .toList();
   }
 
   @override
-  Future<void> updateDocument({required Permissions objeto}) {
-    // TODO: implement updateDocument
-    throw UnimplementedError();
+  Future<void> updateDocument({required Permissions objeto}) async {
+    await _apiMonolito.put(
+      endpoint: '$version/$feature/${objeto.id}',
+      body: PermissionsDto.fromEntity(objeto).toMap(),
+    );
   }
 }
