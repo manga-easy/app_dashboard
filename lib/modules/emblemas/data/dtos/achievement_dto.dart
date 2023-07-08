@@ -64,7 +64,7 @@ class AchievementDto {
       disponivel: map['disponivel'],
       categoria: map['categoria'],
       type: map['type'],
-      timecria: map['timecria'],
+      timecria: map['time_cria'],
       createdat: map['createdat'],
       updatedat: map['updatedat'],
     );

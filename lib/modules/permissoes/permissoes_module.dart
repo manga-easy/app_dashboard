@@ -8,10 +8,6 @@ import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/pe
 class PermissoesModule extends IModuleFactory {
   @override
   void register() {
-    // datasources
-    di.registerFactory<PermissionsRepository>(
-      () => PermissionsRepositoryV1(di()),
-    );
     //register repositories
     di.registerFactory<PermissionsRepository>(
       () => PermissionsRepositoryV1(di()),

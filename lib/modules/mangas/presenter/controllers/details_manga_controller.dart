@@ -40,7 +40,7 @@ class DetailsMangaController extends IController {
   Future<void> updateManga() async {
     try {
       state = StatusBuild.loading;
-      var result = await mangaRepository.updateManga(manga: manga!);
+      await mangaRepository.updateManga(manga: manga!);
     } catch (e) {
       Helps.log(e);
     }
