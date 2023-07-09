@@ -36,7 +36,7 @@ class _BannerPageState extends State<BannerPage> {
         return ModuloPageTemplate(
           route: BannerPage.route,
           statusBuild: ct.state,
-          labelNovoItem: 'Nova Banner',
+          labelNovoItem: 'Novo Banner',
           onPressedAtualiza: ct.listaBanner,
           itemBuilderLista: (context, index) {
             BannerModel reco = ct.listaBannerItens[index];

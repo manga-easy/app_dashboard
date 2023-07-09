@@ -43,8 +43,8 @@ class BannerRepositoryV1 implements BannerRepository {
 
   @override
   Future<void> updateDocument({required BannerModel objeto}) async {
-    await _apiMonolito.post(
-      endpoint: '$version/$table',
+    await _apiMonolito.put(
+      endpoint: '$version/$table/${objeto.id}',
       body: BannerDto.fromEntity(objeto).toMap(),
     );
   }
