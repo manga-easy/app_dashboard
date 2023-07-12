@@ -13,7 +13,7 @@ class RecomendacaoModule extends IModuleFactory {
       () => RecommendationsRepositoryV1(di()),
     );
     //register controllers
-    di.registerFactory(() => CriarRecomendacaoController(di()));
+    di.registerFactory(() => CriarRecomendacaoController(di(), di()));
     di.registerFactory(() => RecomendacaoController(di()));
   }
 }

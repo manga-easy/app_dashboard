@@ -39,11 +39,7 @@ class RecomendacaoController extends IController {
         context: context,
       );
     } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
+      handlerError(e, context);
     }
   }
 }

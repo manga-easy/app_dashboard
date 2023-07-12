@@ -8,6 +8,8 @@ class RecommendationsDto {
   final int datacria;
   final int? createdat;
   final int? updatedat;
+  final String? artistid;
+  final String? artistname;
 
   RecommendationsDto({
     this.uid,
@@ -17,6 +19,8 @@ class RecommendationsDto {
     required this.datacria,
     required this.createdat,
     required this.updatedat,
+    required this.artistid,
+    required this.artistname,
   });
 
   factory RecommendationsDto.fromEntity(RecomendacoesModel entity) {
@@ -28,6 +32,8 @@ class RecommendationsDto {
       datacria: entity.dataCria,
       createdat: entity.createdAt,
       updatedat: entity.updatedAt,
+      artistid: entity.artistId,
+      artistname: entity.artistName,
     );
   }
 
@@ -40,6 +46,8 @@ class RecommendationsDto {
       'datacria': datacria,
       'createdat': createdat,
       'updatedat': updatedat,
+      'artistid': artistid,
+      'artistname': artistname,
     };
   }
 
@@ -49,20 +57,25 @@ class RecommendationsDto {
       uniqueid: map['uniqueid'],
       title: map['title'],
       link: map['link'],
-      datacria: map['datacria'],
+      datacria: map['datacria'] ?? 0,
       createdat: map['createdat'],
       updatedat: map['updatedat'],
+      artistid: map['artistid'],
+      artistname: map['artistname'],
     );
   }
 
   RecomendacoesModel toEntity() {
     return RecomendacoesModel(
+      id: uid,
       title: title,
       link: link,
       uniqueid: uniqueid,
       dataCria: datacria,
       createdAt: createdat ?? datacria,
       updatedAt: createdat ?? datacria,
+      artistId: artistid,
+      artistName: artistname,
     );
   }
 }

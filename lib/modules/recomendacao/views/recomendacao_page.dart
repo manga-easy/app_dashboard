@@ -4,6 +4,7 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/mo
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/recomendacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class RecomendacaoPage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
           labelNovoItem: 'Nova recomendação',
           onPressedAtualiza: ct.listaRecomendacao,
           itemBuilderLista: (context, index) {
-            RecomendacoesModel reco = ct.listaRecomendacaoItens[index];
+            final RecomendacoesModel reco = ct.listaRecomendacaoItens[index];
             return Card(
               child: Column(
                 children: [
@@ -48,6 +49,18 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                     title: Text(
                       reco.title,
                       style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  ListTile(
+                    textColor: Colors.white,
+                    title: Text(
+                      'Artista: ${reco.artistName ?? 'N/A'}',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    subtitle: Text(
+                      DateFormat.yMMMMEEEEd().format(
+                        DateTime.fromMillisecondsSinceEpoch(reco.createdAt),
+                      ),
                     ),
                   ),
                   Padding(
@@ -62,7 +75,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ButtonPadraoAtom(
-                        title: "Editar",
+                        title: 'Editar',
                         icone: Icons.edit,
                         onPress: () => Navigator.of(context)
                             .pushNamed(
@@ -72,7 +85,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                             .then((value) => ct.listaRecomendacao()),
                       ),
                       ButtonPadraoAtom(
-                        title: "Deletar",
+                        title: 'Deletar',
                         icone: Icons.delete_forever,
                         onPress: () => ct
                             .deleteRecomendacao(reco, context)

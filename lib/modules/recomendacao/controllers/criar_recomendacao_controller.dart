@@ -1,15 +1,20 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CriarRecomendacaoController extends IController {
   final RecommendationsRepository _recomendationsRepository;
+  final UsersRepository _usersRepository;
 
-  CriarRecomendacaoController(this._recomendationsRepository);
+  CriarRecomendacaoController(
+    this._recomendationsRepository,
+    this._usersRepository,
+  );
 
   RecomendacoesModel? recomendacao;
   @override
@@ -17,22 +22,12 @@ class CriarRecomendacaoController extends IController {
     recomendacao =
         ModalRoute.of(context)!.settings.arguments as RecomendacoesModel?;
     recomendacao ??= RecomendacoesModel.empty();
-    notifyListeners();
+    state = StatusBuild.done;
   }
 
   Future<void> criarRecomendacao(context) async {
     try {
       if (recomendacao!.id == null) {
-        if (await verificaExisteRecomendacao(recomendacao!.uniqueid)) {
-          Navigator.of(context).pop();
-          AppHelps.confirmaDialog(
-            title: 'Erro',
-            content:
-                'Recomendação já foi feita, edite a recomenção anterior do mangá',
-            context: context,
-          );
-          return;
-        }
         await _recomendationsRepository.creatDocument(objeto: recomendacao!);
       } else {
         await _recomendationsRepository.updateDocument(objeto: recomendacao!);
@@ -40,18 +35,28 @@ class CriarRecomendacaoController extends IController {
       Navigator.of(context).pop();
       AppHelps.confirmaDialog(
         title: 'Sucesso',
-        content: 'Recomendação salv com sucesso',
+        content: 'Recomendação salva com sucesso',
         context: context,
       );
-    } catch (e) {
-      Helps.log(e);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
   }
 
-  Future<bool> verificaExisteRecomendacao(String uniqueid) async {
-    final ret = await _recomendationsRepository.listDocument(
-      filter: RecommendationsFilter(uniqueid: uniqueid),
+  Future<List<User>> pesquisaUser(String search) async {
+    if (search.isEmpty) {
+      return [];
+    }
+    return await _usersRepository.listDocument(
+      search: search,
     );
-    return ret.isNotEmpty;
+  }
+
+  Future<String> getNameUser({required String userId}) async {
+    if (userId.isEmpty) {
+      return 'Selecione um usuario';
+    }
+    final result = await _usersRepository.getDocument(id: userId);
+    return result?.name ?? 'Não encontrado';
   }
 }

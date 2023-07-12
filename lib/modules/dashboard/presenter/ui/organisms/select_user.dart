@@ -40,7 +40,7 @@ class _SelectUserState extends State<SelectUser> {
             CampoPadraoAtom(
               controller: controller,
               onChange: (v) => setState(() {}),
-              hintText: "Digite o nome do usuario",
+              hintText: 'Digite o nome do usuario',
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
@@ -51,7 +51,7 @@ class _SelectUserState extends State<SelectUser> {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        var user = snapshot.data![index];
+                        final user = snapshot.data![index];
                         return ListTile(
                           onTap: () => Navigator.pop(context, user),
                           title: Text(user.name),

@@ -7,7 +7,7 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/de
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/edit_permissoes_controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/organisms/select_user.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/select_user.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
