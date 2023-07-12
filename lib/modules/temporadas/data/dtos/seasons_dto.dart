@@ -1,7 +1,7 @@
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class SeasonsDto {
-  final String uid;
+  final String? uid;
   final String nome;
   final int number;
   final int? createdat;
@@ -36,7 +36,7 @@ class SeasonsDto {
   }
   factory SeasonsDto.fromEntity(TemporadaModel entity) {
     return SeasonsDto(
-      uid: entity.id!,
+      uid: entity.id,
       nome: entity.nome,
       number: entity.number,
       createdat: entity.createdat,

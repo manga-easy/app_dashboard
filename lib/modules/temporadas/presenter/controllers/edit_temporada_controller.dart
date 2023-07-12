@@ -1,4 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/temporadas/domain/repositories/temporadas_repository.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class EditTemporadasController extends IController {
   void init(BuildContext context) {
     temporada = ModalRoute.of(context)!.settings.arguments as TemporadaModel?;
     temporada ??= TemporadaModel.empty();
-    notifyListeners();
+    state = StatusBuild.done;
   }
 
   Future<void> salvarEditaDados(BuildContext context) async {
@@ -33,13 +34,8 @@ class EditTemporadasController extends IController {
         content: 'Temporada $op com sucesso',
         context: context,
       );
-    } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
-      Helps.log(e);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
   }
 }

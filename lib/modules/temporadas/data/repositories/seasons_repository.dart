@@ -21,11 +21,6 @@ class SeasonsRepositoryV1 implements SeasonsRepository {
   }
 
   @override
-  Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete(endpoint: '$version/$feature/$id');
-  }
-
-  @override
   Future<TemporadaModel?> getDocument({required String id}) async {
     final result = await _apiMonolito.get(
       endpoint: '$version/$feature/$id',

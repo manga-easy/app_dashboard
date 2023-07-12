@@ -4,8 +4,6 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 abstract interface class SeasonsRepository {
   Future<void> creatDocument({required TemporadaModel objeto});
 
-  Future<void> deletDocument({required String id});
-
   Future<TemporadaModel?> getDocument({required String id});
 
   Future<void> updateDocument({required TemporadaModel objeto});
