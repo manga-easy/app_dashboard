@@ -1,4 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/levels_user_repository.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class EditeNivelUserController extends IController {
   @override
   void init(BuildContext context) {
     nivelUser = ModalRoute.of(context)!.settings.arguments as NivelUser;
-    notifyListeners();
+    state = StatusBuild.done;
   }
 
   Future<void> salvarNivel(BuildContext context) async {
@@ -37,13 +38,8 @@ class EditeNivelUserController extends IController {
         content: 'Nível $op com sucesso',
         context: context,
       );
-    } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
-      Helps.log(e);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
   }
 
@@ -71,13 +67,8 @@ class EditeNivelUserController extends IController {
           );
         }
       }
-    } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
-      Helps.log(e);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
   }
 }
