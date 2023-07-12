@@ -54,7 +54,7 @@ class LevelsUserRepositoryV1 implements LevelsUserRepository {
     required LevelsUserFilter where,
   }) async {
     final result = await _apiMonolito.get(
-      endpoint: '$version/users/${where.userId}/$feature/',
+      endpoint: '$version/users/${where.userId}/$feature',
     );
     return result.data.map((e) => LevelsUserDto.fromMap(e).toEntity()).toList();
   }

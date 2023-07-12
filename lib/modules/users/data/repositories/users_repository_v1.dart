@@ -43,8 +43,12 @@ class UsersRepositoryV1 implements UsersRepository {
 
   @override
   Future<List<User>> listDocument({String? search}) async {
+    String params = '';
+    if (search != null) {
+      params += 'search=$search';
+    }
     final result = await _apiMonolito.get(
-      endpoint: '$version/$feature/list?search=$search',
+      endpoint: '$version/$feature?$params',
     );
 
     return result.data.map((e) => UserDto.fromMap(e).toEntity()).toList();

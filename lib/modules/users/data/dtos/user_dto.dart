@@ -7,7 +7,6 @@ class UserDto {
   final String name;
   final String registration;
   final bool status;
-  final String passwordUpdate;
   final String email;
   final bool emailVerification;
   final String prefs;
@@ -17,7 +16,6 @@ class UserDto {
     required this.name,
     required this.registration,
     required this.status,
-    required this.passwordUpdate,
     required this.email,
     required this.emailVerification,
     required this.prefs,
@@ -25,11 +23,10 @@ class UserDto {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'uid': id,
       'name': name,
       'registration': registration,
       'status': status,
-      'passwordUpdate': passwordUpdate,
       'email': email,
       'emailVerification': emailVerification,
       'prefs': prefs,
@@ -38,22 +35,21 @@ class UserDto {
 
   factory UserDto.fromMap(Map<String, dynamic> map) {
     return UserDto(
-      id: map['id'] != null ? map['id'] as String : null,
-      name: map['name'] as String,
-      registration: map['registration'] as String,
-      status: map['status'] as bool,
-      passwordUpdate: map['passwordUpdate'] as String,
-      email: map['email'] as String,
-      emailVerification: map['emailVerification'] as bool,
-      prefs: map['prefs'] as String,
+      id: map['uid'],
+      name: map['name'],
+      registration: map['registration'],
+      status: map['status'],
+      email: map['email'],
+      emailVerification: map['emailverification'],
+      prefs: map['prefs'],
     );
   }
   factory UserDto.fromEntity(User entity) {
     return UserDto(
+      id: entity.id,
       name: entity.name,
       registration: entity.registration,
       status: entity.status,
-      passwordUpdate: entity.passwordUpdate,
       email: entity.email,
       emailVerification: entity.emailVerification,
       prefs: entity.prefs.toString(),
@@ -62,13 +58,14 @@ class UserDto {
 
   User toEntity() {
     return User(
+      id: id,
       name: name,
       registration: registration,
       status: status,
-      passwordUpdate: passwordUpdate,
+      passwordUpdate: '',
       email: email,
       emailVerification: emailVerification,
-      prefs: json.decode(prefs),
+      prefs: Prefs.fromJson(json.decode(prefs)),
     );
   }
 }
