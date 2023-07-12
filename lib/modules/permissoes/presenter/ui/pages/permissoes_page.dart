@@ -42,7 +42,7 @@ class _PermissoesPageState extends State<PermissoesPage> {
             EditPermissoesPage.route,
           ),
           itemBuilderLista: (context, index) {
-            var data = ct.permissoes[index];
+            final data = ct.permissoes[index];
             return Card(
               child: ListTile(
                 onTap: () => Navigator.pushNamed(

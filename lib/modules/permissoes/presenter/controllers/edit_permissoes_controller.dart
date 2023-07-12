@@ -1,12 +1,18 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EditPermissoesController extends IController {
+  final UsersRepository _usersRepository;
   final PermissionsRepository _permissionsRepository;
-  EditPermissoesController(this._permissionsRepository);
+  EditPermissoesController(
+    this._permissionsRepository,
+    this._usersRepository,
+  );
 
   Permissions? permissoes;
 
@@ -14,16 +20,20 @@ class EditPermissoesController extends IController {
   void init(BuildContext context) {
     permissoes = ModalRoute.of(context)!.settings.arguments as Permissions?;
     permissoes ??= Permissions.empty();
-    notifyListeners();
+    state = StatusBuild.done;
   }
 
   Future<String> getNameUser({required String userId}) async {
-    if (userId.isEmpty) return 'Sem user';
-    throw UnimplementedError();
+    if (userId.isEmpty) {
+      return 'Selecione um usuario';
+    }
+    final result = await _usersRepository.getDocument(id: userId);
+    return result?.name ?? 'Não encontrado';
   }
 
   Future<void> salvarEditaDados(BuildContext context) async {
     try {
+      state = StatusBuild.loading;
       if (permissoes!.userId.isEmpty) {
         throw Exception('User vazio, selecione um usuário');
       }
@@ -40,17 +50,18 @@ class EditPermissoesController extends IController {
         content: 'Permissão $op com sucesso',
         context: context,
       );
-    } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
-      Helps.log(e);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
+    state = StatusBuild.done;
   }
 
   Future<List<User>> pesquisaUser(String pesquisa) async {
-    throw UnimplementedError();
+    if (pesquisa.isEmpty) {
+      return [];
+    }
+    return await _usersRepository.listDocument(
+      search: pesquisa,
+    );
   }
 }

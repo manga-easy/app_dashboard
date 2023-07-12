@@ -13,7 +13,7 @@ class PermissoesModule extends IModuleFactory {
       () => PermissionsRepositoryV1(di()),
     );
     //register controllers
-    di.registerFactory(() => PermissoesController(di()));
-    di.registerFactory(() => EditPermissoesController(di()));
+    di.registerFactory(() => PermissoesController(di(), di()));
+    di.registerFactory(() => EditPermissoesController(di(), di()));
   }
 }
