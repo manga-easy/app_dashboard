@@ -4,9 +4,15 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 abstract interface class EmblemaUserRepository {
   Future<void> creatDocument({required EmblemaUser objeto});
 
-  Future<void> deletDocument({required String id});
+  Future<void> deletDocument({
+    required String idEmblema,
+    required String userID,
+  });
 
-  Future<EmblemaUser?> getDocument({required String id});
+  Future<EmblemaUser?> getDocument({
+    required String idEmblema,
+    required String userID,
+  });
 
   Future<void> updateDocument({required EmblemaUser objeto});
 

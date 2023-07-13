@@ -1,8 +1,9 @@
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/default_page_template.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/presenter/controllers/cria_edita_emblema_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
@@ -20,6 +21,12 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+    ct.onMessage(listernerMessage);
     super.initState();
   }
 
@@ -29,232 +36,240 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
     super.dispose();
   }
 
+  void listernerMessage(String? message) {
+    if (message != null && mounted) {
+      AppHelps.confirmaDialog(
+        title: 'Error ⚠️😥',
+        content: message,
+        context: context,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: ct,
-      builder: (context, child) {
-        if (ct.emblema == null) return const LoadingAtom();
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Criar Emblema'),
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(AppTheme.defaultPadding),
-              child: ListView(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(AppTheme.defaultPadding),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        CampoPadraoAtom(
-                          hintText: 'Nome do emblema',
-                          initialValue: ct.emblema!.name,
-                          onChange: (v) => ct.emblema!.name = v,
-                        ),
-                        const SizedBox(height: AppTheme.defaultPadding),
-                        CampoPadraoAtom(
-                          hintText: 'Descrição do emblema',
-                          initialValue: ct.emblema!.description,
-                          numberLines: 3,
-                          onChange: (v) => ct.emblema!.description = v,
-                        ),
-                        const SizedBox(height: AppTheme.defaultPadding),
-                        SwitchListTile(
-                            contentPadding: EdgeInsets.zero,
-                            title: Text(
-                              'Remove ADS',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
-                                    color: Colors.white,
-                                  ),
-                            ),
-                            value: ct.emblema!.adsOff,
-                            onChanged: (v) {
-                              ct.emblema!.adsOff = v;
-                              ct.update();
-                            }),
-                        const SizedBox(height: AppTheme.defaultPadding),
-                        Row(
-                          children: [
-                            Text(
-                              'Beneficios',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
-                                    color: Colors.white,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: AppTheme.defaultPadding * 2),
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                  height: AppTheme.defaultPadding / 2),
-                              Column(
-                                children: beneficios(),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      ct.emblema!.benefits.add('');
-                                      ct.update();
-                                    },
-                                    icon: const Icon(Icons.add),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      ct.emblema!.benefits.removeLast();
-                                      ct.update();
-                                    },
-                                    icon: const Icon(Icons.remove),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: AppTheme.defaultPadding),
-                        Row(
-                          children: [
-                            Text(
-                              'Categoria',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
-                                    color: Colors.white,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        DropdownButton<String>(
-                          isExpanded: true,
-                          value: ct.emblema!.categoria,
-                          items: CategoriaEmblema.values
-                              .map((e) => DropdownMenuItem<String>(
-                                    value: e.name,
-                                    child: Text(e.name),
-                                  ))
-                              .toList(),
-                          onChanged: (v) {
-                            ct.emblema!.categoria = v!;
-                            ct.update();
-                          },
-                        ),
-                        const SizedBox(height: AppTheme.defaultPadding),
-                        SwitchListTile(
-                            contentPadding: EdgeInsets.zero,
-                            title: Text(
-                              'Disponivel para resgatar',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
-                                    color: Colors.white,
-                                  ),
-                            ),
-                            value: ct.emblema!.disponivel,
-                            onChanged: (v) {
-                              ct.emblema!.disponivel = v;
-                              ct.update();
-                            }),
-                        const SizedBox(height: AppTheme.defaultPadding),
-                        Row(
-                          children: [
-                            Text(
-                              'Tipo de imagem',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
-                                    color: Colors.white,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        DropdownButton<String>(
-                          isExpanded: true,
-                          value: ct.emblema!.type,
-                          items: TypeEmblema.values
-                              .map((e) => DropdownMenuItem<String>(
-                                    value: e.name,
-                                    child: Text(e.name),
-                                  ))
-                              .toList(),
-                          onChanged: (v) {
-                            ct.emblema!.type = v!;
-                            ct.update();
-                          },
-                        ),
-                        const SizedBox(height: AppTheme.defaultPadding),
-                        Row(
-                          children: [
-                            Text(
-                              'Raridade',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(
-                                    color: Colors.white,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        DropdownButton<RarityEmblema>(
-                          isExpanded: true,
-                          value: ct.emblema!.rarity,
-                          items: RarityEmblema.values
-                              .map((e) => DropdownMenuItem<RarityEmblema>(
-                                    value: e,
-                                    child: Text(e.name),
-                                  ))
-                              .toList(),
-                          onChanged: (v) {
-                            ct.emblema!.rarity = v!;
-                            ct.update();
-                          },
-                        ),
-                        const SizedBox(height: AppTheme.defaultPadding),
-                        CampoPadraoAtom(
-                          hintText: 'Url',
-                          initialValue: ct.emblema!.url,
-                          onChange: (v) => ct.emblema!.url = v,
-                          numberLines: 5,
-                        ),
-                        const SizedBox(height: AppTheme.defaultPadding * 2),
-                        ButtonPadraoAtom(
-                          title: 'Salvar',
-                          icone: Icons.create,
-                          onPress: () => ct.criaAlteraEmblema(context),
-                        ),
-                      ],
-                    ),
+    return DefaultPageTemplate(
+      done: Scaffold(
+        appBar: AppBar(
+          title: const Text('Criar Emblema'),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(AppTheme.defaultPadding),
+            child: ListView(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(AppTheme.defaultPadding),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ],
-              ),
+                  child: Column(
+                    children: [
+                      CampoPadraoAtom(
+                        hintText: 'Nome do emblema',
+                        initialValue: ct.emblema?.name,
+                        onChange: (v) => ct.emblema!.name = v,
+                      ),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      CampoPadraoAtom(
+                        hintText: 'Descrição do emblema',
+                        initialValue: ct.emblema?.description,
+                        numberLines: 3,
+                        onChange: (v) => ct.emblema!.description = v,
+                      ),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      SwitchListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(
+                            'Remove ADS',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
+                          ),
+                          value: ct.emblema?.adsOff ?? false,
+                          onChanged: (v) {
+                            ct.emblema!.adsOff = v;
+                            ct.update();
+                          }),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      Row(
+                        children: [
+                          Text(
+                            'Beneficios',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppTheme.defaultPadding * 2),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: AppTheme.defaultPadding / 2),
+                            Column(
+                              children: beneficios(),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    ct.emblema!.benefits.add('');
+                                    ct.update();
+                                  },
+                                  icon: const Icon(Icons.add),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    ct.emblema!.benefits.removeLast();
+                                    ct.update();
+                                  },
+                                  icon: const Icon(Icons.remove),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      Row(
+                        children: [
+                          Text(
+                            'Categoria',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ],
+                      ),
+                      DropdownButton<String>(
+                        isExpanded: true,
+                        value: ct.emblema?.categoria,
+                        items: CategoriaEmblema.values
+                            .map((e) => DropdownMenuItem<String>(
+                                  value: e.name,
+                                  child: Text(e.name),
+                                ))
+                            .toList(),
+                        onChanged: (v) {
+                          ct.emblema!.categoria = v!;
+                          ct.update();
+                        },
+                      ),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      SwitchListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(
+                            'Disponivel para resgatar',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
+                          ),
+                          value: ct.emblema?.disponivel ?? false,
+                          onChanged: (v) {
+                            ct.emblema!.disponivel = v;
+                            ct.update();
+                          }),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      Row(
+                        children: [
+                          Text(
+                            'Tipo de imagem',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ],
+                      ),
+                      DropdownButton<String>(
+                        isExpanded: true,
+                        value: ct.emblema?.type,
+                        items: TypeEmblema.values
+                            .map((e) => DropdownMenuItem<String>(
+                                  value: e.name,
+                                  child: Text(e.name),
+                                ))
+                            .toList(),
+                        onChanged: (v) {
+                          ct.emblema!.type = v!;
+                          ct.update();
+                        },
+                      ),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      Row(
+                        children: [
+                          Text(
+                            'Raridade',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ],
+                      ),
+                      DropdownButton<RarityEmblema>(
+                        isExpanded: true,
+                        value: ct.emblema?.rarity,
+                        items: RarityEmblema.values
+                            .map((e) => DropdownMenuItem<RarityEmblema>(
+                                  value: e,
+                                  child: Text(e.name),
+                                ))
+                            .toList(),
+                        onChanged: (v) {
+                          ct.emblema!.rarity = v!;
+                          ct.update();
+                        },
+                      ),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      CampoPadraoAtom(
+                        hintText: 'Url',
+                        initialValue: ct.emblema?.url,
+                        onChange: (v) => ct.emblema!.url = v,
+                        numberLines: 5,
+                      ),
+                      const SizedBox(height: AppTheme.defaultPadding * 2),
+                      ButtonPadraoAtom(
+                        title: 'Salvar',
+                        icone: Icons.create,
+                        onPress: () => ct.criaAlteraEmblema(context),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
+      state: ct.state,
     );
   }
 
   List<Widget> beneficios() {
-    var widiget = <Widget>[];
+    final widiget = <Widget>[];
+    if (ct.emblema == null) {
+      return widiget;
+    }
     for (var i = 0; i < ct.emblema!.benefits.length; i++) {
       widiget.add(Padding(
         padding: const EdgeInsets.only(bottom: 8),

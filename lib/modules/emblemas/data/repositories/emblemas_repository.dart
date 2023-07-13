@@ -41,7 +41,7 @@ class EmblemasRepositoryV1 implements EmblemasRepository {
   @override
   Future<void> updateDocument({required Emblema objeto}) async {
     await _apiMonolito.put(
-      endpoint: '$version/$feature',
+      endpoint: '$version/$feature/${objeto.id}',
       body: AchievementDto.fromEntity(objeto).toMap(),
     );
   }

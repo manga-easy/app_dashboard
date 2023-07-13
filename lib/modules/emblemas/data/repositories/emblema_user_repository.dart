@@ -1,5 +1,4 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
-import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/data/dtos/achievements_user_dto.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user_params.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
@@ -15,7 +14,7 @@ class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
 
   @override
   Future<void> creatDocument({required EmblemaUser objeto}) async {
-    final String userID = ServiceRoute.user!.id!;
+    final String userID = objeto.userId;
     await _apiMonolito.post(
       endpoint: '$version/users/$userID/achievements',
       body: AchievementsUserDto.fromEntity(objeto).toMap(),
@@ -23,22 +22,27 @@ class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
   }
 
   @override
-  Future<void> deletDocument({required String id}) async {
-    final String userID = ServiceRoute.user!.id!;
+  Future<void> deletDocument({
+    required String idEmblema,
+    required String userID,
+  }) async {
     await _apiMonolito.delete(
-      endpoint: '$version/users/$userID/achievements/$id',
+      endpoint: '$version/users/$userID/achievements/$idEmblema',
     );
   }
 
   @override
-  Future<EmblemaUser?> getDocument({required String id}) async {
+  Future<EmblemaUser?> getDocument({
+    required String idEmblema,
+    required String userID,
+  }) async {
     throw UnimplementedError();
   }
 
   @override
   Future<void> updateDocument({required EmblemaUser objeto}) async {
-    final String userID = ServiceRoute.user!.id!;
-    await _apiMonolito.post(
+    final String userID = objeto.userId;
+    await _apiMonolito.put(
       endpoint: '$version/users/$userID/achievements/${objeto.id}',
       body: AchievementsUserDto.fromEntity(objeto).toMap(),
     );

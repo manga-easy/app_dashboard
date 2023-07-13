@@ -90,6 +90,7 @@ class AchievementDto {
   }
   Emblema toEntity() {
     return Emblema(
+      id: uid,
       name: name,
       rarity: Emblema.validaRarity(rarity),
       description: description,

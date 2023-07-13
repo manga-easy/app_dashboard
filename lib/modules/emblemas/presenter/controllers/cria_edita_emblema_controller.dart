@@ -1,4 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,12 @@ class CriaEditaEmblemaController extends IController {
   void init(BuildContext context) {
     emblema = ModalRoute.of(context)!.settings.arguments as Emblema?;
     emblema ??= Emblema.empty();
-    notifyListeners();
+    state = StatusBuild.done;
   }
 
   Future<void> criaAlteraEmblema(context) async {
     try {
-      if (emblema!.benefits.isEmpty) {
-        throw Exception('Benefícios não pode ta vazio');
-      }
+      state = StatusBuild.loading;
       if (emblema!.id == null) {
         await _emblemasRepository.creatDocument(objeto: emblema!);
       } else {
@@ -34,16 +33,11 @@ class CriaEditaEmblemaController extends IController {
         content: 'Emblema salvo com sucesso',
         context: context,
       );
-    } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
-      Helps.log(e);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
-    notifyListeners();
+    state = StatusBuild.done;
   }
 
-  void update() => notifyListeners();
+  void update() => state = StatusBuild.done;
 }

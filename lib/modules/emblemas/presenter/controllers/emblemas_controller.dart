@@ -12,13 +12,6 @@ class EmblemasController extends IController {
 
   var lista = <Emblema>[];
   var pesquisa = '';
-  var status = ValueNotifier(StatusBuild.loading);
-
-  @override
-  void dispose() {
-    super.dispose();
-    status.dispose();
-  }
 
   @override
   void init(BuildContext context) {
@@ -27,13 +20,13 @@ class EmblemasController extends IController {
 
   Future<void> carregaEmblemas() async {
     try {
-      status.value = StatusBuild.loading;
+      state = StatusBuild.loading;
       lista = await _emblemasRepository.listDocument(where: EmblemaParams());
 
-      status.value = StatusBuild.done;
+      state = StatusBuild.done;
     } on Exception catch (e) {
-      status.value = StatusBuild.erro;
-      Helps.log(e);
+      state = StatusBuild.erro;
+      handleErrorEvent(e);
     }
   }
 }
