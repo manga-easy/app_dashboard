@@ -33,12 +33,8 @@ class HostDetailsController extends IController {
         content: 'Host salvo com sucesso',
         context: context,
       );
-    } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Error',
-        content: e.toString(),
-        context: context,
-      );
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
     state = StatusBuild.done;
   }

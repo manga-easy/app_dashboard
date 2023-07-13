@@ -36,7 +36,7 @@ class HostRepositoryV1 implements HostRepository {
 
   @override
   Future<void> updateDocument({required HostModel objeto}) async {
-    await _apiMonolito.post(
+    await _apiMonolito.put(
       endpoint: '$version/$feature/${objeto.id}',
       body: HostDto.fromEntity(objeto).toMap(),
     );
@@ -44,7 +44,9 @@ class HostRepositoryV1 implements HostRepository {
 
   @override
   Future<List<HostModel>> listDocument({HostFilter? where}) async {
-    final result = await _apiMonolito.get(endpoint: '$version/$feature/list');
+    final result = await _apiMonolito.get(
+      endpoint: '$version/$feature/list?isAll=true',
+    );
 
     return result.data.map((e) => HostDto.fromMap(e).toEntity()).toList();
   }

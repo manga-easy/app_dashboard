@@ -21,11 +21,10 @@ class HostController extends IController {
     try {
       list = await _hostRepository.listDocument();
       state = StatusBuild.done;
-    } catch (e) {
-      Helps.log(e);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
       state = StatusBuild.erro;
     }
-    notifyListeners();
   }
 
   Future<void> deleteHost(BuildContext context, HostModel host) async {
@@ -38,12 +37,8 @@ class HostController extends IController {
         content: 'Host salvo com sucesso',
         context: context,
       );
-    } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Error',
-        content: e.toString(),
-        context: context,
-      );
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
     state = StatusBuild.done;
   }
@@ -56,8 +51,8 @@ class HostController extends IController {
           : HostStatus.disable;
       await _hostRepository.updateDocument(objeto: host);
       list = await _hostRepository.listDocument();
-    } catch (e) {
-      Helps.log(e);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
     state = StatusBuild.done;
   }
