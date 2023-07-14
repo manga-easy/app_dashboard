@@ -1,3 +1,5 @@
+import 'package:dashboard_manga_easy/modules/auth/domain/services/logoff_service.dart';
+import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/drawer_list_tile_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/menu_item.dart';
@@ -12,8 +14,10 @@ import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_pag
 import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/temporada_page.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class SideMenu extends StatelessWidget {
+  final LogoffService _logoffService = GetIt.I();
   final String atual;
   final List<MenuItem> menu = [
     MenuItem(route: MainPage.route, title: 'Home'),
@@ -60,10 +64,22 @@ class SideMenu extends StatelessWidget {
             ),
           ),
           Row(
-            children: const [
-              Padding(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: VersaoAppOrg(),
+              ),
+              TextButton(
+                child: const Text('Sair'),
+                onPressed: () {
+                  _logoffService.call();
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AuthPage.route,
+                    (route) => false,
+                  );
+                },
               ),
             ],
           ),
