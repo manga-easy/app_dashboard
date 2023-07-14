@@ -23,7 +23,7 @@ class CoreModule extends IModuleService {
     di.registerLazySingleton<Preference>(() => Preference(di()));
     di.registerFactory(() => ApiResponseParser());
     di.registerFactory<ClientRequest>(() => ClientHttp());
-    di.registerFactory(() => ApiMonolito(di(), di()));
+    di.registerFactory(() => ApiMonolito(di(), di(), di()));
     di.registerLazySingleton<HiveDb>(() => HiveDb());
     di.registerLazySingleton(() => ServiceRoute());
     di.registerLazySingleton<AuthService>(() => AuthAppwriteService());
