@@ -1,14 +1,17 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class SendNotificationController extends IController {
   final NotificacaoRepository _notificacaoRepository;
+  final UsersRepository _usersRepository;
 
   SendNotificationController(
     this._notificacaoRepository,
+    this._usersRepository,
   );
   User? test;
   Notificacao? nova;
@@ -20,11 +23,7 @@ class SendNotificationController extends IController {
 
   Future<void> enviaNotificacao(context) async {
     try {
-      if (nova == null) {
-        return;
-      }
-      await _notificacaoRepository.sendMessage(objeto: nova!);
-
+      await _notificacaoRepository.createDocument(objeto: nova!);
       Navigator.pop(context);
       AppHelps.confirmaDialog(
         title: 'Sucesso',
@@ -32,11 +31,7 @@ class SendNotificationController extends IController {
         context: context,
       );
     } on Exception catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
+      handleErrorEvent(e);
     }
   }
 
@@ -60,16 +55,14 @@ class SendNotificationController extends IController {
       //     context: context,
       //   );
       // }
-    } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
   }
 
-  Future<List<User>> pesquisaUser(String pesquisa) async {
-    throw UnimplementedError();
+  Future<List<User>> pesquisaUser(String search) async {
+    return _usersRepository.listDocument(
+      search: search.isEmpty ? null : search,
+    );
   }
 }

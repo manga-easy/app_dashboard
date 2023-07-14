@@ -30,14 +30,6 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
   }
 
   @override
-  Future<void> updateDocument({required Notificacao objeto}) async {
-    await _apiMonolito.post(
-      endpoint: '$version/$feature',
-      body: NotificationDto.fromEntity(objeto).toMap(),
-    );
-  }
-
-  @override
   Future<List<Notificacao>> listDocument({FiltroNotificacao? where}) async {
     final ret = await _apiMonolito.get(
       endpoint: '$version/$feature/list',
@@ -46,9 +38,9 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
   }
 
   @override
-  Future<void> sendMessage({required Notificacao objeto}) async {
+  Future<void> createDocument({required Notificacao objeto}) async {
     await _apiMonolito.post(
-      endpoint: '$version/$feature/send-message',
+      endpoint: '$version/$feature',
       body: NotificationDto.fromEntity(objeto).toMap(),
     );
   }
