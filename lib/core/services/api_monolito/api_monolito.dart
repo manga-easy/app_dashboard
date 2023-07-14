@@ -7,7 +7,7 @@ class ApiMonolito {
   final ApiResponseParser _apiResponseParser;
   final ClientRequest _clientRequest;
   final AuthService _authService;
-  final String _host = 'http://192.168.15.8:8080';
+  final String _host = 'https://monolito.lucas-cm.com.br';
 
   ApiMonolito(this._clientRequest, this._apiResponseParser, this._authService);
   Map<String, dynamic> getHeaders(String token) {
