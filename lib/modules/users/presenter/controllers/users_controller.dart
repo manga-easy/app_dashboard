@@ -1,17 +1,17 @@
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/services/appwrite_admin.dart';
-
+import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class UsersController extends IController {
-  var lista = <User>[];
+  final UsersRepository _usersRepository;
+  UsersController(this._usersRepository);
 
-  final AppwriteAdmin app;
-  var pesquisa = ValueNotifier('');
+  List<User> lista = <User>[];
 
-  UsersController({required this.app});
+  ValueNotifier<String> pesquisa = ValueNotifier<String>('');
+
   @override
   void dispose() {
     super.dispose();
@@ -23,12 +23,12 @@ class UsersController extends IController {
     carregaUsers();
   }
 
-  void carregaUsers() async {
+  Future<void> carregaUsers() async {
     try {
       state = StatusBuild.loading;
-      lista.clear();
-      var retorno = await app.users.list(limit: 100, search: pesquisa.value);
-      lista = retorno.users.map((e) => User.fromJson(e.toMap())).toList();
+      lista = await _usersRepository.listDocument(
+        search: pesquisa.value.isEmpty ? null : pesquisa.value,
+      );
       state = StatusBuild.done;
     } catch (e) {
       state = StatusBuild.erro;

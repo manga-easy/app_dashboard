@@ -1,9 +1,8 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
+import 'package:dashboard_manga_easy/modules/users/presenter/ui/atoms/achievement_widget.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/select_dados.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EmblemasUsersW extends StatelessWidget {
@@ -26,16 +25,16 @@ class EmblemasUsersW extends StatelessWidget {
             ),
             TextButton(
               onPressed: () async {
-                var ret = await AppHelps.bottomSheet(
+                final ret = await AppHelps.bottomSheet(
                   context: context,
                   child: SelectDados<Emblema>(
-                    future: ct.carregaEmblemas,
+                    future: ct.loadAchievements,
                     getSubTitle: (v) => v.categoria,
                     getTitle: (v) => v.name,
                   ),
                 );
                 if (ret is Emblema) {
-                  ct.addEmblema(ret.id!, context);
+                  await ct.addEmblema(ret.id!);
                 }
               },
               child: const Text('Adicionar'),
@@ -46,51 +45,21 @@ class EmblemasUsersW extends StatelessWidget {
         SizedBox(
           height: 140,
           child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-            child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(
-                color: Theme.of(context).colorScheme.primary,
-              ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: ListView.builder(
               padding: const EdgeInsets.all(8),
+              physics: const PageScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: list.length,
               itemBuilder: (context, index) {
-                var userEmblema = list[index];
-                var emb = ct.listEmblema.firstWhere(
-                    (element) => element.id == userEmblema.idEmblema);
-                return Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Image.network(
-                            emb.url,
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            emb.name,
-                          ),
-                          Text(
-                            DateFormat.yMMMMEEEEd().format(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                  userEmblema.timeCria),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () =>
-                          ct.removerEmblema(userEmblema.id!, context),
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                    )
-                  ],
+                final userEmblema = list[index];
+                return AchievementWidget(
+                  future: ct.getAchievement(userEmblema.idEmblema),
+                  dateAcquired: userEmblema.createAt,
+                  removeIdEmblema: (context) =>
+                      ct.removerEmblema(userEmblema.idEmblema, context),
                 );
               },
             ),

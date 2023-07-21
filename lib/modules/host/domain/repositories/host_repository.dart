@@ -1,12 +1,7 @@
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_filter.dart';
-import 'package:dashboard_manga_easy/modules/host/infra/datasources/host_datasources.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-abstract class HostRepository {
-  final HostDatasource hostDatasource;
-
-  HostRepository(this.hostDatasource);
-
+abstract interface class HostRepository {
   Future<HostModel?> getDocument({required String id});
 
   Future<void> updateDocument({required HostModel objeto});

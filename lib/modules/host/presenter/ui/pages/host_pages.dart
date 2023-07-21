@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_controller.dart';
@@ -19,6 +22,7 @@ class _HostPageState extends State<HostPage> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
     ct.addListener(() => setState(() => {}));
+    ct.onMessage(listernerMessage);
     super.initState();
   }
 
@@ -28,6 +32,16 @@ class _HostPageState extends State<HostPage> {
     super.dispose();
   }
 
+  void listernerMessage(String? message) {
+    if (message != null && mounted) {
+      AppHelps.confirmaDialog(
+        title: 'Error ⚠️😥',
+        content: message,
+        context: context,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModuloPageTemplate(
@@ -35,7 +49,7 @@ class _HostPageState extends State<HostPage> {
       statusBuild: ct.state,
       labelNovoItem: 'Host',
       itemBuilderLista: (context, index) {
-        HostModel host = ct.list[index];
+        final HostModel host = ct.list[index];
         return InkWell(
           onTap: () => Navigator.pushNamed(
             context,
@@ -66,29 +80,28 @@ class _HostPageState extends State<HostPage> {
                       ],
                     ),
                   ),
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () => ct.deleteHost(context, host),
-                        child: const Icon(Icons.close),
-                      ),
-                      const SizedBox(height: 16),
-                      TextButton(
-                        onPressed: () => ct.changStatus(host),
-                        style: TextButton.styleFrom(
-                          backgroundColor: host.status == HostStatus.enable
-                              ? Colors.green
-                              : Colors.red,
-                        ),
-                        child: Text(
-                          host.status.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(color: Colors.white),
-                        ),
-                      ),
-                    ],
+                  TextButton(
+                    onPressed: () async {
+                      final result = await AppHelps.confirmaDialog(
+                        title: 'Tem certeza ?',
+                        context: context,
+                      );
+                      if (result) {
+                        unawaited(ct.changStatus(host));
+                      }
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: host.status == HostStatus.enable
+                          ? Colors.green
+                          : Colors.red,
+                    ),
+                    child: Text(
+                      host.status.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: Colors.white),
+                    ),
                   )
                 ],
               ),

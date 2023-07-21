@@ -4,11 +4,11 @@ import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_params
 import 'package:dashboard_manga_easy/modules/banners/domain/repositories/banner_repository.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class BannerRepositoryV1 implements BannerRepository {
+class BannerRepositoryV2 implements BannerRepository {
   final ApiMonolito _apiMonolito;
-  String get version => 'v1';
+  String get version => 'v2';
 
-  BannerRepositoryV1(
+  BannerRepositoryV2(
     this._apiMonolito,
   );
 
@@ -43,8 +43,8 @@ class BannerRepositoryV1 implements BannerRepository {
 
   @override
   Future<void> updateDocument({required BannerModel objeto}) async {
-    await _apiMonolito.post(
-      endpoint: '$version/$table',
+    await _apiMonolito.put(
+      endpoint: '$version/$table/${objeto.id}',
       body: BannerDto.fromEntity(objeto).toMap(),
     );
   }

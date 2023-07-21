@@ -9,7 +9,7 @@ class BannersModule extends IModuleFactory {
   @override
   void register() {
     //register repositories
-    di.registerFactory<BannerRepository>(() => BannerRepositoryV1(di()));
+    di.registerFactory<BannerRepository>(() => BannerRepositoryV2(di()));
     //register controllers
     di.registerFactory(() => CriarBannerController(
           bannerRepository: di(),

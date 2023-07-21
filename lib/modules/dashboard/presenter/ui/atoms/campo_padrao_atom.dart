@@ -37,15 +37,16 @@ class CampoPadraoAtom extends StatelessWidget {
       ),
       child: Column(
         children: [
-          hintText != null
-              ? Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    hintText!,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                )
-              : const SizedBox(),
+          if (hintText != null)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                hintText!,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            )
+          else
+            const SizedBox(),
           const SizedBox(height: 5),
           TextFormField(
             initialValue: initialValue,

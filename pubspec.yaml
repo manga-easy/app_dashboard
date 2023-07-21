@@ -3,16 +3,18 @@ description: Painel administrativo para os autores, parceiros e admins do app
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.3.2+6
+version: 1.4.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   #### PACKAGES ####
-  google_fonts: ^5.1.0
+  google_fonts: ^4.0.3
   flutter_svg: ^2.0.7
   appwrite: ^9.0.1
   get_it: ^7.6.0
@@ -22,10 +24,8 @@ dependencies:
   octo_image: ^1.0.2
   package_info_plus: ^4.0.2
   dropdown_search: ^5.0.6
-  api_fcm: ^1.1.1
-  intl: ^0.18.1
+  intl: ^0.18.0
   dynamic_color: ^1.6.6
-  html_editor_enhanced: 2.5.1
   infinite_scroll_pagination: ^3.2.0
   file_picker: ^5.3.2
   #### LIBS #####
@@ -33,6 +33,8 @@ dependencies:
   client_driver:
   coffee_cup:
   toggle_config:
+  persistent_database:
+  manga_easy_crashlytics_service:
   #### MICRO APPS #####
   manga_easy_advanced_search:
     git:
@@ -49,9 +51,9 @@ dependency_overrides:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
       ref: v1.3.1
   manga_easy_sdk:
-    git:
+    git: 
       url: https://github.com/manga-easy/manga_easy_sdk.git
-      ref: v1.4.1
+      ref: v1.5.0
   toggle_config:
     git: 
       url: https://github.com/manga-easy/lib_toggle_config.git
@@ -60,15 +62,14 @@ dependency_overrides:
     git:
       url: https://github.com/manga-easy/lib_persistent_database.git
       ref: v1.2.2
+  manga_easy_crashlytics_service:
+    git:
+      url: https://github.com/manga-easy/manga_easy_crashlytics_service.git
+      ref: v1.0.0
   http: ^1.1.0 
 
 dev_dependencies:
   flutter_lints: ^2.0.2
-  custom_lint: 0.4.0
-  manga_easy_lint_rules:
-    git:
-      url: https://github.com/manga-easy/manga_easy_lint_rules.git
-      ref: v1.1.0
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1

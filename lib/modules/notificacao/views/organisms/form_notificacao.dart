@@ -1,3 +1,4 @@
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/send_notification_controller.dart';
@@ -16,28 +17,41 @@ class FormNotificacao extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             'Novo Aviso',
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: Colors.white),
           ),
           const SizedBox(height: 20),
           CampoPadraoAtom(
             hintText: 'Digite o titulo',
-            onChange: (v) => controller.nova.titulo = v,
+            onChange: (v) => controller.nova!.titulo = v,
           ),
           const SizedBox(height: 10),
           CampoPadraoAtom(
             hintText: 'Digite a mensagem',
-            onChange: (v) => controller.nova.menssege = v,
+            onChange: (v) => controller.nova!.menssege = v,
           ),
           const SizedBox(height: 10),
           CampoPadraoAtom(
             hintText: 'Digite o link',
-            onChange: (v) => controller.nova.image = v,
+            onChange: (v) => controller.nova!.image = v,
           ),
           const SizedBox(height: 20),
           ButtonPadraoAtom(
-            onPress: () => controller.enviaNotificacao(context),
+            onPress: () {
+              final result = AppHelps.confirmaDialog(
+                title: 'Deseja enviar notificação ?',
+                context: context,
+              );
+              result.then((value) {
+                if (value) {
+                  controller.enviaNotificacao(context);
+                }
+              });
+            },
             icone: Icons.send,
-            title: "Enviar",
+            title: 'Enviar',
           )
         ],
       ),

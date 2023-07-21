@@ -41,7 +41,7 @@ class _UsersPageState extends State<UsersPage> {
           onEditCompletPesquisa: ct.carregaUsers,
           onPressedAtualiza: ct.carregaUsers,
           itemBuilderLista: (context, index) {
-            User use = ct.lista[index];
+            final User use = ct.lista[index];
             return ListTile(
               onTap: () => Navigator.pushNamed(context, UserDetalhesPage.route,
                   arguments: use),
@@ -54,7 +54,7 @@ class _UsersPageState extends State<UsersPage> {
                 use.email,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle1!
+                    .titleMedium!
                     .copyWith(color: Colors.white),
               ),
             );

@@ -1,8 +1,11 @@
+import 'dart:async';
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
 import 'package:flutter/material.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class NotificacaoPage extends StatefulWidget {
   static const route = '/Notificacao';
@@ -16,7 +19,13 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
 
   @override
   void initState() {
+    ct.onMessage(listernerMessage);
     WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
     super.initState();
   }
 
@@ -26,58 +35,102 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
     super.dispose();
   }
 
+  void listernerMessage(String? message) {
+    if (message != null && mounted) {
+      AppHelps.confirmaDialog(
+        title: 'Error ⚠️😥',
+        content: message,
+        context: context,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: ct,
-      builder: (context, child) {
-        return ModuloPageTemplate(
-          route: NotificacaoPage.route,
-          statusBuild: ct.state,
-          onPressedAtualiza: ct.carregaNotificacao,
-          onPressedNovoItem: () =>
-              Navigator.pushNamed(context, SendNotificationPage.route),
-          labelNovoItem: "Enviar notificação",
-          itemBuilderLista: (context, index) {
-            var use = ct.lista.value[index];
-            return Column(
-              children: [
-                ListTile(
-                  leading: CircleAvatar(
-                    radius: 35,
-                    child: Text(
-                        use.titulo.substring(0, use.titulo.length > 1 ? 1 : 0)),
-                  ),
-                  title: Text(use.titulo),
-                  subtitle: Text(
-                    use.menssege,
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle1!
-                        .copyWith(color: Colors.white),
-                  ),
-                  trailing: IconButton(
+    return ModuloPageTemplate(
+      route: NotificacaoPage.route,
+      statusBuild: ct.state,
+      onPressedAtualiza: ct.carregaNotificacao,
+      onPressedNovoItem: () => Navigator.pushNamed(
+        context,
+        SendNotificationPage.route,
+      ),
+      labelNovoItem: 'Enviar notificação',
+      itemBuilderLista: (context, index) {
+        final notification = ct.lista[index];
+        return Column(
+          children: [
+            ListTile(
+              isThreeLine: true,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(child: Text(notification.titulo)),
+                  IconButton(
                     icon: const Icon(
                       Icons.close,
                       color: Colors.red,
                     ),
-                    onPressed: () => ct.removePermissoes(use.id!, context),
+                    onPressed: () async {
+                      final ret = await AppHelps.confirmaDialog(
+                        title: 'Tem certeza?',
+                        context: context,
+                      );
+                      if (ret) {
+                        unawaited(ct.deleteNotification(notification.id!));
+                      }
+                    },
                   ),
-                ),
-                use.image.isNotEmpty
-                    ? SizedBox(
-                        height: MediaQuery.of(context).size.height / 4,
-                        child: Image.network(
-                          use.image,
-                        ),
+                ],
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text(
+                      notification.menssege,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: Colors.white),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(Helps.formetDateFromTimestap(notification.createAt)),
+                      ElevatedButton(
+                        onPressed: () {
+                          AppHelps.confirmaDialog(
+                            title: 'Tem certeza?',
+                            context: context,
+                          ).then((value) {
+                            if (value) {
+                              ct.reSendNotification(notification).then((value) {
+                                if (value) {
+                                  AppHelps.confirmaDialog(
+                                    title: 'Sucesso',
+                                    content: 'Mensagem enviada com sucesso',
+                                    context: context,
+                                  );
+                                }
+                              });
+                            }
+                          });
+                        },
+                        child: const Text('Re-enviar'),
                       )
-                    : const SizedBox()
-              ],
-            );
-          },
-          listaItems: ct.lista.value,
+                    ],
+                  )
+                ],
+              ),
+            ),
+            const Divider(color: Colors.white)
+          ],
         );
       },
+      listaItems: ct.lista,
     );
   }
 }

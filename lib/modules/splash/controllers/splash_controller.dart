@@ -13,17 +13,17 @@ class SplashController extends IController {
     loadingServices(context);
   }
 
-  void loadingServices(context) async {
+  Future<void> loadingServices(context) async {
     try {
       await CoreModule().start();
-      Navigator.pushNamedAndRemoveUntil(
+      await Navigator.pushNamedAndRemoveUntil(
         context,
         AuthPage.route,
         (route) => true,
       );
     } catch (e) {
       Helps.log(e);
-      AppHelps.confirmaDialog(
+      await AppHelps.confirmaDialog(
         title: 'Erro',
         content: e.toString(),
         context: context,

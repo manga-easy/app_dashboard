@@ -37,7 +37,9 @@ class _CriarBannerPageState extends State<CriarBannerPage> {
         if (ct.banner == null) return const LoadingAtom();
         return Scaffold(
           appBar: AppBar(
-            title: const CoffeeText(text: 'Criar Banner'),
+            title: CoffeeText(
+              text: ct.banner?.id == null ? 'Criar Banner' : 'Alterar Banner',
+            ),
           ),
           body: SafeArea(
             child: Padding(
@@ -68,7 +70,9 @@ class _CriarBannerPageState extends State<CriarBannerPage> {
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),
                         ButtonPadraoAtom(
-                          title: 'Criar Banner',
+                          title: ct.banner?.id == null
+                              ? 'Criar Banner'
+                              : 'Alterar Banner',
                           icone: Icons.create,
                           onPress: () => ct.criarBanner(context),
                         ),

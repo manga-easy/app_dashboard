@@ -1,11 +1,9 @@
 import 'package:dashboard_manga_easy/core/core_module.dart';
-import 'package:dashboard_manga_easy/core/services/service_route.dart';
+import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
-import 'package:dashboard_manga_easy/modules/autor/autor_module.dart';
 import 'package:dashboard_manga_easy/modules/banners/banners_module.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/emblemas_module.dart';
-import 'package:dashboard_manga_easy/modules/enquente/enquete_module.dart';
 import 'package:dashboard_manga_easy/modules/host/host_module.dart';
 import 'package:dashboard_manga_easy/modules/mangas/mangas_modules.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
@@ -16,6 +14,7 @@ import 'package:dashboard_manga_easy/modules/temporadas/temporadas_module.dart';
 import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/manga_easy_advanced_search.dart';
 
@@ -43,8 +42,6 @@ Future<void> main() async {
   MangasModule().register();
   PermissoesModule().register();
   TemporadasModule().register();
-  EnqueteModule().register();
-  AutorModule().register();
   HostModule().register();
   AdvancedMicroApp().registerDependencies();
   runApp(const MyApp());
@@ -98,6 +95,15 @@ class MyApp extends StatelessWidget {
             colorScheme: darkColorScheme,
             extensions: [darkCustomColors],
           ),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate
+          ],
+          supportedLocales: const [
+            Locale('pt', 'BR'),
+            Locale('en'),
+          ],
           onGenerateRoute: serviceRoute.generationRoutes,
           debugShowCheckedModeBanner: false,
         );

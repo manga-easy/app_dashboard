@@ -33,12 +33,7 @@ class CriarBannerController extends IController {
         context: context,
       );
     } catch (e) {
-      AppHelps.confirmaDialog(
-        title: 'Erro',
-        content: e.toString(),
-        context: context,
-      );
-      Helps.log(e);
+      handlerError(e, context);
     }
   }
 }

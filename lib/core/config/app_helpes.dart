@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class AppHelps {
   static Future<bool> confirmaDialog({
     required String title,
-    required String content,
+    String? content,
     void Function()? confime,
     required BuildContext context,
   }) async {
@@ -11,7 +12,7 @@ class AppHelps {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             title: Text(title),
-            content: Text(content),
+            content: content != null ? Text(content) : null,
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, false),

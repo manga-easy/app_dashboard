@@ -16,9 +16,8 @@ class InfoUsersW extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Detalhes',
-          style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 5),
         SizedBox(
@@ -35,7 +34,6 @@ class InfoUsersW extends StatelessWidget {
                   const SizedBox(height: 15),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CircleAvatar(
                         radius: 45,
@@ -50,7 +48,8 @@ class InfoUsersW extends StatelessWidget {
                   SelectableText(user.id!),
                   const SizedBox(height: 5),
                   SelectableText(
-                      "Tipo de autenticação: ${user.prefs.provider}"),
+                    'Tipo de autenticação: ${user.prefs.provider}',
+                  ),
                 ],
               ),
             ),

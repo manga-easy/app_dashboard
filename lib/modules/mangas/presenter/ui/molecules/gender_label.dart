@@ -35,14 +35,15 @@ class GenderLabel extends StatelessWidget {
               gender,
             ),
             const SizedBox(width: 5),
-            onRemove != null
-                ? IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () => onRemove!(gender),
-                    icon: const Icon(Icons.clear),
-                    color: Theme.of(context).colorScheme.primary,
-                  )
-                : Container()
+            if (onRemove != null)
+              IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: () => onRemove!(gender),
+                icon: const Icon(Icons.clear),
+                color: Theme.of(context).colorScheme.primary,
+              )
+            else
+              Container()
           ],
         ),
       ),
