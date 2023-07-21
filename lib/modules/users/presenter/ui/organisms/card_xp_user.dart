@@ -12,9 +12,9 @@ class CardXpUser extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CoffeeText(
-          text: 'Nivels',
-          typography: CoffeeTypography.title,
+        Text(
+          'Nivels',
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 5),
         ValueListenableBuilder<List<NivelUser>>(

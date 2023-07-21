@@ -1,4 +1,3 @@
-import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
@@ -17,8 +16,8 @@ class InfoUsersW extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CoffeeText(
-          text: 'Detalhes',
+        const Text(
+          'Detalhes',
         ),
         const SizedBox(height: 5),
         SizedBox(

@@ -9,7 +9,7 @@ class HostRepositoryV1 implements HostRepository {
 
   HostRepositoryV1(this._apiMonolito);
 
-  String get version => 'v1';
+  String get version => 'v2';
   String get feature => 'hosts';
 
   @override

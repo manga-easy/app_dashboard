@@ -33,7 +33,7 @@ class EditeNivelUserController extends IController {
         op = 'atualizado';
       }
       Navigator.of(context).pop();
-      AppHelps.confirmaDialog(
+      await AppHelps.confirmaDialog(
         title: 'Sucesso',
         content: 'Nível $op com sucesso',
         context: context,
@@ -54,13 +54,13 @@ class EditeNivelUserController extends IController {
         if (nivelUser!.id != null) {
           await _levelsUserRepository.deletDocument(id: nivelUser!.id!);
           Navigator.of(context).pop();
-          AppHelps.confirmaDialog(
+          await AppHelps.confirmaDialog(
             title: 'Sucesso',
             content: 'Nível deletado com sucesso',
             context: context,
           );
         } else {
-          AppHelps.confirmaDialog(
+          await AppHelps.confirmaDialog(
             title: 'Erro',
             content: 'Nivel ainda não foi salvo',
             context: context,

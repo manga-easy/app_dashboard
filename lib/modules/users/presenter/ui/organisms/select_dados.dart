@@ -46,7 +46,7 @@ class _SelectDadosState<T> extends State<SelectDados<T>> {
             CampoPadraoAtom(
               controller: controller,
               onChange: (v) => setState(() {}),
-              hintText: "Digite o nome do $T",
+              hintText: 'Digite o nome do $T',
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
@@ -57,7 +57,7 @@ class _SelectDadosState<T> extends State<SelectDados<T>> {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        var dado = snapshot.data![index];
+                        final dado = snapshot.data![index];
                         return ListTile(
                           onTap: () => Navigator.pop(context, dado),
                           title: Text(widget.getTitle(dado)),

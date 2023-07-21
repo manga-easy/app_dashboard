@@ -29,7 +29,7 @@ class EditTemporadasController extends IController {
         op = 'atualizado';
       }
       Navigator.of(context).pop();
-      AppHelps.confirmaDialog(
+      await AppHelps.confirmaDialog(
         title: 'Sucesso',
         content: 'Temporada $op com sucesso',
         context: context,

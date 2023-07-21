@@ -41,7 +41,7 @@ class _TemporadasPageState extends State<TemporadasPage> {
             EditTemporadasPage.route,
           ),
           itemBuilderLista: (context, index) {
-            var data = ct.temporadas[index];
+            final data = ct.temporadas[index];
             return Card(
               child: ListTile(
                 onTap: () => Navigator.pushNamed(
