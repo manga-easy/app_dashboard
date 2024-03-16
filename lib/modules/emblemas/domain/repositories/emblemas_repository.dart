@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
 
@@ -11,4 +13,6 @@ abstract interface class EmblemasRepository {
   Future<void> updateDocument({required Emblema objeto});
 
   Future<List<Emblema>> listDocument({EmblemaParams? where});
+
+  Future<Emblema> updateImage({required String id, required File file});
 }

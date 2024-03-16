@@ -46,12 +46,17 @@ class CriaEditaEmblemaController extends IController {
   void update() => state = StatusBuild.done;
 
   Future<void> pickerImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    try {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    if (pickedFile == null) {
-      throw Exception('Erro ao selecionar imagem');
+      if (pickedFile == null) {
+        throw Exception('Erro ao selecionar imagem');
+      }
+      image = File(pickedFile.path);
+      await _emblemasRepository.updateImage(file: image!, id: emblema!.id!);
+    } on Exception catch (e) {
+      handleErrorEvent(e);
     }
-    image = File(pickedFile.path);
   }
 }

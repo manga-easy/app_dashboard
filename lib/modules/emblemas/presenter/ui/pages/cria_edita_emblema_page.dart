@@ -241,11 +241,10 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                         },
                       ),
                       const SizedBox(height: AppTheme.defaultPadding),
-                      CampoPadraoAtom(
-                        hintText: 'Url',
-                        initialValue: ct.emblema?.url,
-                        onChange: (v) => ct.emblema!.url = v,
-                        numberLines: 5,
+                      ButtonPadraoAtom(
+                        title: 'Adicionar imagem',
+                        icone: Icons.image,
+                        onPress: () => ct.pickerImage(),
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
                       ButtonPadraoAtom(
