@@ -1,28 +1,25 @@
-import 'package:client_driver/client_driver.dart';
 import 'package:dashboard_manga_easy/core/interfaces/module_service.dart';
+import 'package:dashboard_manga_easy/core/libraries/api_response_parse/api_response_parse.dart';
+import 'package:dashboard_manga_easy/core/libraries/client/client_dio.dart';
+import 'package:dashboard_manga_easy/core/libraries/client/cliente_request.dart';
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_appwrite_service.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/hive_service.dart';
+import 'package:dashboard_manga_easy/core/services/persistent_database/persistent_database.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:manga_easy_crashlytics_service/manga_easy_crashlytics_service.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
-import 'package:persistent_database/persistent_database.dart';
 
 class CoreModule extends IModuleService {
   @override
   void register() {
     //register singletons
-    di.registerLazySingleton<CrashlyticsService>(
-      () => CrashlyticsGoogleService(),
-    );
     di.registerLazySingleton<PersistentDatabaseSembast>(
       () => PersistentDatabaseSembast(),
     );
     di.registerLazySingleton<Preference>(() => Preference(di()));
     di.registerFactory(() => ApiResponseParser());
-    di.registerFactory<ClientRequest>(() => ClientHttp());
+    di.registerFactory<ClientRequest>(() => ClientDio());
     di.registerFactory(() => ApiMonolito(di(), di(), di()));
     di.registerLazySingleton<HiveDb>(() => HiveDb());
     di.registerLazySingleton(() => ServiceRoute());

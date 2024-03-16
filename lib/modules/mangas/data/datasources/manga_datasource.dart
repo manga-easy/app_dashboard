@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/modules/mangas/data/dtos/manga_dto.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/entities/manga_filter_entity.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/entities/info_comic_model.dart';
 
 abstract class MangaDatasource {
   Future<MangaDto> list({

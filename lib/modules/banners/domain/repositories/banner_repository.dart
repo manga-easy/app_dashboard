@@ -1,5 +1,5 @@
+import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_model.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_params.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 interface class BannerRepository {
   Future<void> creatDocument({required BannerModel objeto}) {

@@ -1,9 +1,10 @@
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/repositories/manga_repository.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/entities/manga_filter_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/entities/info_comic_model.dart';
 
 class DetailsMangaController extends IController {
   final MangaRepository mangaRepository;

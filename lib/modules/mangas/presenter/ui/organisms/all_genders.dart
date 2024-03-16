@@ -1,7 +1,7 @@
-import 'package:coffee_cup/coffe_cup.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/entities/generos_model.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/molecules/gender_label.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/entities/info_comic_model.dart';
 
 class AllGenders extends StatelessWidget {
   const AllGenders({super.key});
@@ -15,9 +15,8 @@ class AllGenders extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 15),
-          const CoffeeText(
-            text: 'Selecionar gênero',
-            typography: CoffeeTypography.title,
+          const Text(
+            'Selecionar gênero',
           ),
           const SizedBox(height: 15),
           Expanded(

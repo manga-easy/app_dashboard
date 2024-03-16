@@ -1,4 +1,4 @@
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 
 class RecommendationsDto {
   final String? uid;
@@ -29,7 +29,7 @@ class RecommendationsDto {
       uniqueid: entity.uniqueid,
       title: entity.title,
       link: entity.link,
-      datacria: entity.dataCria,
+      datacria: entity.createdAt,
       createdat: entity.createdAt,
       updatedat: entity.updatedAt,
       artistid: entity.artistId,
@@ -71,7 +71,6 @@ class RecommendationsDto {
       title: title,
       link: link,
       uniqueid: uniqueid,
-      dataCria: datacria,
       createdAt: createdat ?? datacria,
       updatedAt: createdat ?? datacria,
       artistId: artistid,

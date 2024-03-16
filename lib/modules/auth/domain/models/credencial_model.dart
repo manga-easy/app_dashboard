@@ -1,7 +1,4 @@
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
-
-class CredencialModel implements IModelData {
-  @override
+class CredencialModel {
   String? id;
   String email;
   DateTime datetime;
@@ -13,7 +10,6 @@ class CredencialModel implements IModelData {
         datetime = json['datetime'],
         id = 'CredencialModel';
 
-  @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = 'CredencialModel';

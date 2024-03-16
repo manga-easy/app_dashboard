@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:appwrite/models.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
@@ -7,8 +10,9 @@ import 'package:dashboard_manga_easy/modules/auth/domain/repositories/crendecial
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart'
+    as sdk;
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart' as sdk;
 
 class AuthController extends IController {
   final CredencialRepository _credencialRepo;
@@ -93,13 +97,15 @@ class AuthController extends IController {
       final dataUser = await _authService.getUser();
       await validacaoPermissao(dataUser);
       ServiceRoute.user = sdk.User.fromJson(dataUser.toMap());
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        MainPage.route,
-        (route) => false,
+      unawaited(
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          MainPage.route,
+          (route) => false,
+        ),
       );
     } catch (e) {
-      sdk.Helps.log(e);
+      Helps.log(e);
     }
   }
 }

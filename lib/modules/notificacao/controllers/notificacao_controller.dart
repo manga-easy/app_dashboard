@@ -4,7 +4,7 @@ import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 
 class NotificacaoController extends IController {
   final NotificacaoRepository _notificacaoRepository;

@@ -1,8 +1,8 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_exception.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class AuthAppwriteService implements AuthService {
   late Account _account;

@@ -1,4 +1,3 @@
-import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
@@ -8,8 +7,9 @@ import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_perm
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/edit_permissoes_controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/select_user.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
 
 class EditPermissoesPage extends StatefulWidget {
   static const route = '/permissions/edit';
@@ -55,7 +55,7 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
       state: ct.state,
       done: Scaffold(
         appBar: AppBar(
-          title: const CoffeeText(text: 'Criar Permissões'),
+          title: const Text('Criar Permissões'),
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(
@@ -68,7 +68,7 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
               items: LevelPermissoes.values
                   .map((e) => DropdownMenuItem<int>(
                         value: e.value,
-                        child: CoffeeText(text: e.name),
+                        child: Text(e.name),
                       ))
                   .toList(),
               onChanged: (v) {

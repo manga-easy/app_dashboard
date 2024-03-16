@@ -28,44 +28,14 @@ dependencies:
   dynamic_color: ^1.6.6
   infinite_scroll_pagination: ^3.2.0
   file_picker: ^5.3.2
-  #### LIBS #####
-  manga_easy_sdk:
-  client_driver:
-  coffee_cup:
-  toggle_config:
-  persistent_database:
-  manga_easy_crashlytics_service:
-  #### MICRO APPS #####
-  manga_easy_advanced_search:
-    git:
-      url: https://github.com/manga-easy/manga_easy_advanced_search.git
-      ref: v1.1.0
+  logger: ^2.1.0
+  dio: ^5.4.1
+  sembast: ^3.6.0
+  path_provider: ^2.1.2
+  path: ^1.9.0
+  flutter_cache_manager: ^3.3.1
 
 dependency_overrides:
-  client_driver:
-    git:
-      url: https://github.com/manga-easy/manga_easy_client_driver.git
-      ref: v1.2.0
-  coffee_cup:
-    git:
-      url: https://github.com/manga-easy/manga_easy_coffee_cup.git
-      ref: v1.3.1
-  manga_easy_sdk:
-    git: 
-      url: https://github.com/manga-easy/manga_easy_sdk.git
-      ref: v1.5.0
-  toggle_config:
-    git: 
-      url: https://github.com/manga-easy/lib_toggle_config.git
-      ref: v1.1.1
-  persistent_database:
-    git:
-      url: https://github.com/manga-easy/lib_persistent_database.git
-      ref: v1.2.2
-  manga_easy_crashlytics_service:
-    git:
-      url: https://github.com/manga-easy/manga_easy_crashlytics_service.git
-      ref: v1.0.0
   http: ^1.1.0 
 
 dev_dependencies:

@@ -1,4 +1,5 @@
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
 
 class AchievementDto {
   String? uid;

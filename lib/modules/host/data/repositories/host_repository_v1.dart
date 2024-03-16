@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/host/data/dtos/host_dto.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_filter.dart';
+import 'package:dashboard_manga_easy/modules/host/domain/entities/host_model.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/repositories/host_repository.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class HostRepositoryV1 implements HostRepository {
   final ApiMonolito _apiMonolito;

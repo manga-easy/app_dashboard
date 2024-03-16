@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 
 class UserDto {
   final String? id;

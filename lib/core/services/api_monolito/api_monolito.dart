@@ -1,7 +1,7 @@
-import 'package:client_driver/client_driver.dart';
+import 'package:dashboard_manga_easy/core/libraries/api_response_parse/api_response_parse.dart';
+import 'package:dashboard_manga_easy/core/libraries/api_response_parse/result_entity.dart';
+import 'package:dashboard_manga_easy/core/libraries/client/cliente_request.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
-import 'package:manga_easy_sdk/src/services/api_response_parse/result_entity.dart';
 
 class ApiMonolito {
   final ApiResponseParser _apiResponseParser;
@@ -22,10 +22,7 @@ class ApiMonolito {
       path: '$_host/$endpoint',
       headers: getHeaders(token),
     );
-    return _apiResponseParser.handleResponse(
-      statusCode: result.statusCode,
-      response: result.data,
-    );
+    return _apiResponseParser.handleResponse(result);
   }
 
   Future<ResultEntity> delete({required String endpoint}) async {
@@ -34,10 +31,7 @@ class ApiMonolito {
       path: '$_host/$endpoint',
       headers: getHeaders(token),
     );
-    return _apiResponseParser.handleResponse(
-      statusCode: result.statusCode,
-      response: result.data,
-    );
+    return _apiResponseParser.handleResponse(result);
   }
 
   Future<ResultEntity> post({
@@ -50,10 +44,7 @@ class ApiMonolito {
       headers: getHeaders(token),
       body: body,
     );
-    return _apiResponseParser.handleResponse(
-      statusCode: result.statusCode,
-      response: result.data,
-    );
+    return _apiResponseParser.handleResponse(result);
   }
 
   Future<ResultEntity> put({
@@ -66,9 +57,6 @@ class ApiMonolito {
       headers: getHeaders(token),
       body: body,
     );
-    return _apiResponseParser.handleResponse(
-      statusCode: result.statusCode,
-      response: result.data,
-    );
+    return _apiResponseParser.handleResponse(result);
   }
 }
