@@ -42,7 +42,7 @@ class SideMenu extends StatelessWidget {
         children: [
           DrawerHeader(
             child: Image.asset(
-              "assets/images/logo.png",
+              'assets/images/logo.png',
               color: Colors.white,
             ),
           ),
@@ -53,7 +53,7 @@ class SideMenu extends StatelessWidget {
                 final e = menu[index];
                 return DrawerListTileAtom(
                   title: e.title,
-                  svgSrc: e.icon ?? "assets/icons/configApp.svg",
+                  svgSrc: e.icon ?? 'assets/icons/configApp.svg',
                   press: () => atual != e.route
                       ? Navigator.pushNamed(context, e.route)
                       : Navigator.pop(context),

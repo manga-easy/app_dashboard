@@ -7,4 +7,3 @@ export 'src/persistent_database.dart';
 export 'src/sembast/sembast_database.dart';
 export 'src/sembast/store_sembast_enum.dart';
 export 'src/user_preference/key_preference.dart';
-export 'src/user_preference/preference_service.dart';

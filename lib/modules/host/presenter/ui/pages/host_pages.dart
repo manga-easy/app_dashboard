@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/modules/host/domain/entities/host_model.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_status_enum.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_controller.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:dashboard_manga_easy/modules/host/domain/entities/host_model.dart';
 
 class HostPage extends StatefulWidget {
   static const route = '/Host';

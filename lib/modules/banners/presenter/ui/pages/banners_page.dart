@@ -62,7 +62,7 @@ class _BannerPageState extends State<BannerPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ButtonPadraoAtom(
-                        title: "Editar",
+                        title: 'Editar',
                         icone: Icons.edit,
                         onPress: () => Navigator.of(context)
                             .pushNamed(

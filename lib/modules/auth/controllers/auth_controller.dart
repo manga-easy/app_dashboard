@@ -76,8 +76,8 @@ class AuthController extends IController {
     _serviceRoute.permissions = result.first;
   }
 
-  void carregaCredencial() {
-    final ret = _credencialRepo.list();
+  Future<void> carregaCredencial() async {
+    final ret = await _credencialRepo.list();
     if (ret.isNotEmpty) {
       credencialModel = ret.first;
       email.text = credencialModel!.email;

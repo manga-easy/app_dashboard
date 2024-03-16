@@ -40,7 +40,7 @@ class SectionGenders extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: genders.length,
             itemBuilder: (context, index) {
-              var gender = genders[index];
+              final gender = genders[index];
               return GenderLabel(
                 gender: gender,
                 onRemove: onRemove,

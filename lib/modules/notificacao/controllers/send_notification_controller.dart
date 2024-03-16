@@ -1,10 +1,10 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 
 class SendNotificationController extends IController {
   final NotificacaoRepository _notificacaoRepository;

@@ -1,5 +1,5 @@
-import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
 
 abstract interface class RecommendationsRepository {
   Future<RecomendacoesModel?> getDocument({required String id});

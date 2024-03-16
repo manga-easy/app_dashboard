@@ -2,14 +2,13 @@ import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/select_user.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/default_page_template.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/edit_permissoes_controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/select_user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:flutter/material.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
 
 class EditPermissoesPage extends StatefulWidget {
   static const route = '/permissions/edit';

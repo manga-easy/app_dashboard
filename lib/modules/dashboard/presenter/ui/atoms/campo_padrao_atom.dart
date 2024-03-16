@@ -80,7 +80,7 @@ class CampoPadraoAtom extends StatelessWidget {
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        child: SvgPicture.asset("assets/icons/Search.svg"),
+                        child: SvgPicture.asset('assets/icons/Search.svg'),
                       ),
                     )
                   : null,

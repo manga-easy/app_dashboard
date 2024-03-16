@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/data/dtos/permissions_dto.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
 
 class PermissionsRepositoryV1 implements PermissionsRepository {
   final ApiMonolito _apiMonolito;

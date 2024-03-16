@@ -23,7 +23,9 @@ class _VersaoAppOrgState extends State<VersaoAppOrg> {
 
   @override
   Widget build(BuildContext context) {
-    if (pkgInfo == null) return const Center(child: CircularProgressIndicator());
+    if (pkgInfo == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return Text('v${pkgInfo!.version}+${pkgInfo!.buildNumber}');
   }
 }

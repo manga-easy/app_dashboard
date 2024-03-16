@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
@@ -6,7 +7,6 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/mo
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
 import 'package:flutter/material.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 
 class NotificacaoPage extends StatefulWidget {
   static const route = '/Notificacao';

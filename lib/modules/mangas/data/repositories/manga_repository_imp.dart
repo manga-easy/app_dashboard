@@ -15,7 +15,7 @@ class MangaRepositoryImp implements MangaRepository {
     int? limit,
     int? offset,
   }) async {
-    var result = await _mangaDatasource.list(
+    final result = await _mangaDatasource.list(
       filter: filter,
       limit: limit ?? 20,
       offset: offset ?? 0,

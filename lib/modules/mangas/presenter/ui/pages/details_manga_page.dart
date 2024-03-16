@@ -112,7 +112,7 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                         });
                       },
                       onAdd: () async {
-                        var ret = await showModalBottomSheet(
+                        final ret = await showModalBottomSheet(
                           context: context,
                           builder: (context) => const AllGenders(),
                         );

@@ -16,11 +16,11 @@ class CoverSuccess implements CoverState {
 class CoverError extends CoverState {
   @override
   // ignore: avoid_class_asset_image
-  final ImageProvider<Object> image = AssetImage('');
+  final ImageProvider<Object> image = const AssetImage('');
 }
 
 class CoverLoading extends CoverState {
   @override
   // ignore: avoid_class_asset_image
-  final ImageProvider<Object> image = AssetImage('AssetsState.loading.path');
+  final ImageProvider<Object> image = const AssetImage('AssetsState.loading.path');
 }

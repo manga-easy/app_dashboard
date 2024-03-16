@@ -1,40 +1,40 @@
-import 'package:dashboard_manga_easy/core/services/hive_service.dart';
+import 'package:dashboard_manga_easy/core/services/persistent_database/persistent_database.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_params.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/repositories/crendecial_repository.dart';
 
 class CredencialRepositoryV1 implements CredencialRepository {
-  final HiveDb _hiveDb;
-  CredencialRepositoryV1(this._hiveDb);
+  final PersistentDatabaseSembast _database;
+  CredencialRepositoryV1(this._database);
 
-  String get table => 'credencial';
+  StoreSembast get table => StoreSembast.credencial;
 
   @override
-  List<CredencialModel> list({CredencialParams? where}) {
-    return _hiveDb
-        .list(table: table)
-        .map((e) => CredencialModel.fromJson(e))
-        .toList();
+  Future<List<CredencialModel>> list({CredencialParams? where}) async {
+    final result = await _database.list(store: table);
+    return result.map((e) => CredencialModel.fromJson(e)).toList();
   }
 
   @override
-  CredencialModel? get({required String id}) {
-    final dados = _hiveDb.get(table: table, id: id);
-    if (dados == null) return null;
+  Future<CredencialModel?> get({required String id}) async {
+    final dados = await _database.get(store: table, id: id);
+    if (dados == null) {
+      return null;
+    }
     return CredencialModel.fromJson(dados);
   }
 
   @override
   Future<void> put({required CredencialModel objeto}) async {
-    await _hiveDb.createUpdate(
-      table: table,
-      dados: objeto.toJson(),
+    await _database.create(
+      store: table,
+      objeto: objeto.toJson(),
       id: objeto.id,
     );
   }
 
   @override
   Future<void> remove({required String id}) async {
-    await _hiveDb.delet(table: table, id: id);
+    await _database.delete(store: table, id: id);
   }
 }

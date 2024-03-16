@@ -6,7 +6,6 @@ import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user_params.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
-import 'package:dashboard_manga_easy/modules/users/domain/entities/levels_user_filter.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:flutter/material.dart';
 

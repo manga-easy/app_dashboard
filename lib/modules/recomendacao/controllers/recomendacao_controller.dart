@@ -2,10 +2,9 @@ import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
-
-import 'package:flutter/material.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
+import 'package:flutter/material.dart';
 
 class RecomendacaoController extends IController {
   final RecommendationsRepository _recomendationsRepository;

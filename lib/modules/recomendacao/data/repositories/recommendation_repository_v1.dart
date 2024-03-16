@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/data/dtos/recommendations_dto.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 
 class RecommendationsRepositoryV1 implements RecommendationsRepository {
   final ApiMonolito _apiMonolito;

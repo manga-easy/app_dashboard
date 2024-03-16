@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CriaEditaEmblemaController extends IController {
   final EmblemasRepository _emblemasRepository;
@@ -11,6 +14,7 @@ class CriaEditaEmblemaController extends IController {
   CriaEditaEmblemaController(this._emblemasRepository);
 
   Emblema? emblema;
+  File? image;
 
   @override
   void init(BuildContext context) {
@@ -40,4 +44,14 @@ class CriaEditaEmblemaController extends IController {
   }
 
   void update() => state = StatusBuild.done;
+
+  Future<void> pickerImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile == null) {
+      throw Exception('Erro ao selecionar imagem');
+    }
+    image = File(pickedFile.path);
+  }
 }

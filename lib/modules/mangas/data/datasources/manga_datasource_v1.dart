@@ -40,7 +40,7 @@ class MangaDatasourceV1 extends MangaDatasource {
     if (filter.uniqueid != null) {
       params += 'uniqueid=${filter.uniqueid}&';
     }
-    var result = await _clientDriver.get(
+    final result = await _clientDriver.get(
       path: '$url/$version/$path?limit=$limit&offset=$offset&$params',
     );
     return MangaDto.fromJson(result.data);

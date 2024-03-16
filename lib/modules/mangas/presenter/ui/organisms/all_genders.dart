@@ -1,7 +1,6 @@
 import 'package:dashboard_manga_easy/modules/mangas/domain/entities/generos_model.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/molecules/gender_label.dart';
 import 'package:flutter/material.dart';
-import 'package:dashboard_manga_easy/modules/mangas/domain/entities/info_comic_model.dart';
 
 class AllGenders extends StatelessWidget {
   const AllGenders({super.key});

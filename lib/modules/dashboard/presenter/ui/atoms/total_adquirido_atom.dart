@@ -9,8 +9,12 @@ class TotalAdquiridoAtom extends StatelessWidget {
     return FutureBuilder<int>(
       future: future,
       builder: (context, snapshot) {
-        if (snapshot.hasError) return const Text('Erro');
-        if (snapshot.hasData) return Text('Total adquirido: ${snapshot.data}');
+        if (snapshot.hasError) {
+          return const Text('Erro');
+        }
+        if (snapshot.hasData) {
+          return Text('Total adquirido: ${snapshot.data}');
+        }
         return const LoadingAtom();
       },
     );
