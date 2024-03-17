@@ -84,12 +84,10 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
                         },
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
-                      CampoPadraoAtom(
-                        hintText: 'Link',
-                        initialValue: ct.recomendacao?.link,
-                        onChange: (v) {
-                          ct.recomendacao = ct.recomendacao!.copyWith(link: v);
-                        },
+                      ButtonPadraoAtom(
+                        title: 'Adicionar imagem',
+                        icone: Icons.image,
+                        onPress: () => ct.pickerImage(context),
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
                       Column(
@@ -106,6 +104,10 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
                             children: [
                               Expanded(
                                 child: OutlinedButton(
+                                  onLongPress: () => Helps.copyText(
+                                    ct.recomendacao?.artistId,
+                                    context,
+                                  ),
                                   onPressed: () async {
                                     final user = await AppHelps.bottomSheet(
                                       context: context,

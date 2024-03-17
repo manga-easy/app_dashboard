@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
 
@@ -13,4 +14,6 @@ abstract interface class RecommendationsRepository {
   Future<List<RecomendacoesModel>> listDocument({
     RecommendationsFilter? filter,
   });
+
+  Future<void> updateImage({required File file, required String uniqueid});
 }

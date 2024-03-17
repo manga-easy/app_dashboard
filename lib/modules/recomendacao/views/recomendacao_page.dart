@@ -1,3 +1,4 @@
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
@@ -45,6 +46,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
               child: Column(
                 children: [
                   ListTile(
+                    onTap: () => Helps.copyText(reco.title, context),
                     textColor: Colors.white,
                     title: Text(
                       reco.title,

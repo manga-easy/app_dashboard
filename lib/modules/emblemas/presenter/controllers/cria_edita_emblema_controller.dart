@@ -45,7 +45,7 @@ class CriaEditaEmblemaController extends IController {
 
   void update() => state = StatusBuild.done;
 
-  Future<void> pickerImage() async {
+  Future<void> pickerImage(context) async {
     try {
       final picker = ImagePicker();
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -55,6 +55,7 @@ class CriaEditaEmblemaController extends IController {
       }
       image = File(pickedFile.path);
       await _emblemasRepository.updateImage(file: image!, id: emblema!.id!);
+      Navigator.of(context).pop();
     } on Exception catch (e) {
       handleErrorEvent(e);
     }

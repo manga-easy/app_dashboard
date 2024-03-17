@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/data/dtos/recommendations_dto.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
+import 'package:path/path.dart';
 
 class RecommendationsRepositoryV1 implements RecommendationsRepository {
   final ApiMonolito _apiMonolito;
@@ -59,5 +65,24 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
     return result.data
         .map((e) => RecommendationsDto.fromMap(e).toEntity())
         .toList();
+  }
+
+  @override
+  Future<RecomendacoesModel> updateImage({
+    required String uniqueid,
+    required File file,
+  }) async {
+    final response = await _apiMonolito.put(
+      endpoint: '$version/$feature/$uniqueid/image',
+      body: {
+        'file': MultipartFile.fromFileSync(
+          file.path,
+          filename: basename(file.path),
+          contentType: MediaType.parse(lookupMimeType(file.path) ?? ''),
+        ),
+      },
+      isformData: true,
+    );
+    return RecommendationsDto.fromMap(response.data.first).toEntity();
   }
 }
