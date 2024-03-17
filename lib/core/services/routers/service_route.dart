@@ -18,14 +18,14 @@ import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permi
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
-import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
 import 'package:flutter/material.dart';
 
 class ServiceRoute extends IService {
   bool isInicialize = false;
-  static User? user;
+  static String? userId;
+  static String? token;
   Permissions? permissions;
   @override
   Future<void> initialise() async {
@@ -41,7 +41,7 @@ class ServiceRoute extends IService {
       );
     }
     //verifica se está logado
-    if (user == null) {
+    if (userId == null) {
       return MaterialPageRoute(
         builder: (_) => const AuthPage(),
         settings: settings,

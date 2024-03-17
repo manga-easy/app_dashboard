@@ -38,7 +38,7 @@ class AuthAppwriteService implements AuthService {
   Future<String> getJwt({String? sessionId}) async {
     try {
       final ret = await _account.createJWT();
-      Helps.log(ret.jwt);
+      Helps.log(ret);
       return ret.jwt;
     } catch (e) {
       _handleError(e);
@@ -116,9 +116,9 @@ class AuthAppwriteService implements AuthService {
   }
 
   @override
-  Future<models.User> getUser() async {
+  Future<models.Session> getSession() async {
     try {
-      return await _account.get();
+      return await _account.getSession(sessionId: 'current');
     } catch (e) {
       _handleError(e);
       rethrow;

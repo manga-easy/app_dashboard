@@ -9,7 +9,7 @@ class LogoffService {
 
   Future<void> call() async {
     _serviceRoute.permissions = null;
-    ServiceRoute.user = null;
+    ServiceRoute.userId = null;
     await _authService.deleteSession();
   }
 }
