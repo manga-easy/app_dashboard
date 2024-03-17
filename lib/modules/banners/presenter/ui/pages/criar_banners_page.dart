@@ -33,7 +33,9 @@ class _CriarBannerPageState extends State<CriarBannerPage> {
     return AnimatedBuilder(
       animation: ct,
       builder: (context, child) {
-        if (ct.banner == null) return const LoadingAtom();
+        if (ct.banner == null) {
+          return const LoadingAtom();
+        }
         return Scaffold(
           appBar: AppBar(
             title: Text(

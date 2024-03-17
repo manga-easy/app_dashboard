@@ -7,7 +7,6 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/de
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/presenter/controllers/cria_edita_emblema_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class CriaEditaEmblemaPage extends StatefulWidget {
   static const route = '/CriaEditaEmblema';
