@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dashboard_manga_easy/core/libraries/api_response_parse/api_erros/api_error.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
@@ -106,5 +108,12 @@ class Helps {
     final DateTime data = DateTime.fromMillisecondsSinceEpoch(timestamp);
     final String dataFormatada = DateFormat('d MMMM, y', 'pt_BR').format(data);
     return 'Conta criada em $dataFormatada';
+  }
+
+  static void copyText(String? text, BuildContext context) {
+    Clipboard.setData(ClipboardData(text: text ?? ''));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('Texto $text copiado'),
+    ));
   }
 }
