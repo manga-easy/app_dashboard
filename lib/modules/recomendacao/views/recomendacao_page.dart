@@ -36,12 +36,17 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
       animation: ct,
       builder: (context, child) {
         return ModuloPageTemplate(
+          onChangePesquisa: ct.search,
           route: RecomendacaoPage.route,
           statusBuild: ct.state,
           labelNovoItem: 'Nova recomendação',
           onPressedAtualiza: ct.listaRecomendacao,
           itemBuilderLista: (context, index) {
             final RecomendacoesModel reco = ct.listaRecomendacaoItens[index];
+            if (!reco.title.toLowerCase().contains(ct.seach.toLowerCase()) &&
+                ct.seach.isNotEmpty) {
+              return const SizedBox.shrink();
+            }
             return Card(
               child: Column(
                 children: [

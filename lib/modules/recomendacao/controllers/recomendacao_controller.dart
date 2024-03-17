@@ -12,6 +12,7 @@ class RecomendacaoController extends IController {
   RecomendacaoController(this._recomendationsRepository);
 
   var listaRecomendacaoItens = <RecomendacoesModel>[];
+  String seach = '';
 
   @override
   void init(BuildContext context) {
@@ -41,5 +42,10 @@ class RecomendacaoController extends IController {
     } catch (e) {
       handlerError(e, context);
     }
+  }
+
+  void search(String value) {
+    seach = value;
+    notifyListeners();
   }
 }
