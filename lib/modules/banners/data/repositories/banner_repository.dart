@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/banners/data/dtos/banner_dto.dart';
+import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_model.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_params.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/repositories/banner_repository.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class BannerRepositoryV2 implements BannerRepository {
   final ApiMonolito _apiMonolito;

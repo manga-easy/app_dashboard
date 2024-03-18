@@ -1,6 +1,6 @@
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class AchievementWidget extends StatelessWidget {
   final Future<Emblema?>? future;

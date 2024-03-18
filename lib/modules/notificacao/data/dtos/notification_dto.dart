@@ -1,4 +1,4 @@
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 
 class NotificationDto {
   final String? uid;

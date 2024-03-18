@@ -9,27 +9,23 @@ import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/emblema
 import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_details_page.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_pages.dart';
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/details_manga_page.dart';
-import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pages.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
 import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
-import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/edit_temporada_page.dart';
-import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/temporada_page.dart';
-import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/edite_nivel_user.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/user_detalhe_page.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/manga_easy_advanced_search.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class ServiceRoute extends IService {
   bool isInicialize = false;
-  static User? user;
+  static String? userId;
+  static String? token;
   Permissions? permissions;
   @override
   Future<void> initialise() async {
@@ -45,7 +41,7 @@ class ServiceRoute extends IService {
       );
     }
     //verifica se está logado
-    if (user == null) {
+    if (userId == null) {
       return MaterialPageRoute(
         builder: (_) => const AuthPage(),
         settings: settings,
@@ -56,11 +52,6 @@ class ServiceRoute extends IService {
       case MainPage.route:
         return MaterialPageRoute(
           builder: (_) => const MainPage(),
-          settings: settings,
-        );
-      case MangasPage.route:
-        return MaterialPageRoute(
-          builder: (_) => AdvancedMicroApp().routers['/advanced-search']!,
           settings: settings,
         );
       case '/migrate':
@@ -140,21 +131,6 @@ class ServiceRoute extends IService {
       case SendNotificationPage.route:
         return MaterialPageRoute(
           builder: (_) => const SendNotificationPage(),
-          settings: settings,
-        );
-      case TemporadasPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const TemporadasPage(),
-          settings: settings,
-        );
-      case EditTemporadasPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const EditTemporadasPage(),
-          settings: settings,
-        );
-      case EditeNivelUserPage.route:
-        return MaterialPageRoute(
-          builder: (_) => const EditeNivelUserPage(),
           settings: settings,
         );
       case HostPage.route:

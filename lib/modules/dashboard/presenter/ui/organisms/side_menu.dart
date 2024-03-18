@@ -11,7 +11,6 @@ import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pa
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
-import 'package:dashboard_manga_easy/modules/temporadas/presenter/ui/pages/temporada_page.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -28,7 +27,6 @@ class SideMenu extends StatelessWidget {
     MenuItem(route: EmblemasPage.route, title: 'Emblemas'),
     MenuItem(route: BannerPage.route, title: 'Banners'),
     MenuItem(route: PermissoesPage.route, title: 'Permissões'),
-    MenuItem(route: TemporadasPage.route, title: 'Temporadas'),
     MenuItem(route: HostPage.route, title: 'Hosts'),
   ];
 
@@ -44,7 +42,7 @@ class SideMenu extends StatelessWidget {
         children: [
           DrawerHeader(
             child: Image.asset(
-              "assets/images/logo.png",
+              'assets/images/logo.png',
               color: Colors.white,
             ),
           ),
@@ -55,7 +53,7 @@ class SideMenu extends StatelessWidget {
                 final e = menu[index];
                 return DrawerListTileAtom(
                   title: e.title,
-                  svgSrc: e.icon ?? "assets/icons/configApp.svg",
+                  svgSrc: e.icon ?? 'assets/icons/configApp.svg',
                   press: () => atual != e.route
                       ? Navigator.pushNamed(context, e.route)
                       : Navigator.pop(context),

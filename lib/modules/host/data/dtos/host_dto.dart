@@ -1,4 +1,5 @@
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/host/domain/entities/host_model.dart';
+import 'package:dashboard_manga_easy/modules/host/domain/entities/host_status_enum.dart';
 
 class HostDto {
   final String? uid;

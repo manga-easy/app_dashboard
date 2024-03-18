@@ -1,8 +1,8 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_exception.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class AuthAppwriteService implements AuthService {
   late Account _account;
@@ -38,7 +38,7 @@ class AuthAppwriteService implements AuthService {
   Future<String> getJwt({String? sessionId}) async {
     try {
       final ret = await _account.createJWT();
-      Helps.log(ret.jwt);
+      Helps.log(ret);
       return ret.jwt;
     } catch (e) {
       _handleError(e);
@@ -116,9 +116,9 @@ class AuthAppwriteService implements AuthService {
   }
 
   @override
-  Future<models.User> getUser() async {
+  Future<models.Session> getSession() async {
     try {
-      return await _account.get();
+      return await _account.getSession(sessionId: 'current');
     } catch (e) {
       _handleError(e);
       rethrow;

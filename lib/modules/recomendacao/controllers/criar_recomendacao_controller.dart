@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CriarRecomendacaoController extends IController {
   final RecommendationsRepository _recomendationsRepository;
@@ -57,6 +61,25 @@ class CriarRecomendacaoController extends IController {
       return 'Selecione um usuario';
     }
     final result = await _usersRepository.getDocument(id: userId);
-    return result?.name ?? 'Não encontrado';
+    return '${result?.name} - ${result?.email}';
+  }
+
+  Future<void> pickerImage(context) async {
+    try {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+      if (pickedFile == null) {
+        throw Exception('Erro ao selecionar imagem');
+      }
+      final image = File(pickedFile.path);
+      await _recomendationsRepository.updateImage(
+        file: image,
+        uniqueid: recomendacao!.uniqueid,
+      );
+      Navigator.of(context).pop();
+    } on Exception catch (e) {
+      handleErrorEvent(e);
+    }
   }
 }

@@ -1,11 +1,9 @@
-import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/error_default_page.dart';
 
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
-import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/card_xp_user.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/emblemas_users.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/info_users.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +59,7 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
           case StatusBuild.done:
             return Scaffold(
               appBar: AppBar(
-                title: CoffeeText(text: ct.user?.name ?? 'Carregando...'),
+                title: Text(ct.user?.name ?? 'Carregando...'),
               ),
               body: SafeArea(
                 child: ListView(
@@ -76,9 +74,6 @@ class _UserDetalhesPageState extends State<UserDetalhesPage> {
                         InfoUsersW(
                           user: ct.user!,
                         ),
-                        CardXpUser(
-                          ct: ct,
-                        )
                       ],
                     ),
                     const SizedBox(height: 15),

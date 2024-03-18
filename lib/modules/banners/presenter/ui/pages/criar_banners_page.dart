@@ -1,4 +1,3 @@
-import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/criar_banner_controller.dart';
@@ -34,11 +33,13 @@ class _CriarBannerPageState extends State<CriarBannerPage> {
     return AnimatedBuilder(
       animation: ct,
       builder: (context, child) {
-        if (ct.banner == null) return const LoadingAtom();
+        if (ct.banner == null) {
+          return const LoadingAtom();
+        }
         return Scaffold(
           appBar: AppBar(
-            title: CoffeeText(
-              text: ct.banner?.id == null ? 'Criar Banner' : 'Alterar Banner',
+            title: Text(
+              ct.banner?.id == null ? 'Criar Banner' : 'Alterar Banner',
             ),
           ),
           body: SafeArea(

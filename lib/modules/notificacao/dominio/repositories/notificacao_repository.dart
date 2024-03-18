@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/filtro_notificacao.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 
 abstract interface class NotificacaoRepository {
   Future<void> createDocument({required Notificacao objeto});

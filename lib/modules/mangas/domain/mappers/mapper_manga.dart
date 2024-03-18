@@ -1,4 +1,4 @@
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/mangas/domain/entities/info_comic_model.dart';
 
 class MangaMapper {
   InfoComicModel from(Map<String, dynamic> json) {

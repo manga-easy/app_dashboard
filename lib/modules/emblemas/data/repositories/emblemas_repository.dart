@@ -1,8 +1,13 @@
+import 'dart:io';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
+import 'package:path/path.dart';
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/data/dtos/achievement_dto.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dio/dio.dart';
 
 class EmblemasRepositoryV1 implements EmblemasRepository {
   final ApiMonolito _apiMonolito;
@@ -59,5 +64,21 @@ class EmblemasRepositoryV1 implements EmblemasRepository {
     );
     final data = result.data.map((e) => AchievementDto.fromMap(e)).toList();
     return data.map((e) => e.toEntity()).toList();
+  }
+
+  @override
+  Future<Emblema> updateImage({required String id, required File file}) async {
+    final response = await _apiMonolito.put(
+      endpoint: '$version/$feature/$id/image',
+      body: {
+        'file': MultipartFile.fromFileSync(
+          file.path,
+          filename: basename(file.path),
+          contentType: MediaType.parse(lookupMimeType(file.path) ?? ''),
+        ),
+      },
+      isformData: true,
+    );
+    return AchievementDto.fromMap(response.data.first).toEntity();
   }
 }

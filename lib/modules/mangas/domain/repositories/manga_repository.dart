@@ -1,5 +1,5 @@
+import 'package:dashboard_manga_easy/modules/mangas/domain/entities/info_comic_model.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/entities/manga_filter_entity.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 abstract class MangaRepository {
   Future<List<InfoComicModel>> getManga({

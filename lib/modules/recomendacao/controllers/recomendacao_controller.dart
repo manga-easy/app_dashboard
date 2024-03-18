@@ -1,10 +1,10 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
-
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class RecomendacaoController extends IController {
   final RecommendationsRepository _recomendationsRepository;
@@ -12,6 +12,7 @@ class RecomendacaoController extends IController {
   RecomendacaoController(this._recomendationsRepository);
 
   var listaRecomendacaoItens = <RecomendacoesModel>[];
+  String seach = '';
 
   @override
   void init(BuildContext context) {
@@ -41,5 +42,10 @@ class RecomendacaoController extends IController {
     } catch (e) {
       handlerError(e, context);
     }
+  }
+
+  void search(String value) {
+    seach = value;
+    notifyListeners();
   }
 }

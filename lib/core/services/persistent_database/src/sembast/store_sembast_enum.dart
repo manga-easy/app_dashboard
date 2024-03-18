@@ -1,0 +1,1 @@
+enum StoreSembast { credencial }

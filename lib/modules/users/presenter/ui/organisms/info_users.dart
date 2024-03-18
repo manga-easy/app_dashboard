@@ -1,5 +1,5 @@
+import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class InfoUsersW extends StatelessWidget {
   final User user;

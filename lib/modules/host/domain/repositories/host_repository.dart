@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_filter.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/modules/host/domain/entities/host_model.dart';
 
 abstract interface class HostRepository {
   Future<HostModel?> getDocument({required String id});

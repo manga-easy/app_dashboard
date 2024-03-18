@@ -10,13 +10,11 @@ import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart
 import 'package:dashboard_manga_easy/modules/permissoes/permissoes_module.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
 import 'package:dashboard_manga_easy/modules/splash/splash_module.dart';
-import 'package:dashboard_manga_easy/modules/temporadas/temporadas_module.dart';
 import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
-import 'package:manga_easy_advanced_search/manga_easy_advanced_search.dart';
 
 bool isDemoUsingDynamicColors = false;
 
@@ -41,9 +39,7 @@ Future<void> main() async {
   BannersModule().register();
   MangasModule().register();
   PermissoesModule().register();
-  TemporadasModule().register();
   HostModule().register();
-  AdvancedMicroApp().registerDependencies();
   runApp(const MyApp());
 }
 

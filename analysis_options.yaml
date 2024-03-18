@@ -3,11 +3,9 @@ linter:
   rules:
     always_declare_return_types: true
     always_put_control_body_on_new_line: true
-    always_require_non_null_named_parameters: true
     # always_specify_types: true
     annotate_overrides: true
     avoid_bool_literals_in_conditional_expressions: true
-    avoid_classes_with_only_static_members: true
     avoid_empty_else: true
     avoid_function_literals_in_foreach_calls: true
     avoid_init_to_null: true
@@ -34,10 +32,8 @@ linter:
     flutter_style_todos: true
     hash_and_equals: true
     implementation_imports: true
-    iterable_contains_unrelated_type: true
     library_names: true
     library_prefixes: true
-    list_remove_unrelated_type: true
     no_adjacent_strings_in_list: true
     no_duplicate_case_values: true
     null_closures: true

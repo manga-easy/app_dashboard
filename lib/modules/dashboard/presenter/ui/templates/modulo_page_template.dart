@@ -64,20 +64,17 @@ class ModuloPageTemplate extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const SizedBox(height: AppTheme.defaultPadding),
-                          width > 1000
-                              ? Text(
+                          if (width > 1000) Text(
                                   route.replaceAll('/', ''),
                                   style: Theme.of(context).textTheme.titleLarge,
-                                )
-                              : const SizedBox(),
+                                ) else const SizedBox(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TextButton(
                                   onPressed: onPressedAtualiza,
                                   child: const Text('Atualiza')),
-                              labelNovoItem != null
-                                  ? ElevatedButton.icon(
+                              if (labelNovoItem != null) ElevatedButton.icon(
                                       style: TextButton.styleFrom(
                                         padding: EdgeInsets.symmetric(
                                           horizontal:
@@ -91,19 +88,16 @@ class ModuloPageTemplate extends StatelessWidget {
                                       onPressed: onPressedNovoItem,
                                       icon: const Icon(Icons.add),
                                       label: Text(labelNovoItem!),
-                                    )
-                                  : const SizedBox(),
+                                    ) else const SizedBox(),
                             ],
                           ),
                           const SizedBox(height: AppTheme.defaultPadding),
-                          onChangePesquisa != null ||
-                                  onEditCompletPesquisa != null
-                              ? CampoPadraoAtom(
+                          if (onChangePesquisa != null ||
+                                  onEditCompletPesquisa != null) CampoPadraoAtom(
                                   onChange: onChangePesquisa,
                                   onEditComplet: onEditCompletPesquisa,
                                   initialValue: initialValueCampoPesquisa,
-                                )
-                              : const SizedBox(),
+                                ) else const SizedBox(),
                           const SizedBox(height: AppTheme.defaultPadding / 2),
                           child ??
                               Expanded(

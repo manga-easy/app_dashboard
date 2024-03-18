@@ -1,5 +1,5 @@
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 abstract interface class PermissionsRepository {
   Future<Permissions?> getDocument({required String id});

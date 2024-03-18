@@ -1,4 +1,4 @@
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:dashboard_manga_easy/core/libraries/api_response_parse/api_erros/api_error.dart';
 
 class AuthException implements ApiError {
   @override

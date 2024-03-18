@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/data/dtos/achievements_user_dto.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user_params.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
   final ApiMonolito _apiMonolito;

@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/data/dtos/notification_dto.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/filtro_notificacao.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class NotificacaoRepositoryV1 implements NotificacaoRepository {
   final ApiMonolito _apiMonolito;

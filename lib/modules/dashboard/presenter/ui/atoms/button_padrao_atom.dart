@@ -5,12 +5,14 @@ class ButtonPadraoAtom extends StatelessWidget {
   final String title;
   final IconData icone;
   final void Function()? onPress;
+  final void Function()? onLongPress;
 
   const ButtonPadraoAtom({
     Key? key,
     this.onPress,
     required this.title,
     required this.icone,
+    this.onLongPress,
   }) : super(key: key);
 
   @override
@@ -22,6 +24,7 @@ class ButtonPadraoAtom extends StatelessWidget {
           vertical: AppTheme.defaultPadding,
         ),
       ),
+      onLongPress: onLongPress,
       onPressed: onPress,
       icon: Icon(icone),
       label: Text(title),

@@ -8,7 +8,7 @@ abstract class AuthService {
     required String password,
   });
 
-  Future<User> getUser();
+  Future<Session> getSession();
 
   Future<String> getJwt();
 

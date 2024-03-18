@@ -1,6 +1,6 @@
-import 'package:coffee_cup/coffe_cup.dart';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
@@ -8,8 +8,8 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/se
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/default_page_template.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/criar_recomendacao_controller.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class CriarRecomendacaoPage extends StatefulWidget {
   static const route = '/CriarRecomendacao';
@@ -55,8 +55,8 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
       state: ct.state,
       done: Scaffold(
         appBar: AppBar(
-          title: CoffeeText(
-            text: ct.recomendacao?.id == null
+          title: Text(
+            ct.recomendacao?.id == null
                 ? 'Criar Recomendação'
                 : 'Editar Recomendação',
           ),
@@ -84,12 +84,10 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
                         },
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
-                      CampoPadraoAtom(
-                        hintText: 'Link',
-                        initialValue: ct.recomendacao?.link,
-                        onChange: (v) {
-                          ct.recomendacao = ct.recomendacao!.copyWith(link: v);
-                        },
+                      ButtonPadraoAtom(
+                        title: 'Adicionar imagem',
+                        icone: Icons.image,
+                        onPress: () => ct.pickerImage(context),
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
                       Column(
@@ -106,6 +104,10 @@ class _CriarRecomendacaoPageState extends State<CriarRecomendacaoPage> {
                             children: [
                               Expanded(
                                 child: OutlinedButton(
+                                  onLongPress: () => Helps.copyText(
+                                    ct.recomendacao?.artistId,
+                                    context,
+                                  ),
                                   onPressed: () async {
                                     final user = await AppHelps.bottomSheet(
                                       context: context,

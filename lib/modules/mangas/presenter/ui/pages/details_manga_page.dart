@@ -1,6 +1,6 @@
-import 'package:coffee_cup/features/cards/image_card/ui/coffee_manga_cover.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
+import 'package:dashboard_manga_easy/core/libraries/widgets/manga_cover/manga_cover.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
@@ -10,7 +10,6 @@ import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/organisms/all_g
 import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/organisms/section_genders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class DetailsMangaPage extends StatefulWidget {
   const DetailsMangaPage({super.key});
@@ -63,7 +62,6 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                           height: 250,
                           width: 200,
                           cover: ct.manga!.thumb,
-                          headers: Global.header,
                         ),
                       ],
                     ),
@@ -114,7 +112,7 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                         });
                       },
                       onAdd: () async {
-                        var ret = await showModalBottomSheet(
+                        final ret = await showModalBottomSheet(
                           context: context,
                           builder: (context) => const AllGenders(),
                         );

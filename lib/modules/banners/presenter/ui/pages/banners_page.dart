@@ -1,10 +1,10 @@
 import 'package:dashboard_manga_easy/main.dart';
+import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_model.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/banners_controller.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class BannerPage extends StatefulWidget {
   static const route = '/Banner';
@@ -39,7 +39,7 @@ class _BannerPageState extends State<BannerPage> {
           labelNovoItem: 'Novo Banner',
           onPressedAtualiza: ct.listaBanner,
           itemBuilderLista: (context, index) {
-            BannerModel reco = ct.listaBannerItens[index];
+            final BannerModel reco = ct.listaBannerItens[index];
             return Card(
               child: Column(
                 children: [
@@ -62,7 +62,7 @@ class _BannerPageState extends State<BannerPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ButtonPadraoAtom(
-                        title: "Editar",
+                        title: 'Editar',
                         icone: Icons.edit,
                         onPress: () => Navigator.of(context)
                             .pushNamed(
