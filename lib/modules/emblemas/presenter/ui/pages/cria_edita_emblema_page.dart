@@ -1,5 +1,6 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
@@ -184,6 +185,20 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             ct.emblema!.disponivel = v;
                             ct.update();
                           }),
+                      const SizedBox(height: AppTheme.defaultPadding),
+                      Row(
+                        children: [
+                          Text(
+                            'Data de criação: ${Helps.formetDateFromTimestap(ct.emblema?.createAt ?? 0)}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: AppTheme.defaultPadding),
                       Row(
                         children: [

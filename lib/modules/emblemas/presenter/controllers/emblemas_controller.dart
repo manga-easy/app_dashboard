@@ -11,7 +11,12 @@ class EmblemasController extends IController {
   EmblemasController(this._emblemasRepository);
 
   var lista = <Emblema>[];
-  var pesquisa = '';
+  String get search => _search;
+  var _search = '';
+  set search(String value) {
+    _search = value;
+    notifyListeners();
+  }
 
   @override
   void init(BuildContext context) {

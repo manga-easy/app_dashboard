@@ -49,21 +49,24 @@ class _EmblemasPageState extends State<EmblemasPage> {
     return ModuloPageTemplate(
       route: EmblemasPage.route,
       statusBuild: ct.state,
+      onChangePesquisa: (v) => ct.search = v,
       labelNovoItem: 'Novo Emblema',
       itemBuilderLista: (context, index) {
         final Emblema emb = ct.lista[index];
+        if (!emb.name.toLowerCase().contains(ct.search.toLowerCase()) &&
+            ct.search.isNotEmpty) {
+          return const SizedBox.shrink();
+        }
         return ListTile(
           onTap: () => Navigator.pushNamed(
             context,
             CriaEditaEmblemaPage.route,
             arguments: emb,
           ),
-          leading: emb.type == TypeEmblema.link.name
-              ? CircleAvatar(
-                  radius: 25,
-                  foregroundImage: NetworkImage(emb.url),
-                )
-              : null,
+          leading: CircleAvatar(
+            radius: 25,
+            foregroundImage: NetworkImage(emb.url),
+          ),
           title: Text(emb.name),
           subtitle: Text(
             emb.categoria,
