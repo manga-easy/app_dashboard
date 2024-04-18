@@ -5,12 +5,14 @@ class SelectDados<T> extends StatefulWidget {
   final Future<List<T>> Function(String v) future;
   final String Function(T objet) getTitle;
   final String Function(T objet) getSubTitle;
+  final bool Function(T objet, String search) onSearch;
 
   const SelectDados({
     super.key,
     required this.future,
     required this.getSubTitle,
     required this.getTitle,
+    required this.onSearch,
   });
 
   @override
@@ -58,6 +60,9 @@ class _SelectDadosState<T> extends State<SelectDados<T>> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         final dado = snapshot.data![index];
+                        if (!widget.onSearch(dado, controller.text)) {
+                          return const SizedBox.shrink();
+                        }
                         return ListTile(
                           onTap: () => Navigator.pop(context, dado),
                           title: Text(widget.getTitle(dado)),
