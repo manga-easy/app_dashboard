@@ -33,7 +33,10 @@ class EmblemasUsersW extends StatelessWidget {
                     getSubTitle: (v) => v.categoria,
                     getTitle: (v) => v.name,
                     onSearch: (objet, search) {
-                      return objet.name.contains(search);
+                      if (search.isEmpty) {
+                        return true;
+                      }
+                      return objet.name.toLowerCase().contains(search.toLowerCase());
                     },
                   ),
                 );
