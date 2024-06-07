@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 
 class PermissionsRepositoryV1 implements PermissionsRepository {
-  final ApiMonolito _apiMonolito;
+  final ApiMonolith _apiMonolito;
 
   PermissionsRepositoryV1(this._apiMonolito);
 
@@ -15,25 +15,25 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
   @override
   Future<void> creatDocument({required Permissions objeto}) async {
     await _apiMonolito.post(
-      endpoint: '$version/$feature',
+      '$version/$feature',
       body: PermissionsDto.fromEntity(objeto).toMap(),
     );
   }
 
   @override
   Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete(endpoint: '$version/$feature/$id');
+    await _apiMonolito.delete('$version/$feature/$id');
   }
 
   @override
   Future<Permissions?> getDocument({required String id}) async {
     final result = await _apiMonolito.get(
-      endpoint: '$version/$feature/$id',
+      '$version/$feature/$id',
     );
-    if (result.data.isEmpty) {
+    if (result['data'].isEmpty) {
       return null;
     }
-    return PermissionsDto.fromMap(result.data.first).toEntity();
+    return PermissionsDto.fromMap(result['data'].first).toEntity();
   }
 
   @override
@@ -45,17 +45,17 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
       }
     }
     final result = await _apiMonolito.get(
-      endpoint: '$version/$feature/list?$filter',
+      '$version/$feature/list?$filter',
     );
-    return result.data
-        .map((e) => PermissionsDto.fromMap(e).toEntity())
+    return result['data']
+        .map<Permissions>((e) => PermissionsDto.fromMap(e).toEntity())
         .toList();
   }
 
   @override
   Future<void> updateDocument({required Permissions objeto}) async {
     await _apiMonolito.put(
-      endpoint: '$version/$feature/${objeto.id}',
+      '$version/$feature/${objeto.id}',
       body: PermissionsDto.fromEntity(objeto).toMap(),
     );
   }

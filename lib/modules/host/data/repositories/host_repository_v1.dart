@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/modules/host/domain/entities/host_model.dar
 import 'package:dashboard_manga_easy/modules/host/domain/repositories/host_repository.dart';
 
 class HostRepositoryV1 implements HostRepository {
-  final ApiMonolito _apiMonolito;
+  final ApiMonolith _apiMonolito;
 
   HostRepositoryV1(this._apiMonolito);
 
@@ -15,39 +15,38 @@ class HostRepositoryV1 implements HostRepository {
   @override
   Future<void> creatDocument({required HostModel objeto}) async {
     await _apiMonolito.post(
-      endpoint: '$version/$feature',
+      '$version/$feature',
       body: HostDto.fromEntity(objeto).toMap(),
     );
   }
 
   @override
   Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete(endpoint: '$version/$feature/$id');
+    await _apiMonolito.delete('$version/$feature/$id');
   }
 
   @override
   Future<HostModel?> getDocument({required String id}) async {
-    final ret = await _apiMonolito.get(endpoint: '$version/$feature/$id');
-    if (ret.data.isEmpty) {
+    final result = await _apiMonolito.get('$version/$feature/$id');
+    if (result['data'].isEmpty) {
       return null;
     }
-    return HostDto.fromMap(ret.data.first).toEntity();
+    return HostDto.fromMap(result['data'].first).toEntity();
   }
 
   @override
   Future<void> updateDocument({required HostModel objeto}) async {
     await _apiMonolito.put(
-      endpoint: '$version/$feature/${objeto.id}',
+      '$version/$feature/${objeto.id}',
       body: HostDto.fromEntity(objeto).toMap(),
     );
   }
 
   @override
   Future<List<HostModel>> listDocument({HostFilter? where}) async {
-    final result = await _apiMonolito.get(
-      endpoint: '$version/$feature/list?isAll=true',
-    );
-
-    return result.data.map((e) => HostDto.fromMap(e).toEntity()).toList();
+    final result = await _apiMonolito.get('$version/$feature/list?isAll=true');
+    return result['data']
+        .map<HostModel>((e) => HostDto.fromMap(e).toEntity())
+        .toList();
   }
 }

@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
 
 class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
-  final ApiMonolito _apiMonolito;
+  final ApiMonolith _apiMonolito;
   String get version => 'v1';
 
   EmblemaUserRepositoryV1(
@@ -16,7 +16,7 @@ class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
   Future<void> creatDocument({required EmblemaUser objeto}) async {
     final String userID = objeto.userId;
     await _apiMonolito.post(
-      endpoint: '$version/users/$userID/achievements',
+      '$version/users/$userID/achievements',
       body: AchievementsUserDto.fromEntity(objeto).toMap(),
     );
   }
@@ -27,7 +27,7 @@ class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
     required String userID,
   }) async {
     await _apiMonolito.delete(
-      endpoint: '$version/users/$userID/achievements/$idEmblema',
+      '$version/users/$userID/achievements/$idEmblema',
     );
   }
 
@@ -43,7 +43,7 @@ class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
   Future<void> updateDocument({required EmblemaUser objeto}) async {
     final String userID = objeto.userId;
     await _apiMonolito.put(
-      endpoint: '$version/users/$userID/achievements/${objeto.id}',
+      '$version/users/$userID/achievements/${objeto.id}',
       body: AchievementsUserDto.fromEntity(objeto).toMap(),
     );
   }
@@ -57,10 +57,10 @@ class EmblemaUserRepositoryV1 implements EmblemaUserRepository {
       filter += 'idemblema=${where.idEmblema}&';
     }
     final result = await _apiMonolito.get(
-      endpoint: '$version/users/${where.userId}/achievements?$filter',
+      '$version/users/${where.userId}/achievements?$filter',
     );
-    return result.data
-        .map((e) => AchievementsUserDto.fromMap(e).toEntity())
+    return result['data']
+        .map<EmblemaUser>((e) => AchievementsUserDto.fromMap(e).toEntity())
         .toList();
   }
 }

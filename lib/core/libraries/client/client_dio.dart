@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dashboard_manga_easy/core/libraries/client/cliente_request.dart';
 import 'package:dashboard_manga_easy/core/libraries/client/response_request_entity.dart';
 import 'package:dashboard_manga_easy/core/libraries/client/response_request_mapper.dart';
-import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dio/dio.dart';
 
 class ClientDio extends ClientRequest {
@@ -147,7 +147,7 @@ class ClientDio extends ClientRequest {
     Map<String, dynamic>? headers,
     Map<String, dynamic>? body,
   }) {
-    Helps.log(
+    log(
       '=============================== INICIO ==============================\n'
       '=============== Method: $method \n'
       '=============== Path: $path \n'

@@ -32,10 +32,11 @@ class PermissoesController extends IController {
     try {
       state = StatusBuild.loading;
       permissoes = await _permissionsRepository.listDocument();
+      state = StatusBuild.done;
     } catch (e) {
       state = StatusBuild.erro;
+      rethrow;
     }
-    state = StatusBuild.done;
   }
 
   Future<void> removePermissoes(String id, context) async {

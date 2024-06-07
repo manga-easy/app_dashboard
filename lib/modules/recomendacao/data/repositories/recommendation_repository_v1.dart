@@ -11,7 +11,7 @@ import 'package:mime/mime.dart';
 import 'package:path/path.dart';
 
 class RecommendationsRepositoryV1 implements RecommendationsRepository {
-  final ApiMonolito _apiMonolito;
+  final ApiMonolith _apiMonolito;
 
   RecommendationsRepositoryV1(this._apiMonolito);
 
@@ -19,17 +19,17 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
   String get feature => 'recommendations';
   @override
   Future<RecomendacoesModel?> getDocument({required String id}) async {
-    final result = await _apiMonolito.get(endpoint: '$version/$feature/$id');
-    if (result.data.isEmpty) {
+    final result = await _apiMonolito.get('$version/$feature/$id');
+    if (result['data'].isEmpty) {
       return null;
     }
-    return RecommendationsDto.fromMap(result.data.first).toEntity();
+    return RecommendationsDto.fromMap(result['data'].first).toEntity();
   }
 
   @override
   Future<void> updateDocument({required RecomendacoesModel objeto}) async {
     await _apiMonolito.put(
-      endpoint: '$version/$feature/${objeto.id}',
+      '$version/$feature/${objeto.id}',
       body: RecommendationsDto.fromEntity(objeto).toMap(),
     );
   }
@@ -37,14 +37,14 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
   @override
   Future<void> deletDocument({required String id}) async {
     await _apiMonolito.delete(
-      endpoint: '$version/$feature/$id',
+      '$version/$feature/$id',
     );
   }
 
   @override
   Future<void> creatDocument({required RecomendacoesModel objeto}) async {
     await _apiMonolito.post(
-      endpoint: '$version/$feature',
+      '$version/$feature',
       body: RecommendationsDto.fromEntity(objeto).toMap(),
     );
   }
@@ -59,11 +59,10 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
         parans += 'uniqueid=${filter.uniqueid}&';
       }
     }
-    final result = await _apiMonolito.get(
-      endpoint: '$version/$feature/list$parans',
-    );
-    return result.data
-        .map((e) => RecommendationsDto.fromMap(e).toEntity())
+    final result = await _apiMonolito.get('$version/$feature/list$parans');
+    return result['data']
+        .map<RecomendacoesModel>(
+            (e) => RecommendationsDto.fromMap(e).toEntity())
         .toList();
   }
 
@@ -72,8 +71,8 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
     required String uniqueid,
     required File file,
   }) async {
-    final response = await _apiMonolito.put(
-      endpoint: '$version/$feature/$uniqueid/image',
+    final result = await _apiMonolito.put(
+      '$version/$feature/$uniqueid/image',
       body: {
         'file': MultipartFile.fromFileSync(
           file.path,
@@ -83,6 +82,6 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
       },
       isformData: true,
     );
-    return RecommendationsDto.fromMap(response.data.first).toEntity();
+    return RecommendationsDto.fromMap(result['data'].first).toEntity();
   }
 }
