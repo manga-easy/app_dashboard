@@ -29,7 +29,6 @@ jobs:
       run: flutter pub get
 
     - name: Update pubspec.yaml version
-      id: update_version
       run: |
         VERSION=$(echo "${GITHUB_REF#refs/tags/}")
         CURRENT_VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}')
@@ -45,8 +44,7 @@ jobs:
         flutter build web --release --web-renderer --no-tree-shake-icons html
         mv build/web deploy
 
-    - name: Update pubspec.yaml version
-      id: update_version
+    - name: Commit pubspec.yaml version
       run: |
         VERSION=$(echo "${GITHUB_REF#refs/tags/}")
         git config --global user.email "lucas.cardo123@hotmail.com"
