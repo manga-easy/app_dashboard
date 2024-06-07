@@ -4,7 +4,7 @@ import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 
 class UsersRepositoryV1 implements UsersRepository {
-  final ApiMonolito _apiMonolito;
+  final ApiMonolith _apiMonolito;
 
   UsersRepositoryV1(this._apiMonolito);
 
@@ -14,29 +14,29 @@ class UsersRepositoryV1 implements UsersRepository {
   @override
   Future<void> creatDocument({required User objeto}) async {
     await _apiMonolito.post(
-      endpoint: '$version/$feature',
+      '$version/$feature',
       body: UserDto.fromEntity(objeto).toMap(),
     );
   }
 
   @override
   Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete(endpoint: '$version/$feature/$id');
+    await _apiMonolito.delete('$version/$feature/$id');
   }
 
   @override
   Future<User?> getDocument({required String id}) async {
-    final ret = await _apiMonolito.get(endpoint: '$version/$feature/$id');
-    if (ret.data.isEmpty) {
+    final ret = await _apiMonolito.get('$version/$feature/$id');
+    if (ret['data'].isEmpty) {
       return null;
     }
-    return UserDto.fromMap(ret.data.first).toEntity();
+    return UserDto.fromMap(ret['data'].first).toEntity();
   }
 
   @override
   Future<void> updateDocument({required User objeto}) async {
     await _apiMonolito.post(
-      endpoint: '$version/$feature/${objeto.id}',
+      '$version/$feature/${objeto.id}',
       body: UserDto.fromEntity(objeto).toMap(),
     );
   }
@@ -48,9 +48,11 @@ class UsersRepositoryV1 implements UsersRepository {
       params += 'search=$search';
     }
     final result = await _apiMonolito.get(
-      endpoint: '$version/$feature?$params',
+      '$version/$feature?$params',
     );
 
-    return result.data.map((e) => UserDto.fromMap(e).toEntity()).toList();
+    return result['data']
+        .map<User>((e) => UserDto.fromMap(e).toEntity())
+        .toList();
   }
 }

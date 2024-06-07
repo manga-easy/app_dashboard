@@ -32,6 +32,7 @@ class UsersController extends IController {
       state = StatusBuild.done;
     } catch (e) {
       state = StatusBuild.erro;
+      rethrow;
     }
   }
 }

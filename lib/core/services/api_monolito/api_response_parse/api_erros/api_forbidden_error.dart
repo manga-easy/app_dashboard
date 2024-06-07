@@ -1,8 +1,6 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_response_parse/api_erros/api_error.dart';
 
-class AuthException implements ApiError {
+class ApiForbiddenError implements ApiError {
   @override
-  final String message;
-
-  AuthException(this.message);
+  String message = 'Acesso negado';
 }

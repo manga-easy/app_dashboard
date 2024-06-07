@@ -1,8 +1,6 @@
 import 'package:dashboard_manga_easy/core/interfaces/module_service.dart';
-import 'package:dashboard_manga_easy/core/libraries/api_response_parse/api_response_parse.dart';
-import 'package:dashboard_manga_easy/core/libraries/client/client_dio.dart';
-import 'package:dashboard_manga_easy/core/libraries/client/cliente_request.dart';
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
+import 'package:dashboard_manga_easy/core/services/api_monolito/api_response_parse/api_response_parse.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_appwrite_service.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/persistent_database/persistent_database.dart';
@@ -17,8 +15,7 @@ class CoreModule extends IModuleService {
       () => PersistentDatabaseSembast(),
     );
     di.registerFactory(() => ApiResponseParser());
-    di.registerFactory<ClientRequest>(() => ClientDio());
-    di.registerFactory(() => ApiMonolito(di(), di(), di()));
+    di.registerFactory(() => ApiMonolith(di(), di()));
     di.registerLazySingleton(() => ServiceRoute());
     di.registerLazySingleton<AuthService>(() => AuthAppwriteService());
   }

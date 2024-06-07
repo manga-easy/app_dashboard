@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/libraries/api_response_parse/api_erros/api_error.dart';
+import 'package:dashboard_manga_easy/core/services/api_monolito/api_response_parse/api_erros/api_error.dart';
 
 class ApiInternalServerError implements ApiError {
   @override

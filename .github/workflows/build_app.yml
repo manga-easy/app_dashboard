@@ -1,0 +1,59 @@
+name: Build and Upload Flutter APK
+
+on:
+  push:
+    tags:
+      - '*'  # Executa a ação em qualquer tag que comece com 'v'
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '17'
+        
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.22.1'  # Defina a versão do Flutter que você deseja usar
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Update pubspec.yaml version
+      id: update_version
+      run: |
+        VERSION=$(echo "${GITHUB_REF#refs/tags/}")
+        CURRENT_VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}')
+        BASE_VERSION=$(echo $CURRENT_VERSION | cut -d'+' -f1)
+        BUILD_NUMBER=$(echo $CURRENT_VERSION | cut -d'+' -f2)
+        NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
+        sed -i "s/version: .*/version: $BASE_VERSION+$NEW_BUILD_NUMBER/" pubspec.yaml
+      env:
+        GITHUB_REF: ${{ github.ref }}
+
+    - name: Build APK
+      run: |
+        flutter build web --release --web-renderer --no-tree-shake-icons html
+        mv build/web deploy
+
+    - name: Update pubspec.yaml version
+      id: update_version
+      run: |
+        VERSION=$(echo "${GITHUB_REF#refs/tags/}")
+        git config --global user.email "lucas.cardo123@hotmail.com"
+        git config --global user.name "lucas"
+        git add pubspec.yaml
+        git commit -m "Update version to $VERSION"
+        git push origin HEAD:main
+      env:
+        GITHUB_REF: ${{ github.ref }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

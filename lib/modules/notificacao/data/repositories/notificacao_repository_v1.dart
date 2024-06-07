@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notifica
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
 
 class NotificacaoRepositoryV1 implements NotificacaoRepository {
-  final ApiMonolito _apiMonolito;
+  final ApiMonolith _apiMonolito;
 
   NotificacaoRepositoryV1(this._apiMonolito);
 
@@ -13,17 +13,17 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
   String get feature => 'notifications';
   @override
   Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete(endpoint: '$version/$feature/$id');
+    await _apiMonolito.delete('$version/$feature/$id');
   }
 
   @override
   Future<Notificacao?> getDocument({required String id}) async {
     try {
-      final ret = await _apiMonolito.get(endpoint: '$version/$feature/$id');
-      if (ret.data.isEmpty) {
+      final result = await _apiMonolito.get('$version/$feature/$id');
+      if (result['data'].isEmpty) {
         return null;
       }
-      return NotificationDto.fromMap(ret.data.first).toEntity();
+      return NotificationDto.fromMap(result['data'].first).toEntity();
     } catch (e) {
       return null;
     }
@@ -31,16 +31,18 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
 
   @override
   Future<List<Notificacao>> listDocument({FiltroNotificacao? where}) async {
-    final ret = await _apiMonolito.get(
-      endpoint: '$version/$feature/list',
+    final result = await _apiMonolito.get(
+      '$version/$feature/list',
     );
-    return ret.data.map((e) => NotificationDto.fromMap(e).toEntity()).toList();
+    return (result['data'] as List)
+        .map<Notificacao>((e) => NotificationDto.fromMap(e).toEntity())
+        .toList();
   }
 
   @override
   Future<void> createDocument({required Notificacao objeto}) async {
     await _apiMonolito.post(
-      endpoint: '$version/$feature',
+      '$version/$feature',
       body: NotificationDto.fromEntity(objeto).toMap(),
     );
   }
