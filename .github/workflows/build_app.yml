@@ -35,7 +35,7 @@ jobs:
         sed -i "s/version: .*/version: $BASE_VERSION+$NEW_BUILD_NUMBER/" pubspec.yaml
       env:
         GITHUB_REF: ${{ github.ref }}
-        
+
     - name: Install dependencies
       run: flutter pub get
 
@@ -43,15 +43,3 @@ jobs:
       run: |
         flutter build web --release --no-tree-shake-icons --web-renderer html
         mv build/web deploy
-
-    - name: Commit pubspec.yaml version
-      run: |
-        VERSION=$(echo "${GITHUB_REF#refs/tags/}")
-        git config --global user.email "lucas.cardo123@hotmail.com"
-        git config --global user.name "lucas"
-        git add pubspec.yaml
-        git commit -m "Update version to $VERSION"
-        git push origin HEAD:main
-      env:
-        GITHUB_REF: ${{ github.ref }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
