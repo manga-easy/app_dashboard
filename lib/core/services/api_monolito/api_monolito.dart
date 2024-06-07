@@ -3,15 +3,13 @@ import 'package:dashboard_manga_easy/core/libraries/api_response_parse/result_en
 import 'package:dashboard_manga_easy/core/libraries/client/cliente_request.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class ApiMonolito {
   final ApiResponseParser _apiResponseParser;
   final ClientRequest _clientRequest;
   final AuthService _authService;
-  final String _host =
-      kDebugMode ? 'http://localhost:8080' : 'https://monolito.lucas-cm.com.br';
+  final String _host = 'https://monolito.lucas-cm.com.br';
 
   ApiMonolito(this._clientRequest, this._apiResponseParser, this._authService);
   Map<String, dynamic> getHeaders(String token) {

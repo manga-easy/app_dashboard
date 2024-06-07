@@ -32,6 +32,12 @@ class EmblemasUsersW extends StatelessWidget {
                     future: ct.loadAchievements,
                     getSubTitle: (v) => v.categoria,
                     getTitle: (v) => v.name,
+                    onSearch: (objet, search) {
+                      if (search.isEmpty) {
+                        return true;
+                      }
+                      return objet.name.toLowerCase().contains(search.toLowerCase());
+                    },
                   ),
                 );
                 if (ret is Emblema) {
