@@ -42,6 +42,7 @@ jobs:
     - name: Build APK
       run: |
         flutter build web --release --no-tree-shake-icons --web-renderer html
+        rm -rf deploy/web
         mv build/web deploy
 
     - name: Commit pubspec.yaml version
