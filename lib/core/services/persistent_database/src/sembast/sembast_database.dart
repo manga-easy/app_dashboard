@@ -1,9 +1,5 @@
 import 'package:dashboard_manga_easy/core/services/persistent_database/persistent_database.dart';
-import 'package:flutter/foundation.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
-import 'package:sembast/sembast_io.dart';
 import 'package:sembast_web/sembast_web.dart';
 import 'package:uuid/uuid.dart';
 
@@ -12,14 +8,9 @@ class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
 
   @override
   Future<void> starting() async {
-    final dbFactory = kIsWeb ? databaseFactoryWeb : databaseFactoryIo;
-    String dbName = 'sembast_v1.db';
-    if (!kIsWeb) {
-      final dir = await getApplicationDocumentsDirectory();
-      dbName = join(dir.path, dbName);
-    }
+    final dbFactory = databaseFactoryWeb;
     // We use the database factory to open the database
-    _db = await dbFactory.openDatabase(dbName);
+    _db = await dbFactory.openDatabase('sembast_v1.db');
   }
 
   @override

@@ -24,7 +24,7 @@ class AuthAppwriteService implements AuthService {
     required String password,
   }) async {
     try {
-      return await _account.createEmailSession(
+      return await _account.createEmailPasswordSession(
         email: email.trim(),
         password: password.trim(),
       );
