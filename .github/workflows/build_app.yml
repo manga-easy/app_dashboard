@@ -29,10 +29,9 @@ jobs:
       run: |
         VERSION=$(echo "${GITHUB_REF#refs/tags/}")
         CURRENT_VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}')
-        BASE_VERSION=$(echo $CURRENT_VERSION | cut -d'+' -f1)
         BUILD_NUMBER=$(echo $CURRENT_VERSION | cut -d'+' -f2)
         NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
-        sed -i "s/version: .*/version: $BASE_VERSION+$NEW_BUILD_NUMBER/" pubspec.yaml
+        sed -i "s/version: .*/version: $VERSION+$NEW_BUILD_NUMBER/" pubspec.yaml
       env:
         GITHUB_REF: ${{ github.ref }}
         
