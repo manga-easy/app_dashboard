@@ -1,16 +1,18 @@
 import 'package:dashboard_manga_easy/core/services/persistent_database/persistent_database.dart';
-import 'package:sembast/sembast.dart';
-import 'package:sembast_web/sembast_web.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
-  late final Database _db;
-
+  final Map<StoreSembast, Box> _dbs = {};
+  Box _getdb(StoreSembast e) => _dbs[e]!;
   @override
   Future<void> starting() async {
-    final dbFactory = databaseFactoryWeb;
-    // We use the database factory to open the database
-    _db = await dbFactory.openDatabase('sembast_v1.db');
+    await Hive.initFlutter();
+
+    for (final element in StoreSembast.values) {
+      final db = await Hive.openBox(element.name);
+      _dbs[element] = db;
+    }
   }
 
   @override
@@ -18,8 +20,7 @@ class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
     required String id,
     required StoreSembast store,
   }) async {
-    final storeref = StoreRef<String, dynamic>(store.name);
-    await storeref.record(id).delete(_db);
+    await _getdb(store).delete(id);
   }
 
   @override
@@ -27,14 +28,12 @@ class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
     required String id,
     required StoreSembast store,
   }) async {
-    final storeref = StoreRef<String, dynamic>(store.name);
-    return await storeref.record(id).get(_db);
+    return Map.from(_getdb(store).get(id));
   }
 
   @override
   Future<void> deleteAll({required StoreSembast store}) async {
-    final storeref = StoreRef<String, dynamic>(store.name);
-    await storeref.drop(_db);
+    await _getdb(store).deleteFromDisk();
   }
 
   @override
@@ -43,10 +42,9 @@ class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
     required StoreSembast store,
     String? id,
   }) async {
-    final storeref = StoreRef<String, dynamic>(store.name);
     id ??= const Uuid().v4();
     objeto['id'] = id;
-    await storeref.record(id).put(_db, objeto);
+    await _getdb(store).put(id, objeto);
     return id;
   }
 
@@ -59,8 +57,10 @@ class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
     required StoreSembast store,
     required String id,
   }) async {
-    final storeref = StoreRef<String, dynamic>(store.name);
-    await storeref.record(id).put(_db, objeto);
+    if (id.isEmpty) {
+      throw Exception('Id não pode ser vazio');
+    }
+    await _getdb(store).put(id, objeto);
   }
 
   @override
@@ -68,8 +68,7 @@ class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
     where,
     required StoreSembast store,
   }) async {
-    final storeref = StoreRef<String, dynamic>(store.name);
-    final result = await storeref.find(_db);
+    final result = _getdb(store).values;
     return result.map((e) => Map<String, dynamic>.from(e.value)).toList();
   }
 }
