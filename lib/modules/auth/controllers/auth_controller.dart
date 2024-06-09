@@ -79,10 +79,7 @@ class AuthController extends IController {
   }
 
   Future<void> salvaCredencial() async {
-    final cred = CredencialModel(
-      email: email.text,
-      tokenJwt: ServiceRoute.token!,
-    );
+    final cred = CredencialModel(email: email.text);
     await _credencialRepo.put(objeto: cred);
   }
 

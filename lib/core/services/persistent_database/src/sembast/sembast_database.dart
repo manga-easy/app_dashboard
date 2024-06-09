@@ -68,7 +68,7 @@ class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
     where,
     required StoreSembast store,
   }) async {
-    final result = _getdb(store).values;
-    return result.map((e) => Map<String, dynamic>.from(e.value)).toList();
+    final result = _getdb(store).values.map((e) => Map.from(e)).toList();
+    return result.map((e) => Map<String, dynamic>.from(e)).toList();
   }
 }
