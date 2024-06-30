@@ -103,7 +103,7 @@ class _HostPageState extends State<HostPage> {
                           .bodyMedium!
                           .copyWith(color: Colors.white),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

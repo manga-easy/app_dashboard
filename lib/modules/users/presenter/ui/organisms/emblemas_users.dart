@@ -10,8 +10,7 @@ class EmblemasUsersW extends StatelessWidget {
   final UsersDetalhesController ct;
   final List<EmblemaUser> list;
 
-  const EmblemasUsersW({Key? key, required this.list, required this.ct})
-      : super(key: key);
+  const EmblemasUsersW({super.key, required this.list, required this.ct});
 
   @override
   Widget build(BuildContext context) {

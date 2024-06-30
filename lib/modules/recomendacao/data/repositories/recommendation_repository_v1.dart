@@ -62,7 +62,7 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
     final result = await _apiMonolito.get('$version/$feature/list$parans');
     return result['data']
         .map<RecomendacoesModel>(
-            (e) => RecommendationsDto.fromMap(e).toEntity())
+            (e) => RecommendationsDto.fromMap(e).toEntity(),)
         .toList();
   }
 

@@ -3,12 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class DrawerListTileAtom extends StatelessWidget {
   const DrawerListTileAtom({
-    Key? key,
+    super.key,
     // For selecting those three line once press "Command+D"
     required this.title,
     required this.svgSrc,
     required this.press,
-  }) : super(key: key);
+  });
 
   final String title, svgSrc;
   final VoidCallback press;

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class BannerPage extends StatefulWidget {
   static const route = '/Banner';
-  const BannerPage({Key? key}) : super(key: key);
+  const BannerPage({super.key});
   @override
   State<BannerPage> createState() => _BannerPageState();
 }
@@ -80,7 +80,7 @@ class _BannerPageState extends State<BannerPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16)
+                  const SizedBox(height: 16),
                 ],
               ),
             );

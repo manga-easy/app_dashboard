@@ -10,8 +10,12 @@ class InformacoesUserAtom extends StatelessWidget {
     return FutureBuilder<User>(
       future: future,
       builder: (context, snapshot) {
-        if (snapshot.hasError) return const Text('Erro');
-        if (snapshot.hasData) return Text(snapshot.data!.email);
+        if (snapshot.hasError) {
+          return const Text('Erro');
+        }
+        if (snapshot.hasData) {
+          return Text(snapshot.data!.email);
+        }
         return const LoadingAtom();
       },
     );

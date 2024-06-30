@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MangasPage extends StatefulWidget {
   static const route = '/Mangas';
-  const MangasPage({Key? key}) : super(key: key);
+  const MangasPage({super.key});
   @override
   State<MangasPage> createState() => _MangasPageState();
 }

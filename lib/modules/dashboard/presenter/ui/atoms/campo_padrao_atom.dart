@@ -15,7 +15,7 @@ class CampoPadraoAtom extends StatelessWidget {
   final TextInputType? keyboardType;
 
   const CampoPadraoAtom({
-    Key? key,
+    super.key,
     this.obscureText,
     this.numberLines = 1,
     this.hintText,
@@ -26,7 +26,7 @@ class CampoPadraoAtom extends StatelessWidget {
     this.initialValue,
     this.onSubmitted,
     this.keyboardType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

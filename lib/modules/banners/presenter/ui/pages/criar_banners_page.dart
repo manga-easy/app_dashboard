@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class CriarBannerPage extends StatefulWidget {
   static const route = '/CriarBanner';
-  const CriarBannerPage({Key? key}) : super(key: key);
+  const CriarBannerPage({super.key});
   @override
   State<CriarBannerPage> createState() => _CriarBannerPageState();
 }

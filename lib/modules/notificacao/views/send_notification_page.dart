@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class SendNotificationPage extends StatefulWidget {
   static const route = '/SendNotification';
-  const SendNotificationPage({Key? key}) : super(key: key);
+  const SendNotificationPage({super.key});
   @override
   State<SendNotificationPage> createState() => _SendNotificationPageState();
 }
@@ -79,7 +79,7 @@ class _SendNotificationPageState extends State<SendNotificationPage> {
                 onPress: () => ct.enviaNotificacaoTest(context),
                 icone: Icons.send,
                 title: 'Enviar Notificação de teste',
-              )
+              ),
             ],
           ),
         );

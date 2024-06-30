@@ -68,7 +68,7 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
                   .map((e) => DropdownMenuItem<int>(
                         value: e.value,
                         child: Text(e.name),
-                      ))
+                      ),)
                   .toList(),
               onChanged: (v) {
                 setState(() {

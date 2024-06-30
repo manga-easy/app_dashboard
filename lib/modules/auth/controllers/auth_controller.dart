@@ -65,7 +65,7 @@ class AuthController extends IController {
     final result = await _permissionsRepository.listDocument(
         where: PermissoesParams(
       userId: userId,
-    ));
+    ),);
 
     _serviceRoute.permissions = result.first;
   }

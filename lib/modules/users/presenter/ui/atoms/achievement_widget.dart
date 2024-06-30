@@ -58,7 +58,7 @@ class AchievementWidget extends StatelessWidget {
                       CircularProgressIndicator(),
                     ],
                   );
-                }),
+                },),
           ),
         ),
         GestureDetector(

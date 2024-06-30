@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class CriaEditaEmblemaPage extends StatefulWidget {
   static const route = '/CriaEditaEmblema';
-  const CriaEditaEmblemaPage({Key? key}) : super(key: key);
+  const CriaEditaEmblemaPage({super.key});
   @override
   State<CriaEditaEmblemaPage> createState() => _CriaEditaEmblemaPageState();
 }
@@ -94,7 +94,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           onChanged: (v) {
                             ct.emblema!.adsOff = v;
                             ct.update();
-                          }),
+                          },),
                       const SizedBox(height: AppTheme.defaultPadding),
                       Row(
                         children: [
@@ -111,7 +111,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: AppTheme.defaultPadding * 2),
+                            horizontal: AppTheme.defaultPadding * 2,),
                         child: Column(
                           children: [
                             const SizedBox(height: AppTheme.defaultPadding / 2),
@@ -134,7 +134,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                                     ct.update();
                                   },
                                   icon: const Icon(Icons.remove),
-                                )
+                                ),
                               ],
                             ),
                           ],
@@ -161,7 +161,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             .map((e) => DropdownMenuItem<String>(
                                   value: e.name,
                                   child: Text(e.name),
-                                ))
+                                ),)
                             .toList(),
                         onChanged: (v) {
                           ct.emblema!.categoria = v!;
@@ -184,7 +184,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                           onChanged: (v) {
                             ct.emblema!.disponivel = v;
                             ct.update();
-                          }),
+                          },),
                       const SizedBox(height: AppTheme.defaultPadding),
                       Row(
                         children: [
@@ -220,7 +220,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             .map((e) => DropdownMenuItem<String>(
                                   value: e.name,
                                   child: Text(e.name),
-                                ))
+                                ),)
                             .toList(),
                         onChanged: (v) {
                           ct.emblema!.type = v!;
@@ -248,7 +248,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                             .map((e) => DropdownMenuItem<RarityEmblema>(
                                   value: e,
                                   child: Text(e.name),
-                                ))
+                                ),)
                             .toList(),
                         onChanged: (v) {
                           ct.emblema!.rarity = v!;
@@ -291,7 +291,7 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
           onChange: (p0) => ct.emblema!.benefits[i] = p0,
           initialValue: ct.emblema!.benefits[i],
         ),
-      ));
+      ),);
     }
 
     return widiget;
