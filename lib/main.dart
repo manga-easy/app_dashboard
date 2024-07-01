@@ -14,6 +14,7 @@ import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get_it/get_it.dart';
 
 bool isDemoUsingDynamicColors = false;
@@ -27,6 +28,7 @@ var darkCustomColors =
     const CustomColors(danger: Color.fromARGB(255, 154, 198, 239));
 final di = GetIt.instance;
 Future<void> main() async {
+  usePathUrlStrategy();
   //register all modules
   CoreModule().register();
   AuthModule().register();

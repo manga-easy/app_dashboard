@@ -1,12 +1,9 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
-import 'package:dashboard_manga_easy/modules/banners/data/dtos/banner_dto.dart';
-import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_model.dart';
-import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_params.dart';
-import 'package:dashboard_manga_easy/modules/banners/domain/repositories/banner_repository.dart';
+import 'package:dashboard_manga_easy/modules/banners/data/dtos/create_banner_dto.dart';
+import 'package:dashboard_manga_easy/modules/banners/domain/entities/banner_entity.dart';
 
-class BannerRepositoryV2 implements BannerRepository {
+class BannerRepositoryV2 {
   final ApiMonolith _apiMonolito;
-  String get version => 'v2';
 
   BannerRepositoryV2(
     this._apiMonolito,
@@ -14,46 +11,31 @@ class BannerRepositoryV2 implements BannerRepository {
 
   String get table => 'banners';
 
-  @override
-  Future<void> creatDocument({required BannerModel objeto}) async {
-    await _apiMonolito.post(
-      '$version/$table',
-      body: BannerDto.fromEntity(objeto).toMap(),
+  Future<BannerEntity> creatDocument({required CreateBannerDto dto}) async {
+    final result = await _apiMonolito.post(
+      '$table/v1',
+      body: dto.toJson(),
     );
+    return BannerEntity.fromJson(result);
   }
 
-  @override
   Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete(
-      '$version/$table/$id',
-    );
+    await _apiMonolito.delete('$table/v1/$id');
   }
 
-  @override
-  Future<BannerModel?> getDocument({required String id}) async {
-    final result = await _apiMonolito.get(
-      '$version/$table/$id',
+  Future<BannerEntity> updateDocument({
+    required CreateBannerDto dto,
+    required String id,
+  }) async {
+    final result = await _apiMonolito.put(
+      '$table/v1/$id',
+      body: dto.toJson(),
     );
-    if (result.isEmpty) {
-      return null;
-    }
-
-    return BannerDto.fromMap(result.first).toEntity();
+    return BannerEntity.fromJson(result);
   }
 
-  @override
-  Future<void> updateDocument({required BannerModel objeto}) async {
-    await _apiMonolito.put(
-      '$version/$table/${objeto.id}',
-      body: BannerDto.fromEntity(objeto).toMap(),
-    );
-  }
-
-  @override
-  Future<List<BannerModel>> listDocument({BannerParams? where}) async {
-    final result = await _apiMonolito.get('$version/$table/list');
-    return result
-        .map<BannerModel>((e) => BannerDto.fromMap(e).toEntity())
-        .toList();
+  Future<List<BannerEntity>> listDocument() async {
+    final result = await _apiMonolito.get('$table/v1');
+    return result.map<BannerEntity>((e) => BannerEntity.fromJson(e)).toList();
   }
 }

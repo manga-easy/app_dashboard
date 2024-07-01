@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/banners/domain/models/banner_model.dart';
+import 'package:dashboard_manga_easy/modules/banners/domain/entities/banner_entity.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/banners_controller.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
@@ -39,21 +39,21 @@ class _BannerPageState extends State<BannerPage> {
           labelNovoItem: 'Novo Banner',
           onPressedAtualiza: ct.listaBanner,
           itemBuilderLista: (context, index) {
-            final BannerModel reco = ct.listaBannerItens[index];
+            final BannerEntity banner = ct.listaBannerItens[index];
             return Card(
               child: Column(
                 children: [
                   ListTile(
                     textColor: Colors.white,
                     title: Text(
-                      reco.link,
+                      banner.link,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Image.network(
-                      reco.image,
+                      banner.image,
                       height: 300,
                     ),
                   ),
@@ -67,7 +67,7 @@ class _BannerPageState extends State<BannerPage> {
                         onPress: () => Navigator.of(context)
                             .pushNamed(
                               CriarBannerPage.route,
-                              arguments: reco,
+                              arguments: banner,
                             )
                             .then((value) => ct.listaBanner()),
                       ),
@@ -75,7 +75,7 @@ class _BannerPageState extends State<BannerPage> {
                         title: 'Deletar',
                         icone: Icons.delete_forever,
                         onPress: () => ct
-                            .deleteBanner(reco, context)
+                            .deleteBanner(banner.id, context)
                             .then((value) => ct.listaBanner()),
                       ),
                     ],
