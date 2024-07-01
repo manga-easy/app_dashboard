@@ -56,17 +56,17 @@ class _CriarBannerPageState extends State<CriarBannerPage> {
                       children: [
                         CampoPadraoAtom(
                           hintText: 'Link da image',
-                          initialValue: ct.banner!.image,
+                          initialValue: ct.dto.image,
                           onChange: (v) {
-                            ct.banner = ct.banner!.copyWith(image: v);
+                            ct.dto.image = v;
                           },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),
                         CampoPadraoAtom(
                           hintText: 'Link do redirecionamento',
-                          initialValue: ct.banner!.link,
+                          initialValue: ct.dto.link,
                           onChange: (v) {
-                            ct.banner = ct.banner!.copyWith(link: v);
+                            ct.dto.link = v;
                           },
                         ),
                         const SizedBox(height: AppTheme.defaultPadding * 2),
