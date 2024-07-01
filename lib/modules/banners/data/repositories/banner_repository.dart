@@ -34,11 +34,11 @@ class BannerRepositoryV2 implements BannerRepository {
     final result = await _apiMonolito.get(
       '$version/$table/$id',
     );
-    if (result['data'].isEmpty) {
+    if (result.isEmpty) {
       return null;
     }
 
-    return BannerDto.fromMap(result['data'].first).toEntity();
+    return BannerDto.fromMap(result.first).toEntity();
   }
 
   @override
@@ -52,7 +52,7 @@ class BannerRepositoryV2 implements BannerRepository {
   @override
   Future<List<BannerModel>> listDocument({BannerParams? where}) async {
     final result = await _apiMonolito.get('$version/$table/list');
-    return result['data']
+    return result
         .map<BannerModel>((e) => BannerDto.fromMap(e).toEntity())
         .toList();
   }

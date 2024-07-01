@@ -1,14 +1,15 @@
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/data/dtos/create_permission_dto.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission_entity.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 
 abstract interface class PermissionsRepository {
-  Future<Permissions?> getDocument({required String id});
+  Future<Permission?> getDocument({required String id});
 
-  Future<void> updateDocument({required Permissions objeto});
+  Future<Permission> updateDocument({required CreatePermissionDto objeto});
 
   Future<void> deletDocument({required String id});
 
-  Future<void> creatDocument({required Permissions objeto});
+  Future<Permission> creatDocument({required CreatePermissionDto objeto});
 
-  Future<List<Permissions>> listDocument({PermissoesParams? where});
+  Future<List<Permission>> listDocument({PermissoesParams? where});
 }

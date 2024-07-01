@@ -4,21 +4,20 @@ import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user_params.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblema_user_repository.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
+import 'package:dashboard_manga_easy/modules/users/data/repositories/user_achievement_repository.dart';
 import 'package:flutter/material.dart';
 
 class DashboardController extends IController {
   final ServiceRoute serviceRoute;
-  final EmblemaUserRepository emblemaUserRepository;
+  final UserAchievementRepository userAchievementRepository;
   final EmblemasRepository emblemasRepository;
   var emblemasDoadores = ValueNotifier(<Emblema>[]);
   var status = ValueNotifier(StatusBuild.done);
 
   DashboardController({
     required this.serviceRoute,
-    required this.emblemaUserRepository,
+    required this.userAchievementRepository,
     required this.emblemasRepository,
   });
 
@@ -44,12 +43,5 @@ class DashboardController extends IController {
     } catch (e) {
       Helps.log(e);
     }
-  }
-
-  Future<int> calculaTotalAdquirido(String idEmblema) async {
-    final ret = await emblemaUserRepository.listDocument(
-      where: EmblemaUserParams(idEmblema: idEmblema, userId: ''),
-    );
-    return ret.length;
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class ForbidenPage extends StatefulWidget {
   static const route = '/Forbiden';
-  const ForbidenPage({Key? key}) : super(key: key);
+  const ForbidenPage({super.key});
   @override
   State<ForbidenPage> createState() => _ForbidenPageState();
 }

@@ -114,6 +114,6 @@ class Helps {
     Clipboard.setData(ClipboardData(text: text ?? ''));
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('Texto $text copiado'),
-    ));
+    ),);
   }
 }

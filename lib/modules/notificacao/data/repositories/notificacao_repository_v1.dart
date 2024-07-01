@@ -20,10 +20,10 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
   Future<Notificacao?> getDocument({required String id}) async {
     try {
       final result = await _apiMonolito.get('$version/$feature/$id');
-      if (result['data'].isEmpty) {
+      if (result.isEmpty) {
         return null;
       }
-      return NotificationDto.fromMap(result['data'].first).toEntity();
+      return NotificationDto.fromMap(result.first).toEntity();
     } catch (e) {
       return null;
     }
@@ -34,7 +34,7 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
     final result = await _apiMonolito.get(
       '$version/$feature/list',
     );
-    return (result['data'] as List)
+    return (result as List)
         .map<Notificacao>((e) => NotificationDto.fromMap(e).toEntity())
         .toList();
   }

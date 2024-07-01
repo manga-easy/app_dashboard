@@ -8,12 +8,12 @@ class ButtonPadraoAtom extends StatelessWidget {
   final void Function()? onLongPress;
 
   const ButtonPadraoAtom({
-    Key? key,
+    super.key,
     this.onPress,
     required this.title,
     required this.icone,
     this.onLongPress,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

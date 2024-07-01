@@ -88,3 +88,9 @@ linter:
     use_function_type_syntax_for_parameters: true
     use_rethrow_when_possible: true
     valid_regexps: true
+    close_sinks: true
+    require_trailing_commas: true
+    sized_box_for_whitespace: true
+    sized_box_shrink_expand: true
+    sort_child_properties_last: true
+    use_build_context_synchronously: true

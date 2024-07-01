@@ -1,17 +1,16 @@
-import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/host/domain/entities/host_model.dart';
+import 'package:dashboard_manga_easy/modules/host/data/repositories/host_repository_v1.dart';
+import 'package:dashboard_manga_easy/modules/host/domain/entities/host_entity.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_status_enum.dart';
-import 'package:dashboard_manga_easy/modules/host/domain/repositories/host_repository.dart';
 import 'package:flutter/material.dart';
 
 class HostController extends IController {
-  final HostRepository _hostRepository;
+  final HostRepositoryV1 _hostRepository;
 
   HostController(this._hostRepository);
 
-  var list = <HostModel>[];
+  var list = <HostEntity>[];
 
   @override
   void init(BuildContext context) {
@@ -28,29 +27,13 @@ class HostController extends IController {
     }
   }
 
-  Future<void> deleteHost(BuildContext context, HostModel host) async {
-    try {
-      state = StatusBuild.loading;
-      await _hostRepository.deletDocument(id: host.id!);
-      list = await _hostRepository.listDocument();
-      AppHelps.confirmaDialog(
-        title: 'Sucesso',
-        content: 'Host salvo com sucesso',
-        context: context,
-      );
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-    }
-    state = StatusBuild.done;
-  }
-
-  Future<void> changStatus(HostModel host) async {
+  Future<void> changStatus(HostEntity host) async {
     try {
       state = StatusBuild.loading;
       host.status = host.status == HostStatus.disable
           ? HostStatus.enable
           : HostStatus.disable;
-      await _hostRepository.updateDocument(objeto: host);
+      await _hostRepository.updateDocument(objeto: host.toDto(), id: host.id);
       list = await _hostRepository.listDocument();
     } on Exception catch (e) {
       handleErrorEvent(e);

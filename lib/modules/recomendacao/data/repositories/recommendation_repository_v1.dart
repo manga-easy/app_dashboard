@@ -20,10 +20,10 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
   @override
   Future<RecomendacoesModel?> getDocument({required String id}) async {
     final result = await _apiMonolito.get('$version/$feature/$id');
-    if (result['data'].isEmpty) {
+    if (result.isEmpty) {
       return null;
     }
-    return RecommendationsDto.fromMap(result['data'].first).toEntity();
+    return RecommendationsDto.fromMap(result.first).toEntity();
   }
 
   @override
@@ -60,9 +60,10 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
       }
     }
     final result = await _apiMonolito.get('$version/$feature/list$parans');
-    return result['data']
+    return result
         .map<RecomendacoesModel>(
-            (e) => RecommendationsDto.fromMap(e).toEntity())
+          (e) => RecommendationsDto.fromMap(e).toEntity(),
+        )
         .toList();
   }
 
@@ -82,6 +83,6 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
       },
       isformData: true,
     );
-    return RecommendationsDto.fromMap(result['data'].first).toEntity();
+    return RecommendationsDto.fromMap(result.first).toEntity();
   }
 }

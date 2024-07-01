@@ -52,7 +52,7 @@ class FormNotificacao extends StatelessWidget {
             },
             icone: Icons.send,
             title: 'Enviar',
-          )
+          ),
         ],
       ),
     );

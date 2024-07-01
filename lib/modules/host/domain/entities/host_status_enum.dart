@@ -2,7 +2,7 @@ enum HostStatus {
   disable,
   enable;
 
-  static HostStatus getStatus(String name) {
+  static HostStatus getStatus(String? name) {
     switch (name) {
       case 'disable':
         return HostStatus.disable;

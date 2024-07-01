@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class UsersPage extends StatefulWidget {
   static const route = '/Users';
-  const UsersPage({Key? key}) : super(key: key);
+  const UsersPage({super.key});
   @override
   State<UsersPage> createState() => _UsersPageState();
 }
@@ -44,7 +44,7 @@ class _UsersPageState extends State<UsersPage> {
             final User use = ct.lista[index];
             return ListTile(
               onTap: () => Navigator.pushNamed(context, UserDetalhesPage.route,
-                  arguments: use),
+                  arguments: use,),
               leading: CircleAvatar(
                 radius: 35,
                 child: Text(use.name.substring(0, use.name.length > 1 ? 1 : 0)),

@@ -43,7 +43,6 @@ class ModuloPageTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final ratio = width * 0.005;
-    print(ratio);
     return Scaffold(
       drawer: width <= 1000 && isModule ? SideMenu(atual: route) : null,
       appBar:
@@ -55,49 +54,62 @@ class ModuloPageTemplate extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Visibility(
-                      visible: width > 1000, child: SideMenu(atual: route)),
+                    visible: width > 1000,
+                    child: SideMenu(atual: route),
+                  ),
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 16 * ratio, vertical: 8),
+                        horizontal: 16 * ratio,
+                        vertical: 8,
+                      ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const SizedBox(height: AppTheme.defaultPadding),
-                          if (width > 1000) Text(
-                                  route.replaceAll('/', ''),
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ) else const SizedBox(),
+                          if (width > 1000)
+                            Text(
+                              route.replaceAll('/', ''),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            )
+                          else
+                            const SizedBox(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TextButton(
-                                  onPressed: onPressedAtualiza,
-                                  child: const Text('Atualiza')),
-                              if (labelNovoItem != null) ElevatedButton.icon(
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal:
-                                              AppTheme.defaultPadding * 1.5,
-                                          vertical: AppTheme.defaultPadding /
-                                              (Responsive.isMobile(context)
-                                                  ? 2
-                                                  : 1),
-                                        ),
-                                      ),
-                                      onPressed: onPressedNovoItem,
-                                      icon: const Icon(Icons.add),
-                                      label: Text(labelNovoItem!),
-                                    ) else const SizedBox(),
+                                onPressed: onPressedAtualiza,
+                                child: const Text('Atualiza'),
+                              ),
+                              if (labelNovoItem != null)
+                                ElevatedButton.icon(
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: AppTheme.defaultPadding * 1.5,
+                                      vertical: AppTheme.defaultPadding /
+                                          (Responsive.isMobile(context)
+                                              ? 2
+                                              : 1),
+                                    ),
+                                  ),
+                                  onPressed: onPressedNovoItem,
+                                  icon: const Icon(Icons.add),
+                                  label: Text(labelNovoItem!),
+                                )
+                              else
+                                const SizedBox(),
                             ],
                           ),
                           const SizedBox(height: AppTheme.defaultPadding),
                           if (onChangePesquisa != null ||
-                                  onEditCompletPesquisa != null) CampoPadraoAtom(
-                                  onChange: onChangePesquisa,
-                                  onEditComplet: onEditCompletPesquisa,
-                                  initialValue: initialValueCampoPesquisa,
-                                ) else const SizedBox(),
+                              onEditCompletPesquisa != null)
+                            CampoPadraoAtom(
+                              onChange: onChangePesquisa,
+                              onEditComplet: onEditCompletPesquisa,
+                              initialValue: initialValueCampoPesquisa,
+                            )
+                          else
+                            const SizedBox(),
                           const SizedBox(height: AppTheme.defaultPadding / 2),
                           child ??
                               Expanded(

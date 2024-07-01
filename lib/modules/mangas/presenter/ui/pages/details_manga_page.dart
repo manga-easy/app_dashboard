@@ -52,7 +52,7 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                 ),
                 child: ListView(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: AppTheme.defaultPadding),
+                      horizontal: AppTheme.defaultPadding,),
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

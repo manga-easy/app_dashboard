@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class NotificacaoPage extends StatefulWidget {
   static const route = '/Notificacao';
-  const NotificacaoPage({Key? key}) : super(key: key);
+  const NotificacaoPage({super.key});
   @override
   State<NotificacaoPage> createState() => _NotificacaoPageState();
 }
@@ -121,13 +121,13 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
                           });
                         },
                         child: const Text('Re-enviar'),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-            const Divider(color: Colors.white)
+            const Divider(color: Colors.white),
           ],
         );
       },

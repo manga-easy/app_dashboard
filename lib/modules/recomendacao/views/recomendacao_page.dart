@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 
 class RecomendacaoPage extends StatefulWidget {
   static const route = '/Recomendacao';
-  const RecomendacaoPage({Key? key}) : super(key: key);
+  const RecomendacaoPage({super.key});
   @override
   State<RecomendacaoPage> createState() => _RecomendacaoPageState();
 }
@@ -100,7 +100,7 @@ class _RecomendacaoPageState extends State<RecomendacaoPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16)
+                  const SizedBox(height: 16),
                 ],
               ),
             );

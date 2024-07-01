@@ -13,9 +13,9 @@ class BannersModule extends IModuleFactory {
     //register controllers
     di.registerFactory(() => CriarBannerController(
           bannerRepository: di(),
-        ));
+        ),);
     di.registerFactory(() => BannerController(
           bannerRepository: di(),
-        ));
+        ),);
   }
 }

@@ -23,6 +23,6 @@ class ApiResponseParser {
     if (response.data['status'] == 'ERROR') {
       throw ApiErrorBusiness(message: response.data['message']);
     }
-    return response.data;
+    return response.data['data'];
   }
 }

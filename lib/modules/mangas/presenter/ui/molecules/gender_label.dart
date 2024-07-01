@@ -43,7 +43,7 @@ class GenderLabel extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               )
             else
-              Container()
+              Container(),
           ],
         ),
       ),

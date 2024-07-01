@@ -14,5 +14,5 @@ class MangaFilterEntity {
       required this.genders,
       this.rating,
       this.author,
-      this.uniqueid});
+      this.uniqueid,});
 }

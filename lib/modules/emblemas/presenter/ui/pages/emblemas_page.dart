@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class EmblemasPage extends StatefulWidget {
   static const route = '/Emblemas';
-  const EmblemasPage({Key? key}) : super(key: key);
+  const EmblemasPage({super.key});
   @override
   State<EmblemasPage> createState() => _EmblemasPageState();
 }

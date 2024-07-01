@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
-import 'package:dashboard_manga_easy/modules/host/domain/entities/host_model.dart';
+import 'package:dashboard_manga_easy/modules/host/domain/entities/host_entity.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_status_enum.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_controller.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_details_page.dart';
@@ -50,7 +50,7 @@ class _HostPageState extends State<HostPage> {
       statusBuild: ct.state,
       labelNovoItem: 'Host',
       itemBuilderLista: (context, index) {
-        final HostModel host = ct.list[index];
+        final HostEntity host = ct.list[index];
         return InkWell(
           onTap: () => Navigator.pushNamed(
             context,
@@ -74,9 +74,9 @@ class _HostPageState extends State<HostPage> {
                       children: [
                         Text(host.name),
                         Text(
-                          host.host.length > 30
-                              ? '${host.host.substring(0, 30)} ...'
-                              : host.host,
+                          host.urlApi.length > 30
+                              ? '${host.urlApi.substring(0, 30)} ...'
+                              : host.urlApi,
                         ),
                       ],
                     ),
@@ -103,7 +103,7 @@ class _HostPageState extends State<HostPage> {
                           .bodyMedium!
                           .copyWith(color: Colors.white),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

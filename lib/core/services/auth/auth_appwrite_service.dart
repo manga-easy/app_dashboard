@@ -63,7 +63,7 @@ class AuthAppwriteService implements AuthService {
   }) async {
     try {
       return await _account.updatePassword(
-          password: password, oldPassword: oldPassword);
+          password: password, oldPassword: oldPassword,);
     } catch (e) {
       _handleError(e);
       rethrow;
@@ -82,7 +82,7 @@ class AuthAppwriteService implements AuthService {
 
   @override
   Future<models.User> updatePrefs(
-      {required Map<dynamic, dynamic> prefs}) async {
+      {required Map<dynamic, dynamic> prefs,}) async {
     try {
       return await _account.updatePrefs(prefs: prefs);
     } catch (e) {

@@ -31,9 +31,9 @@ class SideMenu extends StatelessWidget {
   ];
 
   SideMenu({
-    Key? key,
+    super.key,
     required this.atual,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
