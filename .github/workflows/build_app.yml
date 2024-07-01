@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - '*'  # Executa a ação em qualquer tag que comece com 'v'
-permissions: write-all
 
 jobs:
   build:
@@ -43,15 +42,3 @@ jobs:
         flutter build web --release --no-tree-shake-icons --web-renderer html
         rm -rf deploy
         mv build/web deploy
-
-    - name: Commit pubspec.yaml version
-      run: |
-        VERSION=$(echo "${GITHUB_REF#refs/tags/}")
-        git config --global user.email "lucas.cardo123@hotmail.com"
-        git config --global user.name "lucas"
-        git add .
-        git commit -m "Update version to $VERSION"
-        git push origin HEAD:main
-      env:
-        GITHUB_REF: ${{ github.ref }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
