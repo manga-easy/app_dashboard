@@ -12,7 +12,7 @@ import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/details_m
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission_entity.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
@@ -26,7 +26,7 @@ class ServiceRoute extends IService {
   bool isInicialize = false;
   static String? userId;
   static String? token;
-  Permissions? permissions;
+  Permission? permissions;
   @override
   Future<void> initialise() async {
     isInicialize = true;
@@ -60,7 +60,7 @@ class ServiceRoute extends IService {
           settings: settings,
         );
     }
-    if (permissions!.value >= LevelPermissoes.suporte.value) {
+    if (permissions!.level >= LevelPermissoes.suporte.value) {
       switch (settings.name) {
         case UsersPage.route:
           return MaterialPageRoute(
@@ -76,7 +76,7 @@ class ServiceRoute extends IService {
       }
     }
     //somnte admin podem acessar as rotas abaixo
-    if (permissions!.value < LevelPermissoes.admin.value) {
+    if (permissions!.level < LevelPermissoes.admin.value) {
       return MaterialPageRoute(
         builder: (_) => const ForbidenPage(),
         settings: settings,

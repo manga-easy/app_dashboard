@@ -54,7 +54,7 @@ abstract class IController extends ChangeNotifier {
     );
   }
 
-  void handleErrorEvent(Exception e) {
+  void handleErrorEvent(Object e) {
     String message = 'Ocorreu um erro';
     Helps.log(e);
 
