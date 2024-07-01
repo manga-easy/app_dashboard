@@ -54,7 +54,7 @@ class _PermissoesPageState extends State<PermissoesPage> {
                   future: ct.getNameUser(userId: data.userId),
                 ),
                 subtitle: Text(
-                  'Nivel: ${data.value}',
+                  'Nivel: ${data.level}',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 trailing: IconButton(
@@ -62,7 +62,7 @@ class _PermissoesPageState extends State<PermissoesPage> {
                     Icons.close,
                     color: Colors.red,
                   ),
-                  onPressed: () => ct.removePermissoes(data.id!, context),
+                  onPressed: () => ct.removePermissoes(data.id, context),
                 ),
               ),
             );

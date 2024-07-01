@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/data/dtos/permissions_dto.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissions_model.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/data/dtos/create_permission_dto.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission_entity.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 
@@ -9,35 +9,38 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
 
   PermissionsRepositoryV1(this._apiMonolito);
 
-  String get version => 'v1';
-  String get feature => 'permissions';
+  String get feature => 'permission';
 
   @override
-  Future<void> creatDocument({required Permissions objeto}) async {
-    await _apiMonolito.post(
-      '$version/$feature',
-      body: PermissionsDto.fromEntity(objeto).toMap(),
+  Future<Permission> creatDocument({
+    required CreatePermissionDto objeto,
+  }) async {
+    final result = await _apiMonolito.post(
+      '$feature/v1',
+      body: objeto.toMap(),
     );
+
+    return Permission.fromMap(result);
   }
 
   @override
   Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete('$version/$feature/$id');
+    await _apiMonolito.delete('$feature/v1/$id');
   }
 
   @override
-  Future<Permissions?> getDocument({required String id}) async {
+  Future<Permission?> getDocument({required String id}) async {
     final result = await _apiMonolito.get(
-      '$version/$feature/$id',
+      '$feature/v1',
     );
-    if (result['data'].isEmpty) {
+    if (result.isEmpty) {
       return null;
     }
-    return PermissionsDto.fromMap(result['data'].first).toEntity();
+    return Permission.fromMap(result.first);
   }
 
   @override
-  Future<List<Permissions>> listDocument({PermissoesParams? where}) async {
+  Future<List<Permission>> listDocument({PermissoesParams? where}) async {
     String filter = '';
     if (where != null) {
       if (where.userId != null) {
@@ -45,18 +48,19 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
       }
     }
     final result = await _apiMonolito.get(
-      '$version/$feature/list?$filter',
+      '$feature/v1?$filter',
     );
-    return result['data']
-        .map<Permissions>((e) => PermissionsDto.fromMap(e).toEntity())
-        .toList();
+    return result.map<Permission>((e) => Permission.fromMap(e)).toList();
   }
 
   @override
-  Future<void> updateDocument({required Permissions objeto}) async {
-    await _apiMonolito.put(
-      '$version/$feature/${objeto.id}',
-      body: PermissionsDto.fromEntity(objeto).toMap(),
+  Future<Permission> updateDocument({
+    required CreatePermissionDto objeto,
+  }) async {
+    final result = await _apiMonolito.put(
+      '$feature/v1',
+      body: objeto.toMap(),
     );
+    return Permission.fromMap(result);
   }
 }

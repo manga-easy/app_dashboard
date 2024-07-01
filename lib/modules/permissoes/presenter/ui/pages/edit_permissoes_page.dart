@@ -63,16 +63,18 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
           children: [
             DropdownButton<int>(
               isExpanded: true,
-              value: ct.permissoes?.value,
+              value: ct.permission.value,
               items: LevelPermissoes.values
-                  .map((e) => DropdownMenuItem<int>(
-                        value: e.value,
-                        child: Text(e.name),
-                      ),)
+                  .map(
+                    (e) => DropdownMenuItem<int>(
+                      value: e.value,
+                      child: Text(e.name),
+                    ),
+                  )
                   .toList(),
               onChanged: (v) {
                 setState(() {
-                  ct.permissoes = ct.permissoes!.copyWith(value: v);
+                  ct.permission = ct.permission.copyWith(value: v);
                 });
               },
             ),
@@ -85,12 +87,12 @@ class _EditPermissoesPageState extends State<EditPermissoesPage> {
                 );
                 if (user is User) {
                   setState(() {
-                    ct.permissoes = ct.permissoes!.copyWith(userId: user.id!);
+                    ct.permission = ct.permission.copyWith(userid: user.id!);
                   });
                 }
               },
               child: NameUserBuild(
-                future: ct.getNameUser(userId: ct.permissoes?.userId ?? ''),
+                future: ct.getNameUser(userId: ct.permission.userid),
               ),
             ),
             const SizedBox(height: AppTheme.defaultPadding),
