@@ -36,7 +36,7 @@ class UserDto {
   factory UserDto.fromMap(Map<String, dynamic> map) {
     return UserDto(
       id: map['uid'],
-      name: map['name'],
+      name: map['name'] ?? '',
       registration: map['registration'],
       status: map['status'],
       email: map['email'],

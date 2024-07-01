@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_user.dart';
+import 'package:dashboard_manga_easy/modules/users/domain/entities/user_achievement_entity.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/atoms/achievement_widget.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/organisms/select_dados.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class EmblemasUsersW extends StatelessWidget {
   final UsersDetalhesController ct;
-  final List<EmblemaUser> list;
+  final List<UserAchievement> list;
 
   const EmblemasUsersW({super.key, required this.list, required this.ct});
 
@@ -35,7 +35,9 @@ class EmblemasUsersW extends StatelessWidget {
                       if (search.isEmpty) {
                         return true;
                       }
-                      return objet.name.toLowerCase().contains(search.toLowerCase());
+                      return objet.name
+                          .toLowerCase()
+                          .contains(search.toLowerCase());
                     },
                   ),
                 );
@@ -62,10 +64,10 @@ class EmblemasUsersW extends StatelessWidget {
               itemBuilder: (context, index) {
                 final userEmblema = list[index];
                 return AchievementWidget(
-                  future: ct.getAchievement(userEmblema.idEmblema),
-                  dateAcquired: userEmblema.createAt,
+                  future: ct.getAchievement(userEmblema.achievementId),
+                  dateAcquired: userEmblema.createdAt,
                   removeIdEmblema: (context) =>
-                      ct.removerEmblema(userEmblema.idEmblema, context),
+                      ct.removerEmblema(userEmblema.achievementId, context),
                 );
               },
             ),

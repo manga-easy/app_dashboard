@@ -27,10 +27,10 @@ class UsersRepositoryV1 implements UsersRepository {
   @override
   Future<User?> getDocument({required String id}) async {
     final ret = await _apiMonolito.get('$version/$feature/$id');
-    if (ret['data'].isEmpty) {
+    if (ret.isEmpty) {
       return null;
     }
-    return UserDto.fromMap(ret['data'].first).toEntity();
+    return UserDto.fromMap(ret.first).toEntity();
   }
 
   @override
@@ -51,8 +51,6 @@ class UsersRepositoryV1 implements UsersRepository {
       '$version/$feature?$params',
     );
 
-    return result['data']
-        .map<User>((e) => UserDto.fromMap(e).toEntity())
-        .toList();
+    return result.map<User>((e) => UserDto.fromMap(e).toEntity()).toList();
   }
 }
