@@ -37,11 +37,11 @@ class EmblemasRepositoryV1 implements EmblemasRepository {
     final result = await _apiMonolito.get(
       '$version/$feature/$id',
     );
-    if (result['data'].isEmpty) {
+    if (result.isEmpty) {
       return null;
     }
 
-    return AchievementDto.fromMap(result['data'].first).toEntity();
+    return AchievementDto.fromMap(result.first).toEntity();
   }
 
   @override
@@ -63,9 +63,8 @@ class EmblemasRepositoryV1 implements EmblemasRepository {
     final result = await _apiMonolito.get(
       '$version/$feature/list?',
     );
-    final List<AchievementDto> data = result['data']
-        .map<AchievementDto>((e) => AchievementDto.fromMap(e))
-        .toList();
+    final List<AchievementDto> data =
+        result.map<AchievementDto>((e) => AchievementDto.fromMap(e)).toList();
     return data.map<Emblema>((e) => e.toEntity()).toList();
   }
 
@@ -82,6 +81,6 @@ class EmblemasRepositoryV1 implements EmblemasRepository {
       },
       isformData: true,
     );
-    return AchievementDto.fromMap(result['data'].first).toEntity();
+    return AchievementDto.fromMap(result.first).toEntity();
   }
 }
