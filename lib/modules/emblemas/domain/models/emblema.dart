@@ -55,6 +55,9 @@ class Emblema {
         (element) => element.label == rarity,
       );
     }
+    if (index == -1) {
+      return RarityEmblema.comum;
+    }
     return RarityEmblema.values[index];
   }
 
