@@ -49,7 +49,7 @@ class MangaRepositoryImp implements MangaRepository {
     final result = await _apiMonolito.get(
       '$url/$version/$path?limit=$limit&offset=$offset&$params',
     );
-    return (result['data'] as List)
+    return (result as List)
         .map<InfoComicModel>((e) => _mangaMapper.from(e.toJson()))
         .toList();
   }

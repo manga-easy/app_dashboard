@@ -64,32 +64,26 @@ class _HostDetailsPageState extends State<HostDetailsPage> {
                     children: [
                       CampoPadraoAtom(
                         hintText: 'Nome do host',
-                        initialValue: ct.host?.name,
-                        onChange: (v) => ct.host!.name = v,
+                        initialValue: ct.dto.name,
+                        onChange: (v) => ct.dto.name = v,
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
                       CampoPadraoAtom(
                         hintText: 'Url',
-                        initialValue: ct.host?.host,
-                        onChange: (v) => ct.host!.host = v,
-                      ),
-                      const SizedBox(height: AppTheme.defaultPadding * 2),
-                      CampoPadraoAtom(
-                        hintText: 'Id Ads tela cheia',
-                        initialValue: ct.host?.interstitialAdUnitId,
-                        onChange: (v) => ct.host!.interstitialAdUnitId = v,
+                        initialValue: ct.dto.urlApi,
+                        onChange: (v) => ct.dto.urlApi = v,
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
                       CampoPadraoAtom(
                         hintText: 'Ordem',
-                        initialValue: ct.host?.order.toString(),
-                        onChange: (v) => ct.host!.order = int.tryParse(v) ?? 0,
+                        initialValue: ct.dto.order.toString(),
+                        onChange: (v) => ct.dto.order = int.tryParse(v) ?? 0,
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
                       CampoPadraoAtom(
                         hintText: 'Idhost',
-                        initialValue: ct.host?.idHost.toString(),
-                        onChange: (v) => ct.host!.idHost = int.tryParse(v) ?? 0,
+                        initialValue: ct.dto.hostId.toString(),
+                        onChange: (v) => ct.dto.hostId = int.tryParse(v) ?? 0,
                       ),
                       const SizedBox(height: AppTheme.defaultPadding * 2),
                       ButtonPadraoAtom(
