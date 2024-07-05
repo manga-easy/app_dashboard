@@ -6214,6 +6214,7 @@ device_info_plus_platform_interface
 
 --------------------------------------------------------------------------------
 dio
+dio_web_adapter
 
 MIT License
 
