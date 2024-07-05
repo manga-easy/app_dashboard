@@ -23,7 +23,7 @@ class HostDetailsController extends IController {
         order: host!.order,
         name: host!.name,
         urlApi: host!.urlApi,
-        status: host!.status.name,
+        status: host!.status,
       );
     }
     state = StatusBuild.done;

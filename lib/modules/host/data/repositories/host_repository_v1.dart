@@ -10,12 +10,11 @@ class HostRepositoryV1 {
 
   String get feature => 'hosts';
 
-  Future<HostEntity> creatDocument({required CreateHostDto objeto}) async {
-    final result = await _apiMonolito.post(
+  Future<void> creatDocument({required CreateHostDto objeto}) async {
+    await _apiMonolito.post(
       '$feature/v1',
       body: objeto.toJson(),
     );
-    return HostEntity.fromJson(result);
   }
 
   Future<HostEntity?> getDocument({required String id}) async {

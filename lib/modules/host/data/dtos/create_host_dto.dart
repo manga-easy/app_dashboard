@@ -1,9 +1,11 @@
+import 'package:dashboard_manga_easy/modules/host/domain/entities/host_status_enum.dart';
+
 class CreateHostDto {
   int hostId;
   int order;
   String name;
   String urlApi;
-  String status;
+  HostStatus status;
 
   CreateHostDto({
     required this.hostId,
@@ -19,7 +21,7 @@ class CreateHostDto {
       'order': order,
       'name': name,
       'urlApi': urlApi,
-      'status': status,
+      'status': status.name,
     };
   }
 
@@ -29,7 +31,7 @@ class CreateHostDto {
       order: 0,
       name: '',
       urlApi: '',
-      status: '',
+      status: HostStatus.disable,
     );
   }
 }

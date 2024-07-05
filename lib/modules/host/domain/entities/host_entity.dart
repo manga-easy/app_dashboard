@@ -41,7 +41,7 @@ class HostEntity {
       order: order,
       name: name,
       urlApi: urlApi,
-      status: status?.name ?? this.status.name,
+      status: status ?? this.status,
     );
   }
 }
