@@ -5396,6 +5396,7 @@ file_selector_platform_interface
 file_selector_windows
 flutter_lints
 flutter_plugin_android_lifecycle
+go_router
 image_picker_for_web
 image_picker_linux
 image_picker_macos
@@ -32935,6 +32936,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+--------------------------------------------------------------------------------
+page_manager
+
+TODO: Add your license here.
 
 --------------------------------------------------------------------------------
 path_parsing
