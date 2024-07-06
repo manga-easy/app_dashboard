@@ -11,27 +11,25 @@ class BannerRepositoryV2 {
 
   String get table => 'banners';
 
-  Future<BannerEntity> creatDocument({required CreateBannerDto dto}) async {
-    final result = await _apiMonolito.post(
+  Future<void> creatDocument({required CreateBannerDto dto}) async {
+    await _apiMonolito.post(
       '$table/v1',
       body: dto.toJson(),
     );
-    return BannerEntity.fromJson(result);
   }
 
   Future<void> deletDocument({required String id}) async {
     await _apiMonolito.delete('$table/v1/$id');
   }
 
-  Future<BannerEntity> updateDocument({
+  Future<void> updateDocument({
     required CreateBannerDto dto,
     required String id,
   }) async {
-    final result = await _apiMonolito.put(
+    await _apiMonolito.put(
       '$table/v1/$id',
       body: dto.toJson(),
     );
-    return BannerEntity.fromJson(result);
   }
 
   Future<List<BannerEntity>> listDocument() async {

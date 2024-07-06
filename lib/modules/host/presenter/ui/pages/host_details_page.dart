@@ -3,7 +3,7 @@ import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/default_page_template.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/default_page_template.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_details_controller.dart';
 import 'package:flutter/material.dart';
 

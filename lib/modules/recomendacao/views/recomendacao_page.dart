@@ -1,7 +1,7 @@
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/recomendacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';

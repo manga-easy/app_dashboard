@@ -4,7 +4,7 @@ import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/default_page_template.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/default_page_template.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/presenter/controllers/cria_edita_emblema_controller.dart';
 import 'package:flutter/material.dart';
@@ -80,21 +80,20 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                       ),
                       const SizedBox(height: AppTheme.defaultPadding),
                       SwitchListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: Text(
-                            'Remove ADS',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  color: Colors.white,
-                                ),
-                          ),
-                          value: ct.emblema?.adsOff ?? false,
-                          onChanged: (v) {
-                            ct.emblema!.adsOff = v;
-                            ct.update();
-                          },),
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(
+                          'Remove ADS',
+                          style:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    color: Colors.white,
+                                  ),
+                        ),
+                        value: ct.emblema?.adsOff ?? false,
+                        onChanged: (v) {
+                          ct.emblema!.adsOff = v;
+                          ct.update();
+                        },
+                      ),
                       const SizedBox(height: AppTheme.defaultPadding),
                       Row(
                         children: [
@@ -111,7 +110,8 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: AppTheme.defaultPadding * 2,),
+                          horizontal: AppTheme.defaultPadding * 2,
+                        ),
                         child: Column(
                           children: [
                             const SizedBox(height: AppTheme.defaultPadding / 2),
@@ -158,10 +158,12 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                         isExpanded: true,
                         value: ct.emblema?.categoria,
                         items: CategoriaEmblema.values
-                            .map((e) => DropdownMenuItem<String>(
-                                  value: e.name,
-                                  child: Text(e.name),
-                                ),)
+                            .map(
+                              (e) => DropdownMenuItem<String>(
+                                value: e.name,
+                                child: Text(e.name),
+                              ),
+                            )
                             .toList(),
                         onChanged: (v) {
                           ct.emblema!.categoria = v!;
@@ -170,21 +172,20 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                       ),
                       const SizedBox(height: AppTheme.defaultPadding),
                       SwitchListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: Text(
-                            'Disponivel para resgatar',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  color: Colors.white,
-                                ),
-                          ),
-                          value: ct.emblema?.disponivel ?? false,
-                          onChanged: (v) {
-                            ct.emblema!.disponivel = v;
-                            ct.update();
-                          },),
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(
+                          'Disponivel para resgatar',
+                          style:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    color: Colors.white,
+                                  ),
+                        ),
+                        value: ct.emblema?.disponivel ?? false,
+                        onChanged: (v) {
+                          ct.emblema!.disponivel = v;
+                          ct.update();
+                        },
+                      ),
                       const SizedBox(height: AppTheme.defaultPadding),
                       Row(
                         children: [
@@ -217,10 +218,12 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                         isExpanded: true,
                         value: ct.emblema?.type,
                         items: TypeEmblema.values
-                            .map((e) => DropdownMenuItem<String>(
-                                  value: e.name,
-                                  child: Text(e.name),
-                                ),)
+                            .map(
+                              (e) => DropdownMenuItem<String>(
+                                value: e.name,
+                                child: Text(e.name),
+                              ),
+                            )
                             .toList(),
                         onChanged: (v) {
                           ct.emblema!.type = v!;
@@ -245,10 +248,12 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
                         isExpanded: true,
                         value: ct.emblema?.rarity,
                         items: RarityEmblema.values
-                            .map((e) => DropdownMenuItem<RarityEmblema>(
-                                  value: e,
-                                  child: Text(e.name),
-                                ),)
+                            .map(
+                              (e) => DropdownMenuItem<RarityEmblema>(
+                                value: e,
+                                child: Text(e.name),
+                              ),
+                            )
                             .toList(),
                         onChanged: (v) {
                           ct.emblema!.rarity = v!;
@@ -285,13 +290,15 @@ class _CriaEditaEmblemaPageState extends State<CriaEditaEmblemaPage> {
       return widiget;
     }
     for (var i = 0; i < ct.emblema!.benefits.length; i++) {
-      widiget.add(Padding(
-        padding: const EdgeInsets.only(bottom: 8),
-        child: CampoPadraoAtom(
-          onChange: (p0) => ct.emblema!.benefits[i] = p0,
-          initialValue: ct.emblema!.benefits[i],
+      widiget.add(
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: CampoPadraoAtom(
+            onChange: (p0) => ct.emblema!.benefits[i] = p0,
+            initialValue: ct.emblema!.benefits[i],
+          ),
         ),
-      ),);
+      );
     }
 
     return widiget;

@@ -1,6 +1,5 @@
-
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:flutter/material.dart';
 
 class ForbidenPage extends StatefulWidget {

@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class ApiMonolith {
-  final ApiResponseParser _apiResponseParser;
+  final ApiResponseParser _apiResponseParser = ApiResponseParser();
   final ClientRequest _clientRequest = ClientDio();
   final AuthService _authService;
   final String _host = kDebugMode
@@ -16,7 +16,7 @@ class ApiMonolith {
   String? get jwt => ServiceRoute.token;
   set jwt(v) => ServiceRoute.token = v;
 
-  ApiMonolith(this._apiResponseParser, this._authService);
+  ApiMonolith(this._authService);
 
   Future<Map<String, dynamic>> _getHeaders({required bool isToken}) async {
     final Map<String, dynamic> headers = {};

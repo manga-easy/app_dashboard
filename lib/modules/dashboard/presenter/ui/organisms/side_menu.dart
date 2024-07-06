@@ -14,6 +14,7 @@ import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_pag
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 class SideMenu extends StatelessWidget {
   final LogoffService _logoffService = GetIt.I();
@@ -54,9 +55,8 @@ class SideMenu extends StatelessWidget {
                 return DrawerListTileAtom(
                   title: e.title,
                   svgSrc: e.icon ?? 'assets/icons/configApp.svg',
-                  press: () => atual != e.route
-                      ? Navigator.pushNamed(context, e.route)
-                      : Navigator.pop(context),
+                  press: () =>
+                      atual != e.route ? context.push(e.route) : context.pop(),
                 );
               },
             ),
@@ -72,11 +72,7 @@ class SideMenu extends StatelessWidget {
                 child: const Text('Sair'),
                 onPressed: () {
                   _logoffService.call();
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    AuthPage.route,
-                    (route) => false,
-                  );
+                  context.pushReplacement(AuthPage.route);
                 },
               ),
             ],

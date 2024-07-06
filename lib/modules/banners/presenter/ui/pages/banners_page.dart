@@ -1,33 +1,21 @@
-import 'package:dashboard_manga_easy/main.dart';
+import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/entities/banner_entity.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/banners_controller.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/criar_banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_manager/manager_page.dart';
 
 class BannerPage extends StatefulWidget {
-  static const route = '/Banner';
+  static const route = '/banner';
   const BannerPage({super.key});
   @override
   State<BannerPage> createState() => _BannerPageState();
 }
 
-class _BannerPageState extends State<BannerPage> {
-  final ct = di.get<BannerController>();
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    ct.dispose();
-    super.dispose();
-  }
-
+class _BannerPageState extends ManagerPage<BannerController, BannerPage> {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -35,7 +23,7 @@ class _BannerPageState extends State<BannerPage> {
       builder: (context, child) {
         return ModuloPageTemplate(
           route: BannerPage.route,
-          statusBuild: ct.state,
+          statusBuild: StatusBuild.done,
           labelNovoItem: 'Novo Banner',
           onPressedAtualiza: ct.listaBanner,
           itemBuilderLista: (context, index) {
@@ -64,12 +52,7 @@ class _BannerPageState extends State<BannerPage> {
                       ButtonPadraoAtom(
                         title: 'Editar',
                         icone: Icons.edit,
-                        onPress: () => Navigator.of(context)
-                            .pushNamed(
-                              CriarBannerPage.route,
-                              arguments: banner,
-                            )
-                            .then((value) => ct.listaBanner()),
+                        onPress: () => context.go('/banner/${banner.id}'),
                       ),
                       ButtonPadraoAtom(
                         title: 'Deletar',
@@ -86,9 +69,7 @@ class _BannerPageState extends State<BannerPage> {
             );
           },
           listaItems: ct.listaBannerItens,
-          onPressedNovoItem: () => Navigator.of(context)
-              .pushNamed(CriarBannerPage.route)
-              .then((value) => ct.listaBanner()),
+          onPressedNovoItem: () => context.go('/banner/null'),
         );
       },
     );

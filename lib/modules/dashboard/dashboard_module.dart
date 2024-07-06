@@ -1,8 +1,10 @@
 import 'package:dashboard_manga_easy/core/interfaces/module_factory.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/controllers/dashboard_controller.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
+import 'package:go_router/src/route.dart';
 
-class DashboardModule extends IModuleFactory {
+class DashboardModule implements Module {
   @override
   void register() {
     //register controllers
@@ -14,4 +16,12 @@ class DashboardModule extends IModuleFactory {
       ),
     );
   }
+
+  @override
+  List<RouteBase> routes() => [
+        GoRoute(
+          path: MainPage.route,
+          builder: (context, state) => const MainPage(),
+        ),
+      ];
 }

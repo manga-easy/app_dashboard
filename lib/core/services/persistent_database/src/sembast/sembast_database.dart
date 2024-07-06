@@ -28,6 +28,10 @@ class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
     required String id,
     required StoreSembast store,
   }) async {
+    final result = _getdb(store).get(id);
+    if (result == null) {
+      return null;
+    }
     return Map.from(_getdb(store).get(id));
   }
 

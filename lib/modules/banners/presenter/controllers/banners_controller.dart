@@ -1,42 +1,33 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/modules/banners/data/repositories/banner_repository.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/entities/banner_entity.dart';
-import 'package:flutter/material.dart';
+import 'package:page_manager/manager_store.dart';
 
-class BannerController extends IController {
+class BannerController extends ManagerStore<bool> {
   final BannerRepositoryV2 bannerRepository;
   var listaBannerItens = <BannerEntity>[];
   BannerController({required this.bannerRepository});
 
   @override
-  void init(BuildContext context) {
+  void init(Map<String, dynamic> arguments) {
     listaBanner();
   }
 
-  Future<void> listaBanner() async {
-    state = StatusBuild.loading;
-    try {
-      listaBannerItens = await bannerRepository.listDocument();
-      state = StatusBuild.done;
-    } catch (e) {
-      state = StatusBuild.erro;
-      Helps.log(e);
-    }
-  }
-
-  Future<void> deleteBanner(String id, context) async {
-    try {
-      await bannerRepository.deletDocument(id: id);
-      AppHelps.confirmaDialog(
-        title: 'Sucesso',
-        content: 'Banner deletada com sucesso',
-        context: context,
+  Future<void> listaBanner() => handleTry(
+        call: () async =>
+            listaBannerItens = await bannerRepository.listDocument(),
+        onWhenRethow: (e) => false,
       );
-    } catch (e) {
-      handlerError(e, context);
-    }
-  }
+
+  Future<void> deleteBanner(String id, context) => handleTry(
+      call: () async {
+        throw Exception('test');
+        await bannerRepository.deletDocument(id: id);
+        AppHelps.confirmaDialog(
+          title: 'Sucesso',
+          content: 'Banner deletada com sucesso',
+          context: context,
+        );
+      },
+      onWhenRethow: (e) => false);
 }

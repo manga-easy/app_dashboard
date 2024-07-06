@@ -4,6 +4,7 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashController extends IController {
   SplashController();
@@ -13,13 +14,12 @@ class SplashController extends IController {
     loadingServices(context);
   }
 
-  Future<void> loadingServices(context) async {
+  Future<void> loadingServices(BuildContext context) async {
     try {
       await CoreModule().start();
-      await Navigator.pushNamedAndRemoveUntil(
-        context,
+
+      context.pushReplacement(
         AuthPage.route,
-        (route) => true,
       );
     } catch (e) {
       Helps.log(e);

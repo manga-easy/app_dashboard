@@ -4,8 +4,10 @@ import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/send_notification_controller.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/data/repositories/notificacao_repository_v1.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
+import 'package:go_router/go_router.dart';
 
-class NotificacaoModule extends IModuleFactory {
+class NotificacaoModule implements Module {
   @override
   void register() {
     //register Repositores
@@ -20,4 +22,16 @@ class NotificacaoModule extends IModuleFactory {
       ),
     );
   }
+
+  @override
+  List<RouteBase> routes() => [
+        GoRoute(
+          path: NotificacaoPage.route,
+          builder: (context, state) => const NotificacaoPage(),
+        ),
+        GoRoute(
+          path: NotificacaoPage.route,
+          builder: (context, state) => const NotificacaoPage(),
+        ),
+      ];
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/templates/modulo_page_template.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_entity.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_status_enum.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_controller.dart';

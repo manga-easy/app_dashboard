@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class DetailsMangaPage extends StatefulWidget {
+  static const route = '/manga-deatails';
   const DetailsMangaPage({super.key});
 
   @override
@@ -52,7 +53,8 @@ class _DetailsMangaPageState extends State<DetailsMangaPage> {
                 ),
                 child: ListView(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: AppTheme.defaultPadding,),
+                    horizontal: AppTheme.defaultPadding,
+                  ),
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

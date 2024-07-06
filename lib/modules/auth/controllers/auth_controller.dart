@@ -3,12 +3,13 @@ import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
+import 'package:dashboard_manga_easy/modules/auth/data/repositories/credencial_repository_v1.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
-import 'package:dashboard_manga_easy/modules/auth/domain/repositories/crendecial_repository.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthController extends IController {
   final CredencialRepository _credencialRepo;
@@ -41,7 +42,7 @@ class AuthController extends IController {
     }
   }
 
-  Future<void> logar(context) async {
+  Future<void> logar(BuildContext context) async {
     try {
       final session = await _authService.createSession(
         email: email.text,
@@ -51,10 +52,8 @@ class AuthController extends IController {
       ServiceRoute.token = await _authService.getJwt();
       await validacaoPermissao(session.userId);
       await salvaCredencial();
-      Navigator.pushNamedAndRemoveUntil(
-        context,
+      context.pushReplacement(
         MainPage.route,
-        (route) => false,
       );
     } on Exception catch (e) {
       handlerError(e, context);
@@ -63,38 +62,38 @@ class AuthController extends IController {
 
   Future<void> validacaoPermissao(String userId) async {
     final result = await _permissionsRepository.listDocument(
-        where: PermissoesParams(
-      userId: userId,
-    ),);
+      where: PermissoesParams(
+        userId: userId,
+      ),
+    );
 
     _serviceRoute.permissions = result.first;
   }
 
   Future<void> carregaCredencial() async {
-    final ret = await _credencialRepo.list();
-    if (ret.isNotEmpty) {
-      credencialModel = ret.first;
+    credencialModel = await _credencialRepo.get();
+    if (credencialModel != null) {
       email.text = credencialModel!.email;
     }
   }
 
   Future<void> salvaCredencial() async {
-    final cred = CredencialModel(email: email.text);
+    final cred = CredencialModel(
+      email: email.text,
+      token: ServiceRoute.token,
+      userId: ServiceRoute.userId,
+    );
     await _credencialRepo.put(objeto: cred);
   }
 
-  Future<void> loginAutomatico(context) async {
+  Future<void> loginAutomatico(BuildContext context) async {
     try {
       final session = await _authService.getSession();
       ServiceRoute.userId = session.userId;
       ServiceRoute.token = await _authService.getJwt();
       await validacaoPermissao(session.userId);
-      unawaited(
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          MainPage.route,
-          (route) => false,
-        ),
+      context.pushReplacement(
+        MainPage.route,
       );
     } catch (e) {
       Helps.log(e);

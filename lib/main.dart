@@ -1,21 +1,11 @@
 import 'package:dashboard_manga_easy/core/core_module.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
-import 'package:dashboard_manga_easy/modules/auth/auth_module.dart';
-import 'package:dashboard_manga_easy/modules/banners/banners_module.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/dashboard_module.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/emblemas_module.dart';
-import 'package:dashboard_manga_easy/modules/host/host_module.dart';
-import 'package:dashboard_manga_easy/modules/mangas/mangas_modules.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/notificacao_module.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/permissoes_module.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.dart';
-import 'package:dashboard_manga_easy/modules/splash/splash_module.dart';
-import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 bool isDemoUsingDynamicColors = false;
 
@@ -29,19 +19,10 @@ var darkCustomColors =
 final di = GetIt.instance;
 Future<void> main() async {
   usePathUrlStrategy();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   //register all modules
   CoreModule().register();
-  AuthModule().register();
-  SplashModule().register();
-  DashboardModule().register();
-  NotificacaoModule().register();
-  RecomendacaoModule().register();
-  UsersModule().register();
-  EmblemasModule().register();
-  BannersModule().register();
-  MangasModule().register();
-  PermissoesModule().register();
-  HostModule().register();
+  ServiceRoute.of.register();
   runApp(const MyApp());
 }
 
@@ -50,8 +31,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ServiceRoute serviceRoute = di.get();
-
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         ColorScheme lightColorScheme;
@@ -84,7 +63,7 @@ class MyApp extends StatelessWidget {
           );
         }
 
-        return MaterialApp(
+        return MaterialApp.router(
           theme: ThemeData(
             colorScheme: lightColorScheme,
             extensions: [lightCustomColors],
@@ -102,7 +81,7 @@ class MyApp extends StatelessWidget {
             Locale('pt', 'BR'),
             Locale('en'),
           ],
-          onGenerateRoute: serviceRoute.generationRoutes,
+          routerConfig: ServiceRoute.of.routers,
           debugShowCheckedModeBanner: false,
         );
       },

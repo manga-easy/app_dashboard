@@ -154,6 +154,7 @@ class ClientDio extends ClientRequest {
       '=============== Body: ${json.encode(body)} \n'
       '=============== Headers: ${json.encode(headers)} \n'
       '============================= FIM ================================\n',
+      name: 'Client_dio',
     );
   }
 }

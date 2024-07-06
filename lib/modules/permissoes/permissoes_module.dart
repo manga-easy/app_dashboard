@@ -4,8 +4,11 @@ import 'package:dashboard_manga_easy/modules/permissoes/data/repositories/permis
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/edit_permissoes_controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/permissoes_controller.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
+import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
+import 'package:go_router/go_router.dart';
 
-class PermissoesModule extends IModuleFactory {
+class PermissoesModule implements Module {
   @override
   void register() {
     //register repositories
@@ -16,4 +19,16 @@ class PermissoesModule extends IModuleFactory {
     di.registerFactory(() => PermissoesController(di(), di()));
     di.registerFactory(() => EditPermissoesController(di(), di()));
   }
+
+  @override
+  List<RouteBase> routes() => [
+        GoRoute(
+          path: PermissoesPage.route,
+          builder: (context, state) => const PermissoesPage(),
+        ),
+        GoRoute(
+          path: EditPermissoesPage.route,
+          builder: (context, state) => const EditPermissoesPage(),
+        ),
+      ];
 }
