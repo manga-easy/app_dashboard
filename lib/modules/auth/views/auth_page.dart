@@ -3,6 +3,7 @@ import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/auth/controllers/auth_controller.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/versao_app_org.dart';
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatefulWidget {
@@ -42,9 +43,16 @@ class _AuthPageState extends State<AuthPage> {
           ),
           child: Column(
             children: [
-              const Text(
-                'Login',
-                style: TextStyle(fontSize: 24),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Login',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  SizedBox(width: 8),
+                  VersaoAppOrg()
+                ],
               ),
               const SizedBox(height: AppTheme.defaultPadding * 2),
               CampoPadraoAtom(

@@ -26,6 +26,6 @@ class _VersaoAppOrgState extends State<VersaoAppOrg> {
     if (pkgInfo == null) {
       return const Center(child: CircularProgressIndicator());
     }
-    return Text('v${pkgInfo!.version}+${pkgInfo!.buildNumber}');
+    return Text('v${pkgInfo!.version}');
   }
 }
