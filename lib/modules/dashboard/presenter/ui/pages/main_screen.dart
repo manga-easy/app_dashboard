@@ -5,7 +5,7 @@ import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_templa
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
-  static const route = '/Main';
+  static const route = '/';
   const MainPage({super.key});
   @override
   State<MainPage> createState() => _MainPageState();
