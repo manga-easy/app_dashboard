@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
@@ -10,8 +8,10 @@ import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_rep
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:page_manager/entities/state_manager.dart';
+import 'package:page_manager/manager_store.dart';
 
-class CriarRecomendacaoController extends IController {
+class CriarRecomendacaoController extends ManagerStore {
   final RecommendationsRepository _recomendationsRepository;
   final UsersRepository _usersRepository;
 
@@ -22,30 +22,30 @@ class CriarRecomendacaoController extends IController {
 
   RecomendacoesModel? recomendacao;
   @override
-  void init(BuildContext context) {
-    recomendacao =
-        ModalRoute.of(context)!.settings.arguments as RecomendacoesModel?;
+  void init(Map<String, dynamic> arguments) {
+    recomendacao = arguments as RecomendacoesModel?;
     recomendacao ??= RecomendacoesModel.empty();
-    state = StatusBuild.done;
+    state = StateManager.done;
   }
 
-  Future<void> criarRecomendacao(context) async {
-    try {
-      if (recomendacao!.id == null) {
-        await _recomendationsRepository.creatDocument(objeto: recomendacao!);
-      } else {
-        await _recomendationsRepository.updateDocument(objeto: recomendacao!);
-      }
-      Navigator.of(context).pop();
-      AppHelps.confirmaDialog(
-        title: 'Sucesso',
-        content: 'Recomendação salva com sucesso',
-        context: context,
+  Future<void> criarRecomendacao(context) => handleTry(
+        call: () async {
+          if (recomendacao!.id == null) {
+            await _recomendationsRepository.creatDocument(
+                objeto: recomendacao!);
+          } else {
+            await _recomendationsRepository.updateDocument(
+                objeto: recomendacao!);
+          }
+          Navigator.of(context).pop();
+          AppHelps.confirmaDialog(
+            title: 'Sucesso',
+            content: 'Recomendação salva com sucesso',
+            context: context,
+          );
+        },
+        onWhenRethow: (e) => false,
       );
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-    }
-  }
 
   Future<List<User>> pesquisaUser(String search) async {
     if (search.isEmpty) {
@@ -64,22 +64,22 @@ class CriarRecomendacaoController extends IController {
     return '${result?.name} - ${result?.email}';
   }
 
-  Future<void> pickerImage(context) async {
-    try {
-      final picker = ImagePicker();
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future<void> pickerImage(context) => handleTry(
+        call: () async {
+          final picker = ImagePicker();
+          final pickedFile =
+              await picker.pickImage(source: ImageSource.gallery);
 
-      if (pickedFile == null) {
-        throw Exception('Erro ao selecionar imagem');
-      }
-      final image = File(pickedFile.path);
-      await _recomendationsRepository.updateImage(
-        file: image,
-        uniqueid: recomendacao!.uniqueid,
+          if (pickedFile == null) {
+            throw Exception('Erro ao selecionar imagem');
+          }
+          final image = File(pickedFile.path);
+          await _recomendationsRepository.updateImage(
+            file: image,
+            uniqueid: recomendacao!.uniqueid,
+          );
+          Navigator.of(context).pop();
+        },
+        onWhenRethow: (e) => false,
       );
-      Navigator.of(context).pop();
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-    }
-  }
 }
