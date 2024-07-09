@@ -1,63 +1,65 @@
 import 'dart:io';
 
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/data/dtos/create_achievement_dto.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/data/repositories/achievements_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:page_manager/entities/state_manager.dart';
+import 'package:page_manager/manager_store.dart';
 
-class CriaEditaEmblemaController extends IController {
-  final EmblemasRepository _emblemasRepository;
+class CriaEditaEmblemaController extends ManagerStore {
+  final AchievementsRepository _achievementRepository;
 
-  CriaEditaEmblemaController(this._emblemasRepository);
+  CriaEditaEmblemaController(this._achievementRepository);
 
-  Emblema? emblema;
+  String? achievementId;
+  CreateAchievementDto dto = CreateAchievementDto.empty();
   File? image;
 
   @override
-  void init(BuildContext context) {
-    emblema = ModalRoute.of(context)!.settings.arguments as Emblema?;
-    emblema ??= Emblema.empty();
-    state = StatusBuild.done;
+  Future<void> init(Map<String, dynamic> arguments) async {
+    achievementId = arguments['achievementId'];
+    if (achievementId != null) {
+      final result = await _achievementRepository.getById(id: achievementId!);
+      dto = CreateAchievementDto.fromEntity(result!);
+    }
+    state = StateManager.done;
   }
 
   Future<void> criaAlteraEmblema(context) async {
-    try {
-      state = StatusBuild.loading;
-      if (emblema!.id == null) {
-        await _emblemasRepository.creatDocument(objeto: emblema!);
-      } else {
-        await _emblemasRepository.updateDocument(objeto: emblema!);
-      }
-      Navigator.of(context).pop();
-      AppHelps.confirmaDialog(
-        title: 'Sucesso',
-        content: 'Emblema salvo com sucesso',
-        context: context,
+    if (achievementId == null) {
+      await _achievementRepository.create(dto: dto);
+    } else {
+      await _achievementRepository.update(
+        dto: dto,
+        id: achievementId!,
       );
-    } on Exception catch (e) {
-      handleErrorEvent(e);
     }
-    state = StatusBuild.done;
+    Navigator.of(context).pop();
+    AppHelps.confirmaDialog(
+      title: 'Sucesso',
+      content: 'Emblema salvo com sucesso',
+      context: context,
+    );
   }
 
-  void update() => state = StatusBuild.done;
+  Future<void> pickerImage(context) => handleTry(
+        call: () async {
+          final picker = ImagePicker();
+          final pickedFile =
+              await picker.pickImage(source: ImageSource.gallery);
 
-  Future<void> pickerImage(context) async {
-    try {
-      final picker = ImagePicker();
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-      if (pickedFile == null) {
-        throw Exception('Erro ao selecionar imagem');
-      }
-      image = File(pickedFile.path);
-      await _emblemasRepository.updateImage(file: image!, id: emblema!.id!);
-      Navigator.of(context).pop();
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-    }
-  }
+          if (pickedFile == null) {
+            throw Exception('Erro ao selecionar imagem');
+          }
+          image = File(pickedFile.path);
+          await _achievementRepository.updateImage(
+            file: image!,
+            id: achievementId!,
+          );
+          Navigator.of(context).pop();
+        },
+        onWhenRethow: (e) => false,
+      );
 }

@@ -1,16 +1,13 @@
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/data/repositories/achievements_repository.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_entity.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_params.dart';
+import 'package:page_manager/manager_store.dart';
 
-import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema_params.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
-import 'package:flutter/material.dart';
-
-class EmblemasController extends IController {
-  final EmblemasRepository _emblemasRepository;
+class EmblemasController extends ManagerStore {
+  final AchievementsRepository _emblemasRepository;
   EmblemasController(this._emblemasRepository);
 
-  var lista = <Emblema>[];
+  var lista = <AchievementEntity>[];
   String get search => _search;
   var _search = '';
   set search(String value) {
@@ -19,19 +16,14 @@ class EmblemasController extends IController {
   }
 
   @override
-  void init(BuildContext context) {
+  void init(Map<String, dynamic> arguments) {
     carregaEmblemas();
   }
 
-  Future<void> carregaEmblemas() async {
-    try {
-      state = StatusBuild.loading;
-      lista = await _emblemasRepository.listDocument(where: EmblemaParams());
-
-      state = StatusBuild.done;
-    } on Exception catch (e) {
-      state = StatusBuild.erro;
-      handleErrorEvent(e);
-    }
-  }
+  Future<void> carregaEmblemas() => handleTry(
+        call: () async {
+          lista = await _emblemasRepository.get(where: AchievementParams());
+        },
+        onWhenRethow: (e) => false,
+      );
 }
