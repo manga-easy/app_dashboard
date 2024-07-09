@@ -1,12 +1,12 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/host/data/dtos/create_host_dto.dart';
 import 'package:dashboard_manga_easy/modules/host/data/repositories/host_repository_v1.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/entities/state_manager.dart';
+import 'package:page_manager/manager_store.dart';
 
-class HostDetailsController extends IController {
+class HostDetailsController extends ManagerStore {
   final HostRepositoryV1 _hostRepository;
 
   HostDetailsController(this._hostRepository);
@@ -15,8 +15,8 @@ class HostDetailsController extends IController {
   HostEntity? host;
 
   @override
-  void init(BuildContext context) {
-    host = ModalRoute.of(context)?.settings.arguments as HostEntity?;
+  void init(Map<String, dynamic> arguments) {
+    host = arguments as HostEntity?;
     if (host != null) {
       dto = CreateHostDto(
         hostId: host!.hostId,
@@ -26,26 +26,23 @@ class HostDetailsController extends IController {
         status: host!.status,
       );
     }
-    state = StatusBuild.done;
+    state = StateManager.done;
   }
 
-  Future<void> saveHost(BuildContext context) async {
-    try {
-      state = StatusBuild.loading;
-      if (host?.id == null) {
-        await _hostRepository.creatDocument(objeto: dto);
-      } else {
-        await _hostRepository.updateDocument(objeto: dto, id: host!.id);
-      }
-      Navigator.pop(context);
-      AppHelps.confirmaDialog(
-        title: 'Sucesso',
-        content: 'Host salvo com sucesso',
-        context: context,
+  Future<void> saveHost(BuildContext context) => handleTry(
+        call: () async {
+          if (host?.id == null) {
+            await _hostRepository.creatDocument(objeto: dto);
+          } else {
+            await _hostRepository.updateDocument(objeto: dto, id: host!.id);
+          }
+          Navigator.pop(context);
+          AppHelps.confirmaDialog(
+            title: 'Sucesso',
+            content: 'Host salvo com sucesso',
+            context: context,
+          );
+        },
+        onWhenRethow: (e) => false,
       );
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-    }
-    state = StatusBuild.done;
-  }
 }
