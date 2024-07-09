@@ -41,7 +41,6 @@ class RecomendacaoController extends ManagerStore {
             context: context,
           );
         },
-        onWhenRethow: (e) => false,
       );
 
   void search(String value) {

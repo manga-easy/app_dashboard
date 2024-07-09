@@ -6,7 +6,7 @@ class AchievementEntity {
   final String name;
   final AchievementRarity rarity;
   final String description;
-  final int percentRarity;
+  final double percentRarity;
   final int totalAcquired;
   final String url;
   final String benefits;
@@ -41,7 +41,7 @@ class AchievementEntity {
       url: json['url'],
       benefits: json['benefits'],
       reclaim: json['reclaim'],
-      category: json['category'],
+      category: AchievementCategory.byName(json['category']),
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
     );

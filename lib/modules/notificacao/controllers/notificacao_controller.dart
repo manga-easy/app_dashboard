@@ -33,7 +33,6 @@ class NotificacaoController extends ManagerStore {
           await _notificacaoRepository.deletDocument(id: id);
           await carregaNotificacao();
         },
-        onWhenRethow: (e) => false,
       );
 
   void reSendNotification(Notificacao entity) => handleTry(
@@ -46,6 +45,5 @@ class NotificacaoController extends ManagerStore {
           //   context: context,
           // );
         },
-        onWhenRethow: (e) => false,
       );
 }

@@ -44,7 +44,6 @@ class CriarRecomendacaoController extends ManagerStore {
             context: context,
           );
         },
-        onWhenRethow: (e) => false,
       );
 
   Future<List<User>> pesquisaUser(String search) async {
@@ -80,6 +79,5 @@ class CriarRecomendacaoController extends ManagerStore {
           );
           Navigator.of(context).pop();
         },
-        onWhenRethow: (e) => false,
       );
 }

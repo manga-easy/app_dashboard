@@ -7,7 +7,7 @@ import 'package:page_manager/manager_page_builder.dart';
 class DefaultPageTemplate extends StatelessWidget {
   final Widget Function() pageDone;
   final StateManager state;
-  final Exception? error;
+  final Object? error;
   final Widget Function()? pageInitial;
   final Widget appBar;
   const DefaultPageTemplate({

@@ -17,6 +17,5 @@ class SplashController extends ManagerStore<String> {
           await CoreModule().start();
           emitNavigation(AuthPage.route);
         },
-        onWhenRethow: (e) => false,
       );
 }

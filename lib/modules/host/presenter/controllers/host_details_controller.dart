@@ -43,6 +43,5 @@ class HostDetailsController extends ManagerStore {
             context: context,
           );
         },
-        onWhenRethow: (e) => false,
       );
 }

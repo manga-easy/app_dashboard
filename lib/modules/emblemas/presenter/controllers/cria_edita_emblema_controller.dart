@@ -60,6 +60,5 @@ class CriaEditaEmblemaController extends ManagerStore {
           );
           Navigator.of(context).pop();
         },
-        onWhenRethow: (e) => false,
       );
 }

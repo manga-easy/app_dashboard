@@ -34,7 +34,6 @@ class SendNotificationController extends ManagerStore {
             context: context,
           );
         },
-        onWhenRethow: (e) => false,
       );
 
   Future<void> enviaNotificacaoTest(context) => handleTry(
@@ -58,7 +57,6 @@ class SendNotificationController extends ManagerStore {
           //   );
           // }
         },
-        onWhenRethow: (e) => false,
       );
 
   Future<List<User>> pesquisaUser(String search) async {

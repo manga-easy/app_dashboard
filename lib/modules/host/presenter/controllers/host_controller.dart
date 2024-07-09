@@ -36,6 +36,5 @@ class HostController extends ManagerStore {
               objeto: host.toDto(), id: host.id);
           list = await _hostRepository.listDocument();
         },
-        onWhenRethow: (e) => false,
       );
 }

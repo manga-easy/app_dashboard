@@ -34,8 +34,5 @@ class CriarBannerController extends ManagerStore<DetailsBannerEvent> {
           }
           emitNavigation(DetailsBannerEventSuccess(tipo));
         },
-        onWhenRethow: (e) {
-          return false;
-        },
       );
 }

@@ -67,7 +67,6 @@ class EditPermissoesController extends ManagerStore {
             context: context,
           );
         },
-        onWhenRethow: (e) => false,
       );
 
   Future<List<User>> pesquisaUser(String pesquisa) async {

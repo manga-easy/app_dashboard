@@ -16,17 +16,16 @@ class BannerController extends ManagerStore<bool> {
   Future<void> listaBanner() => handleTry(
         call: () async =>
             listaBannerItens = await bannerRepository.listDocument(),
-        onWhenRethow: (e) => false,
       );
 
   Future<void> deleteBanner(String id, context) => handleTry(
-      call: () async {
-        await bannerRepository.deletDocument(id: id);
-        AppHelps.confirmaDialog(
-          title: 'Sucesso',
-          content: 'Banner deletada com sucesso',
-          context: context,
-        );
-      },
-      onWhenRethow: (e) => false);
+        call: () async {
+          await bannerRepository.deletDocument(id: id);
+          AppHelps.confirmaDialog(
+            title: 'Sucesso',
+            content: 'Banner deletada com sucesso',
+            context: context,
+          );
+        },
+      );
 }

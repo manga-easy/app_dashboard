@@ -51,7 +51,6 @@ class AuthController extends ManagerStore<String> {
           await salvaCredencial();
           emitNavigation(MainPage.route);
         },
-        onWhenRethow: (e) => false,
       );
 
   Future<void> validacaoPermissao(String userId) async {

@@ -20,7 +20,7 @@ class ModuloPageTemplate extends StatelessWidget {
   final String? initialValueCampoPesquisa;
   final bool isModule;
   final Widget? child;
-  final Exception? error;
+  final Object? error;
 
   const ModuloPageTemplate({
     super.key,
