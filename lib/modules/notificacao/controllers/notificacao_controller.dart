@@ -1,12 +1,11 @@
 import 'dart:async';
 
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
+import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
-import 'package:flutter/material.dart';
+import 'package:page_manager/export_manager.dart';
 
-class NotificacaoController extends IController {
+class NotificacaoController extends ManagerStore {
   final NotificacaoRepository _notificacaoRepository;
 
   NotificacaoController(this._notificacaoRepository);
@@ -14,39 +13,39 @@ class NotificacaoController extends IController {
   var lista = <Notificacao>[];
 
   @override
-  void init(BuildContext context) {
+  void init(Map<String, dynamic> arguments) {
     carregaNotificacao();
   }
 
   Future<void> carregaNotificacao() async {
     try {
-      state = StatusBuild.loading;
+      state = StateManager.loading;
       lista = await _notificacaoRepository.listDocument();
-      state = StatusBuild.done;
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-      state = StatusBuild.erro;
+      state = StateManager.done;
+    } catch (e) {
+      state = StateManager.error;
+      rethrow;
     }
   }
 
-  Future<void> deleteNotification(String id) async {
-    try {
-      state = StatusBuild.loading;
-      await _notificacaoRepository.deletDocument(id: id);
-      unawaited(carregaNotificacao());
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-    }
-    state = StatusBuild.done;
-  }
+  Future<void> deleteNotification(String id) => handleTry(
+        call: () async {
+          await _notificacaoRepository.deletDocument(id: id);
+          await carregaNotificacao();
+        },
+        onWhenRethow: (e) => false,
+      );
 
-  Future<bool> reSendNotification(Notificacao entity) async {
-    try {
-      await _notificacaoRepository.createDocument(objeto: entity);
-      return true;
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-      return false;
-    }
-  }
+  void reSendNotification(Notificacao entity) => handleTry(
+        call: () async {
+          throw UnimplementedError();
+          await _notificacaoRepository.createDocument(objeto: entity);
+          // AppHelps.confirmaDialog(
+          //   title: 'Sucesso',
+          //   content: 'Mensagem enviada com sucesso',
+          //   context: context,
+          // );
+        },
+        onWhenRethow: (e) => false,
+      );
 }

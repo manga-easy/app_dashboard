@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
-import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/manager_page.dart';
 
 class NotificacaoPage extends StatefulWidget {
   static const route = '/Notificacao';
@@ -15,42 +15,14 @@ class NotificacaoPage extends StatefulWidget {
   State<NotificacaoPage> createState() => _NotificacaoPageState();
 }
 
-class _NotificacaoPageState extends State<NotificacaoPage> {
-  final ct = di.get<NotificacaoController>();
-
-  @override
-  void initState() {
-    ct.onMessage(listernerMessage);
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
-    ct.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    ct.dispose();
-    super.dispose();
-  }
-
-  void listernerMessage(String? message) {
-    if (message != null && mounted) {
-      AppHelps.confirmaDialog(
-        title: 'Error ⚠️😥',
-        content: message,
-        context: context,
-      );
-    }
-  }
-
+class _NotificacaoPageState
+    extends ManagerPage<NotificacaoController, NotificacaoPage> {
   @override
   Widget build(BuildContext context) {
     return ModuloPageTemplate(
       route: NotificacaoPage.route,
-      statusBuild: ct.state,
+      state: ct.state,
+      error: ct.error,
       onPressedAtualiza: ct.carregaNotificacao,
       onPressedNovoItem: () => Navigator.pushNamed(
         context,
@@ -108,15 +80,7 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
                             context: context,
                           ).then((value) {
                             if (value) {
-                              ct.reSendNotification(notification).then((value) {
-                                if (value) {
-                                  AppHelps.confirmaDialog(
-                                    title: 'Sucesso',
-                                    content: 'Mensagem enviada com sucesso',
-                                    context: context,
-                                  );
-                                }
-                              });
+                              ct.reSendNotification(notification);
                             }
                           });
                         },
