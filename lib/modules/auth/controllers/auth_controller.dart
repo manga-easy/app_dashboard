@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
@@ -9,9 +8,9 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_s
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:page_manager/manager_store.dart';
 
-class AuthController extends IController {
+class AuthController extends ManagerStore<String> {
   final CredencialRepository _credencialRepo;
   final PermissionsRepository _permissionsRepository;
   final ServiceRoute _serviceRoute;
@@ -35,30 +34,25 @@ class AuthController extends IController {
   }
 
   @override
-  Future<void> init(BuildContext context) async {
+  Future<void> init(Map<String, dynamic> arguments) async {
     await carregaCredencial();
-    if (context.mounted) {
-      await loginAutomatico(context);
-    }
+    await loginAutomatico();
   }
 
-  Future<void> logar(BuildContext context) async {
-    try {
-      final session = await _authService.createSession(
-        email: email.text,
-        password: password.text,
+  void logar(BuildContext context) => handleTry(
+        call: () async {
+          final session = await _authService.createSession(
+            email: email.text,
+            password: password.text,
+          );
+          ServiceRoute.userId = session.userId;
+          ServiceRoute.token = await _authService.getJwt();
+          await validacaoPermissao(session.userId);
+          await salvaCredencial();
+          emitNavigation(MainPage.route);
+        },
+        onWhenRethow: (e) => false,
       );
-      ServiceRoute.userId = session.userId;
-      ServiceRoute.token = await _authService.getJwt();
-      await validacaoPermissao(session.userId);
-      await salvaCredencial();
-      context.pushReplacement(
-        MainPage.route,
-      );
-    } on Exception catch (e) {
-      handlerError(e, context);
-    }
-  }
 
   Future<void> validacaoPermissao(String userId) async {
     final result = await _permissionsRepository.listDocument(
@@ -86,15 +80,13 @@ class AuthController extends IController {
     await _credencialRepo.put(objeto: cred);
   }
 
-  Future<void> loginAutomatico(BuildContext context) async {
+  Future<void> loginAutomatico() async {
     try {
       final session = await _authService.getSession();
       ServiceRoute.userId = session.userId;
       ServiceRoute.token = await _authService.getJwt();
       await validacaoPermissao(session.userId);
-      context.pushReplacement(
-        MainPage.route,
-      );
+      emitNavigation(MainPage.route);
     } catch (e) {
       Helps.log(e);
     }

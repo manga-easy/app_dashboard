@@ -1,10 +1,12 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
-import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/auth/controllers/auth_controller.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/organisms/versao_app_org.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_manager/entities/state_manager.dart';
+import 'package:page_manager/manager_page.dart';
 
 class AuthPage extends StatefulWidget {
   static const route = '/auth';
@@ -13,23 +15,20 @@ class AuthPage extends StatefulWidget {
   State<AuthPage> createState() => _AuthPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
-  final ct = di.get<AuthController>();
-
+class _AuthPageState extends ManagerPage<AuthController, AuthPage> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.onNavigation((event) => context.pushReplacement(event));
     super.initState();
   }
 
   @override
-  void dispose() {
-    ct.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    if (ct.state != StateManager.done) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(
