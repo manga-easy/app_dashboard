@@ -1,6 +1,8 @@
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/splash/controllers/splash_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_manager/manager_page.dart';
 
 class SplashPage extends StatefulWidget {
   static const route = '/Splash';
@@ -9,28 +11,23 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
-  final ct = di.get<SplashController>();
-
+class _SplashPageState extends ManagerPage<SplashController, SplashPage> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
+    ct.onNavigation(
+      (event) => context.pushReplacement(event),
+    );
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    ct.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-          child: Center(
-        child: CircularProgressIndicator(),
-      ),),
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }
