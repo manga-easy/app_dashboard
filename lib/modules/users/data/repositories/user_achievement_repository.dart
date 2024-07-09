@@ -44,6 +44,9 @@ class UserAchievementRepository {
     if (result == null) {
       return [];
     }
+    if (result.isEmpty) {
+      return [];
+    }
     return result
         .map<UserAchievement>((e) => UserAchievement.fromJson(e))
         .toList();

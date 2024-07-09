@@ -19,7 +19,11 @@ class UsersModule implements Module {
     di.registerFactory<UsersRepository>(() => UsersRepositoryV1(di()));
     di.registerFactory(() => UsersController(di()));
     di.registerFactory(
-      () => UsersDetalhesController(di(), di()),
+      () => UsersDetalhesController(
+        di(),
+        di(),
+        di(),
+      ),
     );
   }
 
@@ -28,10 +32,12 @@ class UsersModule implements Module {
         GoRoute(
           path: UsersPage.route,
           builder: (context, state) => const UsersPage(),
-        ),
-        GoRoute(
-          path: UserDetalhesPage.route,
-          builder: (context, state) => const UserDetalhesPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              builder: (context, state) => const UserDetalhesPage(),
+            ),
+          ],
         ),
       ];
 }

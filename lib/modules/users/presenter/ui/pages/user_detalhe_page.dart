@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
 
 class UserDetalhesPage extends StatefulWidget {
-  static const route = '/UserDetalhes';
   const UserDetalhesPage({super.key});
   @override
   State<UserDetalhesPage> createState() => _UserDetalhesPageState();
