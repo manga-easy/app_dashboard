@@ -1,30 +1,16 @@
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/entities/state_manager.dart';
 
-class ForbidenPage extends StatefulWidget {
-  static const route = '/Forbiden';
+class ForbidenPage extends StatelessWidget {
+  static const route = '/forbiden';
   const ForbidenPage({super.key});
-  @override
-  State<ForbidenPage> createState() => _ForbidenPageState();
-}
-
-class _ForbidenPageState extends State<ForbidenPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return ModuloPageTemplate(
-      route: ForbidenPage.route,
-      statusBuild: StatusBuild.done,
+      route: route,
+      error: null,
+      state: StateManager.done,
       itemBuilderLista: (context, index) {
         return const Center(
           child: Text('Sem permissão para acessar esse modulo'),
