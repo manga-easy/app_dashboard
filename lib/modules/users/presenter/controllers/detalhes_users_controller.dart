@@ -1,6 +1,4 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/data/repositories/achievements_repository.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_entity.dart';
 import 'package:dashboard_manga_easy/modules/users/data/dtos/create_user_achievement_dto.dart';
@@ -8,8 +6,9 @@ import 'package:dashboard_manga_easy/modules/users/data/repositories/user_achiev
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user_achievement_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/manager_store.dart';
 
-class UsersDetalhesController extends IController {
+class UsersDetalhesController extends ManagerStore {
   final UserAchievementRepository _userAchievementRepository;
   final AchievementsRepository _emblemasRepository;
   UsersDetalhesController(
@@ -21,16 +20,13 @@ class UsersDetalhesController extends IController {
   List<UserAchievement> emblemasUsers = [];
 
   @override
-  Future<void> init(BuildContext context) async {
-    try {
-      user = ModalRoute.of(context)!.settings.arguments as User;
-      await loadAchievementsUser();
-      state = StatusBuild.done;
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-      state = StatusBuild.erro;
-    }
-  }
+  Future<void> init(Map<String, dynamic> arguments) => handleTry(
+        call: () async {
+          user = arguments as User;
+          await loadAchievementsUser();
+        },
+        onWhenRethow: (e) => false,
+      );
 
   Future<void> loadAchievementsUser() async {
     emblemasUsers = await _userAchievementRepository.listDocument(
@@ -46,43 +42,38 @@ class UsersDetalhesController extends IController {
     return _emblemasRepository.getById(id: idAchievement);
   }
 
-  Future<void> addEmblema(String achievementId) async {
-    try {
-      state = StatusBuild.loading;
-      await _userAchievementRepository.creatDocument(
-        objeto: CreateUserAchievementDto(
-          achievementId: achievementId,
-          userId: user!.id!,
-        ),
+  Future<void> addEmblema(String achievementId) => handleTry(
+        call: () async {
+          await _userAchievementRepository.creatDocument(
+            objeto: CreateUserAchievementDto(
+              achievementId: achievementId,
+              userId: user!.id!,
+            ),
+          );
+          await loadAchievementsUser();
+        },
+        onWhenRethow: (e) => false,
       );
-      await loadAchievementsUser();
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-    }
-    state = StatusBuild.done;
-  }
 
   Future<void> removerEmblema(
     String achievementId,
     BuildContext context,
-  ) async {
-    try {
-      final ret = await AppHelps.confirmaDialog(
-        title: 'Tem certeza?',
-        content: '',
-        context: context,
+  ) =>
+      handleTry(
+        call: () async {
+          final ret = await AppHelps.confirmaDialog(
+            title: 'Tem certeza?',
+            content: '',
+            context: context,
+          );
+          if (ret) {
+            await _userAchievementRepository.deletDocument(
+              achievementId: achievementId,
+              userId: user!.id!,
+            );
+            await loadAchievementsUser();
+          }
+        },
+        onWhenRethow: (e) => false,
       );
-      if (ret) {
-        state = StatusBuild.loading;
-        await _userAchievementRepository.deletDocument(
-          achievementId: achievementId,
-          userId: user!.id!,
-        );
-        await loadAchievementsUser();
-      }
-    } on Exception catch (e) {
-      handleErrorEvent(e);
-    }
-    state = StatusBuild.done;
-  }
 }

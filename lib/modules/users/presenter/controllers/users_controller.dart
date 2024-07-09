@@ -1,10 +1,10 @@
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/entities/state_manager.dart';
+import 'package:page_manager/manager_store.dart';
 
-class UsersController extends IController {
+class UsersController extends ManagerStore {
   final UsersRepository _usersRepository;
   UsersController(this._usersRepository);
 
@@ -19,19 +19,19 @@ class UsersController extends IController {
   }
 
   @override
-  void init(BuildContext context) {
+  void init(Map<String, dynamic> arguments) {
     carregaUsers();
   }
 
   Future<void> carregaUsers() async {
     try {
-      state = StatusBuild.loading;
+      state = StateManager.loading;
       lista = await _usersRepository.listDocument(
         search: pesquisa.value.isEmpty ? null : pesquisa.value,
       );
-      state = StatusBuild.done;
+      state = StateManager.done;
     } catch (e) {
-      state = StatusBuild.erro;
+      state = StateManager.error;
       rethrow;
     }
   }

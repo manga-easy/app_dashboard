@@ -1,9 +1,9 @@
-import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/user_detalhe_page.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/manager_page.dart';
 
 class UsersPage extends StatefulWidget {
   static const route = '/Users';
@@ -12,21 +12,7 @@ class UsersPage extends StatefulWidget {
   State<UsersPage> createState() => _UsersPageState();
 }
 
-class _UsersPageState extends State<UsersPage> {
-  final ct = di.get<UsersController>();
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => ct.init(context));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    ct.dispose();
-    super.dispose();
-  }
-
+class _UsersPageState extends ManagerPage<UsersController, UsersPage> {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -34,7 +20,8 @@ class _UsersPageState extends State<UsersPage> {
       builder: (context, child) {
         return ModuloPageTemplate(
           route: UsersPage.route,
-          statusBuild: ct.state,
+          error: ct.error,
+          state: ct.state,
           listaItems: ct.lista,
           initialValueCampoPesquisa: ct.pesquisa.value,
           onChangePesquisa: (p) => ct.pesquisa.value = p,

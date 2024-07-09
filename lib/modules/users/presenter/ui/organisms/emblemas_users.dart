@@ -29,7 +29,7 @@ class EmblemasUsersW extends StatelessWidget {
                   context: context,
                   child: SelectDados<AchievementEntity>(
                     future: ct.loadAchievements,
-                    getSubTitle: (v) => v.categoria,
+                    getSubTitle: (v) => v.category.name,
                     getTitle: (v) => v.name,
                     onSearch: (objet, search) {
                       if (search.isEmpty) {
@@ -42,7 +42,7 @@ class EmblemasUsersW extends StatelessWidget {
                   ),
                 );
                 if (ret is AchievementEntity) {
-                  await ct.addEmblema(ret.id!);
+                  await ct.addEmblema(ret.id);
                 }
               },
               child: const Text('Adicionar'),
