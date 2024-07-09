@@ -21,7 +21,6 @@ class BannerController extends ManagerStore<bool> {
 
   Future<void> deleteBanner(String id, context) => handleTry(
       call: () async {
-        throw Exception('test');
         await bannerRepository.deletDocument(id: id);
         AppHelps.confirmaDialog(
           title: 'Sucesso',
