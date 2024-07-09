@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_entity.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user_achievement_entity.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/controllers/detalhes_users_controller.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/atoms/achievement_widget.dart';
@@ -27,7 +27,7 @@ class EmblemasUsersW extends StatelessWidget {
               onPressed: () async {
                 final ret = await AppHelps.bottomSheet(
                   context: context,
-                  child: SelectDados<Emblema>(
+                  child: SelectDados<AchievementEntity>(
                     future: ct.loadAchievements,
                     getSubTitle: (v) => v.categoria,
                     getTitle: (v) => v.name,
@@ -41,7 +41,7 @@ class EmblemasUsersW extends StatelessWidget {
                     },
                   ),
                 );
-                if (ret is Emblema) {
+                if (ret is AchievementEntity) {
                   await ct.addEmblema(ret.id!);
                 }
               },

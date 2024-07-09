@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
 import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
-import 'package:dashboard_manga_easy/modules/emblemas/domain/repositories/emblemas_repository.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/data/repositories/achievements_repository.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_entity.dart';
 import 'package:dashboard_manga_easy/modules/users/data/dtos/create_user_achievement_dto.dart';
 import 'package:dashboard_manga_easy/modules/users/data/repositories/user_achievement_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class UsersDetalhesController extends IController {
   final UserAchievementRepository _userAchievementRepository;
-  final EmblemasRepository _emblemasRepository;
+  final AchievementsRepository _emblemasRepository;
   UsersDetalhesController(
     this._userAchievementRepository,
     this._emblemasRepository,
@@ -38,12 +38,12 @@ class UsersDetalhesController extends IController {
     );
   }
 
-  Future<List<Emblema>> loadAchievements(String search) {
-    return _emblemasRepository.listDocument();
+  Future<List<AchievementEntity>> loadAchievements(String search) {
+    return _emblemasRepository.get();
   }
 
-  Future<Emblema?> getAchievement(String idAchievement) {
-    return _emblemasRepository.getDocument(id: idAchievement);
+  Future<AchievementEntity?> getAchievement(String idAchievement) {
+    return _emblemasRepository.getById(id: idAchievement);
   }
 
   Future<void> addEmblema(String achievementId) async {

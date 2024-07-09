@@ -1,9 +1,9 @@
-import 'package:dashboard_manga_easy/modules/emblemas/domain/models/emblema.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AchievementWidget extends StatelessWidget {
-  final Future<Emblema?>? future;
+  final Future<AchievementEntity?>? future;
   final void Function(BuildContext context) removeIdEmblema;
   final int dateAcquired;
 
@@ -24,41 +24,42 @@ class AchievementWidget extends StatelessWidget {
           child: SizedBox(
             width: 70,
             height: 100,
-            child: FutureBuilder<Emblema?>(
-                future: future,
-                builder: (context, snap) {
-                  if (snap.hasData && snap.data != null) {
-                    final achievement = snap.data!;
-                    return Column(
-                      children: [
-                        Image.network(
-                          achievement.url,
-                          width: 50,
-                          height: 50,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          achievement.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          DateFormat.yMMMMEEEEd().format(
-                            DateTime.fromMillisecondsSinceEpoch(dateAcquired),
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    );
-                  }
-                  return const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+            child: FutureBuilder<AchievementEntity?>(
+              future: future,
+              builder: (context, snap) {
+                if (snap.hasData && snap.data != null) {
+                  final achievement = snap.data!;
+                  return Column(
                     children: [
-                      CircularProgressIndicator(),
+                      Image.network(
+                        achievement.url,
+                        width: 50,
+                        height: 50,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        achievement.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        DateFormat.yMMMMEEEEd().format(
+                          DateTime.fromMillisecondsSinceEpoch(dateAcquired),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ],
                   );
-                },),
+                }
+                return const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                  ],
+                );
+              },
+            ),
           ),
         ),
         GestureDetector(
