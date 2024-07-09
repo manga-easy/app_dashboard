@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/core/config/status_build_enum.dart';
-import 'package:dashboard_manga_easy/core/interfaces/controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission_entity.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/entities/state_manager.dart';
+import 'package:page_manager/manager_store.dart';
 
-class PermissoesController extends IController {
+class PermissoesController extends ManagerStore {
   final UsersRepository _usersRepository;
   final PermissionsRepository _permissionsRepository;
 
@@ -19,7 +19,7 @@ class PermissoesController extends IController {
   );
 
   @override
-  void init(BuildContext context) {
+  void init(Map<String, dynamic> arguments) {
     carregaPermissoes();
   }
 
@@ -30,11 +30,11 @@ class PermissoesController extends IController {
 
   Future<void> carregaPermissoes() async {
     try {
-      state = StatusBuild.loading;
+      state = StateManager.loading;
       permissoes = await _permissionsRepository.listDocument();
-      state = StatusBuild.done;
+      state = StateManager.done;
     } catch (e) {
-      state = StatusBuild.erro;
+      state = StateManager.error;
       rethrow;
     }
   }
