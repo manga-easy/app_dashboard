@@ -66,7 +66,17 @@ class SideMenu extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.all(16.0),
-                child: VersaoAppOrg(),
+                child: Column(
+                  children: [
+                    VersaoAppOrg(),
+                    Text(
+                      String.fromEnvironment(
+                        'ENVIRONMENT',
+                        defaultValue: 'test',
+                      ),
+                    ),
+                  ],
+                ),
               ),
               TextButton(
                 child: const Text('Sair'),

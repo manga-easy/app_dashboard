@@ -4,7 +4,6 @@ import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission_entity.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:page_manager/entities/state_manager.dart';
 import 'package:page_manager/manager_store.dart';
 

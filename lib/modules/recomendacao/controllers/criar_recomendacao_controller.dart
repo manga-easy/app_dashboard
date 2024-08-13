@@ -22,11 +22,16 @@ class CriarRecomendacaoController extends ManagerStore {
 
   RecomendacoesModel? recomendacao;
   @override
-  void init(Map<String, dynamic> arguments) {
-    recomendacao = arguments as RecomendacoesModel?;
-    recomendacao ??= RecomendacoesModel.empty();
-    state = StateManager.done;
-  }
+  void init(Map<String, dynamic> arguments) => handleTry(
+        call: () async {
+          final recommendationId = arguments['id'];
+          recomendacao = await _recomendationsRepository.getDocument(
+            id: recommendationId,
+          );
+          recomendacao ??= RecomendacoesModel.empty();
+          state = StateManager.done;
+        },
+      );
 
   Future<void> criarRecomendacao(context) => handleTry(
         call: () async {

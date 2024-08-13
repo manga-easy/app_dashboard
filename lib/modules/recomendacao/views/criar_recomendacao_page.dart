@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
 
 class CriarRecomendacaoPage extends StatefulWidget {
-  static const route = '/CriarRecomendacao';
   const CriarRecomendacaoPage({super.key});
   @override
   State<CriarRecomendacaoPage> createState() => _CriarRecomendacaoPageState();

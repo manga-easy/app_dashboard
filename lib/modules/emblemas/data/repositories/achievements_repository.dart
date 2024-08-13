@@ -11,7 +11,7 @@ import 'package:path/path.dart';
 
 class AchievementsRepository {
   final ApiMonolith _apiMonolito;
-  String get feature => 'achievement';
+  String get feature => 'achievements';
 
   AchievementsRepository(
     this._apiMonolito,

@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/splash/controllers/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

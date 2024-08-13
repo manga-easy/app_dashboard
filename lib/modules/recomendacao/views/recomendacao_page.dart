@@ -3,13 +3,13 @@ import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_templa
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/controllers/recomendacao_controller.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/views/criar_recomendacao_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:page_manager/manager_page.dart';
 
 class RecomendacaoPage extends StatefulWidget {
-  static const route = '/Recomendacao';
+  static const route = '/recommendations';
   const RecomendacaoPage({super.key});
   @override
   State<RecomendacaoPage> createState() => _RecomendacaoPageState();
@@ -69,11 +69,8 @@ class _RecomendacaoPageState
                   ButtonPadraoAtom(
                     title: 'Editar',
                     icone: Icons.edit,
-                    onPress: () => Navigator.of(context)
-                        .pushNamed(
-                          CriarRecomendacaoPage.route,
-                          arguments: reco,
-                        )
+                    onPress: () => context
+                        .push('${RecomendacaoPage.route}/${reco.id}')
                         .then((value) => ct.listaRecomendacao()),
                   ),
                   ButtonPadraoAtom(
@@ -91,8 +88,8 @@ class _RecomendacaoPageState
         );
       },
       listaItems: ct.listaRecomendacaoItens,
-      onPressedNovoItem: () => Navigator.of(context)
-          .pushNamed(CriarRecomendacaoPage.route)
+      onPressedNovoItem: () => context
+          .push('${RecomendacaoPage.route}/create')
           .then((value) => ct.listaRecomendacao()),
     );
   }
