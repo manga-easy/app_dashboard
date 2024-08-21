@@ -4,15 +4,20 @@ import 'package:uuid/uuid.dart';
 
 class PersistentDatabaseSembast implements PersistentDatabase<StoreSembast> {
   final Map<StoreSembast, Box> _dbs = {};
+  bool isInicialize = false;
   Box _getdb(StoreSembast e) => _dbs[e]!;
   @override
   Future<void> starting() async {
+    if (isInicialize) {
+      return;
+    }
     await Hive.initFlutter();
 
     for (final element in StoreSembast.values) {
       final db = await Hive.openBox(element.name);
       _dbs[element] = db;
     }
+    isInicialize = true;
   }
 
   @override

@@ -18,6 +18,7 @@
             // "toolArgs": [
             //     "--dart-define-from-file=env/dev.json",
             // ],
+            // flutter run -d chrome --web-browser-flag=--disable-web-security --web-port 57702
         }
     ]
 }

@@ -7,6 +7,7 @@ import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/export_manager.dart';
 import 'package:page_manager/manager_store.dart';
 
 class AuthController extends ManagerStore<String> {
@@ -35,7 +36,7 @@ class AuthController extends ManagerStore<String> {
   @override
   Future<void> init(Map<String, dynamic> arguments) async {
     await carregaCredencial();
-    await loginAutomatico();
+    state = StateManager.done;
   }
 
   void logar(BuildContext context) => handleTry(
