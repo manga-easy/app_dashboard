@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/data/repositories/credencial_repository_v1.dart';
@@ -8,7 +7,6 @@ import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_s
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/export_manager.dart';
-import 'package:page_manager/manager_store.dart';
 
 class AuthController extends ManagerStore<String> {
   final CredencialRepository _credencialRepo;
@@ -73,17 +71,5 @@ class AuthController extends ManagerStore<String> {
       userId: ServiceRoute.userId,
     );
     await _credencialRepo.put(objeto: cred);
-  }
-
-  Future<void> loginAutomatico() async {
-    try {
-      final session = await _authService.getSession();
-      ServiceRoute.userId = session.userId;
-      ServiceRoute.token = await _authService.getJwt();
-      await validacaoPermissao(session.userId);
-      emitNavigation(MainPage.route);
-    } catch (e) {
-      Helps.log(e);
-    }
   }
 }
