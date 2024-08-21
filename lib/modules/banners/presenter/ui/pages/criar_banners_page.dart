@@ -47,7 +47,7 @@ class _CriarBannerPageState
         ),
       ),
       pageDisconnected: () {
-        return SizedBox();
+        return const SizedBox();
       },
       pageDone: () => Padding(
         padding: const EdgeInsets.all(AppTheme.defaultPadding),
@@ -90,17 +90,17 @@ class _CriarBannerPageState
         ),
       ),
       pageError: (e) {
-        return SizedBox();
+        return const SizedBox();
       },
       pageInitial: () {
-        return SizedBox();
+        return const SizedBox();
       },
       pageLoading: () => const LoadingAtom(),
       pageLoggedOut: () {
-        return SizedBox();
+        return const SizedBox();
       },
       pageMaintenance: () {
-        return SizedBox();
+        return const SizedBox();
       },
       state: ct.state,
     );

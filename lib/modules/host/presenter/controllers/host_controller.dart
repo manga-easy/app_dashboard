@@ -33,7 +33,7 @@ class HostController extends ManagerStore {
               ? HostStatus.enable
               : HostStatus.disable;
           await _hostRepository.updateDocument(
-              objeto: host.toDto(), id: host.id);
+              objeto: host.toDto(), id: host.id,);
           list = await _hostRepository.listDocument();
         },
       );
