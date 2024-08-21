@@ -27,7 +27,7 @@ class _RecomendacaoPageState
       labelNovoItem: 'Nova recomendação',
       onPressedAtualiza: ct.listaRecomendacao,
       itemBuilderLista: (context, index) {
-        final RecomendacoesModel reco = ct.listaRecomendacaoItens[index];
+        final RecommendationsEntity reco = ct.listaRecomendacaoItens[index];
         if (!reco.title.toLowerCase().contains(ct.seach.toLowerCase()) &&
             ct.seach.isNotEmpty) {
           return const SizedBox.shrink();

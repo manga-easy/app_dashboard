@@ -5,7 +5,6 @@ import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/data/repositories/credencial_repository_v1.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/manager_store.dart';
@@ -54,13 +53,9 @@ class AuthController extends ManagerStore<String> {
       );
 
   Future<void> validacaoPermissao(String userId) async {
-    final result = await _permissionsRepository.listDocument(
-      where: PermissoesParams(
-        userId: userId,
-      ),
-    );
+    final result = await _permissionsRepository.getByUser(userId: userId);
 
-    _serviceRoute.permissions = result.first;
+    _serviceRoute.permissions = result;
   }
 
   Future<void> carregaCredencial() async {

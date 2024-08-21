@@ -10,7 +10,7 @@ class RecomendacaoController extends ManagerStore {
 
   RecomendacaoController(this._recomendationsRepository);
 
-  var listaRecomendacaoItens = <RecomendacoesModel>[];
+  var listaRecomendacaoItens = <RecommendationsEntity>[];
   String seach = '';
 
   @override
@@ -31,7 +31,7 @@ class RecomendacaoController extends ManagerStore {
     }
   }
 
-  Future<void> deleteRecomendacao(RecomendacoesModel entity, context) =>
+  Future<void> deleteRecomendacao(RecommendationsEntity entity, context) =>
       handleTry(
         call: () async {
           await _recomendationsRepository.deletDocument(id: entity.id!);

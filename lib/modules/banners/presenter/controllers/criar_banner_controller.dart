@@ -16,9 +16,8 @@ class CriarBannerController extends ManagerStore<DetailsBannerEvent> {
   Future<void> init(Map<String, dynamic> arguments) async {
     final String? id = arguments['id'];
     if (id != 'null') {
-      final banners = await bannerRepository.listDocument();
-      banner = banners.firstWhere((element) => element.id == id);
-      dto = CreateBannerDto.fromEntity(banner!);
+      final banners = await bannerRepository.getById(id!);
+      dto = CreateBannerDto.fromEntity(banners!);
     }
     state = StateManager.done;
   }

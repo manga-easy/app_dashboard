@@ -20,7 +20,7 @@ class CriarRecomendacaoController extends ManagerStore {
     this._usersRepository,
   );
 
-  RecomendacoesModel? recomendacao;
+  RecommendationsEntity? recomendacao;
   @override
   void init(Map<String, dynamic> arguments) => handleTry(
         call: () async {
@@ -28,7 +28,7 @@ class CriarRecomendacaoController extends ManagerStore {
           recomendacao = await _recomendationsRepository.getDocument(
             id: recommendationId,
           );
-          recomendacao ??= RecomendacoesModel.empty();
+          recomendacao ??= RecommendationsEntity.empty();
           state = StateManager.done;
         },
       );
@@ -37,10 +37,12 @@ class CriarRecomendacaoController extends ManagerStore {
         call: () async {
           if (recomendacao!.id == null) {
             await _recomendationsRepository.creatDocument(
-                objeto: recomendacao!);
+              objeto: recomendacao!,
+            );
           } else {
             await _recomendationsRepository.updateDocument(
-                objeto: recomendacao!);
+              objeto: recomendacao!,
+            );
           }
           Navigator.of(context).pop();
           AppHelps.confirmaDialog(
@@ -80,7 +82,7 @@ class CriarRecomendacaoController extends ManagerStore {
           final image = File(pickedFile.path);
           await _recomendationsRepository.updateImage(
             file: image,
-            uniqueid: recomendacao!.uniqueid,
+            id: recomendacao!.id!,
           );
           Navigator.of(context).pop();
         },

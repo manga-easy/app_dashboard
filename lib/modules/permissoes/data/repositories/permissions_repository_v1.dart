@@ -1,7 +1,6 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/data/dtos/create_permission_dto.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission_entity.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 
 class PermissionsRepositoryV1 implements PermissionsRepository {
@@ -9,7 +8,7 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
 
   PermissionsRepositoryV1(this._apiMonolito);
 
-  String get feature => 'permission';
+  String get feature => 'permissions';
 
   @override
   Future<Permission> creatDocument({
@@ -31,7 +30,7 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
   @override
   Future<Permission?> getDocument({required String id}) async {
     final result = await _apiMonolito.get(
-      '$feature/v1',
+      '$feature/v1/$id',
     );
     if (result.isEmpty) {
       return null;
@@ -40,15 +39,9 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
   }
 
   @override
-  Future<List<Permission>> listDocument({PermissoesParams? where}) async {
-    String filter = '';
-    if (where != null) {
-      if (where.userId != null) {
-        filter += 'userId=${where.userId}&';
-      }
-    }
+  Future<List<Permission>> listDocument() async {
     final result = await _apiMonolito.get(
-      '$feature/v1?$filter',
+      '$feature/v1',
     );
     return result.map<Permission>((e) => Permission.fromMap(e)).toList();
   }
@@ -62,5 +55,16 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
       body: objeto.toMap(),
     );
     return Permission.fromMap(result);
+  }
+
+  @override
+  Future<Permission?> getByUser({required String userId}) async {
+    final result = await _apiMonolito.get(
+      '$feature/v1/users/$userId',
+    );
+    if (result.isEmpty) {
+      return null;
+    }
+    return Permission.fromMap(result.first);
   }
 }

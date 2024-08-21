@@ -9,17 +9,16 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
 
   NotificacaoRepositoryV1(this._apiMonolito);
 
-  String get version => 'v1';
   String get feature => 'notifications';
   @override
   Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete('$version/$feature/$id');
+    await _apiMonolito.delete('$feature/v1/$id');
   }
 
   @override
   Future<Notificacao?> getDocument({required String id}) async {
     try {
-      final result = await _apiMonolito.get('$version/$feature/$id');
+      final result = await _apiMonolito.get('$feature/v1/$id');
       if (result.isEmpty) {
         return null;
       }
@@ -32,7 +31,7 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
   @override
   Future<List<Notificacao>> listDocument({FiltroNotificacao? where}) async {
     final result = await _apiMonolito.get(
-      '$version/$feature/list',
+      '$feature/v1',
     );
     return (result as List)
         .map<Notificacao>((e) => NotificationDto.fromMap(e).toEntity())
@@ -42,7 +41,7 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
   @override
   Future<void> createDocument({required Notificacao objeto}) async {
     await _apiMonolito.post(
-      '$version/$feature',
+      '$feature/v1',
       body: NotificationDto.fromEntity(objeto).toMap(),
     );
   }

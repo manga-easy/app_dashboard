@@ -1,5 +1,5 @@
 class RecommendationsFilter {
-  final String? uniqueid;
+  final int? page;
 
-  RecommendationsFilter({this.uniqueid});
+  RecommendationsFilter({this.page});
 }

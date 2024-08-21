@@ -15,11 +15,10 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
 
   RecommendationsRepositoryV1(this._apiMonolito);
 
-  String get version => 'v1';
   String get feature => 'recommendations';
   @override
-  Future<RecomendacoesModel?> getDocument({required String id}) async {
-    final result = await _apiMonolito.get('$version/$feature/$id');
+  Future<RecommendationsEntity?> getDocument({required String id}) async {
+    final result = await _apiMonolito.get('$feature/v1/$id');
     if (result.isEmpty) {
       return null;
     }
@@ -27,9 +26,9 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
   }
 
   @override
-  Future<void> updateDocument({required RecomendacoesModel objeto}) async {
+  Future<void> updateDocument({required RecommendationsEntity objeto}) async {
     await _apiMonolito.put(
-      '$version/$feature/${objeto.id}',
+      '$feature/v1/${objeto.id}',
       body: RecommendationsDto.fromEntity(objeto).toMap(),
     );
   }
@@ -37,43 +36,43 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
   @override
   Future<void> deletDocument({required String id}) async {
     await _apiMonolito.delete(
-      '$version/$feature/$id',
+      '$feature/v1/$id',
     );
   }
 
   @override
-  Future<void> creatDocument({required RecomendacoesModel objeto}) async {
+  Future<void> creatDocument({required RecommendationsEntity objeto}) async {
     await _apiMonolito.post(
-      '$version/$feature',
+      '$feature/v1',
       body: RecommendationsDto.fromEntity(objeto).toMap(),
     );
   }
 
   @override
-  Future<List<RecomendacoesModel>> listDocument({
+  Future<List<RecommendationsEntity>> listDocument({
     RecommendationsFilter? filter,
   }) async {
     String parans = '?';
     if (filter != null) {
-      if (filter.uniqueid != null) {
-        parans += 'uniqueid=${filter.uniqueid}&';
+      if (filter.page != null) {
+        parans += 'page=${filter.page}&';
       }
     }
-    final result = await _apiMonolito.get('$version/$feature/list$parans');
+    final result = await _apiMonolito.get('$feature/v1?$parans');
     return result
-        .map<RecomendacoesModel>(
+        .map<RecommendationsEntity>(
           (e) => RecommendationsDto.fromMap(e).toEntity(),
         )
         .toList();
   }
 
   @override
-  Future<RecomendacoesModel> updateImage({
-    required String uniqueid,
+  Future<RecommendationsEntity> updateImage({
+    required String id,
     required File file,
   }) async {
     final result = await _apiMonolito.put(
-      '$version/$feature/$uniqueid/image',
+      '$feature/v1/$id/image',
       body: {
         'file': MultipartFile.fromFileSync(
           file.path,

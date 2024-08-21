@@ -14,7 +14,7 @@ class UserAchievementRepository {
   }) async {
     final String userId = objeto.userId;
     final result = await _apiMonolito.post(
-      'user/v1/$userId/achievement',
+      'users/v1/$userId/achievements',
       body: objeto.toJson(),
     );
 

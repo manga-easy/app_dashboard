@@ -23,7 +23,7 @@ class RecommendationsDto {
     required this.artistname,
   });
 
-  factory RecommendationsDto.fromEntity(RecomendacoesModel entity) {
+  factory RecommendationsDto.fromEntity(RecommendationsEntity entity) {
     return RecommendationsDto(
       uid: entity.id,
       uniqueid: entity.uniqueid,
@@ -65,8 +65,8 @@ class RecommendationsDto {
     );
   }
 
-  RecomendacoesModel toEntity() {
-    return RecomendacoesModel(
+  RecommendationsEntity toEntity() {
+    return RecommendationsEntity(
       id: uid,
       title: title,
       link: link,
