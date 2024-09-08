@@ -1,36 +1,38 @@
+import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission_entity.dart';
+
 class CreatePermissionDto {
-  final String userid;
+  final String userId;
   final int value;
 
-  CreatePermissionDto({required this.userid, required this.value});
+  CreatePermissionDto({required this.userId, required this.value});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'userid': userid,
+      'userId': userId,
       'value': value,
     };
   }
 
-  factory CreatePermissionDto.fromMap(Map<String, dynamic> map) {
+  factory CreatePermissionDto.empty() {
     return CreatePermissionDto(
-      userid: map['userid'] as String,
-      value: map['value'] as int,
-    );
-  }
-
-  static CreatePermissionDto empty() {
-    return CreatePermissionDto(
-      userid: '',
+      userId: '',
       value: 0,
     );
   }
 
+  factory CreatePermissionDto.fromEntity(Permission entity) {
+    return CreatePermissionDto(
+      userId: entity.userId,
+      value: entity.level,
+    );
+  }
+
   CreatePermissionDto copyWith({
-    String? userid,
+    String? userId,
     int? value,
   }) {
     return CreatePermissionDto(
-      userid: userid ?? this.userid,
+      userId: userId ?? this.userId,
       value: value ?? this.value,
     );
   }

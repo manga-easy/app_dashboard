@@ -4,7 +4,10 @@ import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission
 abstract interface class PermissionsRepository {
   Future<Permission?> getDocument({required String id});
 
-  Future<Permission> updateDocument({required CreatePermissionDto objeto});
+  Future<Permission> updateDocument({
+    required CreatePermissionDto objeto,
+    required String id,
+  });
 
   Future<void> deletDocument({required String id});
 
