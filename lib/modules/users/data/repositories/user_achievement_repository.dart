@@ -14,7 +14,7 @@ class UserAchievementRepository {
   }) async {
     final String userId = objeto.userId;
     final result = await _apiMonolito.post(
-      'users/v1/$userId/achievements',
+      'users/$userId/v1/achievements',
       body: objeto.toJson(),
     );
 
@@ -26,7 +26,7 @@ class UserAchievementRepository {
     required String userId,
   }) async {
     await _apiMonolito.delete(
-      'user/v1/$userId/achievement/$achievementId',
+      'users/$userId/v1/achievements/$achievementId',
     );
   }
 
@@ -39,7 +39,7 @@ class UserAchievementRepository {
       filter += 'achievementId=$achievementId&';
     }
     final result = await _apiMonolito.get(
-      'user/v1/$userId/achievement?$filter',
+      'users/$userId/v1/achievements?$filter',
     );
     if (result == null) {
       return [];
