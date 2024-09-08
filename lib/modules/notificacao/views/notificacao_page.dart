@@ -4,12 +4,14 @@ import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/controllers/notificacao_controller.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/views/send_notification_page.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/data/dtos/create_notification_dto.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/views/atoms/status_notification.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:page_manager/manager_page.dart';
 
 class NotificacaoPage extends StatefulWidget {
-  static const route = '/Notificacao';
+  static const route = '/notifications';
   const NotificacaoPage({super.key});
   @override
   State<NotificacaoPage> createState() => _NotificacaoPageState();
@@ -24,10 +26,7 @@ class _NotificacaoPageState
       state: ct.state,
       error: ct.error,
       onPressedAtualiza: ct.carregaNotificacao,
-      onPressedNovoItem: () => Navigator.pushNamed(
-        context,
-        SendNotificationPage.route,
-      ),
+      onPressedNovoItem: () => context.push('${NotificacaoPage.route}/create'),
       labelNovoItem: 'Enviar notificação',
       itemBuilderLista: (context, index) {
         final notification = ct.lista[index];
@@ -38,7 +37,15 @@ class _NotificacaoPageState
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: Text(notification.titulo)),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        StatusNotification(status: notification.status),
+                        const SizedBox(width: 16),
+                        Text(notification.title),
+                      ],
+                    ),
+                  ),
                   IconButton(
                     icon: const Icon(
                       Icons.close,
@@ -50,7 +57,7 @@ class _NotificacaoPageState
                         context: context,
                       );
                       if (ret) {
-                        unawaited(ct.deleteNotification(notification.id!));
+                        unawaited(ct.deleteNotification(notification.id));
                       }
                     },
                   ),
@@ -62,7 +69,7 @@ class _NotificacaoPageState
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Text(
-                      notification.menssege,
+                      notification.message ?? '',
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!
@@ -80,7 +87,10 @@ class _NotificacaoPageState
                             context: context,
                           ).then((value) {
                             if (value) {
-                              ct.reSendNotification(notification);
+                              ct.reSendNotification(
+                                CreateNotificationDto.fromEntity(notification),
+                                context,
+                              );
                             }
                           });
                         },

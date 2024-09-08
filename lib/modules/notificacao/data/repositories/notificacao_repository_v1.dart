@@ -1,5 +1,5 @@
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/data/dtos/notification_dto.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/data/dtos/create_notification_dto.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/filtro_notificacao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
@@ -22,7 +22,7 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
       if (result.isEmpty) {
         return null;
       }
-      return NotificationDto.fromMap(result.first).toEntity();
+      return Notificacao.fromMap(result.first);
     } catch (e) {
       return null;
     }
@@ -34,15 +34,15 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
       '$feature/v1',
     );
     return (result as List)
-        .map<Notificacao>((e) => NotificationDto.fromMap(e).toEntity())
+        .map<Notificacao>((e) => Notificacao.fromMap(e))
         .toList();
   }
 
   @override
-  Future<void> createDocument({required Notificacao objeto}) async {
+  Future<void> createDocument({required CreateNotificationDto objeto}) async {
     await _apiMonolito.post(
       '$feature/v1',
-      body: NotificationDto.fromEntity(objeto).toMap(),
+      body: objeto.toMap(),
     );
   }
 }
