@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/data/dtos/create_recommendations_dto.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/data/dtos/recommendations_dto.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
@@ -22,14 +23,17 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
     if (result.isEmpty) {
       return null;
     }
-    return RecommendationsDto.fromMap(result.first).toEntity();
+    return RecommendationsDto.fromMap(result).toEntity();
   }
 
   @override
-  Future<void> updateDocument({required RecommendationsEntity objeto}) async {
+  Future<void> updateDocument({
+    required CreateRecommendationsDto objeto,
+    required String id,
+  }) async {
     await _apiMonolito.put(
-      '$feature/v1/${objeto.id}',
-      body: RecommendationsDto.fromEntity(objeto).toMap(),
+      '$feature/v1/$id',
+      body: objeto.toMap(),
     );
   }
 
@@ -41,10 +45,10 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
   }
 
   @override
-  Future<void> creatDocument({required RecommendationsEntity objeto}) async {
+  Future<void> creatDocument({required CreateRecommendationsDto objeto}) async {
     await _apiMonolito.post(
       '$feature/v1',
-      body: RecommendationsDto.fromEntity(objeto).toMap(),
+      body: objeto.toMap(),
     );
   }
 
@@ -52,7 +56,7 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
   Future<List<RecommendationsEntity>> listDocument({
     RecommendationsFilter? filter,
   }) async {
-    String parans = '?';
+    String parans = '';
     if (filter != null) {
       if (filter.page != null) {
         parans += 'page=${filter.page}&';

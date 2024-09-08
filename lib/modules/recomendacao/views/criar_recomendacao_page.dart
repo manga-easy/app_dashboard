@@ -25,7 +25,7 @@ class _CriarRecomendacaoPageState
       state: ct.state,
       error: ct.error,
       appBar: Text(
-        ct.recomendacao?.id == null
+        ct.recommendationId == null
             ? 'Criar Recomendação'
             : 'Editar Recomendação',
       ),
@@ -44,7 +44,7 @@ class _CriarRecomendacaoPageState
                   onChange: (v) {
                     ct.recomendacao = ct.recomendacao?.copyWith(
                       title: v,
-                      uniqueid: Helps.convertUniqueid(v),
+                      uniqueId: Helps.convertUniqueid(v),
                     );
                   },
                 ),
@@ -82,7 +82,6 @@ class _CriarRecomendacaoPageState
                                 setState(() {
                                   ct.recomendacao = ct.recomendacao!.copyWith(
                                     artistId: user.id!,
-                                    artistName: user.name,
                                   );
                                 });
                               }
@@ -100,7 +99,7 @@ class _CriarRecomendacaoPageState
                 ),
                 const SizedBox(height: AppTheme.defaultPadding * 2),
                 ButtonPadraoAtom(
-                  title: ct.recomendacao?.id == null
+                  title: ct.recommendationId == null
                       ? 'Criar Recomendação'
                       : 'Editar Recomendação',
                   icone: Icons.create,
