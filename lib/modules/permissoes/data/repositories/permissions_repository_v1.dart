@@ -65,6 +65,6 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
     if (result.isEmpty) {
       return null;
     }
-    return Permission.fromMap(result.first);
+    return Permission.fromMap(result);
   }
 }
