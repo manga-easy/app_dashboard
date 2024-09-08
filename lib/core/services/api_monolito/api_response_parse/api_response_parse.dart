@@ -13,7 +13,10 @@ class ApiResponseParser {
       case 403:
         throw ApiForbiddenError();
       case 422:
-        throw ApiErrorBusiness(message: response.data['message']);
+      case 400:
+        throw ApiErrorBusiness(
+          message: response.data['message'] ?? response.data['detail'],
+        );
       case 500:
         throw ApiInternalServerError(message: response.statusMessage);
       case 0:

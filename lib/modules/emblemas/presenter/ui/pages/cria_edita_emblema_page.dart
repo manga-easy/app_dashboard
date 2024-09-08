@@ -10,7 +10,6 @@ import 'package:page_manager/entities/state_manager.dart';
 import 'package:page_manager/manager_page.dart';
 
 class CriaEditaEmblemaPage extends StatefulWidget {
-  static const route = '/CriaEditaEmblema';
   const CriaEditaEmblemaPage({super.key});
   @override
   State<CriaEditaEmblemaPage> createState() => _CriaEditaEmblemaPageState();
