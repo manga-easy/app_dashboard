@@ -38,7 +38,7 @@ class BannerRepositoryV2 {
   }
 
   Future<BannerEntity?> getById(String id) async {
-    final result = await _apiMonolito.get('$table/v1');
+    final result = await _apiMonolito.get('$table/v1/$id');
     return BannerEntity.fromJson(result);
   }
 }

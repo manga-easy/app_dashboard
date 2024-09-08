@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:page_manager/manager_page.dart';
 
 class BannerPage extends StatefulWidget {
-  static const route = '/banner';
+  static const route = '/banners';
   const BannerPage({super.key});
   @override
   State<BannerPage> createState() => _BannerPageState();
@@ -48,7 +48,8 @@ class _BannerPageState extends ManagerPage<BannerController, BannerPage> {
                   ButtonPadraoAtom(
                     title: 'Editar',
                     icone: Icons.edit,
-                    onPress: () => context.go('/banner/${banner.id}'),
+                    onPress: () =>
+                        context.go('${BannerPage.route}/${banner.id}'),
                   ),
                   ButtonPadraoAtom(
                     title: 'Deletar',
@@ -65,7 +66,7 @@ class _BannerPageState extends ManagerPage<BannerController, BannerPage> {
         );
       },
       listaItems: ct.listaBannerItens,
-      onPressedNovoItem: () => context.go('/banner/null'),
+      onPressedNovoItem: () => context.go('/${BannerPage.route}/create'),
     );
   }
 }
