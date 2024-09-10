@@ -2,6 +2,7 @@ import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/criar_banner_controller.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/events/details_banner_event.dart';
+import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
@@ -29,7 +30,7 @@ class _CriarBannerPageState
   }
 
   void showSuccess(DetailsBannerEventSuccess event) {
-    context.pushReplacement('/banner');
+    context.pushReplacement(BannerPage.route);
     AppHelps.confirmaDialog(
       title: 'Sucesso',
       content: 'Banner ${event.operation} com sucesso',
@@ -43,7 +44,7 @@ class _CriarBannerPageState
       error: ct.error,
       appBar: AppBar(
         title: Text(
-          ct.banner?.id == null ? 'Criar Banner' : 'Alterar Banner',
+          ct.id == null ? 'Criar Banner' : 'Alterar Banner',
         ),
       ),
       pageDisconnected: () {
@@ -77,9 +78,7 @@ class _CriarBannerPageState
                   ),
                   const SizedBox(height: AppTheme.defaultPadding * 2),
                   ButtonPadraoAtom(
-                    title: ct.banner?.id == null
-                        ? 'Criar Banner'
-                        : 'Alterar Banner',
+                    title: ct.id == null ? 'Criar Banner' : 'Alterar Banner',
                     icone: Icons.create,
                     onPress: ct.criarBanner,
                   ),
