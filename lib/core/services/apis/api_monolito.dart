@@ -1,6 +1,6 @@
 import 'package:dashboard_manga_easy/core/libraries/client/client_dio.dart';
 import 'package:dashboard_manga_easy/core/libraries/client/cliente_request.dart';
-import 'package:dashboard_manga_easy/core/services/api_monolito/api_response_parse/api_response_parse.dart';
+import 'package:dashboard_manga_easy/core/services/apis/api_response_parse/api_response_parse.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
