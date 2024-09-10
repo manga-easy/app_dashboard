@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
 
 class SendNotificationPage extends StatefulWidget {
-  static const route = '/SendNotification';
   const SendNotificationPage({super.key});
   @override
   State<SendNotificationPage> createState() => _SendNotificationPageState();
