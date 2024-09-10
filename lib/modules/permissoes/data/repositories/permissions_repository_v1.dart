@@ -35,7 +35,7 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
     if (result.isEmpty) {
       return null;
     }
-    return Permission.fromMap(result.first);
+    return Permission.fromMap(result);
   }
 
   @override
@@ -49,9 +49,10 @@ class PermissionsRepositoryV1 implements PermissionsRepository {
   @override
   Future<Permission> updateDocument({
     required CreatePermissionDto objeto,
+    required String id,
   }) async {
     final result = await _apiMonolito.put(
-      '$feature/v1',
+      '$feature/v1/$id',
       body: objeto.toMap(),
     );
     return Permission.fromMap(result);
