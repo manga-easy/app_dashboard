@@ -22,7 +22,7 @@ class HostRepositoryV1 {
     if (result.isEmpty) {
       return null;
     }
-    return HostEntity.fromJson(result.first);
+    return HostEntity.fromJson(result);
   }
 
   Future<HostEntity> updateDocument({
@@ -37,7 +37,7 @@ class HostRepositoryV1 {
   }
 
   Future<List<HostEntity>> listDocument({HostFilter? where}) async {
-    final result = await _apiMonolito.get('$feature/v1?isAll=true');
+    final result = await _apiMonolito.get('$feature/v1');
     return result.map<HostEntity>((e) => HostEntity.fromJson(e)).toList();
   }
 }

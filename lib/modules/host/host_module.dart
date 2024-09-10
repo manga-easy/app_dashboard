@@ -23,10 +23,12 @@ class HostModule implements Module {
         GoRoute(
           path: HostPage.route,
           builder: (context, state) => const HostPage(),
-        ),
-        GoRoute(
-          path: HostDetailsPage.route,
-          builder: (context, state) => const HostDetailsPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              builder: (context, state) => const HostDetailsPage(),
+            ),
+          ],
         ),
       ];
 }
