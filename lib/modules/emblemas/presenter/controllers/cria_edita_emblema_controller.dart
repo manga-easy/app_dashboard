@@ -19,30 +19,34 @@ class CriaEditaEmblemaController extends ManagerStore {
 
   @override
   Future<void> init(Map<String, dynamic> arguments) async {
-    achievementId = arguments['achievementId'];
-    if (achievementId != null) {
+    achievementId = arguments['id'];
+    if (achievementId != 'create') {
       final result = await _achievementRepository.getById(id: achievementId!);
       dto = CreateAchievementDto.fromEntity(result!);
     }
     state = StateManager.done;
   }
 
-  Future<void> criaAlteraEmblema(context) async {
-    if (achievementId == null) {
-      await _achievementRepository.create(dto: dto);
-    } else {
-      await _achievementRepository.update(
-        dto: dto,
-        id: achievementId!,
+  Future<void> criaAlteraEmblema(context) => handleTry(
+        call: () async {
+          if (achievementId == 'create') {
+            await _achievementRepository.create(dto: dto);
+          } else {
+            await _achievementRepository.update(
+              dto: dto,
+              id: achievementId!,
+            );
+          }
+          Navigator.of(context).pop();
+          AppHelps.confirmaDialog(
+            title: 'Sucesso',
+            content: 'Emblema salvo com sucesso',
+            context: context,
+          );
+        },
+        showDialogError: true,
+        onCatch: StateManager.done,
       );
-    }
-    Navigator.of(context).pop();
-    AppHelps.confirmaDialog(
-      title: 'Sucesso',
-      content: 'Emblema salvo com sucesso',
-      context: context,
-    );
-  }
 
   Future<void> pickerImage(context) => handleTry(
         call: () async {
@@ -60,5 +64,7 @@ class CriaEditaEmblemaController extends ManagerStore {
           );
           Navigator.of(context).pop();
         },
+        showDialogError: true,
+        onCatch: StateManager.done,
       );
 }

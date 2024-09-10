@@ -22,10 +22,12 @@ class EmblemasModule implements Module {
         GoRoute(
           path: EmblemasPage.route,
           builder: (context, state) => const EmblemasPage(),
-        ),
-        GoRoute(
-          path: CriaEditaEmblemaPage.route,
-          builder: (context, state) => const CriaEditaEmblemaPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              builder: (context, state) => const CriaEditaEmblemaPage(),
+            ),
+          ],
         ),
       ];
 }
