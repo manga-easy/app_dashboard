@@ -52,12 +52,11 @@ jobs:
 
     - name: Commit pubspec.yaml version
       run: |
-        VERSION=$(echo "${GITHUB_REF#refs/tags/}")
         git config --global user.email "lucas.cardo123@hotmail.com"
         git config --global user.name "lucas"
         git add .
-        git commit -m "Update version to $VERSION"
-        git push origin HEAD:main
+        git commit -m "Update version"
+        git push
       env:
         GITHUB_REF: ${{ github.ref }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
