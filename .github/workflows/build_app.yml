@@ -40,12 +40,12 @@ jobs:
       run: flutter pub get
      
     - name: Build APK DEV
-       if: github.ref == 'refs/heads/dev'
+      if: github.ref == 'refs/heads/dev'
       run: |
         flutter build web --release --no-tree-shake-icons --web-renderer html
     
     - name: Build APK PROD
-       if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/main'
       run: |
         flutter build web --release --no-tree-shake-icons --web-renderer html --dart-define=ENVIRONMENT=production 
 
