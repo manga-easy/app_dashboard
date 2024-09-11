@@ -89,7 +89,7 @@ jobs:
     - name: Copy build/web to server DEV
       if: github.ref == 'refs/heads/dev'
       run: |
-        scp -o StrictHostKeyChecking=no -r build/web/* ubuntu@${{ secrets.SSH_IP_DEV }}:app_dashboard
+        scp -o StrictHostKeyChecking=no -r build/web/* ubuntu@${{ secrets.SSH_IP_DEV }}:app_dashboard/web
 
     - name: Restart container DEV
       if: github.ref == 'refs/heads/dev'
