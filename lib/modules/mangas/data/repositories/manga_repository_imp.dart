@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
+import 'package:dashboard_manga_easy/core/services/apis/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/entities/info_comic_model.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/entities/manga_filter_entity.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/mappers/mapper_manga.dart';

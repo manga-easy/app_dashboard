@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:dashboard_manga_easy/core/services/api_monolito/api_response_parse/api_erros/api_error.dart';
+import 'package:dashboard_manga_easy/core/services/apis/api_response_parse/api_erros/api_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -112,8 +112,10 @@ class Helps {
 
   static void copyText(String? text, BuildContext context) {
     Clipboard.setData(ClipboardData(text: text ?? ''));
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Texto $text copiado'),
-    ),);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Texto $text copiado'),
+      ),
+    );
   }
 }

@@ -63,7 +63,9 @@ class AuthAppwriteService implements AuthService {
   }) async {
     try {
       return await _account.updatePassword(
-          password: password, oldPassword: oldPassword,);
+        password: password,
+        oldPassword: oldPassword,
+      );
     } catch (e) {
       _handleError(e);
       rethrow;
@@ -81,8 +83,9 @@ class AuthAppwriteService implements AuthService {
   }
 
   @override
-  Future<models.User> updatePrefs(
-      {required Map<dynamic, dynamic> prefs,}) async {
+  Future<models.User> updatePrefs({
+    required Map<dynamic, dynamic> prefs,
+  }) async {
     try {
       return await _account.updatePrefs(prefs: prefs);
     } catch (e) {
@@ -131,14 +134,19 @@ class AuthAppwriteService implements AuthService {
       if (message.contains('Invalid email')) {
         throw AuthException(
           'O e-mail fornecido é inválido',
+          e.type,
         );
       }
       if (message.contains('Invalid password')) {
         throw AuthException(
           'A senha fornecida é inválida',
+          e.type,
         );
       }
-      throw AuthException(_mapErrorTypes[e.type ?? ''] ?? e.toString());
+      throw AuthException(
+        _mapErrorTypes[e.type ?? ''] ?? e.toString(),
+        e.type,
+      );
     }
   }
 

@@ -1,38 +1,38 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/libraries/templates/default_page_template.dart';
-import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/criar_banner_controller.dart';
-import 'package:dashboard_manga_easy/modules/banners/presenter/ui/events/details_banner_event.dart';
-import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
+import 'package:dashboard_manga_easy/modules/toggles/presenter/controllers/create_toggle_controller.dart';
+import 'package:dashboard_manga_easy/modules/toggles/presenter/ui/events/details_banner_event.dart';
+import 'package:dashboard_manga_easy/modules/toggles/presenter/ui/pages/toggles_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_manager/manager_page.dart';
 
-class CriarBannerPage extends StatefulWidget {
-  const CriarBannerPage({super.key});
+class CreateTogglesPage extends StatefulWidget {
+  const CreateTogglesPage({super.key});
   @override
-  State<CriarBannerPage> createState() => _CriarBannerPageState();
+  State<CreateTogglesPage> createState() => _CreateTogglesPageState();
 }
 
-class _CriarBannerPageState
-    extends ManagerPage<CriarBannerController, CriarBannerPage> {
+class _CreateTogglesPageState
+    extends ManagerPage<CreateToggleController, CreateTogglesPage> {
   @override
   void initState() {
     ct.onNavigation(
       (e) => switch (e) {
-        DetailsBannerEventSuccess() => showSuccess(e),
+        DetailsTogglesEventSuccess() => showSuccess(e),
       },
     );
     super.initState();
   }
 
-  void showSuccess(DetailsBannerEventSuccess event) {
-    context.pushReplacement(BannerPage.route);
+  void showSuccess(DetailsTogglesEventSuccess event) {
+    context.pushReplacement(TogglesPage.route);
     AppHelps.confirmaDialog(
       title: 'Sucesso',
-      content: 'Banner ${event.operation} com sucesso',
+      content: 'Toggle ${event.operation} com sucesso',
       context: context,
     );
   }
@@ -41,14 +41,12 @@ class _CriarBannerPageState
   Widget build(BuildContext context) {
     return DefaultPageTemplate(
       error: ct.error,
-      appBar: AppBar(
-        title: Text(
-          ct.id == null ? 'Criar Banner' : 'Alterar Banner',
-        ),
+      appBar: Text(
+        ct.toggle?.id == null ? 'Criar Toggle' : 'Alterar Toggle',
       ),
       pageDone: () => Padding(
         padding: const EdgeInsets.all(AppTheme.defaultPadding),
-        child: Column(
+        child: ListView(
           children: [
             Container(
               padding: const EdgeInsets.all(AppTheme.defaultPadding),
@@ -58,23 +56,33 @@ class _CriarBannerPageState
               child: Column(
                 children: [
                   CampoPadraoAtom(
-                    hintText: 'Link da image',
-                    initialValue: ct.dto.image,
+                    hintText: 'Name',
+                    initialValue: ct.dto.name,
                     onChange: (v) {
-                      ct.dto.image = v;
+                      ct.dto.name = v;
                     },
                   ),
                   const SizedBox(height: AppTheme.defaultPadding * 2),
                   CampoPadraoAtom(
-                    hintText: 'Link do redirecionamento',
-                    initialValue: ct.dto.link,
+                    hintText: 'Descrição',
+                    initialValue: ct.dto.description,
                     onChange: (v) {
-                      ct.dto.link = v;
+                      ct.dto.description = v;
+                    },
+                  ),
+                  const SizedBox(height: AppTheme.defaultPadding * 2),
+                  CampoPadraoAtom(
+                    hintText: 'valor',
+                    initialValue: ct.dto.value,
+                    onChange: (v) {
+                      ct.dto.value = v;
                     },
                   ),
                   const SizedBox(height: AppTheme.defaultPadding * 2),
                   ButtonPadraoAtom(
-                    title: ct.id == null ? 'Criar Banner' : 'Alterar Banner',
+                    title: ct.toggle?.id == null
+                        ? 'Criar Toggle'
+                        : 'Alterar Toggle',
                     icone: Icons.create,
                     onPress: ct.criarBanner,
                   ),

@@ -49,6 +49,8 @@ class AuthController extends ManagerStore<String> {
           await salvaCredencial();
           emitNavigation(MainPage.route);
         },
+        showDialogError: true,
+        onCatch: StateManager.done,
       );
 
   Future<void> validacaoPermissao(String userId) async {
