@@ -1,15 +1,14 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/default_page_template.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:dashboard_manga_easy/modules/toggles/presenter/controllers/create_toggle_controller.dart';
 import 'package:dashboard_manga_easy/modules/toggles/presenter/ui/events/details_banner_event.dart';
 import 'package:dashboard_manga_easy/modules/toggles/presenter/ui/pages/toggles_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_manager/manager_page.dart';
-import 'package:page_manager/manager_page_builder.dart';
 
 class CreateTogglesPage extends StatefulWidget {
   const CreateTogglesPage({super.key});
@@ -40,16 +39,11 @@ class _CreateTogglesPageState
 
   @override
   Widget build(BuildContext context) {
-    return ManagerPageBuilder(
+    return DefaultPageTemplate(
       error: ct.error,
-      appBar: AppBar(
-        title: Text(
-          ct.toggle?.id == null ? 'Criar Toggle' : 'Alterar Toggle',
-        ),
+      appBar: Text(
+        ct.toggle?.id == null ? 'Criar Toggle' : 'Alterar Toggle',
       ),
-      pageDisconnected: () {
-        return const SizedBox();
-      },
       pageDone: () => Padding(
         padding: const EdgeInsets.all(AppTheme.defaultPadding),
         child: ListView(
@@ -98,19 +92,6 @@ class _CreateTogglesPageState
           ],
         ),
       ),
-      pageError: (e) {
-        return const SizedBox();
-      },
-      pageInitial: () {
-        return const SizedBox();
-      },
-      pageLoading: () => const LoadingAtom(),
-      pageLoggedOut: () {
-        return const SizedBox();
-      },
-      pageMaintenance: () {
-        return const SizedBox();
-      },
       state: ct.state,
     );
   }

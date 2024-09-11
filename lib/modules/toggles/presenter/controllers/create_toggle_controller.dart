@@ -14,11 +14,12 @@ class CreateToggleController extends ManagerStore<DetailsTogglesEvent> {
 
   @override
   Future<void> init(Map<String, dynamic> arguments) async {
-    final String? name = arguments['name'];
-    if (name != 'create') {
-      final toggle = await _toggleRepository.list(name: name);
-      if (toggle.isNotEmpty) {
-        dto = CreateToggleDto.fromEntity(toggle.first);
+    if (arguments['name'] != 'create') {
+      final String? name = arguments['name'];
+      final result = await _toggleRepository.list(name: name);
+      if (result.isNotEmpty) {
+        toggle = result.first;
+        dto = CreateToggleDto.fromEntity(result.first);
       }
     }
     state = StateManager.done;

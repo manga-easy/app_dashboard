@@ -14,7 +14,7 @@ class ApiToggle {
               'production'
           ? 'https://micro-config.lucas-cm.com.br'
           : 'https://toggle-test.lucas-cm.com.br';
-  String version = 'v1/toggle';
+  String version = 'v1';
   String? get jwt => ServiceRoute.token;
   set jwt(v) => ServiceRoute.token = v;
 

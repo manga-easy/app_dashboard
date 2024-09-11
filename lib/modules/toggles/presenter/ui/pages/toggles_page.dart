@@ -46,7 +46,7 @@ class _TogglesPageState extends ManagerPage<ToggleController, TogglesPage> {
                     title: 'Editar',
                     icone: Icons.edit,
                     onPress: () => context.go(
-                      '${TogglesPage.route}/${toggle.id}',
+                      '${TogglesPage.route}/${toggle.name}',
                     ),
                   ),
                 ],
@@ -57,7 +57,7 @@ class _TogglesPageState extends ManagerPage<ToggleController, TogglesPage> {
         );
       },
       listaItems: ct.toggles,
-      onPressedNovoItem: () => context.go('/${TogglesPage.route}/create'),
+      onPressedNovoItem: () => context.go('${TogglesPage.route}/create'),
     );
   }
 }

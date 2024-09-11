@@ -8,14 +8,14 @@ class ToggleRepositoryV1 {
   ToggleRepositoryV1(this._apiToggle);
 
   Future<void> create({required CreateToggleDto dto}) async {
-    await _apiToggle.post('', body: dto.toJson());
+    await _apiToggle.post('toggle', body: dto.toJson());
   }
 
   Future<void> update({
     required CreateToggleDto dto,
     required String id,
   }) async {
-    await _apiToggle.post(id, body: dto.toJson());
+    await _apiToggle.put('toggle/$id', body: dto.toJson());
   }
 
   Future<List<ToggleEntity>> list({String? name}) async {
@@ -23,7 +23,7 @@ class ToggleRepositoryV1 {
     if (name != null) {
       param = '?name=$name';
     }
-    final response = await _apiToggle.get('search$param');
+    final response = await _apiToggle.get('toggle/search$param');
     return response.map<ToggleEntity>((e) => ToggleEntity.fromJson(e)).toList();
   }
 }
