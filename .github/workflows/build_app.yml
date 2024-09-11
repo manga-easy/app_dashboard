@@ -30,7 +30,7 @@ jobs:
       run: |
         CURRENT_VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}')
         BUILD_NUMBER=$(echo $CURRENT_VERSION | cut -d'+' -f2)
-        VERSION=$(echo $CURRENT_VERSION | cut -d'+' -f2 | cut -d'.' -f2 )
+        VERSION=$(echo $CURRENT_VERSION | cut -d'+' -f1 | cut -d'.' -f2 )
         NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
         VERSION=$((VERSION+1))
         sed -i "s/version: .*/version: 1.$VERSION.0+$NEW_BUILD_NUMBER/" pubspec.yaml
@@ -77,7 +77,7 @@ jobs:
     - name: Copy build/web to server DEV
       if: github.ref == 'refs/heads/dev'
       run: |
-        scp -r build/web/* ubuntu@${{ secrets.SSH_IP_DEV }}:app_dashboard
+        scp -o StrictHostKeyChecking=no -r build/web/* ubuntu@${{ secrets.SSH_IP_DEV }}:app_dashboard
 
     - name: Restart container DEV
       if: github.ref == 'refs/heads/dev'
