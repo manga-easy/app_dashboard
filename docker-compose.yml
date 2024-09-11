@@ -1,0 +1,37 @@
+x-logging: &x-logging
+  logging:
+    driver: 'json-file'
+    options:
+      max-file: '1'
+      max-size: '10m'
+version: '3'
+
+services:
+  nginx:
+    restart: always
+    container_name: dash
+    image: nginx:latest
+    <<: *x-logging
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - web-dash:/etc/nginx/deploy
+    ports:
+      - "8082:8082"
+    networks:
+      - dash-board
+      - kong-net
+
+networks:
+  dash-board:
+  kong-net:
+    external: true # Define que a rede é externa
+
+volumes:
+  web-dash:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: ./web
+      o: bind
+    # compose up -d --no-build --remove-orphans
+    # .\gradlew clean build -x test
