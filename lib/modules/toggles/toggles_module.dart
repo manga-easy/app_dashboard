@@ -28,7 +28,7 @@ class TogglesModule implements Module {
           builder: (context, state) => const TogglesPage(),
           routes: [
             GoRoute(
-              path: ':id',
+              path: ':name',
               builder: (context, state) {
                 return const CreateTogglesPage();
               },
