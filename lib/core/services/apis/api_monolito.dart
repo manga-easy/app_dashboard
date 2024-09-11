@@ -13,7 +13,7 @@ class ApiMonolith {
       const String.fromEnvironment('ENVIRONMENT', defaultValue: 'test') ==
               'production'
           ? 'https://monolito.lucas-cm.com.br'
-          : 'https://test.lucas-cm.com.br';
+          : 'https://monolith-test.lucas-cm.com.br';
   String? get jwt => ServiceRoute.token;
   set jwt(v) => ServiceRoute.token = v;
 
