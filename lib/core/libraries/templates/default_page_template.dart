@@ -1,5 +1,6 @@
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/error_default_page.dart';
+import 'package:dashboard_manga_easy/core/libraries/widgets/error_pages/error_default_page.dart';
+import 'package:dashboard_manga_easy/core/libraries/widgets/error_pages/logged_out_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/entities/state_manager.dart';
 import 'package:page_manager/manager_page_builder.dart';
@@ -35,7 +36,7 @@ class DefaultPageTemplate extends StatelessWidget {
       pageLoading: () => const Center(
         child: CircularProgressIndicator(),
       ),
-      pageLoggedOut: () => const ErrorDefaultPage(),
+      pageLoggedOut: () => const LoggedOutPage(),
       pageMaintenance: () => const ErrorDefaultPage(),
       appBar: AppBar(
         title: appBar,

@@ -1,5 +1,6 @@
 import 'package:dashboard_manga_easy/core/libraries/templates/handle_dialog_error.dart';
 import 'package:dashboard_manga_easy/core/libraries/templates/handle_when_get_rethrow.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/handle_when_set_error.dart';
 import 'package:dashboard_manga_easy/core/services/apis/api_monolito.dart';
 import 'package:dashboard_manga_easy/core/services/apis/api_response_parse/api_response_parse.dart';
 import 'package:dashboard_manga_easy/core/services/apis/api_toggle.dart';
@@ -10,11 +11,15 @@ import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:page_manager/handles/manager_handle_dialog_error.dart';
 import 'package:page_manager/handles/manager_handle_when_get_rethrow.dart';
+import 'package:page_manager/handles/manager_handle_when_set_error.dart';
 
 class CoreModule {
   void register() {
     di.registerFactory<ManagerHandleDialogError>(
       () => HandleDialogError(),
+    );
+    di.registerFactory<ManagerHandleWhenSetError>(
+      () => HandleWhenSetError(),
     );
     di.registerFactory<ManagerHandleWhenGetRethrow>(
       () => HandleWhenGetRethrow(),
