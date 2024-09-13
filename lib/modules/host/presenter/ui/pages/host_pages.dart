@@ -21,9 +21,17 @@ class _HostPageState extends ManagerPage<HostController, HostPage> {
       route: HostPage.route,
       error: ct.error,
       state: ct.state,
+      onChangePesquisa: (v) => ct.searchHost = v,
       labelNovoItem: 'Host',
       itemBuilderLista: (context, index) {
         final HostEntity host = ct.list[index];
+        if (ct.searchHost.isNotEmpty &&
+            ![
+              host.hostId.toString(),
+              host.name.toLowerCase(),
+            ].any((field) => field.contains(ct.searchHost))) {
+          return const SizedBox.shrink();
+        }
         return InkWell(
           onTap: () => context.push('${HostPage.route}/${host.id}'),
           child: Container(
@@ -41,7 +49,9 @@ class _HostPageState extends ManagerPage<HostController, HostPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(host.name),
+                        Text(
+                          '${host.name} (${host.hostId}) - Order: ${host.order}',
+                        ),
                         Text(
                           host.urlApi.length > 30
                               ? '${host.urlApi.substring(0, 30)} ...'
