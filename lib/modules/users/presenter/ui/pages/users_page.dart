@@ -21,7 +21,7 @@ class _UsersPageState extends ManagerPage<UsersController, UsersPage> {
       state: ct.state,
       listaItems: ct.lista,
       initialValueCampoPesquisa: ct.pesquisa.value,
-      onChangePesquisa: (p) => ct.pesquisa.value = p,
+      onChangePesquisa: (p) => ct.pesquisa.value = ct.removeGmailSearch(p),
       onEditCompletPesquisa: ct.carregaUsers,
       onPressedAtualiza: ct.carregaUsers,
       itemBuilderLista: (context, index) {
