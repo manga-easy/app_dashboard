@@ -1,4 +1,4 @@
-class RecomendacoesModel {
+class RecommendationsEntity {
   final String? id;
   final String uniqueid;
   final String title;
@@ -8,7 +8,7 @@ class RecomendacoesModel {
   final String? artistId;
   final String? artistName;
 
-  RecomendacoesModel({
+  RecommendationsEntity({
     this.id,
     required this.title,
     required this.link,
@@ -19,8 +19,8 @@ class RecomendacoesModel {
     this.artistName,
   });
 
-  factory RecomendacoesModel.empty() {
-    return RecomendacoesModel(
+  factory RecommendationsEntity.empty() {
+    return RecommendationsEntity(
       title: '',
       link: '',
       uniqueid: 'uniqueid',
@@ -29,7 +29,7 @@ class RecomendacoesModel {
     );
   }
 
-  RecomendacoesModel copyWith({
+  RecommendationsEntity copyWith({
     String? id,
     String? uniqueid,
     String? title,
@@ -40,7 +40,7 @@ class RecomendacoesModel {
     String? artistId,
     String? artistName,
   }) {
-    return RecomendacoesModel(
+    return RecommendationsEntity(
       id: id ?? this.id,
       uniqueid: uniqueid ?? this.uniqueid,
       title: title ?? this.title,

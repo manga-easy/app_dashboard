@@ -1,5 +1,5 @@
-import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
-import 'package:dashboard_manga_easy/modules/notificacao/data/dtos/notification_dto.dart';
+import 'package:dashboard_manga_easy/core/services/apis/api_monolito.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/data/dtos/create_notification_dto.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/filtro_notificacao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
@@ -9,21 +9,20 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
 
   NotificacaoRepositoryV1(this._apiMonolito);
 
-  String get version => 'v1';
   String get feature => 'notifications';
   @override
   Future<void> deletDocument({required String id}) async {
-    await _apiMonolito.delete('$version/$feature/$id');
+    await _apiMonolito.delete('$feature/v1/$id');
   }
 
   @override
   Future<Notificacao?> getDocument({required String id}) async {
     try {
-      final result = await _apiMonolito.get('$version/$feature/$id');
+      final result = await _apiMonolito.get('$feature/v1/$id');
       if (result.isEmpty) {
         return null;
       }
-      return NotificationDto.fromMap(result.first).toEntity();
+      return Notificacao.fromMap(result.first);
     } catch (e) {
       return null;
     }
@@ -32,18 +31,18 @@ class NotificacaoRepositoryV1 implements NotificacaoRepository {
   @override
   Future<List<Notificacao>> listDocument({FiltroNotificacao? where}) async {
     final result = await _apiMonolito.get(
-      '$version/$feature/list',
+      '$feature/v1',
     );
     return (result as List)
-        .map<Notificacao>((e) => NotificationDto.fromMap(e).toEntity())
+        .map<Notificacao>((e) => Notificacao.fromMap(e))
         .toList();
   }
 
   @override
-  Future<void> createDocument({required Notificacao objeto}) async {
+  Future<void> createDocument({required CreateNotificationDto objeto}) async {
     await _apiMonolito.post(
-      '$version/$feature',
-      body: NotificationDto.fromEntity(objeto).toMap(),
+      '$feature/v1',
+      body: objeto.toMap(),
     );
   }
 }

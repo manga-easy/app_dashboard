@@ -1,14 +1,14 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/config/app_theme.dart';
+import 'package:dashboard_manga_easy/core/libraries/templates/default_page_template.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/controllers/criar_banner_controller.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/events/details_banner_event.dart';
+import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
-import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/loading_atom.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_manager/manager_page.dart';
-import 'package:page_manager/manager_page_builder.dart';
 
 class CriarBannerPage extends StatefulWidget {
   const CriarBannerPage({super.key});
@@ -29,7 +29,7 @@ class _CriarBannerPageState
   }
 
   void showSuccess(DetailsBannerEventSuccess event) {
-    context.pushReplacement('/banner');
+    context.pushReplacement(BannerPage.route);
     AppHelps.confirmaDialog(
       title: 'Sucesso',
       content: 'Banner ${event.operation} com sucesso',
@@ -39,16 +39,13 @@ class _CriarBannerPageState
 
   @override
   Widget build(BuildContext context) {
-    return ManagerPageBuilder(
+    return DefaultPageTemplate(
       error: ct.error,
       appBar: AppBar(
         title: Text(
-          ct.banner?.id == null ? 'Criar Banner' : 'Alterar Banner',
+          ct.id == null ? 'Criar Banner' : 'Alterar Banner',
         ),
       ),
-      pageDisconnected: () {
-        return SizedBox();
-      },
       pageDone: () => Padding(
         padding: const EdgeInsets.all(AppTheme.defaultPadding),
         child: Column(
@@ -77,9 +74,7 @@ class _CriarBannerPageState
                   ),
                   const SizedBox(height: AppTheme.defaultPadding * 2),
                   ButtonPadraoAtom(
-                    title: ct.banner?.id == null
-                        ? 'Criar Banner'
-                        : 'Alterar Banner',
+                    title: ct.id == null ? 'Criar Banner' : 'Alterar Banner',
                     icone: Icons.create,
                     onPress: ct.criarBanner,
                   ),
@@ -89,19 +84,6 @@ class _CriarBannerPageState
           ],
         ),
       ),
-      pageError: (e) {
-        return SizedBox();
-      },
-      pageInitial: () {
-        return SizedBox();
-      },
-      pageLoading: () => const LoadingAtom(),
-      pageLoggedOut: () {
-        return SizedBox();
-      },
-      pageMaintenance: () {
-        return SizedBox();
-      },
       state: ct.state,
     );
   }

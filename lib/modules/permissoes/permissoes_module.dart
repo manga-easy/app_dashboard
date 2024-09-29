@@ -25,10 +25,12 @@ class PermissoesModule implements Module {
         GoRoute(
           path: PermissoesPage.route,
           builder: (context, state) => const PermissoesPage(),
-        ),
-        GoRoute(
-          path: EditPermissoesPage.route,
-          builder: (context, state) => const EditPermissoesPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              builder: (context, state) => const EditPermissoesPage(),
+            ),
+          ],
         ),
       ];
 }

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/data/dtos/create_recommendations_dto.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
@@ -20,22 +20,36 @@ class CriarRecomendacaoController extends ManagerStore {
     this._usersRepository,
   );
 
-  RecomendacoesModel? recomendacao;
+  CreateRecommendationsDto? recomendacao;
+  String? recommendationId;
   @override
-  void init(Map<String, dynamic> arguments) {
-    recomendacao = arguments as RecomendacoesModel?;
-    recomendacao ??= RecomendacoesModel.empty();
-    state = StateManager.done;
-  }
-
-  Future<void> criarRecomendacao(context) => handleTry(
+  void init(Map<String, dynamic> arguments) => handleTry(
         call: () async {
-          if (recomendacao!.id == null) {
+          if (arguments['id'] != 'create') {
+            recommendationId = arguments['id'];
+            final result = await _recomendationsRepository.getDocument(
+              id: recommendationId!,
+            );
+            if (result != null) {
+              recomendacao = CreateRecommendationsDto.fromEntity(result);
+            }
+          }
+          recomendacao ??= CreateRecommendationsDto.empty();
+          state = StateManager.done;
+        },
+      );
+
+  Future<void> criarRecomendacao(BuildContext context) => handleTry(
+        call: () async {
+          if (recommendationId == null) {
             await _recomendationsRepository.creatDocument(
-                objeto: recomendacao!);
+              objeto: recomendacao!,
+            );
           } else {
             await _recomendationsRepository.updateDocument(
-                objeto: recomendacao!);
+              objeto: recomendacao!,
+              id: recommendationId!,
+            );
           }
           Navigator.of(context).pop();
           AppHelps.confirmaDialog(
@@ -44,7 +58,8 @@ class CriarRecomendacaoController extends ManagerStore {
             context: context,
           );
         },
-        onWhenRethow: (e) => false,
+        showDialogError: true,
+        onCatch: StateManager.done,
       );
 
   Future<List<User>> pesquisaUser(String search) async {
@@ -76,10 +91,10 @@ class CriarRecomendacaoController extends ManagerStore {
           final image = File(pickedFile.path);
           await _recomendationsRepository.updateImage(
             file: image,
-            uniqueid: recomendacao!.uniqueid,
+            id: recommendationId!,
           );
           Navigator.of(context).pop();
         },
-        onWhenRethow: (e) => false,
+        onCatch: StateManager.done,
       );
 }

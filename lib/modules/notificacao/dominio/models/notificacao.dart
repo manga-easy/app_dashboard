@@ -1,31 +1,28 @@
 class Notificacao {
-  String? id;
-  String titulo;
-  String menssege;
-  String image;
-  @Deprecated('Campo depreciado use createAt')
-  int dateMade;
-  int createAt;
-  int updateAt;
+  final String id;
+  final String title;
+  final String? message;
+  final String? image;
+  final int createAt;
+  final String status;
 
   Notificacao({
-    this.id,
-    required this.menssege,
-    required this.titulo,
-    required this.dateMade,
+    required this.id,
+    required this.message,
+    required this.title,
     required this.image,
     required this.createAt,
-    required this.updateAt,
+    required this.status,
   });
 
-  factory Notificacao.empty() {
+  factory Notificacao.fromMap(Map<String, dynamic> map) {
     return Notificacao(
-      titulo: '',
-      menssege: '',
-      image: '',
-      dateMade: DateTime.now().millisecondsSinceEpoch,
-      createAt: DateTime.now().millisecondsSinceEpoch,
-      updateAt: DateTime.now().millisecondsSinceEpoch,
+      id: map['id'],
+      title: map['title'],
+      message: map['message'],
+      image: map['image'],
+      createAt: map['createdAt'] ?? 0,
+      status: map['status'],
     );
   }
 }

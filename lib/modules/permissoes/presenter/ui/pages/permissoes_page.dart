@@ -1,8 +1,8 @@
 import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/permissoes_controller.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/atoms/name_user_build.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/edit_permissoes_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:page_manager/manager_page.dart';
 
 class PermissoesPage extends StatefulWidget {
@@ -22,19 +22,14 @@ class _PermissoesPageState
       state: ct.state,
       onPressedAtualiza: ct.carregaPermissoes,
       labelNovoItem: 'Adicionar permissão',
-      onPressedNovoItem: () => Navigator.pushNamed(
-        context,
-        EditPermissoesPage.route,
-      ),
+      onPressedNovoItem: () => context.push('${PermissoesPage.route}/create'),
       itemBuilderLista: (context, index) {
         final data = ct.permissoes[index];
         return Card(
           child: ListTile(
-            onTap: () => Navigator.pushNamed(
-              context,
-              EditPermissoesPage.route,
-              arguments: data,
-            ).then((value) => ct.carregaPermissoes()),
+            onTap: () => context
+                .push('${PermissoesPage.route}/${data.id}')
+                .then((value) => ct.carregaPermissoes()),
             title: NameUserBuild(
               future: ct.getNameUser(userId: data.userId),
             ),

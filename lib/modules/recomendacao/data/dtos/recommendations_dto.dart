@@ -23,7 +23,7 @@ class RecommendationsDto {
     required this.artistname,
   });
 
-  factory RecommendationsDto.fromEntity(RecomendacoesModel entity) {
+  factory RecommendationsDto.fromEntity(RecommendationsEntity entity) {
     return RecommendationsDto(
       uid: entity.id,
       uniqueid: entity.uniqueid,
@@ -37,23 +37,9 @@ class RecommendationsDto {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'uid': uid,
-      'uniqueid': uniqueid,
-      'title': title,
-      'link': link,
-      'datacria': datacria,
-      'createdat': createdat,
-      'updatedat': updatedat,
-      'artistid': artistid,
-      'artistname': artistname,
-    };
-  }
-
   factory RecommendationsDto.fromMap(Map<String, dynamic> map) {
     return RecommendationsDto(
-      uid: map['uid'],
+      uid: map['id'],
       uniqueid: map['uniqueid'],
       title: map['title'],
       link: map['link'],
@@ -65,8 +51,8 @@ class RecommendationsDto {
     );
   }
 
-  RecomendacoesModel toEntity() {
-    return RecomendacoesModel(
+  RecommendationsEntity toEntity() {
+    return RecommendationsEntity(
       id: uid,
       title: title,
       link: link,

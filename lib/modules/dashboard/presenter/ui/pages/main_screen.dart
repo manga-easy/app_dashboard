@@ -1,7 +1,8 @@
-import 'package:dashboard_manga_easy/core/config/app_theme.dart';
 import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_template.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/controllers/dashboard_controller.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/presenter/ui/pages/emblemas_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:page_manager/manager_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,24 +19,23 @@ class _MainPageState extends ManagerPage<DashboardController, MainPage> {
       route: MainPage.route,
       state: ct.state,
       error: ct.error,
-      itemBuilderLista: (context, inte) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: AppTheme.defaultPadding),
-            Row(
-              children: [
-                Text(
-                  'Emblemas de Doações',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ],
-            ),
-            const SizedBox(height: AppTheme.defaultPadding / 2),
-          ],
+      onPressedAtualiza: () => ct.carregaEmblemaDoadores(),
+      itemBuilderLista: (context, index) {
+        final emblems = ct.emblemasDoadores[index];
+        return ListTile(
+          onTap: () => context.push('${EmblemasPage.route}/${emblems.id}'),
+          leading: CircleAvatar(
+            radius: 25,
+            foregroundImage: NetworkImage(emblems.url),
+          ),
+          title: Text(emblems.name),
+          subtitle: Text(
+            emblems.category.name,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         );
       },
-      listaItems: const [1],
+      listaItems: ct.emblemasDoadores,
     );
   }
 }

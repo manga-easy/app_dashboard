@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
+import 'package:dashboard_manga_easy/core/services/apis/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/banners/data/dtos/create_banner_dto.dart';
 import 'package:dashboard_manga_easy/modules/banners/domain/entities/banner_entity.dart';
 
@@ -35,5 +35,10 @@ class BannerRepositoryV2 {
   Future<List<BannerEntity>> listDocument() async {
     final result = await _apiMonolito.get('$table/v1');
     return result.map<BannerEntity>((e) => BannerEntity.fromJson(e)).toList();
+  }
+
+  Future<BannerEntity?> getById(String id) async {
+    final result = await _apiMonolito.get('$table/v1/$id');
+    return BannerEntity.fromJson(result);
   }
 }

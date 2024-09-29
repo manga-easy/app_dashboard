@@ -9,13 +9,6 @@ class CreateBannerDto {
     required this.link,
   });
 
-  factory CreateBannerDto.fromJson(Map<String, dynamic> json) {
-    return CreateBannerDto(
-      image: json['image'],
-      link: json['link'],
-    );
-  }
-
   Map<String, dynamic> toJson() {
     return {
       'image': image,

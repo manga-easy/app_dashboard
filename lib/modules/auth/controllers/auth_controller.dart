@@ -1,14 +1,12 @@
 import 'dart:async';
-import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:dashboard_manga_easy/modules/auth/data/repositories/credencial_repository_v1.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/models/credencial_model.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/pages/main_screen.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permissoes_params.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:page_manager/manager_store.dart';
+import 'package:page_manager/export_manager.dart';
 
 class AuthController extends ManagerStore<String> {
   final CredencialRepository _credencialRepo;
@@ -36,7 +34,7 @@ class AuthController extends ManagerStore<String> {
   @override
   Future<void> init(Map<String, dynamic> arguments) async {
     await carregaCredencial();
-    await loginAutomatico();
+    state = StateManager.done;
   }
 
   void logar(BuildContext context) => handleTry(
@@ -51,17 +49,14 @@ class AuthController extends ManagerStore<String> {
           await salvaCredencial();
           emitNavigation(MainPage.route);
         },
-        onWhenRethow: (e) => false,
+        showDialogError: true,
+        onCatch: StateManager.done,
       );
 
   Future<void> validacaoPermissao(String userId) async {
-    final result = await _permissionsRepository.listDocument(
-      where: PermissoesParams(
-        userId: userId,
-      ),
-    );
+    final result = await _permissionsRepository.getByUser(userId: userId);
 
-    _serviceRoute.permissions = result.first;
+    _serviceRoute.permissions = result;
   }
 
   Future<void> carregaCredencial() async {
@@ -78,17 +73,5 @@ class AuthController extends ManagerStore<String> {
       userId: ServiceRoute.userId,
     );
     await _credencialRepo.put(objeto: cred);
-  }
-
-  Future<void> loginAutomatico() async {
-    try {
-      final session = await _authService.getSession();
-      ServiceRoute.userId = session.userId;
-      ServiceRoute.token = await _authService.getJwt();
-      await validacaoPermissao(session.userId);
-      emitNavigation(MainPage.route);
-    } catch (e) {
-      Helps.log(e);
-    }
   }
 }

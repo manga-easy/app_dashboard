@@ -25,12 +25,12 @@ class FormNotificacao extends StatelessWidget {
           const SizedBox(height: 20),
           CampoPadraoAtom(
             hintText: 'Digite o titulo',
-            onChange: (v) => controller.nova!.titulo = v,
+            onChange: (v) => controller.nova!.title = v,
           ),
           const SizedBox(height: 10),
           CampoPadraoAtom(
             hintText: 'Digite a mensagem',
-            onChange: (v) => controller.nova!.menssege = v,
+            onChange: (v) => controller.nova!.message = v,
           ),
           const SizedBox(height: 10),
           CampoPadraoAtom(

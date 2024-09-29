@@ -25,10 +25,12 @@ class RecomendacaoModule implements Module {
         GoRoute(
           path: RecomendacaoPage.route,
           builder: (context, state) => const RecomendacaoPage(),
-        ),
-        GoRoute(
-          path: CriarRecomendacaoPage.route,
-          builder: (context, state) => const CriarRecomendacaoPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              builder: (context, state) => const CriarRecomendacaoPage(),
+            ),
+          ],
         ),
       ];
 }

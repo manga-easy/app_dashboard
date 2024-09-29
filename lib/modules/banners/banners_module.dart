@@ -34,7 +34,6 @@ class BannersModule implements Module {
             GoRoute(
               path: ':id',
               builder: (context, state) {
-                state.pathParameters;
                 return const CriarBannerPage();
               },
             ),

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
 
 class HostDetailsPage extends StatefulWidget {
-  static const route = '/HostDetails';
   const HostDetailsPage({super.key});
   @override
   State<HostDetailsPage> createState() => _HostDetailsPageState();
@@ -17,7 +16,7 @@ class _HostDetailsPageState
     extends ManagerPage<HostDetailsController, HostDetailsPage> {
   @override
   Widget build(BuildContext context) {
-    final tipo = ct.host?.id == null ? 'Criar' : 'Alterar';
+    final tipo = ct.id == null ? 'Criar' : 'Alterar';
     return DefaultPageTemplate(
       state: ct.state,
       appBar: Text('$tipo Host'),

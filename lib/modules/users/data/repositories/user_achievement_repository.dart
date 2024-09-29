@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/services/api_monolito/api_monolito.dart';
+import 'package:dashboard_manga_easy/core/services/apis/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/users/data/dtos/create_user_achievement_dto.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user_achievement_entity.dart';
 
@@ -14,7 +14,7 @@ class UserAchievementRepository {
   }) async {
     final String userId = objeto.userId;
     final result = await _apiMonolito.post(
-      'user/v1/$userId/achievement',
+      'users/$userId/v1/achievements',
       body: objeto.toJson(),
     );
 
@@ -26,7 +26,7 @@ class UserAchievementRepository {
     required String userId,
   }) async {
     await _apiMonolito.delete(
-      'user/v1/$userId/achievement/$achievementId',
+      'users/$userId/v1/achievements/$achievementId',
     );
   }
 
@@ -39,9 +39,12 @@ class UserAchievementRepository {
       filter += 'achievementId=$achievementId&';
     }
     final result = await _apiMonolito.get(
-      'user/v1/$userId/achievement?$filter',
+      'users/$userId/v1/achievements?$filter',
     );
     if (result == null) {
+      return [];
+    }
+    if (result.isEmpty) {
       return [];
     }
     return result

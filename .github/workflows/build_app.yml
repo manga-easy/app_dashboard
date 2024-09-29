@@ -2,8 +2,9 @@ name: Build and Upload Flutter APK
 
 on:
   push:
-    tags:
-      - '*'  # Executa a ação em qualquer tag que comece com 'v'
+    branches:
+      - dev
+      - main
 permissions: write-all
 
 jobs:
@@ -23,35 +24,92 @@ jobs:
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.1'  # Defina a versão do Flutter que você deseja usar
+        flutter-version: '3.24.2'
 
     - name: Update pubspec.yaml version
       run: |
-        VERSION=$(echo "${GITHUB_REF#refs/tags/}")
         CURRENT_VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}')
         BUILD_NUMBER=$(echo $CURRENT_VERSION | cut -d'+' -f2)
+        VERSION=$(echo $CURRENT_VERSION | cut -d'+' -f1 | cut -d'.' -f2 )
         NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
-        sed -i "s/version: .*/version: $VERSION+$NEW_BUILD_NUMBER/" pubspec.yaml
+        VERSION=$((VERSION+1))
+        sed -i "s/version: .*/version: 1.$VERSION.0+$NEW_BUILD_NUMBER/" pubspec.yaml
       env:
         GITHUB_REF: ${{ github.ref }}
         
     - name: Install dependencies
       run: flutter pub get
-
-    - name: Build APK
+     
+    - name: Build APK DEV
+      if: github.ref == 'refs/heads/dev'
       run: |
         flutter build web --release --no-tree-shake-icons --web-renderer html
-        rm -rf deploy
-        mv build/web deploy
+    
+    - name: Build APK PROD
+      if: github.ref == 'refs/heads/main'
+      run: |
+        flutter build web --release --no-tree-shake-icons --web-renderer html --dart-define=ENVIRONMENT=production 
 
     - name: Commit pubspec.yaml version
       run: |
-        VERSION=$(echo "${GITHUB_REF#refs/tags/}")
         git config --global user.email "lucas.cardo123@hotmail.com"
         git config --global user.name "lucas"
         git add .
-        git commit -m "Update version to $VERSION"
-        git push origin HEAD:main
+        git commit -m "Update version"
+        git push
       env:
         GITHUB_REF: ${{ github.ref }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-build
+        path: build/web  
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Download build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: web-build
+        path: build/web
+
+    ###### DEV ######
+    - name: Set up SSH for DEV
+      if: github.ref == 'refs/heads/dev'
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
+
+    - name: Copy build/web to server DEV
+      if: github.ref == 'refs/heads/dev'
+      run: |
+        scp -o StrictHostKeyChecking=no -r build/web/* ubuntu@${{ secrets.SSH_IP_DEV }}:app_dashboard/web
+
+    - name: Restart container DEV
+      if: github.ref == 'refs/heads/dev'
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SSH_IP_DEV }} "cd app_dashboard && sudo docker compose up -d --force-recreate"
+
+    ###### PROD ######
+
+    - name: Set up SSH for PROD
+      if: github.ref == 'refs/heads/main'
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_PROD }}
+
+    - name: Copy build/web to server PROD
+      if: github.ref == 'refs/heads/main'
+      run: |
+        scp -r build/web/* ubuntu@${{ secrets.SSH_IP_PROD }}:app_dashboard
+
+    - name: Restart container PROD
+      if: github.ref == 'refs/heads/main'
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SSH_IP_PROD }} "cd app_dashboard && sudo docker compose up -d --force-recreate"

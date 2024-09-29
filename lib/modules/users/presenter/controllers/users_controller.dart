@@ -23,6 +23,13 @@ class UsersController extends ManagerStore {
     carregaUsers();
   }
 
+  String removeGmailSearch(String email) {
+    if (email.contains('@gmail')) {
+      return email.split('@gmail')[0];
+    }
+    return email;
+  }
+
   Future<void> carregaUsers() async {
     try {
       state = StateManager.loading;

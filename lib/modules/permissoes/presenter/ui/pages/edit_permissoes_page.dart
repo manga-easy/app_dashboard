@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
 
 class EditPermissoesPage extends StatefulWidget {
-  static const route = '/permissions/edit';
   const EditPermissoesPage({super.key});
   @override
   State<EditPermissoesPage> createState() => _EditPermissoesPageState();
@@ -56,12 +55,12 @@ class _EditPermissoesPageState
               );
               if (user is User) {
                 setState(() {
-                  ct.permission = ct.permission.copyWith(userid: user.id!);
+                  ct.permission = ct.permission.copyWith(userId: user.id!);
                 });
               }
             },
             child: NameUserBuild(
-              future: ct.getNameUser(userId: ct.permission.userid),
+              future: ct.getEmail(userId: ct.permission.userId),
             ),
           ),
           const SizedBox(height: AppTheme.defaultPadding),

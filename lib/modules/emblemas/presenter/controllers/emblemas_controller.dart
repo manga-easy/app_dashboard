@@ -24,6 +24,5 @@ class EmblemasController extends ManagerStore {
         call: () async {
           lista = await _emblemasRepository.get(where: AchievementParams());
         },
-        onWhenRethow: (e) => false,
       );
 }

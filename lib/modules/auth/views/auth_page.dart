@@ -50,7 +50,7 @@ class _AuthPageState extends ManagerPage<AuthController, AuthPage> {
                     style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(width: 8),
-                  VersaoAppOrg()
+                  VersaoAppOrg(),
                 ],
               ),
               const SizedBox(height: AppTheme.defaultPadding * 2),

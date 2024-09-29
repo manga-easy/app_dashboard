@@ -3,12 +3,12 @@ import 'package:dashboard_manga_easy/core/libraries/templates/modulo_page_templa
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_entity.dart';
 import 'package:dashboard_manga_easy/modules/host/domain/entities/host_status_enum.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_controller.dart';
-import 'package:dashboard_manga_easy/modules/host/presenter/ui/pages/host_details_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:page_manager/manager_page.dart';
 
 class HostPage extends StatefulWidget {
-  static const route = '/Host';
+  static const route = '/hosts';
   const HostPage({super.key});
   @override
   State<HostPage> createState() => _HostPageState();
@@ -21,15 +21,19 @@ class _HostPageState extends ManagerPage<HostController, HostPage> {
       route: HostPage.route,
       error: ct.error,
       state: ct.state,
+      onChangePesquisa: (v) => ct.searchHost = v,
       labelNovoItem: 'Host',
       itemBuilderLista: (context, index) {
         final HostEntity host = ct.list[index];
+        if (ct.searchHost.isNotEmpty &&
+            ![
+              host.hostId.toString(),
+              host.name.toLowerCase(),
+            ].any((field) => field.contains(ct.searchHost))) {
+          return const SizedBox.shrink();
+        }
         return InkWell(
-          onTap: () => Navigator.pushNamed(
-            context,
-            HostDetailsPage.route,
-            arguments: host,
-          ),
+          onTap: () => context.push('${HostPage.route}/${host.id}'),
           child: Container(
             margin: const EdgeInsets.only(bottom: 10, right: 16),
             color: Theme.of(context).cardColor,
@@ -45,7 +49,9 @@ class _HostPageState extends ManagerPage<HostController, HostPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(host.name),
+                        Text(
+                          '${host.name} (${host.hostId}) - Order: ${host.order}',
+                        ),
                         Text(
                           host.urlApi.length > 30
                               ? '${host.urlApi.substring(0, 30)} ...'
@@ -85,10 +91,7 @@ class _HostPageState extends ManagerPage<HostController, HostPage> {
       },
       onPressedAtualiza: ct.loadingHost,
       listaItems: ct.list,
-      onPressedNovoItem: () => Navigator.pushNamed(
-        context,
-        HostDetailsPage.route,
-      ),
+      onPressedNovoItem: () => context.push('${HostPage.route}/create'),
     );
   }
 }

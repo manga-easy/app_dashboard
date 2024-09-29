@@ -1,6 +1,5 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/data/dtos/create_permission_dto.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/permission_entity.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/domain/repositories/permissions_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
@@ -17,48 +16,46 @@ class EditPermissoesController extends ManagerStore {
   );
 
   CreatePermissionDto permission = CreatePermissionDto.empty();
-
+  String? id;
   @override
-  void init(Map<String, dynamic> arguments) {
-    final argument = arguments as Permission?;
-    permission = argument != null
-        ? CreatePermissionDto(
-            userid: argument.userId,
-            value: argument.level,
-          )
-        : CreatePermissionDto.empty();
+  Future<void> init(Map<String, dynamic> arguments) async {
+    if (arguments['id'] != 'create') {
+      id = arguments['id'];
+      final result = await _permissionsRepository.getDocument(id: id!);
+      if (result != null) {
+        permission = CreatePermissionDto.fromEntity(result);
+      }
+    }
+
     state = StateManager.done;
   }
 
-  Future<String> getNameUser({required String userId}) async {
+  Future<String> getEmail({required String userId}) async {
     if (userId.isEmpty) {
       return 'Selecione um usuario';
     }
     final result = await _usersRepository.getDocument(id: userId);
-    return result?.name ?? 'Não encontrado';
+    return result?.email ?? 'Não encontrado';
   }
 
   Future<void> salvarEditaDados(BuildContext context) => handleTry(
         call: () async {
-          if (permission.userid.isEmpty) {
+          if (permission.userId.isEmpty) {
             throw Exception('User vazio, selecione um usuário');
           }
           var op = 'criado';
 
-          await _permissionsRepository.creatDocument(
-            objeto: CreatePermissionDto(
-              userid: permission.userid,
-              value: permission.value,
-            ),
-          );
-
-          await _permissionsRepository.updateDocument(
-            objeto: CreatePermissionDto(
-              userid: permission.userid,
-              value: permission.value,
-            ),
-          );
-          op = 'atualizado';
+          if (id == null) {
+            await _permissionsRepository.creatDocument(
+              objeto: permission,
+            );
+          } else {
+            await _permissionsRepository.updateDocument(
+              objeto: permission,
+              id: id!,
+            );
+            op = 'atualizado';
+          }
 
           Navigator.of(context).pop();
           AppHelps.confirmaDialog(
@@ -67,7 +64,8 @@ class EditPermissoesController extends ManagerStore {
             context: context,
           );
         },
-        onWhenRethow: (e) => false,
+        showDialogError: true,
+        onCatch: StateManager.done,
       );
 
   Future<List<User>> pesquisaUser(String pesquisa) async {

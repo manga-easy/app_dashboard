@@ -10,6 +10,8 @@ class HostController extends ManagerStore {
   HostController(this._hostRepository);
 
   var list = <HostEntity>[];
+  String _search = '';
+  String get searchHost => _search.toLowerCase();
 
   @override
   void init(Map<String, dynamic> arguments) {
@@ -20,11 +22,17 @@ class HostController extends ManagerStore {
     try {
       state = StateManager.loading;
       list = await _hostRepository.listDocument();
+      list.sort((a, b) => a.order.compareTo(b.hostId));
       state = StateManager.done;
     } catch (e) {
       state = StateManager.error;
       rethrow;
     }
+  }
+
+  set searchHost(String value) {
+    _search = value;
+    notifyListeners();
   }
 
   void changStatus(HostEntity host) => handleTry(
@@ -33,9 +41,10 @@ class HostController extends ManagerStore {
               ? HostStatus.enable
               : HostStatus.disable;
           await _hostRepository.updateDocument(
-              objeto: host.toDto(), id: host.id);
+            objeto: host.toDto(),
+            id: host.id,
+          );
           list = await _hostRepository.listDocument();
         },
-        onWhenRethow: (e) => false,
       );
 }

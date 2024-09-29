@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
+import 'package:dashboard_manga_easy/modules/notificacao/data/dtos/create_notification_dto.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/models/notificacao.dart';
 import 'package:dashboard_manga_easy/modules/notificacao/dominio/repositories/notificacao_repository.dart';
 import 'package:page_manager/export_manager.dart';
@@ -33,19 +34,16 @@ class NotificacaoController extends ManagerStore {
           await _notificacaoRepository.deletDocument(id: id);
           await carregaNotificacao();
         },
-        onWhenRethow: (e) => false,
       );
 
-  void reSendNotification(Notificacao entity) => handleTry(
+  void reSendNotification(CreateNotificationDto entity, context) => handleTry(
         call: () async {
-          throw UnimplementedError();
           await _notificacaoRepository.createDocument(objeto: entity);
-          // AppHelps.confirmaDialog(
-          //   title: 'Sucesso',
-          //   content: 'Mensagem enviada com sucesso',
-          //   context: context,
-          // );
+          AppHelps.confirmaDialog(
+            title: 'Sucesso',
+            content: 'Mensagem enviada com sucesso',
+            context: context,
+          );
         },
-        onWhenRethow: (e) => false,
       );
 }

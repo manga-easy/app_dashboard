@@ -1,11 +1,13 @@
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_category.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_entity.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_rarity.dart';
 
 class CreateAchievementDto {
   String name;
   String rarity;
   String description;
   String url;
-  String _benefits;
+  List<String> benefits;
   bool reclaim;
   String category;
 
@@ -14,10 +16,10 @@ class CreateAchievementDto {
     required this.rarity,
     required this.description,
     required this.url,
-    required String benefits,
+    required this.benefits,
     required this.reclaim,
     required this.category,
-  }) : _benefits = benefits;
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -25,7 +27,7 @@ class CreateAchievementDto {
       'rarity': rarity,
       'description': description,
       'url': url,
-      'benefits': benefits,
+      'benefits': benefits.join(','),
       'reclaim': reclaim,
       'category': category,
     };
@@ -34,12 +36,12 @@ class CreateAchievementDto {
   static CreateAchievementDto empty() {
     return CreateAchievementDto(
       name: '',
-      rarity: '',
+      rarity: AchievementRarity.comum.name,
       description: '',
       url: '',
-      benefits: '',
+      benefits: [],
       reclaim: false,
-      category: '',
+      category: AchievementCategory.evento.name,
     );
   }
 
@@ -49,14 +51,9 @@ class CreateAchievementDto {
       rarity: entity.rarity.name,
       description: entity.description,
       url: entity.url,
-      benefits: entity.benefits,
+      benefits: entity.benefits.split(','),
       reclaim: entity.reclaim,
       category: entity.category.name,
     );
-  }
-
-  List<String> get benefits => _benefits.split(',');
-  set benefits(List<String> benefits) {
-    _benefits = benefits.join(',');
   }
 }
