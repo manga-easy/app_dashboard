@@ -36,10 +36,7 @@ class _EmblemasPageState extends ManagerPage<EmblemasController, EmblemasPage> {
           title: Text(emb.name),
           subtitle: Text(
             emb.category.name,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.titleMedium!,
           ),
         );
       },

@@ -28,7 +28,6 @@ class _TogglesPageState extends ManagerPage<ToggleController, TogglesPage> {
           child: Column(
             children: [
               ListTile(
-                textColor: Colors.white,
                 title: Text(
                   toggle.name,
                   style: Theme.of(context).textTheme.titleLarge,

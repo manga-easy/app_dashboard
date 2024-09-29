@@ -1,4 +1,5 @@
 import 'package:dashboard_manga_easy/core/core_module.dart';
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -31,7 +32,10 @@ class MyApp extends StatelessWidget {
         Locale('pt', 'BR'),
         Locale('en'),
       ],
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        colorSchemeSeed: Helps.isProd ? Colors.lightBlue : Colors.red,
+        brightness: Brightness.dark,
+      ),
       routerConfig: ServiceRoute.of.routers,
       debugShowCheckedModeBanner: false,
     );

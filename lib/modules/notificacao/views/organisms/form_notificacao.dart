@@ -17,10 +17,7 @@ class FormNotificacao extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             'Novo Aviso',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.titleMedium!,
           ),
           const SizedBox(height: 20),
           CampoPadraoAtom(

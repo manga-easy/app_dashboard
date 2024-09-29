@@ -37,14 +37,12 @@ class _RecomendacaoPageState
             children: [
               ListTile(
                 onTap: () => Helps.copyText(reco.title, context),
-                textColor: Colors.white,
                 title: Text(
                   reco.title,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
               ListTile(
-                textColor: Colors.white,
                 title: Text(
                   'Artista: ${reco.artistName ?? 'N/A'}',
                   style: Theme.of(context).textTheme.titleMedium,

@@ -57,12 +57,7 @@ class _SelectUserState extends State<SelectUser> {
                           title: Text(user.name),
                           subtitle: Text(
                             user.email,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: Colors.white,
-                                ),
+                            style: Theme.of(context).textTheme.bodyMedium!,
                           ),
                         );
                       },

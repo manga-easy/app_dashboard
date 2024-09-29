@@ -1,5 +1,6 @@
 import 'package:dashboard_manga_easy/core/libraries/client/client_dio.dart';
 import 'package:dashboard_manga_easy/core/libraries/client/cliente_request.dart';
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/core/services/apis/api_response_parse/api_response_parse.dart';
 import 'package:dashboard_manga_easy/core/services/auth/auth_service.dart';
 import 'package:dashboard_manga_easy/core/services/routers/service_route.dart';
@@ -9,11 +10,9 @@ class ApiToggle {
   final ApiResponseParser _apiResponseParser = ApiResponseParser();
   final ClientRequest _clientRequest = ClientDio();
   final AuthService _authService;
-  final String _host =
-      const String.fromEnvironment('ENVIRONMENT', defaultValue: 'test') ==
-              'production'
-          ? 'https://micro-config.lucas-cm.com.br'
-          : 'https://toggle-test.lucas-cm.com.br';
+  final String _host = Helps.isProd
+      ? 'https://micro-config.lucas-cm.com.br'
+      : 'https://toggle-test.lucas-cm.com.br';
   String version = 'v1';
   String? get jwt => ServiceRoute.token;
   set jwt(v) => ServiceRoute.token = v;

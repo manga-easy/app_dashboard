@@ -118,4 +118,8 @@ class Helps {
       ),
     );
   }
+
+  static bool get isProd =>
+      const String.fromEnvironment('ENVIRONMENT', defaultValue: 'test') ==
+      'production';
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class DrawerListTileAtom extends StatelessWidget {
   const DrawerListTileAtom({
@@ -18,14 +17,8 @@ class DrawerListTileAtom extends StatelessWidget {
     return ListTile(
       onTap: press,
       horizontalTitleGap: 0.0,
-      leading: SvgPicture.asset(
-        svgSrc,
-        color: Colors.white54,
-        height: 16,
-      ),
       title: Text(
         title,
-        style: const TextStyle(color: Colors.white54),
       ),
     );
   }

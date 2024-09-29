@@ -28,7 +28,6 @@ class _BannerPageState extends ManagerPage<BannerController, BannerPage> {
           child: Column(
             children: [
               ListTile(
-                textColor: Colors.white,
                 title: Text(
                   banner.link,
                   style: Theme.of(context).textTheme.titleLarge,
