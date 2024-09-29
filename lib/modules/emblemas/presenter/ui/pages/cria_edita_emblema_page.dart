@@ -48,9 +48,7 @@ class _CriaEditaEmblemaPageState
                   children: [
                     Text(
                       'Beneficios',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(context).textTheme.titleMedium!,
                     ),
                   ],
                 ),
@@ -101,9 +99,7 @@ class _CriaEditaEmblemaPageState
                   children: [
                     Text(
                       'Categoria',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(context).textTheme.titleMedium!,
                     ),
                   ],
                 ),
@@ -128,9 +124,7 @@ class _CriaEditaEmblemaPageState
                   contentPadding: EdgeInsets.zero,
                   title: Text(
                     'Disponivel para resgatar',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(context).textTheme.titleMedium!,
                   ),
                   value: ct.dto.reclaim,
                   onChanged: (v) {
@@ -143,9 +137,7 @@ class _CriaEditaEmblemaPageState
                   children: [
                     Text(
                       'Raridade',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(context).textTheme.titleMedium!,
                     ),
                   ],
                 ),

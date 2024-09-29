@@ -1,3 +1,4 @@
+import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
 import 'package:dashboard_manga_easy/modules/auth/domain/services/logoff_service.dart';
 import 'package:dashboard_manga_easy/modules/auth/views/auth_page.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/pages/banners_page.dart';
@@ -46,7 +47,7 @@ class SideMenu extends StatelessWidget {
           DrawerHeader(
             child: Image.asset(
               'assets/images/logo.png',
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           Expanded(
@@ -66,16 +67,13 @@ class SideMenu extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(16.0),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    VersaoAppOrg(),
+                    const VersaoAppOrg(),
                     Text(
-                      String.fromEnvironment(
-                        'ENVIRONMENT',
-                        defaultValue: 'test',
-                      ),
+                      Helps.isProd ? 'Produção' : 'Teste',
                     ),
                   ],
                 ),

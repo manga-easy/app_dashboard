@@ -37,10 +37,7 @@ class _UsersPageState extends ManagerPage<UsersController, UsersPage> {
           title: Text(user.name),
           subtitle: Text(
             user.email,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.titleMedium!,
           ),
         );
       },

@@ -70,10 +70,7 @@ class _NotificacaoPageState
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Text(
                       notification.message ?? '',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: Colors.white),
+                      style: Theme.of(context).textTheme.bodySmall!,
                     ),
                   ),
                   Row(
@@ -101,7 +98,7 @@ class _NotificacaoPageState
                 ],
               ),
             ),
-            const Divider(color: Colors.white),
+            const Divider(),
           ],
         );
       },

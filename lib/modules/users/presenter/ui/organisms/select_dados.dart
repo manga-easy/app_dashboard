@@ -68,12 +68,7 @@ class _SelectDadosState<T> extends State<SelectDados<T>> {
                           title: Text(widget.getTitle(dado)),
                           subtitle: Text(
                             widget.getSubTitle(dado),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: Colors.white,
-                                ),
+                            style: Theme.of(context).textTheme.bodyMedium!,
                           ),
                         );
                       },
