@@ -4,7 +4,7 @@ import 'package:dashboard_manga_easy/modules/banners/domain/entities/banner_enti
 import 'package:page_manager/manager_store.dart';
 
 class BannerController extends ManagerStore<bool> {
-  final BannerRepositoryV2 bannerRepository;
+  final BannerRepository bannerRepository;
   var listaBannerItens = <BannerEntity>[];
   BannerController({required this.bannerRepository});
 

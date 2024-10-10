@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/data/dtos/create_achievement_dto.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/data/repositories/achievements_repository.dart';
@@ -15,7 +13,6 @@ class CriaEditaEmblemaController extends ManagerStore {
 
   String? achievementId;
   CreateAchievementDto dto = CreateAchievementDto.empty();
-  File? image;
 
   @override
   Future<void> init(Map<String, dynamic> arguments) async {
@@ -57,9 +54,9 @@ class CriaEditaEmblemaController extends ManagerStore {
           if (pickedFile == null) {
             throw Exception('Erro ao selecionar imagem');
           }
-          image = File(pickedFile.path);
+
           await _achievementRepository.updateImage(
-            file: image!,
+            file: pickedFile,
             id: achievementId!,
           );
           Navigator.of(context).pop();

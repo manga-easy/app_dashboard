@@ -1,13 +1,10 @@
-import 'dart:io';
-
 import 'package:dashboard_manga_easy/core/services/apis/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/data/dtos/create_achievement_dto.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_entity.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_params.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:mime/mime.dart';
-import 'package:path/path.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AchievementsRepository {
   final ApiMonolith _apiMonolito;
@@ -67,15 +64,15 @@ class AchievementsRepository {
 
   Future<AchievementEntity> updateImage({
     required String id,
-    required File file,
+    required XFile file,
   }) async {
     final result = await _apiMonolito.put(
-      '$feature/$id/image',
+      '$feature/v1/$id/images',
       body: {
-        'file': MultipartFile.fromFileSync(
-          file.path,
-          filename: basename(file.path),
-          contentType: MediaType.parse(lookupMimeType(file.path) ?? ''),
+        'file': MultipartFile.fromBytes(
+          await file.readAsBytes(),
+          filename: file.name,
+          contentType: MediaType.parse(file.mimeType ?? ''),
         ),
       },
       isformData: true,

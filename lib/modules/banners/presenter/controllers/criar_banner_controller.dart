@@ -1,11 +1,13 @@
 import 'package:dashboard_manga_easy/modules/banners/data/dtos/create_banner_dto.dart';
 import 'package:dashboard_manga_easy/modules/banners/data/repositories/banner_repository.dart';
 import 'package:dashboard_manga_easy/modules/banners/presenter/ui/events/details_banner_event.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:page_manager/entities/state_manager.dart';
 import 'package:page_manager/manager_store.dart';
 
 class CriarBannerController extends ManagerStore<DetailsBannerEvent> {
-  final BannerRepositoryV2 bannerRepository;
+  final BannerRepository bannerRepository;
 
   CreateBannerDto dto = CreateBannerDto.empty();
 
@@ -32,5 +34,25 @@ class CriarBannerController extends ManagerStore<DetailsBannerEvent> {
           }
           emitNavigation(DetailsBannerEventSuccess(tipo));
         },
+      );
+
+  Future<void> pickerImage(context) => handleTry(
+        call: () async {
+          final picker = ImagePicker();
+          final pickedFile =
+              await picker.pickImage(source: ImageSource.gallery);
+
+          if (pickedFile == null) {
+            throw Exception('Erro ao selecionar imagem');
+          }
+
+          await bannerRepository.updateImage(
+            file: pickedFile,
+            id: id!,
+          );
+          Navigator.of(context).pop();
+        },
+        showDialogError: true,
+        onCatch: StateManager.done,
       );
 }

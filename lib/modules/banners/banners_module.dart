@@ -11,7 +11,7 @@ class BannersModule implements Module {
   @override
   void register() {
     //register repositories
-    di.registerFactory(() => BannerRepositoryV2(di()));
+    di.registerFactory(() => BannerRepository(di()));
     //register controllers
     di.registerFactory(
       () => CriarBannerController(

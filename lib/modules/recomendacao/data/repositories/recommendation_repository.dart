@@ -1,23 +1,19 @@
-import 'dart:io';
-
 import 'package:dashboard_manga_easy/core/services/apis/api_monolito.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/data/dtos/create_recommendations_dto.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/data/dtos/recommendations_dto.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recommendations_filter.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:mime/mime.dart';
-import 'package:path/path.dart';
+import 'package:image_picker/image_picker.dart';
 
-class RecommendationsRepositoryV1 implements RecommendationsRepository {
+class RecommendationsRepository {
   final ApiMonolith _apiMonolito;
 
-  RecommendationsRepositoryV1(this._apiMonolito);
+  RecommendationsRepository(this._apiMonolito);
 
   String get feature => 'recommendations';
-  @override
+
   Future<RecommendationsEntity?> getDocument({required String id}) async {
     final result = await _apiMonolito.get('$feature/v1/$id');
     if (result.isEmpty) {
@@ -26,7 +22,6 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
     return RecommendationsDto.fromMap(result).toEntity();
   }
 
-  @override
   Future<void> updateDocument({
     required CreateRecommendationsDto objeto,
     required String id,
@@ -37,14 +32,12 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
     );
   }
 
-  @override
   Future<void> deletDocument({required String id}) async {
     await _apiMonolito.delete(
       '$feature/v1/$id',
     );
   }
 
-  @override
   Future<void> creatDocument({required CreateRecommendationsDto objeto}) async {
     await _apiMonolito.post(
       '$feature/v1',
@@ -52,7 +45,6 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
     );
   }
 
-  @override
   Future<List<RecommendationsEntity>> listDocument({
     RecommendationsFilter? filter,
   }) async {
@@ -70,18 +62,17 @@ class RecommendationsRepositoryV1 implements RecommendationsRepository {
         .toList();
   }
 
-  @override
   Future<RecommendationsEntity> updateImage({
     required String id,
-    required File file,
+    required XFile file,
   }) async {
     final result = await _apiMonolito.put(
-      '$feature/v1/$id/image',
+      '$feature/v1/$id/images',
       body: {
-        'file': MultipartFile.fromFileSync(
-          file.path,
-          filename: basename(file.path),
-          contentType: MediaType.parse(lookupMimeType(file.path) ?? ''),
+        'file': MultipartFile.fromBytes(
+          await file.readAsBytes(),
+          filename: file.name,
+          contentType: MediaType.parse(file.mimeType ?? ''),
         ),
       },
       isformData: true,
