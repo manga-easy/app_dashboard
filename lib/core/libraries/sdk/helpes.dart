@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:dashboard_manga_easy/core/services/apis/api_response_parse/api_erros/api_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,18 +15,6 @@ class Helps {
         time,
       ),
     );
-  }
-
-  static Future<bool> verificarConexao() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        return true;
-      }
-    } on SocketException catch (_) {
-      return false;
-    }
-    return false;
   }
 
   // Função responsável por converter um título de manga em um identificador único

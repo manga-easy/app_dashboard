@@ -1,7 +1,7 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/core/libraries/sdk/helpes.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/data/repositories/recommendation_repository.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/domain/entities/recomendacoes_model.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
 import 'package:page_manager/entities/state_manager.dart';
 import 'package:page_manager/manager_store.dart';
 

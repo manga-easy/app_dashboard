@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/data/dtos/create_recommendations_dto.dart';
-import 'package:dashboard_manga_easy/modules/recomendacao/domain/repositories/recommendation_repository.dart';
+import 'package:dashboard_manga_easy/modules/recomendacao/data/repositories/recommendation_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/repositories/users_repository.dart';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_manager/entities/state_manager.dart';
@@ -88,9 +85,8 @@ class CriarRecomendacaoController extends ManagerStore {
           if (pickedFile == null) {
             throw Exception('Erro ao selecionar imagem');
           }
-          final image = File(pickedFile.path);
           await _recomendationsRepository.updateImage(
-            file: image,
+            file: pickedFile,
             id: recommendationId!,
           );
           Navigator.of(context).pop();

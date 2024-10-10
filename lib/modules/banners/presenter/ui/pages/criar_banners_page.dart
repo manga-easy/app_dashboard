@@ -41,10 +41,8 @@ class _CriarBannerPageState
   Widget build(BuildContext context) {
     return DefaultPageTemplate(
       error: ct.error,
-      appBar: AppBar(
-        title: Text(
-          ct.id == null ? 'Criar Banner' : 'Alterar Banner',
-        ),
+      appBar: Text(
+        ct.id == null ? 'Criar Banner' : 'Alterar Banner',
       ),
       pageDone: () => Padding(
         padding: const EdgeInsets.all(AppTheme.defaultPadding),
@@ -71,6 +69,12 @@ class _CriarBannerPageState
                     onChange: (v) {
                       ct.dto.link = v;
                     },
+                  ),
+                  const SizedBox(height: AppTheme.defaultPadding * 2),
+                  ButtonPadraoAtom(
+                    title: 'Adicionar imagem',
+                    icone: Icons.image,
+                    onPress: () => ct.pickerImage(context),
                   ),
                   const SizedBox(height: AppTheme.defaultPadding * 2),
                   ButtonPadraoAtom(

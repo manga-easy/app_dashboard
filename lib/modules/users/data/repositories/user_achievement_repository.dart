@@ -31,15 +31,10 @@ class UserAchievementRepository {
   }
 
   Future<List<UserAchievement>> listDocument({
-    String? achievementId,
     required String userId,
   }) async {
-    String filter = '';
-    if (achievementId != null) {
-      filter += 'achievementId=$achievementId&';
-    }
     final result = await _apiMonolito.get(
-      'users/$userId/v1/achievements?$filter',
+      'users/$userId/v1/achievements',
     );
     if (result == null) {
       return [];
