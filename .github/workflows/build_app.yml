@@ -107,7 +107,7 @@ jobs:
     - name: Copy build/web to server PROD
       if: github.ref == 'refs/heads/main'
       run: |
-        scp -r build/web/* ubuntu@${{ secrets.SSH_IP_PROD }}:app_dashboard
+        scp -o StrictHostKeyChecking=no -r build/web/* ubuntu@${{ secrets.SSH_IP_PROD }}:app_dashboard/web
 
     - name: Restart container PROD
       if: github.ref == 'refs/heads/main'
