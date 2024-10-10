@@ -34,8 +34,8 @@ jobs:
         git fetch --tags
         TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null)
         if [ -z "$TAG" ]; then
-          echo "Nenhuma tag encontrada. Usando versão inicial v1.0.0"
-          TAG="v1.0.0"
+          echo "Nenhuma tag encontrada. Usando versão inicial 1.0.0"
+          TAG="1.0.0"
         fi
         echo "Última tag: $TAG"
         echo "::set-output name=LATEST_TAG::$TAG"
@@ -45,7 +45,6 @@ jobs:
       run: |
         echo "Tag atual: ${{ steps.get_latest_tag.outputs.LATEST_TAG }}"
         VERSION=${{ steps.get_latest_tag.outputs.LATEST_TAG }}
-        VERSION=${VERSION#v}
         IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
         if [ ${#VERSION_PARTS[@]} -ne 3 ]; then
           echo "Formato de versão inválido. Usando versão inicial 1.0.0"
@@ -54,7 +53,7 @@ jobs:
         PATCH=${VERSION_PARTS[1]}
         PATCH=$((PATCH + 1))
         NEW_VERSION="${VERSION_PARTS[0]}.$PATCH.${VERSION_PARTS[2]}"
-        NEW_TAG="v$NEW_VERSION"
+        NEW_TAG="$NEW_VERSION"
         echo "Nova versão: $NEW_VERSION"
         echo "::set-output name=NEW_TAG::$NEW_TAG"
         
