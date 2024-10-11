@@ -16,6 +16,7 @@ import 'package:dashboard_manga_easy/modules/recomendacao/recomendacao_module.da
 import 'package:dashboard_manga_easy/modules/splash/splash_module.dart';
 import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';
 import 'package:dashboard_manga_easy/modules/toggles/toggles_module.dart';
+import 'package:dashboard_manga_easy/modules/update_notes/update_notes_module.dart';
 import 'package:dashboard_manga_easy/modules/users/users_module.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -49,6 +50,7 @@ class ServiceRoute {
     PermissoesModule(),
     HostModule(),
     TogglesModule(),
+    UpdateNotesModule(),
   ];
 
   Future<void> initialise() async {
