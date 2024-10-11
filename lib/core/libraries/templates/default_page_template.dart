@@ -11,6 +11,7 @@ class DefaultPageTemplate extends StatelessWidget {
   final Object? error;
   final Widget Function()? pageInitial;
   final Widget appBar;
+  final Widget? bottomNavigationBar;
   const DefaultPageTemplate({
     super.key,
     required this.pageDone,
@@ -18,6 +19,7 @@ class DefaultPageTemplate extends StatelessWidget {
     required this.error,
     this.pageInitial,
     required this.appBar,
+    this.bottomNavigationBar,
   });
 
   @override
@@ -41,6 +43,7 @@ class DefaultPageTemplate extends StatelessWidget {
       appBar: AppBar(
         title: appBar,
       ),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }

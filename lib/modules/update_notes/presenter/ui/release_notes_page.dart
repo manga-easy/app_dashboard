@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:page_manager/export_manager.dart';
 
 class ReleaseNotesPage extends StatefulWidget {
-  static const route = '/update-notes';
+  static const route = '/release-notes';
   const ReleaseNotesPage({super.key});
 
   @override
@@ -33,9 +33,9 @@ class _ReleaseNotesPageState
               ListTile(
                 title: Text(updates.version),
                 subtitle: Text(
-                  updates.description.isNotEmpty
+                  updates.description.isEmpty
                       ? updates.features[0].description
-                      : '',
+                      : updates.description,
                 ),
                 onTap: () =>
                     context.push('${ReleaseNotesPage.route}/${updates.id}'),

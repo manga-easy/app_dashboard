@@ -8,7 +8,7 @@ import 'package:page_manager/export_manager.dart';
 class UpdateNotesController extends ManagerStore {
   final UpdateNotesRepository _repository;
 
-  UpdateNotesDto releaseNotesDto = UpdateNotesDto.empty();
+  UpdateNotesDto? releaseNotesDto;
   var listAllVersions = <UpdateNotesEntity>[];
   String? releasesId;
 
@@ -16,12 +16,13 @@ class UpdateNotesController extends ManagerStore {
 
   @override
   Future<void> init(Map<String, dynamic> arguments) async {
-    await listAllVersion();
     releasesId = arguments['id'];
 
     if (releasesId != null && releasesId != 'create') {
       final result = await _repository.getById(id: releasesId!);
       releaseNotesDto = result;
+    } else {
+      await listAllVersion();
     }
 
     state = StateManager.done;
@@ -37,7 +38,7 @@ class UpdateNotesController extends ManagerStore {
   Future<void> createRelease(context) => handleTry(
         call: () async {
           if (releasesId == 'create') {
-            await _repository.post(body: releaseNotesDto);
+            await _repository.post(body: releaseNotesDto!);
             Navigator.pop(context);
           }
         },
@@ -59,7 +60,7 @@ class UpdateNotesController extends ManagerStore {
   Future<void> updateRelease(context) => handleTry(
         call: () async {
           if (releasesId != 'create') {
-            await _repository.put(id: releasesId!, body: releaseNotesDto);
+            await _repository.put(id: releasesId!, body: releaseNotesDto!);
             Navigator.pop(context);
           }
         },
