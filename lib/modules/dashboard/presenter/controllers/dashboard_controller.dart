@@ -27,7 +27,7 @@ class DashboardController extends ManagerStore {
         call: () async {
           emblemasDoadores = await emblemasRepository.get(
             where: AchievementParams(
-              categoria: AchievementCategory.doacao.name,
+              category: AchievementCategory.doacao.name,
             ),
           );
         },
