@@ -1,18 +1,17 @@
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:flutter/material.dart';
+import 'package:page_manager/export_manager.dart';
 
 class SelectDados<T> extends StatefulWidget {
   final Future<List<T>> Function(String v) future;
   final String Function(T objet) getTitle;
   final String Function(T objet) getSubTitle;
-  final bool Function(T objet, String search) onSearch;
 
   const SelectDados({
     super.key,
     required this.future,
     required this.getSubTitle,
     required this.getTitle,
-    required this.onSearch,
   });
 
   @override
@@ -21,6 +20,19 @@ class SelectDados<T> extends StatefulWidget {
 
 class _SelectDadosState<T> extends State<SelectDados<T>> {
   final TextEditingController controller = TextEditingController();
+  final state = ValueNotifier(StateManager.initial);
+  var list = [];
+  @override
+  void initState() {
+    loadingApi();
+    super.initState();
+  }
+
+  Future<void> loadingApi() async {
+    state.value = StateManager.loading;
+    list = await widget.future(controller.text);
+    state.value = StateManager.done;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,37 +59,34 @@ class _SelectDadosState<T> extends State<SelectDados<T>> {
             const SizedBox(height: 20),
             CampoPadraoAtom(
               controller: controller,
-              onChange: (v) => setState(() {}),
+              onChange: (v) => loadingApi(),
               hintText: 'Digite o nome do $T',
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
-              child: FutureBuilder<List<T>>(
-                future: widget.future(controller.text),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        final dado = snapshot.data![index];
-                        if (!widget.onSearch(dado, controller.text)) {
-                          return const SizedBox.shrink();
-                        }
-                        return ListTile(
-                          onTap: () => Navigator.pop(context, dado),
-                          title: Text(widget.getTitle(dado)),
-                          subtitle: Text(
-                            widget.getSubTitle(dado),
-                            style: Theme.of(context).textTheme.bodyMedium!,
-                          ),
-                        );
-                      },
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+              child: ValueListenableBuilder(
+                builder: (context, value, child) {
+                  return switch (state.value) {
+                    StateManager.done => ListView.builder(
+                        itemCount: list.length,
+                        itemBuilder: (context, index) {
+                          final dado = list[index];
+                          return ListTile(
+                            onTap: () => Navigator.pop(context, dado),
+                            title: Text(widget.getTitle(dado)),
+                            subtitle: Text(
+                              widget.getSubTitle(dado),
+                              style: Theme.of(context).textTheme.bodyMedium!,
+                            ),
+                          );
+                        },
+                      ),
+                    _ => const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                  };
                 },
+                valueListenable: state,
               ),
             ),
           ],

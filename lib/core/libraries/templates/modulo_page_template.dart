@@ -87,9 +87,17 @@ class ModuloPageTemplate extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextButton(
+                      ElevatedButton.icon(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppTheme.defaultPadding * 1.5,
+                            vertical: AppTheme.defaultPadding /
+                                (Responsive.isMobile(context) ? 2 : 1),
+                          ),
+                        ),
                         onPressed: onPressedAtualiza,
-                        child: const Text('Atualiza'),
+                        icon: const Icon(Icons.replay),
+                        label: const Text('Atualizar'),
                       ),
                       if (labelNovoItem != null)
                         ElevatedButton.icon(

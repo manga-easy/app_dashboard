@@ -62,12 +62,4 @@ class BannerRepository {
     );
     return BannerEntity.fromJson(result.first);
   }
-
-  String lokkk(String path) {
-    final index = path.lastIndexOf('.');
-    if (index < 0 || index + 1 >= path.length) {
-      return path;
-    }
-    return path.substring(index + 1).toLowerCase();
-  }
 }

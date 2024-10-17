@@ -1,6 +1,7 @@
 import 'package:dashboard_manga_easy/core/config/app_helpes.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/data/repositories/achievements_repository.dart';
 import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_entity.dart';
+import 'package:dashboard_manga_easy/modules/emblemas/domain/models/achievement_params.dart';
 import 'package:dashboard_manga_easy/modules/users/data/dtos/create_user_achievement_dto.dart';
 import 'package:dashboard_manga_easy/modules/users/data/repositories/user_achievement_repository.dart';
 import 'package:dashboard_manga_easy/modules/users/domain/entities/user.dart';
@@ -38,8 +39,8 @@ class UsersDetalhesController extends ManagerStore {
     );
   }
 
-  Future<List<AchievementEntity>> loadAchievements(String search) {
-    return _emblemasRepository.get();
+  Future<List<AchievementEntity>> loadAchievements(String name) {
+    return _emblemasRepository.get(where: AchievementParams(name: name));
   }
 
   Future<AchievementEntity?> getAchievement(String idAchievement) {

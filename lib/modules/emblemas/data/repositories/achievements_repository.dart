@@ -47,16 +47,21 @@ class AchievementsRepository {
   }
 
   Future<List<AchievementEntity>> get({AchievementParams? where}) async {
-    final filtro = [];
+    String filtro = '';
     if (where != null) {
-      if (where.categoria != null) {
-        filtro.add('categoria=${where.categoria}&');
+      if (where.category != null) {
+        filtro += 'category=${where.category}&';
+      }
+      if (where.name != null) {
+        filtro += 'name=${where.name}&';
       }
     }
     final result = await _apiMonolito.get(
-      '$feature/v1?',
+      '$feature/v1?$filtro',
     );
-
+    if (result.isEmpty) {
+      return [];
+    }
     return result
         .map<AchievementEntity>((e) => AchievementEntity.fromJson(e))
         .toList();

@@ -1,5 +1,5 @@
 class AchievementParams {
-  final String? idAchievement;
-  final String? categoria;
-  AchievementParams({this.categoria, this.idAchievement});
+  final String? category;
+  final String? name;
+  AchievementParams({this.category, this.name});
 }
