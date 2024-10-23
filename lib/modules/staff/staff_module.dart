@@ -1,7 +1,8 @@
 import 'package:dashboard_manga_easy/core/interfaces/module_factory.dart';
 import 'package:dashboard_manga_easy/main.dart';
-import 'package:dashboard_manga_easy/modules/permissoes/presenter/controllers/staff_controller.dart';
 import 'package:dashboard_manga_easy/modules/staff/domain/repositories/staff_repository.dart';
+import 'package:dashboard_manga_easy/modules/staff/presenter/controllers/edit_staff_controller.dart';
+import 'package:dashboard_manga_easy/modules/staff/presenter/controllers/staff_controller.dart';
 import 'package:dashboard_manga_easy/modules/staff/presenter/ui/pages/edit_staff_page.dart';
 import 'package:dashboard_manga_easy/modules/staff/presenter/ui/pages/staff_page.dart';
 import 'package:go_router/go_router.dart';
@@ -13,10 +14,10 @@ class StaffModule implements Module {
     di.registerFactory(() => StaffRepository(di()));
     //register controller
     di.registerFactory(
-      () => StaffController(
-        di(),
-        di(),
-      ),
+      () => StaffController(di(), di()),
+    );
+    di.registerFactory(
+      () => EditStaffController(di(), di(), di()),
     );
   }
 
@@ -28,7 +29,10 @@ class StaffModule implements Module {
           routes: [
             GoRoute(
               path: ':id',
-              builder: (context, state) => const EditStaffPage(),
+              builder: (context, state) {
+                final userId = state.extra;
+                return EditStaffPage(id: userId as String?);
+              },
             ),
           ],
         ),

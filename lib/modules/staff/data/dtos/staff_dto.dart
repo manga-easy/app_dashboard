@@ -1,4 +1,3 @@
-import 'package:dashboard_manga_easy/modules/permissoes/domain/models/level_permissoes_enum.dart';
 import 'package:dashboard_manga_easy/modules/staff/domain/models/staff_entity.dart';
 
 class StaffDto {
@@ -21,7 +20,7 @@ class StaffDto {
       id: '',
       createdAt: 0,
       updatedAt: 0,
-      type: 'unknown',
+      type: StaffType.unknown.name,
       userId: '',
     );
   }
@@ -41,7 +40,7 @@ class StaffDto {
       id: id,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      type: _mapStringToStaffType(type),
+      type: mapStringToStaffType(type),
       userId: userId,
     );
   }
@@ -66,12 +65,16 @@ class StaffDto {
     };
   }
 
-  static StaffType _mapStringToStaffType(String type) {
+  static StaffType mapStringToStaffType(String type) {
     switch (type.toLowerCase()) {
       case 'admin':
         return StaffType.admin;
       case 'support':
         return StaffType.support;
+      case 'developer':
+        return StaffType.developer;
+      case 'designer':
+        return StaffType.designer;
       default:
         return StaffType.unknown;
     }
@@ -89,17 +92,6 @@ class StaffDto {
         return 'Designer';
       default:
         return 'unknown';
-    }
-  }
-
-  static StaffType converter(LevelPermissoes level) {
-    switch (level) {
-      case LevelPermissoes.admin:
-        return StaffType.admin;
-      case LevelPermissoes.suporte:
-        return StaffType.support;
-      default:
-        return StaffType.unknown;
     }
   }
 }
