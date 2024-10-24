@@ -35,7 +35,7 @@ class EditStaffController extends ManagerStore {
       blockNewStaff = true;
 
       final result = await _staffRepository.getById(id: staffId!);
-      staffDetail = result.isNotEmpty ? result.first : null;
+      staffDetail = result;
 
       if (staffDetail != null) {
         selectedType = staffDetail!.type.index;
@@ -107,11 +107,11 @@ class EditStaffController extends ManagerStore {
   }
 
   Future<bool> _verifyStaffHasRole(StaffDto staff) async {
-    final List<StaffEntity> roles =
+    final StaffEntity? roles =
         await _staffRepository.getByUserId(userId: staff.userId);
 
-    return roles
-        .any((role) => role.type == StaffDto.mapStringToStaffType(staff.type));
+    return [roles]
+        .any((role) => role!.type == StaffDto.mapStringToStaffType(staff.type));
   }
 
   Future<List<User>> findStaff(String staff) async {

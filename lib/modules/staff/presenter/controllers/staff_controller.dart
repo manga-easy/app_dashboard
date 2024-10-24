@@ -34,8 +34,8 @@ class StaffController extends ManagerStore {
 
   Future<void> getById(String id, {int? selectedType}) async {
     final staff = await _staffRepository.getById(id: id);
-    if (staff.isNotEmpty) {
-      staffDetail = staff.first;
+    if (staff != null) {
+      staffDetail = staff;
       selectedType = staffDetail!.type.index;
     }
     notifyListeners();

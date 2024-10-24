@@ -20,26 +20,24 @@ class StaffRepository {
         .toList();
   }
 
-  Future<List<StaffEntity>> getById({required String id}) async {
+  Future<StaffEntity?> getById({required String id}) async {
     final data = await _monolith.get('$_path/$id');
 
     if (data.isEmpty) {
-      return [];
+      return null;
     }
 
-    return [StaffDto.fromJson(data).toEntity()];
+    return StaffDto.fromJson(data).toEntity();
   }
 
-  Future<List<StaffEntity>> getByUserId({required String userId}) async {
-    final Map<String, dynamic> data =
-        await _monolith.get('$_path/users/$userId');
+  Future<StaffEntity?> getByUserId({required String userId}) async {
+    final data = await _monolith.get('$_path/users/$userId');
 
     if (data.isEmpty) {
-      return [];
+      return null;
     }
 
-    final staffDto = StaffDto.fromJson(data);
-    return [staffDto.toEntity()];
+    return StaffDto.fromJson(data).toEntity();
   }
 
   Future<void> post({required StaffDto body}) async {
