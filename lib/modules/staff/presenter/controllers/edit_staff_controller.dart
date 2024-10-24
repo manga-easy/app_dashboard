@@ -15,7 +15,7 @@ class EditStaffController extends ManagerStore {
   final UsersRepository _usersRepository;
 
   StaffEntity? staffDetail;
-  String? staffId;
+  String? id;
   int? selectedType;
 
   String appBarText = 'Criar Staff';
@@ -29,12 +29,12 @@ class EditStaffController extends ManagerStore {
 
   @override
   Future<void> init(Map<String, dynamic> arguments) async {
-    staffId = arguments['id'];
-    if (staffId != null && staffId != 'create') {
+    id = arguments['id'];
+    if (id != null && id != 'create') {
       appBarText = 'Editar Staff';
       blockNewStaff = true;
 
-      final result = await _staffRepository.getById(id: staffId!);
+      final result = await _staffRepository.getById(id: id!);
       staffDetail = result;
 
       if (staffDetail != null) {
@@ -70,7 +70,7 @@ class EditStaffController extends ManagerStore {
 
           final staffDto = StaffDto.fromEntity(staffDetail!);
 
-          if (staffId == 'create') {
+          if (id == 'create') {
             await _staffRepository.post(body: staffDto);
             Navigator.of(context).pop();
             await AppHelps.confirmaDialog(
@@ -81,7 +81,7 @@ class EditStaffController extends ManagerStore {
             return;
           } else {
             if (!await _verifyStaffHasRole(staffDto)) {
-              await _staffRepository.put(id: staffId!, body: staffDto);
+              await _staffRepository.put(id: id!, body: staffDto);
               Navigator.of(context).pop();
               await AppHelps.confirmaDialog(
                 title: 'Sucesso',

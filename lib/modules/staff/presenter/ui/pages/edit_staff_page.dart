@@ -11,8 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
 
 class EditStaffPage extends StatefulWidget {
-  final String? id;
-  const EditStaffPage({super.key, this.id});
+  const EditStaffPage({super.key});
 
   @override
   State<EditStaffPage> createState() => _EditStaffPageState();
@@ -52,7 +51,7 @@ class _EditStaffPageState
           ),
           const SizedBox(height: AppTheme.defaultPadding),
           OutlinedButton(
-            onPressed: ct.staffId == 'create'
+            onPressed: ct.id == 'create'
                 ? () async {
                     final user = await AppHelps.bottomSheet(
                       context: context,
@@ -67,7 +66,7 @@ class _EditStaffPageState
                 : null,
             child: NameUserBuild(
               future: ct.getEmail(
-                userId: ct.staffDetail?.userId ?? widget.id ?? '',
+                userId: ct.staffDetail?.userId ?? '',
               ),
             ),
           ),

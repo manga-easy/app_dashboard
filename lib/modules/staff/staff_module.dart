@@ -30,8 +30,7 @@ class StaffModule implements Module {
             GoRoute(
               path: ':id',
               builder: (context, state) {
-                final userId = state.extra;
-                return EditStaffPage(id: userId as String?);
+                return const EditStaffPage();
               },
             ),
           ],

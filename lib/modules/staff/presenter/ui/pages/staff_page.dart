@@ -13,8 +13,6 @@ class StaffPage extends StatefulWidget {
 }
 
 class _StaffPageState extends ManagerPage<StaffController, StaffPage> {
-  String? id;
-
   @override
   Widget build(BuildContext context) {
     return ModuloPageTemplate(
@@ -26,7 +24,6 @@ class _StaffPageState extends ManagerPage<StaffController, StaffPage> {
       onPressedNovoItem: () => context.push('${StaffPage.route}/create'),
       itemBuilderLista: (context, index) {
         final data = ct.staffList[index];
-        id = data.userId;
 
         return FutureBuilder<List<User>>(
           future: ct.findStaff(data.userId),
@@ -38,10 +35,7 @@ class _StaffPageState extends ManagerPage<StaffController, StaffPage> {
               return Card(
                 child: ListTile(
                   onTap: () => context
-                      .push(
-                        '${StaffPage.route}/${data.id}',
-                        extra: id,
-                      )
+                      .push('${StaffPage.route}/${data.id}')
                       .then((value) => ct.getList()),
                   title: Text(
                     ct.validateUserName(user) ?? data.userId,
