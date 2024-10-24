@@ -12,6 +12,7 @@ import 'package:dashboard_manga_easy/modules/mangas/presenter/ui/pages/mangas_pa
 import 'package:dashboard_manga_easy/modules/notificacao/views/notificacao_page.dart';
 import 'package:dashboard_manga_easy/modules/permissoes/presenter/ui/pages/permissoes_page.dart';
 import 'package:dashboard_manga_easy/modules/recomendacao/views/recomendacao_page.dart';
+import 'package:dashboard_manga_easy/modules/staff/presenter/ui/pages/staff_page.dart';
 import 'package:dashboard_manga_easy/modules/toggles/presenter/ui/pages/toggles_page.dart';
 import 'package:dashboard_manga_easy/modules/update_notes/presenter/ui/release_notes_page.dart';
 import 'package:dashboard_manga_easy/modules/users/presenter/ui/pages/users_page.dart';
@@ -34,6 +35,7 @@ class SideMenu extends StatelessWidget {
     MenuItem(route: HostPage.route, title: 'Hosts'),
     MenuItem(route: TogglesPage.route, title: 'Toggles'),
     MenuItem(route: ReleaseNotesPage.route, title: 'Notas de atualização'),
+    MenuItem(route: StaffPage.route, title: 'Staff'),
   ];
 
   SideMenu({
