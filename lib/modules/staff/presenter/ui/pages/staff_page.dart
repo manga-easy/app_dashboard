@@ -38,7 +38,7 @@ class _StaffPageState extends ManagerPage<StaffController, StaffPage> {
                       .push('${StaffPage.route}/${data.id}')
                       .then((value) => ct.getList()),
                   title: Text(
-                    ct.validateUserName(user) ?? data.userId,
+                    '${data.name ?? ''} - ${ct.validateUserName(user)!}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   subtitle: Text(

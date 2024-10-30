@@ -6,6 +6,8 @@ class StaffDto {
   final int updatedAt;
   final String type;
   final String userId;
+  final String? name;
+  final String? picture;
 
   StaffDto({
     required this.id,
@@ -13,6 +15,8 @@ class StaffDto {
     required this.updatedAt,
     required this.type,
     required this.userId,
+    this.name,
+    this.picture,
   });
 
   factory StaffDto.empty() {
@@ -22,16 +26,22 @@ class StaffDto {
       updatedAt: 0,
       type: StaffType.unknown.name,
       userId: '',
+      name: '',
+      picture: '',
     );
   }
 
   factory StaffDto.fromJson(Map<String, dynamic> json) {
+    final Map<String, dynamic> staff = json['staff'];
+
     return StaffDto(
-      id: json['id'] as String,
-      createdAt: json['createdAt'] as int,
-      updatedAt: json['updatedAt'] as int,
-      type: json['type'] as String,
-      userId: json['userId'] as String,
+      name: json['userName'] as String?,
+      picture: json['userImage'] as String?,
+      id: staff['id'] as String,
+      createdAt: staff['createdAt'] as int,
+      updatedAt: staff['updatedAt'] as int,
+      type: staff['type'] as String,
+      userId: staff['userId'] as String,
     );
   }
 
@@ -42,6 +52,8 @@ class StaffDto {
       updatedAt: updatedAt,
       type: mapStringToStaffType(type),
       userId: userId,
+      name: name,
+      picture: picture,
     );
   }
 
@@ -50,6 +62,8 @@ class StaffDto {
       id: entity.id,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
+      name: entity.name,
+      picture: entity.picture,
       type: _mapStaffTypeToString(entity.type),
       userId: entity.userId,
     );
@@ -62,6 +76,8 @@ class StaffDto {
       'updatedAt': updatedAt,
       'type': type,
       'userId': userId,
+      'name': name,
+      'picture': picture,
     };
   }
 
