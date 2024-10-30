@@ -4,6 +4,8 @@ class StaffEntity {
   final int updatedAt;
   final StaffType type;
   final String userId;
+  final String? name;
+  final String? picture;
 
   StaffEntity({
     required this.id,
@@ -11,6 +13,8 @@ class StaffEntity {
     required this.updatedAt,
     required this.type,
     required this.userId,
+    this.name,
+    this.picture,
   });
 
   factory StaffEntity.empty() {
@@ -20,6 +24,8 @@ class StaffEntity {
       updatedAt: 0,
       type: StaffType.unknown,
       userId: '',
+      name: '',
+      picture: '',
     );
   }
 
@@ -29,6 +35,8 @@ class StaffEntity {
     int? updatedAt,
     StaffType? type,
     String? userId,
+    String? name,
+    String? picture,
   }) {
     return StaffEntity(
       id: id ?? this.id,
@@ -36,6 +44,8 @@ class StaffEntity {
       updatedAt: updatedAt ?? this.updatedAt,
       type: type ?? this.type,
       userId: userId ?? this.userId,
+      name: name ?? this.name,
+      picture: picture ?? this.picture,
     );
   }
 }
