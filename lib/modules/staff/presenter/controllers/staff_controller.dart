@@ -55,13 +55,6 @@ class StaffController extends ManagerStore {
     );
   }
 
-  String? validateUserName(User? user) {
-    if (user?.name != null && user!.name.isNotEmpty) {
-      return user.name;
-    }
-    return user?.email;
-  }
-
   Future<List<User>> findStaff(String staffId) async {
     return _usersRepository.listDocument(
       search: staffId.isEmpty ? null : staffId,
