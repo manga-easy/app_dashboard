@@ -72,7 +72,7 @@ class AchievementsRepository {
     required XFile file,
   }) async {
     final result = await _apiMonolito.put(
-      '$feature/v1/$id/images',
+      '$feature/v1/$id/image',
       body: {
         'file': MultipartFile.fromBytes(
           await file.readAsBytes(),
