@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/interfaces/module_factory.dart';
+import 'package:dashboard_manga_easy/core/services/routers/module_factory.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/splash/controllers/splash_controller.dart';
 import 'package:dashboard_manga_easy/modules/splash/views/splash_view.dart';

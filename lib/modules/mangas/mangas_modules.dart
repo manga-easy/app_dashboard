@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/interfaces/module_factory.dart';
+import 'package:dashboard_manga_easy/core/services/routers/module_factory.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/mangas/data/repositories/manga_repository_imp.dart';
 import 'package:dashboard_manga_easy/modules/mangas/domain/mappers/mapper_manga.dart';

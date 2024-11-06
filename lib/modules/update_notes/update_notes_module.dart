@@ -1,4 +1,4 @@
-import 'package:dashboard_manga_easy/core/interfaces/module_factory.dart';
+import 'package:dashboard_manga_easy/core/services/routers/module_factory.dart';
 import 'package:dashboard_manga_easy/main.dart';
 import 'package:dashboard_manga_easy/modules/update_notes/data/repositories/update_notes_repository.dart';
 import 'package:dashboard_manga_easy/modules/update_notes/presenter/controllers/update_notes_controller.dart';
