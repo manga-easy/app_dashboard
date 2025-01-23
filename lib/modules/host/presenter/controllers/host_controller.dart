@@ -22,7 +22,12 @@ class HostController extends ManagerStore {
     try {
       state = StateManager.loading;
       list = await _hostRepository.listDocument();
-      list.sort((a, b) => a.order.compareTo(b.hostId));
+      list.sort((a, b) {
+        if (a.status == b.status) {
+          return a.order.compareTo(b.order);
+        }
+        return a.status == HostStatus.disable ? 1 : -1;
+      });
       state = StateManager.done;
     } catch (e) {
       state = StateManager.error;
