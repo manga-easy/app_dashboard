@@ -7,6 +7,7 @@ class CreateHostDto {
   String name;
   String urlApi;
   HostStatus status;
+  String languages;
 
   CreateHostDto({
     required this.hostId,
@@ -14,6 +15,7 @@ class CreateHostDto {
     required this.name,
     required this.urlApi,
     required this.status,
+    required this.languages,
   });
 
   Map<String, dynamic> toJson() {
@@ -23,6 +25,7 @@ class CreateHostDto {
       'name': name,
       'urlApi': urlApi,
       'status': status.name,
+      'languages': languages,
     };
   }
 
@@ -33,6 +36,7 @@ class CreateHostDto {
       name: '',
       urlApi: '',
       status: HostStatus.disable,
+      languages: '',
     );
   }
   factory CreateHostDto.fromEntity(HostEntity entity) {
@@ -42,6 +46,7 @@ class CreateHostDto {
       name: entity.name,
       urlApi: entity.urlApi,
       status: entity.status,
+      languages: entity.languages.join('<>'),
     );
   }
 }

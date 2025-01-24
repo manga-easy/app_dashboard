@@ -10,6 +10,7 @@ class HostEntity {
   HostStatus status;
   final int createdAt;
   final int updatedAt;
+  final List<String> languages;
 
   HostEntity({
     required this.id,
@@ -20,6 +21,7 @@ class HostEntity {
     required this.status,
     required this.createdAt,
     required this.updatedAt,
+    required this.languages,
   });
 
   factory HostEntity.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class HostEntity {
       status: HostStatus.getStatus(json['status']),
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
+      languages: json['languages'].toString().split('<>'),
     );
   }
 
@@ -42,6 +45,7 @@ class HostEntity {
       name: name,
       urlApi: urlApi,
       status: status ?? this.status,
+      languages: languages.join('<>'),
     );
   }
 }

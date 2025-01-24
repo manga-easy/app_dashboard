@@ -3,6 +3,7 @@ import 'package:dashboard_manga_easy/core/libraries/templates/default_page_templ
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/button_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/dashboard/presenter/ui/atoms/campo_padrao_atom.dart';
 import 'package:dashboard_manga_easy/modules/host/presenter/controllers/host_details_controller.dart';
+import 'package:dashboard_manga_easy/modules/host/presenter/ui/organism/select_host_lang.dart';
 import 'package:flutter/material.dart';
 import 'package:page_manager/manager_page.dart';
 
@@ -52,6 +53,17 @@ class _HostDetailsPageState
                   hintText: 'Idhost',
                   initialValue: ct.dto.hostId.toString(),
                   onChange: (v) => ct.dto.hostId = int.tryParse(v) ?? 0,
+                ),
+                const SizedBox(height: AppTheme.defaultPadding * 2),
+                LanguageSelector(
+                  options: const ['EN', 'ES', 'PT_BR'],
+                  selectedOptions: ct.dto.languages
+                      .split('<>')
+                      .where((item) => item.isNotEmpty)
+                      .toList(),
+                  onChanged: (selected) {
+                    ct.dto.languages = selected.join('<>');
+                  },
                 ),
                 const SizedBox(height: AppTheme.defaultPadding * 2),
                 ButtonPadraoAtom(
