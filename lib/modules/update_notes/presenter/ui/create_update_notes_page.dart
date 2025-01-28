@@ -106,6 +106,7 @@ class _CreateUpdateNotesPageState
                   children: [
                     IconButton(
                       onPressed: () {
+                        ct.releaseNotesDto ??= UpdateNotesDto.empty();
                         ct.releaseNotesDto?.fixes.add(FixDto.empty());
                         ct.state = StateManager.done;
                       },
@@ -190,6 +191,7 @@ class _CreateUpdateNotesPageState
                   children: [
                     IconButton(
                       onPressed: () {
+                        ct.releaseNotesDto ??= UpdateNotesDto.empty();
                         ct.releaseNotesDto?.features.add(FeatureDto.empty());
                         ct.state = StateManager.done;
                       },
